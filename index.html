@@ -224,7 +224,7 @@
     ];
 
     const BANGLADESH_CHANNELS_PRESET = [
-      {
+            {
         id: "bd-t-sports-hd",
         name: "T Sports HD",
         category: "Sports",
@@ -307,25 +307,6 @@
 
     function ChannelCarousel({ title, icon, channels, onSelectChannel, favorites, toggleFavorite }) {
       const containerRef = useRef(null);
-      const [isHovered, setIsHovered] = useState(false);
-      const [localSearch, setLocalSearch] = useState("");
-      const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-      // Local search filtering
-      const filteredChannels = useMemo(() => {
-        if (!localSearch) return channels;
-        const query = localSearch.toLowerCase();
-        return channels.filter(c => 
-            c.name.toLowerCase().includes(query) || 
-            (c.category && c.category.toLowerCase().includes(query))
-        );
-      }, [channels, localSearch]);
-
-      // Duplicate channels to create an infinite loop effect
-      const displayChannels = useMemo(() => {
-         if (filteredChannels.length === 0) return [];
-         return [...filteredChannels, ...filteredChannels]; 
-      }, [filteredChannels]);
 
       const scroll = (direction) => {
         if (containerRef.current) {
@@ -338,31 +319,7 @@
         if (typeof lucide !== 'undefined') {
           lucide.createIcons();
         }
-      }, [displayChannels, isSearchOpen, localSearch]);
-
-      // Infinite scroll loop
-      useEffect(() => {
-        const container = containerRef.current;
-        if (!container || isHovered || filteredChannels.length === 0) return;
-
-        let animationId;
-        const scrollStep = 1; 
-
-        const step = () => {
-          if (container && container.scrollWidth > container.clientWidth) {
-            container.scrollLeft += scrollStep;
-            
-            // Loop condition: once we've scrolled exactly halfway (the original items' width), reset to 0 seamlessly
-            if (container.scrollLeft >= container.scrollWidth / 2) {
-              container.scrollLeft -= container.scrollWidth / 2;
-            }
-          }
-          animationId = requestAnimationFrame(step);
-        };
-
-        animationId = requestAnimationFrame(step);
-        return () => cancelAnimationFrame(animationId);
-      }, [isHovered, filteredChannels.length]);
+      }, [channels]);
 
       if (!channels || channels.length === 0) return null;
 
@@ -375,42 +332,12 @@
                 {title}
               </span>
               <span className="text-xs bg-slate-850 text-slate-400 px-2.5 py-0.5 rounded-full font-semibold">
-                {filteredChannels.length}
+                {channels.length}
               </span>
             </div>
             
-            {/* Control Arrows & Search Toggle */}
+            {/* Control Arrows */}
             <div className="flex items-center gap-1.5">
-              
-              {/* Search specific to this carousel */}
-              {isSearchOpen || localSearch ? (
-                <div className="relative flex items-center mr-2 animate-fadeIn">
-                   <input
-                     type="text"
-                     autoFocus
-                     placeholder="Search..."
-                     value={localSearch}
-                     onChange={(e) => setLocalSearch(e.target.value)}
-                     onBlur={() => { if (!localSearch) setIsSearchOpen(false); }}
-                     className="bg-slate-900 border border-slate-800 rounded-lg pl-8 pr-6 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-500 w-32 md:w-48 transition-all"
-                   />
-                   <i data-lucide="search" className="w-3.5 h-3.5 text-slate-500 absolute left-2.5"></i>
-                   {localSearch && (
-                      <button onClick={() => { setLocalSearch(""); setIsSearchOpen(false); }} className="absolute right-2 text-slate-500 hover:text-slate-300">
-                         <i data-lucide="x" className="w-3 h-3"></i>
-                      </button>
-                   )}
-                </div>
-              ) : (
-                <button
-                  onClick={() => setIsSearchOpen(true)}
-                  className="h-8 w-8 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors mr-1"
-                  title="Search inside this list"
-                >
-                  <i data-lucide="search" className="w-4 h-4"></i>
-                </button>
-              )}
-
               <button 
                 onClick={() => scroll('left')}
                 className="h-8 w-8 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors"
@@ -431,57 +358,49 @@
           {/* Carousel Body */}
           <div 
             ref={containerRef}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onTouchStart={() => setIsHovered(true)}
-            onTouchEnd={() => setIsHovered(false)}
-            className="flex overflow-x-auto gap-4 pb-4 no-scrollbar"
+            className="flex overflow-x-auto gap-4 pb-4 scroll-smooth snap-x snap-mandatory no-scrollbar"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {filteredChannels.length === 0 ? (
-               <div className="w-full text-center py-8 text-slate-500 text-sm">No channels found in this category</div>
-            ) : (
-               displayChannels.map((channel, index) => {
-                 const isFavorited = favorites.includes(channel.id);
-                 return (
-                   <div
-                     key={`${channel.id}-carousel-${index}`}
-                     onClick={() => onSelectChannel(channel)}
-                     className="group flex flex-col p-3 rounded-2xl bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all text-left relative overflow-hidden w-[160px] sm:w-[200px] shrink-0 cursor-pointer"
-                   >
-                     {/* Favorite button */}
-                     <div 
-                       className="absolute top-4 right-4 z-20 cursor-pointer p-1.5 rounded-lg bg-slate-950/80 backdrop-blur-sm border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-900"
-                       onClick={(e) => {
-                         e.stopPropagation();
-                         toggleFavorite(channel.id);
-                       }}
-                     >
-                       <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
-                     </div>
+            {channels.map((channel, index) => {
+              const isFavorited = favorites.includes(channel.id);
+              return (
+                <div
+                  key={`${channel.id}-carousel-${index}`}
+                  onClick={() => onSelectChannel(channel)}
+                  className="group flex flex-col p-3 rounded-2xl bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all text-left relative overflow-hidden w-[160px] sm:w-[200px] shrink-0 snap-start cursor-pointer"
+                >
+                  {/* Favorite button */}
+                  <div 
+                    className="absolute top-4 right-4 z-20 cursor-pointer p-1.5 rounded-lg bg-slate-950/80 backdrop-blur-sm border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-900"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(channel.id);
+                    }}
+                  >
+                    <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
+                  </div>
 
-                     <div className="w-full aspect-video bg-slate-950 rounded-xl mb-3 flex items-center justify-center p-2 relative overflow-hidden">
-                       <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">
-                         <ChannelLogo name={channel.name} logoUrl={channel.logo} />
-                       </div>
-                       <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
-                         <ChannelLogo name={channel.name} logoUrl={channel.logo} />
-                       </div>
-                     </div>
+                  <div className="w-full aspect-video bg-slate-950 rounded-xl mb-3 flex items-center justify-center p-2 relative overflow-hidden">
+                    <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">
+                      <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                    </div>
+                    <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
+                      <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                    </div>
+                  </div>
 
-                     <h4 className="text-sm font-bold text-slate-200 group-hover:text-white truncate w-full px-1">
-                       {channel.name}
-                     </h4>
-                     
-                     <div className="flex items-center gap-1.5 mt-2 px-1 text-[10px] uppercase font-bold tracking-wider text-slate-500">
-                       <span className="truncate max-w-[120px] bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-brand-400/80">
-                         {channel.category}
-                       </span>
-                     </div>
-                   </div>
-                 );
-               })
-            )}
+                  <h4 className="text-sm font-bold text-slate-200 group-hover:text-white truncate w-full px-1">
+                    {channel.name}
+                  </h4>
+                  
+                  <div className="flex items-center gap-1.5 mt-2 px-1 text-[10px] uppercase font-bold tracking-wider text-slate-500">
+                    <span className="truncate max-w-[120px] bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-brand-400/80">
+                      {channel.category}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       );
@@ -635,10 +554,7 @@
           try {
             const CUSTOM_M3U_URLS = [
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
-              { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' },
-              { url: 'https://raw.githubusercontent.com/srhady/AynaOTT/refs/heads/main/aynaott.m3u', name: 'Ayna OTT' },
-              { url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/BongoBD', name: 'Bongo BD' },
-			  { url: 'https://raw.githubusercontent.com/srhady/toffee-bd/refs/heads/main/toffee_playlist.m3u', name: 'Toffee BD' }
+              { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
             ];
 
             const parseM3U = (m3uText, sourceName) => {
