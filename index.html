@@ -16,9 +16,7 @@
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -38,13 +36,10 @@
       }
     }
   </script>
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- HLS.js for Streaming m3u8 -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   
   <style>
@@ -94,16 +89,12 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
 
-  <!-- React Root App Mount Point -->
   <div id="root" class="flex flex-col min-h-screen"></div>
 
-  <!-- React Production CDNs -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <!-- Babel compiler for JSX -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- React Code Execution -->
   <script type="text/babel">
     const { useState, useEffect, useRef, useMemo } = React;
 
@@ -456,6 +447,10 @@
       const [isCopied, setIsCopied] = useState(false);
       const [toastMessage, setToastMessage] = useState(null);
       const [useProxy, setUseProxy] = useState(false);
+
+      // New Modal State
+      const [isNsPlayerModalOpen, setIsNsPlayerModalOpen] = useState(false);
+      const [copiedLinkId, setCopiedLinkId] = useState(null);
       
       const isManualServerSelectionRef = useRef(false);
       const [visibleLimit, setVisibleLimit] = useState(100);
@@ -891,7 +886,9 @@
         useProxy,
         viewState,
         volumeLevel,
-        isMuted
+        isMuted,
+        isNsPlayerModalOpen,
+        copiedLinkId
       ]);
 
       const toggleFavorite = (channelId, e) => {
@@ -1118,7 +1115,7 @@
         try {
           document.execCommand('copy');
           setIsCopied(true);
-          triggerToast("Copied stream link to clipboard!");
+          triggerToast("Copied link to clipboard!");
           setTimeout(() => {
             setIsCopied(false);
           }, 2500);
@@ -1364,6 +1361,15 @@
                     </>
                   )}
                 </div>
+
+                {/* NS Player Servers Button */}
+                <button 
+                  onClick={() => setIsNsPlayerModalOpen(true)}
+                  className="px-4 py-2.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-2 transition-all shadow-lg shadow-emerald-600/25"
+                >
+                  <i data-lucide="play-square" className="w-3.5 h-3.5"></i>
+                  NS Player Servers
+                </button>
               </div>
             </div>
           </header>
@@ -1697,6 +1703,91 @@
                           <i data-lucide="star" className={`w-5 h-5 ${activeChannelWithFreshData && favorites.includes(activeChannelWithFreshData.id) ? 'fill-current' : ''}`}></i>
                         </button>
                       </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ===================================================================== */}
+            {/* VIEW 3: NS PLAYER SERVERS MODAL                                       */}
+            {/* ===================================================================== */}
+            {isNsPlayerModalOpen && (
+              <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fadeIn">
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-xl w-full overflow-hidden flex flex-col relative animate-[fadeIn_0.2s_ease-out]">
+                  
+                  {/* Modal Header */}
+                  <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800 bg-slate-900/50">
+                    <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                      <i data-lucide="monitor-play" className="text-brand-400"></i>
+                      NS Player Instructions
+                    </h3>
+                    <button
+                      onClick={() => setIsNsPlayerModalOpen(false)}
+                      className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg transition-colors"
+                    >
+                      <i data-lucide="x" className="w-5 h-5"></i>
+                    </button>
+                  </div>
+                  
+                  {/* Modal Content */}
+                  <div className="p-5 flex flex-col gap-5 overflow-y-auto max-h-[75vh]">
+                    
+                    <div className="bg-emerald-950/20 border border-emerald-500/20 rounded-xl p-4 text-sm text-slate-300">
+                      <h4 className="font-bold text-emerald-400 mb-2 flex items-center gap-2">
+                        <i data-lucide="info" className="w-4 h-4"></i>
+                        How to use with NS Player:
+                      </h4>
+                      <ol className="list-decimal list-inside space-y-1.5 marker:text-emerald-500/70 ml-1">
+                        <li>Download and install <strong>NS Player</strong> from the Google Play Store.</li>
+                        <li>Open the app and look for the option to <strong>Playlist</strong>.</li>
+                        <li>Copy one of the live server links provided below.</li>
+                        <li>Paste the copied URL into NS Player and hit save. Enjoy the stream!</li>
+                      </ol>
+                    </div>
+
+                    <div className="flex flex-col gap-3 mt-1">
+                      <h4 className="text-xs uppercase tracking-wider font-extrabold text-slate-500 mb-1 border-b border-slate-800/50 pb-2">
+                        Copiable Server URLs
+                      </h4>
+                      
+                      {[
+                        { id: 'Fifa+', name: 'FIFA+', url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u' },
+                        { id: 'tapmad', name: 'Tapmad BD Live', url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u' },
+						{ id: 'sonyliv', name: 'SonyLiV Live', url: 'https://raw.githubusercontent.com/srhady/SonyLiv/refs/heads/main/sonyliv_playlist.m3u' },
+                        { id: 'toffee', name: 'Toffee', url: 'https://raw.githubusercontent.com/BINOD-XD/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_NS_Player.m3u' },
+						{ id: 'akashgo', name: 'Akash Go', url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/akash_live.m3u' },
+						{ id: 'aynaott', name: 'Ayna OTT', url: 'https://raw.githubusercontent.com/srhady/AynaOTT/refs/heads/main/aynaott.m3u' },
+						{ id: 'axsports', name: 'AX Sports Live', url: 'https://raw.githubusercontent.com/srhady/axsports/refs/heads/main/playlist.m3u' }
+                      ].map(link => (
+                        <div key={link.id} className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col gap-2 transition-colors hover:border-slate-700">
+                          <span className="text-xs font-bold text-slate-300">{link.name}</span>
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              readOnly
+                              value={link.url}
+                              className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-400 w-full focus:outline-none focus:border-brand-500/50"
+                            />
+                            <button
+                              onClick={() => {
+                                copyToClipboard(link.url);
+                                setCopiedLinkId(link.id);
+                                setTimeout(() => setCopiedLinkId(null), 2500);
+                              }}
+                              className={`px-3 py-2 rounded-lg flex items-center justify-center transition-all shrink-0 border ${
+                                copiedLinkId === link.id 
+                                  ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-400' 
+                                  : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-300'
+                              }`}
+                              title="Copy URL"
+                            >
+                              <i data-lucide={copiedLinkId === link.id ? "check" : "copy"} className="w-4 h-4"></i>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
 
                   </div>
