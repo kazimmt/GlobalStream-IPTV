@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stay updated with the latest sports news, live match scores, expert analysis, and exclusive updates from the world of football, cricket, and more on Khela.pro.bd. Your ultimate destination for comprehensive sports coverage.">
+  <meta name="keywords" content="FIFA World Cup 2026, ফিফা বিশ্বকাপ ২০২৬, 2026 World Cup, FIFA 2026 schedule, বিশ্বকাপ ফুটবল ২০২৬, host countries 2026, World Cup matches, football tournament 2026, Argentina football, Brazil football, Lionel Messi 2026, Cristiano Ronaldo, World Cup venues, USA Mexico Canada 2026, football world cup news, live football update">
+  <title>GlobalStream - Live World TV & IPTV Player</title>
+  <meta property="og:image" content="./assets/social.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Stream live world television and curated event playlists." />
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- HLS.js for Streaming m3u8 -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a; /* slate-950 equivalent */
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+    /* Floating Animations */
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .pulse-glow {
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+    /* Menu Transitions */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.15s ease-out forwards;
+    }
+    /* Hide scrollbars for Carousel */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- React Root App Mount Point -->
+  <div id="root" class="flex flex-col min-h-screen"></div>
+
+  <!-- React Production CDNs -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel compiler for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- React Code Execution -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo } = React;
+
+    const CURATED_CHANNELS = [
+	  {
+        id: "curated-t-sports",
+        name: "T Sports HD",
+        category: "Sports",
+        country: "Bangladesh",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/1280px-T_Sports_logo.svg.png",
+        url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
+        type: "hls",
+        description: "Live broadcast of T Sports HD from Bangladesh.",
+        servers: [
+          { name: "Server 1", url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8", type: "hls" },
+          { name: "Server 2", url: "https://tvsen7.aynaott.com/tsports-hd/index.m3u8", type: "hls" }
+        ]
+      },
+	  {
+        id: "curated-somoy-news-tv",
+        name: "Somoy News TV",
+        category: "News / Sports",
+        country: "Bangladesh",
+        logo: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c4/SOMOY_TV_Logo.svg/1280px-SOMOY_TV_Logo.svg.png",
+        url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8",
+        type: "hls",
+        description: "Live broadcast of Somoy News TV from Bangladesh.",
+        servers: [
+          { name: "Server 1", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8", type: "hls" },
+          { name: "Server 2", url: "https://tvsen6.aynaott.com/somoytv/index.m3u8", type: "hls" },
+		  { name: "Server 3", url: "https://bozztv.com/rongo/rongo-somoy/index.m3u8", type: "hls" }
+        ]
+      },
+	  {
+        id: "curated-btv",
+        name: "Bangladesh Telivision",
+        category: "News / Sports",
+        country: "Bangladesh",
+        logo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/02/Bangladesh_Television_Logo.svg/1280px-Bangladesh_Television_Logo.svg.png",
+        url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
+        type: "hls",
+        description: "Live broadcast of BTV from Bangladesh.",
+        servers: [
+          { name: "Server 1", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8", type: "hls" },
+          { name: "Server 2", url: "https://tvsen6.aynaott.com/btvhd/index.m3u8", type: "hls" }
+        ]
+      },
+      {
+        id: "curated-cazé-tv",
+        name: "CazéTV",
+        category: "Sports",
+        country: "Brazil",
+        logo: "https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Caz%C3%A9TV_logo.svg/1280px-Caz%C3%A9TV_logo.svg.png",
+        url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8",
+        type: "hls",
+        description: "Official live television stream for CazeTV."
+      },
+      {
+        id: "curated-beIN-sports-xtra",
+        name: "beIN Sports Xtra",
+        category: "Sports",
+        country: "United State",
+        logo: "https://static.wikia.nocookie.net/logopedia/images/b/b5/XTRA_2.png",
+        url: "https://d9ssxzmclhfo4.cloudfront.net/bein_sports.m3u8",
+        type: "hls",
+        description: "Official live television stream for beIN SPORTS XTRA.",
+        servers: [
+          { name: "Server 1", url: "https://d9ssxzmclhfo4.cloudfront.net/bein_sports.m3u8", type: "hls" },
+          { name: "Server 2", url: "https://aegis-cloudfront-1.tubi.video/651ee7d3-e75b-4748-be86-422d43ff24b6/playlist.m3u8", type: "hls" }
+        ]
+      },
+	  {
+        id: "curated-fifa-plus",
+        name: "FIFA+ Live",
+        category: "Sports",
+        country: "Global",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/FIFA%2B_%282025%29.svg/1280px-FIFA%2B_%282025%29.svg.png",
+        url: "https://d2w9q46ikgrcwx.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-of5cbk3sav3w5/v1/sysdata_s_p_a_fifa_7/samsungheadend_us/latest/main/hls/playlist.m3u8",
+        type: "hls",
+        description: "Official FIFA+ Live stream broadcasting documentary series, iconic World Cup historical matches, and live youth international tournaments.",
+        servers: [
+          { name: "Fifa+ 1", url: "https://d2w9q46ikgrcwx.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-of5cbk3sav3w5/v1/sysdata_s_p_a_fifa_7/samsungheadend_us/latest/main/hls/playlist.m3u8", type: "hls" },
+          { name: "Fifa+ 2", url: "https://a62dad94.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 3", url: "https://ba3e2e93.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9GSUZBUGx1c0VuZ2xpc2hfSExT/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 4", url: "https://37b4c228.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWZyX0ZJRkFQbHVzRnJlbmNoX0hMUw/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 5", url: "https://4397879b.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWRlX0ZJRkFQbHVzR2VybWFuX0hMUw/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 6", url: "https://6c849fb3.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctbXhfRklGQVBsdXNTcGFuaXNoLTFfSExT/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 7", url: "https://5d95f7d7.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWl0X0ZJRkFQbHVzSXRhbGlhbl9ITFM/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 8", url: "https://e3be9ac5.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfRklGQVBsdXNQb3J0dWd1ZXNlX0hMUw/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 9", url: "https://d63fabad.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWVzX0ZJRkFQbHVzU3BhbmlzaF9ITFM/playlist.m3u8", type: "hls" },
+		  { name: "Fifa+ 10", url: "https://d2w9q46ikgrcwx.cloudfront.net/v1/sysdata_s_p_a_fifa_7/samsungheadend_us/latest/main/hls/playlist.m3u8", type: "hls" }
+        ]
+      },
+      {
+        id: "curated-fifa-plus-women",
+        name: "FIFA+ Women Live",
+        category: "Sports",
+        country: "Global",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/FIFA%2B_%282025%29.svg/1280px-FIFA%2B_%282025%29.svg.png",
+        url: "https://cffda8ff.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9GSUZBUGx1c3dvbWVuX0hMUw/playlist.m3u8",
+        type: "hls",
+        description: "Official FIFA+ Live stream broadcasting documentary series, iconic World Cup historical matches, and live youth international tournaments."
+      },
+      {
+        id: "curated-aljazeera-eng",
+        name: "Al Jazeera English",
+        category: "News",
+        country: "Qatar / Global",
+        logo: "https://upload.wikimedia.org/wikinews/en/thumb/0/0f/Al_Jazeera.svg/1280px-Al_Jazeera.svg.png",
+        url: "https://dash4.antik.sk/live/test_aljazeera_eng/playlist.m3u8",
+        type: "hls",
+        description: "Global news channel broadcast 24 hours a day in English.",
+        servers: [
+          { name: "Server 1", url: "https://dash4.antik.sk/live/test_aljazeera_eng/playlist.m3u8", type: "hls" },
+          { name: "Server 2", url: "https://live-am.aljazeera.net/algeur/index.m3u8", type: "hls" }
+        ]
+      }
+    ];
+
+    const BANGLADESH_CHANNELS_PRESET = [
+      {
+        id: "bd-t-sports-hd",
+        name: "T Sports HD",
+        category: "Sports",
+        country: "Bangladesh",
+        countryCode: "BD",
+        countryFlag: "🇧🇩",
+        logo: "https://s3.aynaott.com/storage/9fbf3e9ed22c8cc71c93f25d6cb9be32",
+        url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
+        type: "hls",
+        description: "Live broadcast of T Sports HD from Bangladesh.",
+        servers: [{ id: "bd-t-sports-hd-srv-0", name: "Backup Server (Ayna OTT)", url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8", type: "hls" }]
+      }
+    ];
+
+    function ChannelLogo({ name, logoUrl }) {
+      const [isError, setIsError] = useState(!logoUrl);
+
+      useEffect(() => {
+        setIsError(!logoUrl);
+      }, [logoUrl]);
+
+      if (isError) {
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) {
+          hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const hue = Math.abs(hash % 360);
+        const bgStyle = {
+          background: `linear-gradient(135deg, hsl(${hue}, 70%, 40%) 0%, hsl(${(hue + 60) % 360}, 80%, 28%) 100%)`
+        };
+
+        const initials = name
+          .replace(/[^a-zA-Z0-9 ]/g, "")
+          .split(" ")
+          .filter(Boolean)
+          .map(w => w[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase() || name.substring(0, 2).toUpperCase();
+
+        return (
+          <div style={bgStyle} className="w-full h-full flex items-center justify-center text-white font-extrabold text-[11px] tracking-wider shadow-inner select-none uppercase">
+            {initials}
+          </div>
+        );
+      }
+
+      return (
+        <img
+          src={logoUrl}
+          alt=""
+          className="w-full h-full object-contain p-1"
+          onError={() => setIsError(true)}
+        />
+      );
+    }
+
+    const getCategoryIcon = (catId) => {
+      const mapping = {
+        sports: "trophy",
+        news: "newspaper",
+        music: "music",
+        movies: "film",
+        kids: "smile",
+        science: "globe",
+        entertainment: "tv",
+        documentary: "book-open",
+        auto: "car",
+        business: "briefcase",
+        comedy: "laugh",
+        education: "graduation-cap",
+        religious: "heart",
+        travel: "compass",
+        weather: "cloud-sun",
+        lifestyle: "sparkles",
+        series: "clapperboard"
+      };
+      return mapping[catId] || "tv";
+    };
+
+    function ChannelCarousel({ title, icon, channels, onSelectChannel, favorites, toggleFavorite }) {
+      const containerRef = useRef(null);
+      const [isHovered, setIsHovered] = useState(false);
+      const [localSearch, setLocalSearch] = useState("");
+      const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+      // Local search filtering
+      const filteredChannels = useMemo(() => {
+        if (!localSearch) return channels;
+        const query = localSearch.toLowerCase();
+        return channels.filter(c => 
+            c.name.toLowerCase().includes(query) || 
+            (c.category && c.category.toLowerCase().includes(query))
+        );
+      }, [channels, localSearch]);
+
+      // Duplicate channels to create an infinite loop effect
+      const displayChannels = useMemo(() => {
+         if (filteredChannels.length === 0) return [];
+         return [...filteredChannels, ...filteredChannels]; 
+      }, [filteredChannels]);
+
+      const scroll = (direction) => {
+        if (containerRef.current) {
+          const scrollAmount = direction === 'left' ? -400 : 400;
+          containerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      };
+
+      useEffect(() => {
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+      }, [displayChannels, isSearchOpen, localSearch]);
+
+      // Infinite scroll loop
+      useEffect(() => {
+        const container = containerRef.current;
+        if (!container || isHovered || filteredChannels.length === 0) return;
+
+        let animationId;
+        const scrollStep = 1; 
+
+        const step = () => {
+          if (container && container.scrollWidth > container.clientWidth) {
+            container.scrollLeft += scrollStep;
+            
+            // Loop condition: once we've scrolled exactly halfway (the original items' width), reset to 0 seamlessly
+            if (container.scrollLeft >= container.scrollWidth / 2) {
+              container.scrollLeft -= container.scrollWidth / 2;
+            }
+          }
+          animationId = requestAnimationFrame(step);
+        };
+
+        animationId = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(animationId);
+      }, [isHovered, filteredChannels.length]);
+
+      if (!channels || channels.length === 0) return null;
+
+      return (
+        <div className="flex flex-col gap-3 mt-4 relative">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-bold text-white flex items-center gap-2">
+                {icon}
+                {title}
+              </span>
+              <span className="text-xs bg-slate-850 text-slate-400 px-2.5 py-0.5 rounded-full font-semibold">
+                {filteredChannels.length}
+              </span>
+            </div>
+            
+            {/* Control Arrows & Search Toggle */}
+            <div className="flex items-center gap-1.5">
+              
+              {/* Search specific to this carousel */}
+              {isSearchOpen || localSearch ? (
+                <div className="relative flex items-center mr-2 animate-fadeIn">
+                   <input
+                     type="text"
+                     autoFocus
+                     placeholder="Search..."
+                     value={localSearch}
+                     onChange={(e) => setLocalSearch(e.target.value)}
+                     onBlur={() => { if (!localSearch) setIsSearchOpen(false); }}
+                     className="bg-slate-900 border border-slate-800 rounded-lg pl-8 pr-6 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-brand-500 w-32 md:w-48 transition-all"
+                   />
+                   <i data-lucide="search" className="w-3.5 h-3.5 text-slate-500 absolute left-2.5"></i>
+                   {localSearch && (
+                      <button onClick={() => { setLocalSearch(""); setIsSearchOpen(false); }} className="absolute right-2 text-slate-500 hover:text-slate-300">
+                         <i data-lucide="x" className="w-3 h-3"></i>
+                      </button>
+                   )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="h-8 w-8 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors mr-1"
+                  title="Search inside this list"
+                >
+                  <i data-lucide="search" className="w-4 h-4"></i>
+                </button>
+              )}
+
+              <button 
+                onClick={() => scroll('left')}
+                className="h-8 w-8 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                title="Scroll Left"
+              >
+                <i data-lucide="chevron-left" className="w-4 h-4"></i>
+              </button>
+              <button 
+                onClick={() => scroll('right')}
+                className="h-8 w-8 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                title="Scroll Right"
+              >
+                <i data-lucide="chevron-right" className="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          {/* Carousel Body */}
+          <div 
+            ref={containerRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => setIsHovered(false)}
+            className="flex overflow-x-auto gap-4 pb-4 no-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {filteredChannels.length === 0 ? (
+               <div className="w-full text-center py-8 text-slate-500 text-sm">No channels found in this category</div>
+            ) : (
+               displayChannels.map((channel, index) => {
+                 const isFavorited = favorites.includes(channel.id);
+                 return (
+                   <div
+                     key={`${channel.id}-carousel-${index}`}
+                     onClick={() => onSelectChannel(channel)}
+                     className="group flex flex-col p-3 rounded-2xl bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all text-left relative overflow-hidden w-[160px] sm:w-[200px] shrink-0 cursor-pointer"
+                   >
+                     {/* Favorite button */}
+                     <div 
+                       className="absolute top-4 right-4 z-20 cursor-pointer p-1.5 rounded-lg bg-slate-950/80 backdrop-blur-sm border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-900"
+                       onClick={(e) => {
+                         e.stopPropagation();
+                         toggleFavorite(channel.id);
+                       }}
+                     >
+                       <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
+                     </div>
+
+                     <div className="w-full aspect-video bg-slate-950 rounded-xl mb-3 flex items-center justify-center p-2 relative overflow-hidden">
+                       <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">
+                         <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                       </div>
+                       <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
+                         <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                       </div>
+                     </div>
+
+                     <h4 className="text-sm font-bold text-slate-200 group-hover:text-white truncate w-full px-1">
+                       {channel.name}
+                     </h4>
+                     
+                     <div className="flex items-center gap-1.5 mt-2 px-1 text-[10px] uppercase font-bold tracking-wider text-slate-500">
+                       <span className="truncate max-w-[120px] bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-brand-400/80">
+                         {channel.category}
+                       </span>
+                     </div>
+                   </div>
+                 );
+               })
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [viewState, setViewState] = useState("home"); // "home" or "player"
+
+      const [activeCategory, setActiveCategory] = useState("curated");
+      const [curatedChannels, setCuratedChannels] = useState(CURATED_CHANNELS);
+      const [channels, setChannels] = useState(CURATED_CHANNELS);
+      const [curatedSelected, setCuratedSelected] = useState(true);
+      
+      const [globalChannels, setGlobalChannels] = useState([]);
+      const [bdApiChannels, setBdApiChannels] = useState([]); // Dynamic parsed bd.m3u channels
+      const [isLoadingGlobal, setIsLoadingGlobal] = useState(false);
+      
+      const [dynamicCountries, setDynamicCountries] = useState([]);
+      const [dynamicCategories, setDynamicCategories] = useState([]);
+
+      const [selectedCountryCode, setSelectedCountryCode] = useState("");
+      const [searchQuery, setSearchQuery] = useState("");
+      const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
+      
+      const [favorites, setFavorites] = useState(() => {
+        try {
+          const saved = localStorage.getItem("globalstream_favs");
+          return saved ? JSON.parse(saved) : [];
+        } catch (e) {
+          return [];
+        }
+      });
+      
+      const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
+      const [currentChannel, setCurrentChannel] = useState(() => {
+        try {
+          const saved = localStorage.getItem("globalstream_last_channel");
+          return saved ? JSON.parse(saved) : CURATED_CHANNELS[0];
+        } catch (e) {
+          return CURATED_CHANNELS[0];
+        }
+      });
+
+      const [activeServerIndex, setActiveServerIndex] = useState(0);
+      const [videoError, setVideoError] = useState(null);
+      const [isLoadingList, setIsLoadingList] = useState(false);
+      const [isPlaying, setIsPlaying] = useState(true);
+      const [isMuted, setIsMuted] = useState(false);
+      const [volumeLevel, setVolumeLevel] = useState(100); // 0 to 200 volume scale
+      const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+      const [isCountryOpen, setIsCountryOpen] = useState(false);
+      const [isCopied, setIsCopied] = useState(false);
+      const [toastMessage, setToastMessage] = useState(null);
+      const [useProxy, setUseProxy] = useState(false);
+      
+      const isManualServerSelectionRef = useRef(false);
+      const [visibleLimit, setVisibleLimit] = useState(100);
+
+      const videoRef = useRef(null);
+      const hlsRef = useRef(null);
+      const audioCtxRef = useRef(null);
+      const gainNodeRef = useRef(null);
+
+      const bdCarouselChannels = useMemo(() => {
+        // Return only the exact API country playlist fetched directly from iptv-org/iptv/countries/bd.m3u
+        return bdApiChannels;
+      }, [bdApiChannels]);
+
+      const sportsCarouselChannels = useMemo(() => {
+        // Exclude all presets and M3U sideloaded configurations to maintain iptv-org only logic
+        return globalChannels.filter(ch => 
+          ch.category && 
+          ch.category.toLowerCase().includes('sport') &&
+          !ch.isCustomSource && 
+          !ch.id.startsWith('bd-')
+        );
+      }, [globalChannels]);
+
+      const triggerToast = (msg) => {
+        setToastMessage(msg);
+        setTimeout(() => setToastMessage(null), 4000);
+      };
+
+      useEffect(() => {
+        if (!window.history.state) {
+          window.history.replaceState({ view: "home" }, "");
+        }
+
+        const handlePopState = (event) => {
+          if (event.state && event.state.view === "player") {
+            const channelId = event.state.channelId;
+            const found = globalChannels.find(c => c.id === channelId) || curatedChannels.find(c => c.id === channelId);
+            if (found) {
+              setCurrentChannel(found);
+            }
+            setViewState("player");
+          } else {
+            setViewState("home");
+          }
+        };
+
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+      }, [globalChannels, curatedChannels]);
+
+      const handleSelectChannel = (channel) => {
+        setActiveServerIndex(0);
+        setUseProxy(false);
+        isManualServerSelectionRef.current = false;
+        setCurrentChannel(channel);
+        setViewState("player");
+        
+        // Push State for Android Back Button & Hardware Swipe Controls
+        window.history.pushState({ view: "player", channelId: channel.id }, "");
+      };
+
+      const handleBackToHome = () => {
+        setViewState("home");
+        if (window.history.state && window.history.state.view === "player") {
+          window.history.back();
+        }
+      };
+
+      const activeChannelWithFreshData = useMemo(() => {
+        if (!currentChannel) return null;
+        const fresh = globalChannels.find(c => c.id === currentChannel.id) || curatedChannels.find(c => c.id === currentChannel.id);
+        return fresh || currentChannel;
+      }, [currentChannel, globalChannels, curatedChannels]);
+
+      const currentChannelSources = useMemo(() => {
+        const channel = activeChannelWithFreshData;
+        if (!channel) return [];
+        const sources = channel.servers || [{ id: "primary", name: "Backup Server 2", url: channel.url }];
+        const seenUrls = new Set();
+        return sources.filter(srv => {
+          if (seenUrls.has(srv.url)) return false;
+          seenUrls.add(srv.url);
+          return true;
+        });
+      }, [activeChannelWithFreshData]);
+
+      const activeSource = useMemo(() => {
+        if (!currentChannelSources || currentChannelSources.length === 0) return null;
+        return currentChannelSources[activeServerIndex] || currentChannelSources[0];
+      }, [currentChannelSources, activeServerIndex]);
+
+      useEffect(() => {
+        const fetchGlobalDatabase = async () => {
+          setIsLoadingGlobal(true);
+          try {
+            const CUSTOM_M3U_URLS = [
+              { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
+              { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' },
+              { url: 'https://raw.githubusercontent.com/srhady/AynaOTT/refs/heads/main/aynaott.m3u', name: 'Ayna OTT' },
+              { url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/BongoBD', name: 'Bongo BD' },
+			  { url: 'https://raw.githubusercontent.com/srhady/toffee-bd/refs/heads/main/toffee_playlist.m3u', name: 'Toffee BD' }
+            ];
+
+            const parseM3U = (m3uText, sourceName) => {
+              const lines = m3uText.split(/\r?\n/);
+              const parsedChannels = [];
+              let currentCh = null;
+
+              for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line.startsWith('#EXTINF:')) {
+                  currentCh = {};
+                  const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
+                  const tvgLogoMatch = line.match(/tvg-logo="([^"]+)"/);
+                  const groupTitleMatch = line.match(/group-title="([^"]+)"/);
+                  const nameMatch = line.split(',');
+                  const fallbackName = nameMatch.length > 1 ? nameMatch[nameMatch.length - 1].trim() : "Unknown Channel";
+
+                  currentCh.name = (tvgNameMatch && tvgNameMatch[1]) ? tvgNameMatch[1] : fallbackName;
+                  currentCh.logo = (tvgLogoMatch && tvgLogoMatch[1]) ? tvgLogoMatch[1] : "";
+                  currentCh.category = (groupTitleMatch && groupTitleMatch[1]) ? groupTitleMatch[1] : "Sports";
+                } else if (line && !line.startsWith('#') && currentCh) {
+                  currentCh.url = line;
+                  currentCh.id = `custom-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
+                  currentCh.type = "hls";
+                  currentCh.country = "Global";
+                  currentCh.countryCode = "BD";
+                  currentCh.countryFlag = "🇧🇩";
+                  currentCh.description = `Streamed from ${sourceName} Playlist. If it does not play here, Copy stream link and try NS Player`;
+                  currentCh.isCustomSource = true;
+                  currentCh.sourceName = sourceName;
+                  currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: `Backup Server (${sourceName})`, url: line, type: "hls" }];
+                  parsedChannels.push(currentCh);
+                  currentCh = null;
+                }
+              }
+              return parsedChannels;
+            };
+
+            const parseBdM3u = (m3uText) => {
+              const lines = m3uText.split(/\r?\n/);
+              const parsedChannels = [];
+              let currentCh = null;
+
+              for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line.startsWith('#EXTINF:')) {
+                  currentCh = {};
+                  const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
+                  const tvgLogoMatch = line.match(/tvg-logo="([^"]+)"/);
+                  const groupTitleMatch = line.match(/group-title="([^"]+)"/);
+                  const nameMatch = line.split(',');
+                  const fallbackName = nameMatch.length > 1 ? nameMatch[nameMatch.length - 1].trim() : "Unknown Channel";
+
+                  currentCh.name = (tvgNameMatch && tvgNameMatch[1]) ? tvgNameMatch[1] : fallbackName;
+                  currentCh.logo = (tvgLogoMatch && tvgLogoMatch[1]) ? tvgLogoMatch[1] : "";
+                  currentCh.category = (groupTitleMatch && groupTitleMatch[1]) ? groupTitleMatch[1] : "General";
+                } else if (line && !line.startsWith('#') && currentCh) {
+                  currentCh.url = line;
+                  currentCh.id = `bd-api-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
+                  currentCh.type = "hls";
+                  currentCh.country = "Bangladesh";
+                  currentCh.countryCode = "BD";
+                  currentCh.countryFlag = "🇧🇩";
+                  currentCh.description = `Streamed via official iptv-org country index.`;
+                  currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: "Primary Stream", url: line, type: "hls" }];
+                  parsedChannels.push(currentCh);
+                  currentCh = null;
+                }
+              }
+              return parsedChannels;
+            };
+
+            const customM3UPromises = CUSTOM_M3U_URLS.map(source =>
+              fetch(source.url)
+                .then(res => res.text())
+                .then(text => parseM3U(text, source.name))
+                .catch(err => {
+                  console.warn(`Failed to fetch custom M3U: ${source.url}`, err);
+                  return [];
+                })
+            );
+
+            const [channelsRes, streamsRes, countriesRes, categoriesRes, logosRes, bdM3uText, ...customM3UResults] = await Promise.all([
+              fetch('https://iptv-org.github.io/api/channels.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/streams.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/countries.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/categories.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/logos.json').then(r => r.json()).catch(() => []),
+              fetch('https://iptv-org.github.io/iptv/countries/bd.m3u').then(r => r.text()).catch(() => ""),
+              ...customM3UPromises
+            ]);
+
+            const streamsMap = {};
+            streamsRes.forEach(stream => {
+              if (stream.status !== 'blocked') {
+                if (!streamsMap[stream.channel]) streamsMap[stream.channel] = [];
+                streamsMap[stream.channel].push(stream);
+              }
+            });
+
+            const logosMap = {};
+            logosRes.forEach(logo => {
+              if (logo.url && (logo.in_use || !logosMap[logo.channel])) logosMap[logo.channel] = logo.url;
+            });
+
+            const countriesMap = {};
+            countriesRes.forEach(c => countriesMap[c.code.toUpperCase()] = c);
+
+            const categoriesMap = {};
+            categoriesRes.forEach(c => categoriesMap[c.id] = c.name);
+
+            const normalizeName = (name) => {
+              return name.toLowerCase()
+                .replace(/\s+/g, '')
+                .replace(/hd/gi, '')
+                .replace(/tv/gi, '')
+                .replace(/bd/gi, '')
+                .replace(/[^a-z0-9]/g, '');
+            };
+
+            const bdPresetsCopy = BANGLADESH_CHANNELS_PRESET.map(ch => ({
+              ...ch,
+              servers: [...(ch.servers || [{ id: `${ch.id}-srv-0`, name: "Server 1 (Primary)", url: ch.url, type: "hls" }])]
+            }));
+
+            const bdPresetsMap = {};
+            bdPresetsCopy.forEach(p => {
+              bdPresetsMap[normalizeName(p.name)] = p;
+            });
+
+            const allCustomChannels = customM3UResults.flat();
+            const standaloneCustomChannels = [];
+
+            allCustomChannels.forEach(customCh => {
+              const normName = normalizeName(customCh.name);
+              if (bdPresetsMap[normName]) {
+                const preset = bdPresetsMap[normName];
+                const urlExists = preset.servers.some(s => s.url === customCh.url);
+                if (!urlExists) {
+                  // Push to make custom servers secondary/backup streams
+                  preset.servers.push({
+                    id: customCh.servers[0].id,
+                    name: customCh.servers[0].name,
+                    url: customCh.url,
+                    type: "hls"
+                  });
+                  // Keep primary preset.url intact so that custom doesn't override it immediately
+                  if (!preset.logo && customCh.logo) preset.logo = customCh.logo;
+                }
+              } else {
+                const existingCustom = standaloneCustomChannels.find(c => normalizeName(c.name) === normName);
+                if (existingCustom) {
+                  const urlExists = existingCustom.servers.some(s => s.url === customCh.url);
+                  if (!urlExists) existingCustom.servers.push(customCh.servers[0]);
+                } else {
+                  standaloneCustomChannels.push(customCh);
+                }
+              }
+            });
+
+            const compiled = [];
+
+            channelsRes.forEach(ch => {
+              const channelStreams = streamsMap[ch.id] || [];
+              if (channelStreams.length === 0) return;
+
+              const countryInfo = countriesMap[ch.country.toUpperCase()];
+              const countryName = countryInfo ? countryInfo.name : ch.country;
+              const countryFlag = countryInfo ? countryInfo.flag : "🏳️";
+
+              let channelLogo = logosMap[ch.id] || ch.logo || "";
+              if (channelLogo && channelLogo.startsWith("http://")) channelLogo = channelLogo.replace("http://", "https://");
+
+              const isBD = ch.country && (ch.country.toUpperCase() === 'BD' || ch.country.toUpperCase() === 'BANGLADESH');
+              const normName = normalizeName(ch.name);
+
+              if (bdPresetsMap[normName] && (isBD || bdPresetsMap[normName].isCustomSource)) {
+                const matchedPreset = bdPresetsMap[normName];
+                // Prepend official iptv-org streams to make them primary servers
+                const newStreams = channelStreams.filter(stream => !matchedPreset.servers.some(srv => srv.url === stream.url));
+                if (newStreams.length > 0) {
+                  const mappedNewStreams = newStreams.map((stream, sIdx) => ({
+                    id: `${matchedPreset.id}-iptv-srv-${sIdx}`,
+                    name: stream.quality ? `Primary Server (${stream.quality.toUpperCase()})` : `Primary Server`,
+                    url: stream.url,
+                    type: "hls"
+                  }));
+                  matchedPreset.servers = [...mappedNewStreams, ...matchedPreset.servers];
+                  // Set primary url to the first and highest quality iptv-org stream
+                  matchedPreset.url = mappedNewStreams[0].url;
+                }
+                return; 
+              }
+
+              compiled.push({
+                id: ch.id,
+                name: ch.name,
+                logo: channelLogo,
+                country: countryName,
+                countryCode: ch.country.toUpperCase(),
+                countryFlag: countryFlag,
+                category: ch.categories && ch.categories.length > 0 ? (categoriesMap[ch.categories[0]] || ch.categories[0]) : "General",
+                description: ch.network ? `Broadcasting live network. Part of the ${ch.network} network.` : `Official live television stream for ${ch.name}.`,
+                url: channelStreams[0].url,
+                servers: channelStreams.map((srv, idx) => ({
+                  id: `${ch.id}-srv-${idx}`,
+                  name: srv.quality ? `Server ${idx + 1} (${srv.quality.toUpperCase()})` : `Server ${idx + 1}`,
+                  url: srv.url,
+                  type: "hls"
+                }))
+              });
+            });
+
+            const finalCompiled = [...compiled, ...bdPresetsCopy, ...standaloneCustomChannels];
+            setGlobalChannels(finalCompiled);
+            
+            // Set dynamic bd.m3u API channels for the grid carousel
+            const parsedBdApi = parseBdM3u(bdM3uText);
+            setBdApiChannels(parsedBdApi);
+            
+            const dynamicCurated = allCustomChannels.filter(ch => ch.sourceName === "Tapmad BD" || ch.sourceName === "FIFA Plus");
+            const updatedCurated = [...dynamicCurated, ...CURATED_CHANNELS];
+            setCuratedChannels(updatedCurated);
+            
+            setChannels(prev => {
+              if (prev === CURATED_CHANNELS) {
+                return updatedCurated;
+              }
+              return prev;
+            });
+            
+            const activeCountryCodes = new Set(finalCompiled.map(ch => ch.countryCode));
+            const sortedCountries = countriesRes
+              .filter(c => activeCountryCodes.has(c.code.toUpperCase()))
+              .map(c => ({
+                code: c.code.toLowerCase(),
+                name: `${c.flag} ${c.name}`
+              }))
+              .sort((a, b) => a.name.localeCompare(b.name));
+            
+            setDynamicCountries(sortedCountries);
+
+            const activeCategorySet = new Set(finalCompiled.map(ch => ch.category));
+            const knownCategories = new Set(categoriesRes.map(c => c.name));
+
+            const sortedCategories = categoriesRes
+              .filter(c => activeCategorySet.has(c.name))
+              .map(c => ({
+                id: c.id,
+                name: c.name,
+                icon: getCategoryIcon(c.id)
+              }));
+
+            activeCategorySet.forEach(cat => {
+              if (!knownCategories.has(cat)) {
+                sortedCategories.push({
+                  id: cat.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                  name: cat,
+                  icon: "tv" 
+                });
+              }
+            });
+
+            sortedCategories.sort((a, b) => a.name.localeCompare(b.name));
+            setDynamicCategories(sortedCategories);
+
+            triggerToast(`Successfully synced local APIs with ${finalCompiled.length.toLocaleString()} world channels.`);
+          } catch (err) {
+            console.error("Database initialization failed", err);
+            triggerToast("Failed to compile global IPTV database.");
+          } finally {
+            setIsLoadingGlobal(false);
+          }
+        };
+
+        fetchGlobalDatabase();
+      }, []);
+
+      useEffect(() => {
+        try {
+          localStorage.setItem("globalstream_favs", JSON.stringify(favorites));
+        } catch (e) {
+          console.error("Failed to save favorites", e);
+        }
+      }, [favorites]);
+
+      useEffect(() => {
+        if (currentChannel) {
+          try {
+            localStorage.setItem("globalstream_last_channel", JSON.stringify(currentChannel));
+          } catch (e) {
+            console.error("Failed to save active channel state", e);
+          }
+        }
+      }, [currentChannel]);
+
+      useEffect(() => {
+        const handleClickOutside = (e) => {
+          if (!e.target.closest('.dropdown-container')) {
+            setIsCategoryOpen(false);
+            setIsCountryOpen(false);
+          }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+          document.removeEventListener('touchstart', handleClickOutside);
+        };
+      }, []);
+
+      useEffect(() => {
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+      }, [
+        isCategoryOpen, 
+        isCountryOpen, 
+        channels, 
+        favorites, 
+        isCopied, 
+        videoError, 
+        isLoadingList, 
+        showFavoritesOnly, 
+        toastMessage, 
+        isLoadingGlobal,
+        globalChannels,
+        activeServerIndex,
+        currentChannelSources,
+        visibleLimit,
+        dynamicCountries,
+        dynamicCategories,
+        curatedChannels,
+        useProxy,
+        viewState,
+        volumeLevel,
+        isMuted
+      ]);
+
+      const toggleFavorite = (channelId, e) => {
+        if (e) e.stopPropagation();
+        if (favorites.includes(channelId)) {
+          setFavorites(prev => prev.filter(id => id !== channelId));
+          triggerToast("Removed from favorites");
+        } else {
+          setFavorites(prev => [...prev, channelId]);
+          triggerToast("Added to favorites");
+        }
+      };
+
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (viewState !== "player") return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          switch (e.key.toLowerCase()) {
+            case ' ':
+              e.preventDefault();
+              togglePlayPause();
+              break;
+            case 'f':
+              e.preventDefault();
+              triggerFullscreen();
+              break;
+            case 'm':
+              e.preventDefault();
+              setIsMuted(prev => !prev);
+              break;
+          }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [currentChannel, viewState, isPlaying, isMuted]);
+
+      useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        if (gainNodeRef.current) {
+          gainNodeRef.current.gain.value = isMuted ? 0 : volumeLevel / 100;
+        } 
+        video.volume = Math.min((isMuted ? 0 : volumeLevel) / 100, 1.0);
+        
+      }, [volumeLevel, isMuted, viewState]);
+
+      useEffect(() => {
+        const video = videoRef.current;
+        if (!video || viewState !== "player") return;
+
+        const handlePlaying = () => {
+          if (!audioCtxRef.current && window.AudioContext) {
+            try {
+              if (hlsRef.current) {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const source = ctx.createMediaElementSource(video);
+                const gain = ctx.createGain();
+                source.connect(gain);
+                gain.connect(ctx.destination);
+                
+                audioCtxRef.current = ctx;
+                gainNodeRef.current = gain;
+                
+                gain.gain.value = isMuted ? 0 : volumeLevel / 100;
+              }
+            } catch (e) {
+              console.warn("AudioContext init blocked, relying on standard bounds", e);
+            }
+          }
+        };
+
+        video.addEventListener('playing', handlePlaying);
+        return () => video.removeEventListener('playing', handlePlaying);
+      }, [viewState]);
+
+      useEffect(() => {
+        if (viewState !== "player" || !activeSource) return;
+        setVideoError(null);
+        setIsPlaying(true);
+
+        const video = videoRef.current;
+        if (!video) return;
+
+        destroyHls();
+        const resolvedUrl = activeSource.url;
+
+        const handleStreamFailure = () => {
+          if (!useProxy) {
+            console.warn(`Direct stream blocked (likely CORS). Attempting Proxy Bypass...`);
+            setUseProxy(true);
+            return;
+          }
+
+          if (isManualServerSelectionRef.current) {
+            console.warn(`Manual server selection failed. Stopping auto-switch.`);
+            setVideoError(`The selected server failed to connect. Please try another source manually.`);
+            destroyHls();
+            return;
+          }
+
+          if (activeServerIndex < currentChannelSources.length - 1) {
+            console.warn(`Server ${activeServerIndex + 1} proxy failed. Automatically trying next server...`);
+            setUseProxy(false);
+            setActiveServerIndex(prev => prev + 1);
+          } else {
+            setVideoError("This stream connection failed to connect. All alternative sources exhausted.");
+            destroyHls();
+          }
+        };
+
+        if (Hls.isSupported()) {
+          const hlsConfig = {
+            enableWorker: true,
+            lowLatencyMode: true,
+            maxMaxBufferLength: 20,
+            manifestLoadingMaxRetry: 5,
+            levelLoadingMaxRetry: 5,
+            xhrSetup: function (xhr, url) {
+              xhr.withCredentials = false;
+            }
+          };
+
+          if (useProxy) {
+            const ProxyLoader = function(config) {
+              let loader = new Hls.DefaultConfig.loader(config);
+              this.load = function(context, cfg, callbacks) {
+                if (context.url && context.url.startsWith('http') && !context.url.includes('corsproxy.io')) {
+                  context.url = 'https://corsproxy.io/?' + encodeURIComponent(context.url);
+                }
+                loader.load(context, cfg, callbacks);
+              };
+              this.abort = function() { loader.abort(); };
+              this.destroy = function() { loader.destroy(); };
+            };
+            hlsConfig.loader = ProxyLoader;
+          }
+
+          const hls = new Hls(hlsConfig);
+          hlsRef.current = hls;
+
+          hls.loadSource(resolvedUrl);
+          hls.attachMedia(video);
+
+          hls.on(Hls.Events.MANIFEST_PARSED, () => {
+            video.play().catch(err => {
+              console.log("Auto-play blocked, waiting for click.", err);
+              setIsPlaying(false);
+            });
+          });
+
+          hls.on(Hls.Events.ERROR, (event, data) => {
+            if (data.fatal) {
+              switch (data.type) {
+                case Hls.ErrorTypes.NETWORK_ERROR:
+                  console.warn("Network error encountered on stream.");
+                  if (data.details === Hls.ErrorDetails.MANIFEST_LOAD_ERROR || data.details === Hls.ErrorDetails.MANIFEST_LOAD_TIMEOUT) {
+                    handleStreamFailure();
+                  } else {
+                    hls.startLoad();
+                  }
+                  break;
+                case Hls.ErrorTypes.MEDIA_ERROR:
+                  console.warn("Media buffer error, attempting recovery...");
+                  hls.recoverMediaError();
+                  break;
+                default:
+                  handleStreamFailure();
+                  break;
+              }
+            }
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = useProxy ? `https://corsproxy.io/?${encodeURIComponent(resolvedUrl)}` : resolvedUrl;
+          video.addEventListener('error', handleStreamFailure);
+          video.addEventListener('loadedmetadata', () => {
+            video.play().catch(err => {
+              console.log("Native Autoplay blocked", err);
+              setIsPlaying(false);
+            });
+          });
+        } else {
+          setVideoError("HLS playback is not natively supported on this browser.");
+        }
+
+        return () => {
+          destroyHls();
+          video.removeEventListener('error', handleStreamFailure);
+        };
+      }, [activeSource, activeServerIndex, currentChannelSources, useProxy, viewState]);
+
+      const destroyHls = () => {
+        if (hlsRef.current) {
+          hlsRef.current.destroy();
+          hlsRef.current = null;
+        }
+      };
+
+      const togglePlayPause = () => {
+        const video = videoRef.current;
+        if (!video) return;
+        if (isPlaying) {
+          video.pause();
+          setIsPlaying(false);
+        } else {
+          video.play().catch(e => console.log(e));
+          setIsPlaying(true);
+        }
+      };
+
+      const triggerFullscreen = () => {
+        const video = videoRef.current;
+        if (video && video.requestFullscreen) {
+          video.requestFullscreen();
+        }
+      };
+
+      const copyToClipboard = (text) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          setIsCopied(true);
+          triggerToast("Copied stream link to clipboard!");
+          setTimeout(() => {
+            setIsCopied(false);
+          }, 2500);
+        } catch (err) {
+          console.error("Copy failed", err);
+        }
+        document.body.removeChild(textArea);
+      };
+
+      const loadIPTVCategory = (catId, catName) => {
+        setActiveCategory("category");
+        setSelectedCountryCode("");
+        setCuratedSelected(false);
+        setSearchQuery(""); 
+        setSelectedCategoryFilter("All"); 
+
+        const filtered = globalChannels.filter(ch => ch.category.toLowerCase() === catName.toLowerCase());
+        if (filtered.length > 0) {
+          setChannels(filtered);
+          triggerToast(`Loaded ${filtered.length} channels from ${catName}`);
+        } else {
+          triggerToast("Syncing category feeds... please wait a moment.");
+        }
+        setViewState("home");
+      };
+
+      const loadIPTVCountry = (countryCode, countryName) => {
+        setActiveCategory("country");
+        setSelectedCountryCode(countryCode);
+        setCuratedSelected(false);
+        setSearchQuery(""); 
+        setSelectedCategoryFilter("All"); 
+
+        const filtered = globalChannels.filter(ch => ch.countryCode === countryCode.toUpperCase());
+        if (filtered.length > 0) {
+          setChannels(filtered);
+          triggerToast(`Loaded ${filtered.length} channels from ${countryName}`);
+        } else {
+          triggerToast("Syncing country feeds... please wait a moment.");
+        }
+        setViewState("home");
+      };
+
+      const loadCurated = () => {
+        setActiveCategory("curated");
+        setSelectedCountryCode("");
+        setCuratedSelected(true);
+        setChannels(curatedChannels);
+        setVideoError(null);
+        setSearchQuery(""); 
+        setSelectedCategoryFilter("All"); 
+        triggerToast("Curated directory restored.");
+        setViewState("home");
+      };
+
+      useEffect(() => {
+        setVisibleLimit(100);
+      }, [searchQuery, selectedCategoryFilter, activeCategory, selectedCountryCode, showFavoritesOnly]);
+
+      const uniqueCategories = useMemo(() => {
+        const list = new Set();
+        channels.forEach(ch => {
+          if (ch.category) list.add(ch.category);
+        });
+        return ["All", ...Array.from(list).sort()];
+      }, [channels]);
+
+      const filteredChannels = useMemo(() => {
+        let searchPool = channels;
+        if (searchQuery.trim() !== "") {
+           searchPool = globalChannels.length > 0 ? globalChannels : channels;
+        }
+
+        let result = searchPool;
+
+        if (searchQuery.trim() !== "") {
+          const query = searchQuery.toLowerCase();
+          result = searchPool.filter(ch => {
+            return ch.name.toLowerCase().includes(query) || 
+                   (ch.category && ch.category.toLowerCase().includes(query)) ||
+                   (ch.country && ch.country.toLowerCase().includes(query));
+          });
+
+          result.sort((a, b) => {
+            const aIsSport = a.category && a.category.toLowerCase().includes("sport");
+            const bIsSport = b.category && b.category.toLowerCase().includes("sport");
+            if (aIsSport && !bIsSport) return -1;
+            if (!aIsSport && bIsSport) return 1;
+
+            const aStartsWith = a.name.toLowerCase().startsWith(query);
+            const bStartsWith = b.name.toLowerCase().startsWith(query);
+            if (aStartsWith && !bStartsWith) return -1;
+            if (!aStartsWith && bStartsWith) return 1;
+
+            return a.name.localeCompare(b.name);
+          });
+        } else {
+          result = searchPool.filter(ch => {
+            const matchesCat = selectedCategoryFilter === "All" || ch.category === selectedCategoryFilter;
+            const matchesFav = !showFavoritesOnly || favorites.includes(ch.id);
+            return matchesCat && matchesFav;
+          });
+        }
+        
+        return result;
+      }, [channels, globalChannels, searchQuery, selectedCategoryFilter, favorites, showFavoritesOnly]);
+
+      const handleScroll = (e) => {
+        const { scrollTop, scrollHeight, clientHeight } = e.target;
+        if (scrollHeight - scrollTop <= clientHeight + 300) {
+            if (visibleLimit < filteredChannels.length) {
+                setVisibleLimit(prev => prev + 100);
+            }
+        }
+      };
+
+      const channelsToRender = filteredChannels.slice(0, visibleLimit);
+
+      return (
+        <div className="flex-grow flex flex-col relative h-screen">
+          
+          {/* Toast Notification System */}
+          {toastMessage && (
+            <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[150] bg-slate-800 text-white px-4 py-2 rounded-full shadow-2xl border border-slate-700 animate-fadeIn text-xs font-semibold flex items-center gap-2 pointer-events-none">
+              <i data-lucide="info" className="w-4 h-4 text-brand-400"></i>
+              {toastMessage}
+            </div>
+          )}
+
+          {/* Header Controls */}
+          <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3.5 shadow-sm shrink-0">
+            <div className="max-w-[1700px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+              
+              {/* Brand Logo */}
+              <div className="flex items-center gap-3 cursor-pointer" onClick={loadCurated}>
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+                  <i data-lucide="tv" className="w-6 h-6"></i>
+                </div>
+                <div>
+                  <h1 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-400 bg-clip-text text-transparent flex items-center gap-2">
+                    GlobalStream <span className="text-[10px] uppercase font-bold tracking-widest bg-brand-600/30 text-brand-400 px-2 py-0.5 rounded border border-brand-500/20">IPTV</span>
+                  </h1>
+                  <p className="text-[11px] text-slate-400 hidden sm:block">Stream live television networks directly on your browser</p>
+                </div>
+              </div>
+
+              {/* Header Navigation Options */}
+              <div className={`flex-wrap items-center justify-center md:justify-end gap-2.5 w-full md:w-auto ${viewState === 'player' ? 'hidden md:flex' : 'flex'}`}>
+                <button 
+                  onClick={loadCurated}
+                  className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all ${
+                    activeCategory === 'curated' && viewState === 'home'
+                      ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' 
+                      : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                  }`}
+                >
+                  <i data-lucide="sparkles" className="w-3.5 h-3.5"></i>
+                  Curated
+                </button>
+
+                {/* Categories Dropdown */}
+                <div className="relative dropdown-container">
+                  <button 
+                    onClick={() => {
+                      setIsCategoryOpen(!isCategoryOpen);
+                      setIsCountryOpen(false);
+                    }}
+                    className="px-4 py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-2 transition-all"
+                  >
+                    <i data-lucide="grid" className="w-3.5 h-3.5"></i>
+                    Categories
+                    <i data-lucide="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''}`}></i>
+                  </button>
+                  {isCategoryOpen && (
+                    <>
+                      <div className="fixed inset-0 z-[90] md:hidden bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCategoryOpen(false)}></div>
+                      <div className="fixed md:absolute top-[76px] md:top-full left-4 right-4 md:left-auto md:right-0 mt-2 w-auto md:w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
+                        <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">
+                          Select Category
+                        </div>
+                        <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
+                          {dynamicCategories.map(cat => (
+                            <button
+                              key={cat.id}
+                              onClick={() => {
+                                loadIPTVCategory(cat.id, cat.name);
+                                setIsCategoryOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center gap-3 transition-all ${
+                                activeCategory === cat.id ? 'text-brand-400 bg-brand-950/20 font-bold' : 'text-slate-300'
+                              }`}
+                            >
+                              <i data-lucide={cat.icon} className="w-4 h-4 text-slate-400"></i>
+                              <span>{cat.name}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Country Explorer Dropdown */}
+                <div className="relative dropdown-container">
+                  <button 
+                    onClick={() => {
+                      setIsCountryOpen(!isCountryOpen);
+                      setIsCategoryOpen(false);
+                    }}
+                    className="px-4 py-2.5 rounded-lg text-xs font-semibold bg-brand-600 hover:bg-brand-500 text-white flex items-center gap-2 transition-all shadow-lg shadow-brand-600/25"
+                  >
+                    <i data-lucide="globe" className="w-3.5 h-3.5"></i>
+                    Browse Country
+                    <i data-lucide="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCountryOpen ? 'rotate-180' : ''}`}></i>
+                  </button>
+                  {isCountryOpen && (
+                    <>
+                      <div className="fixed inset-0 z-[90] md:hidden bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCountryOpen(false)}></div>
+                      <div className="fixed md:absolute top-[76px] md:top-full left-4 right-4 md:left-auto md:right-0 mt-2 w-auto md:w-72 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
+                        <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">
+                          Select Country TV
+                        </div>
+                        <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
+                          {dynamicCountries.map(ct => (
+                            <button
+                              key={ct.code}
+                              onClick={() => {
+                                loadIPTVCountry(ct.code, ct.name);
+                                setIsCountryOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center justify-between transition-all ${
+                                selectedCountryCode === ct.code ? 'text-brand-400 bg-brand-950/25 font-bold' : 'text-slate-300'
+                              }`}
+                            >
+                              <span className="truncate pr-2">{ct.name}</span>
+                              <span className="text-[10px] uppercase font-mono text-slate-500 bg-slate-950 px-2 py-0.5 rounded border border-slate-850 shrink-0">
+                                {ct.code}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* MAIN CONTENT AREA - SCROLLABLE CONTAINER */}
+          <main className="flex-grow overflow-y-auto w-full bg-slate-950" onScroll={handleScroll}>
+            
+            {/* ===================================================================== */}
+            {/* VIEW 1: HOME (CHANNEL GRID & CAROUSELS)                               */}
+            {/* ===================================================================== */}
+            {viewState === "home" && (
+              <div className="max-w-[1700px] mx-auto px-4 py-6 flex flex-col gap-6 animate-fadeIn">
+                
+                {/* Search & Filters Bar */}
+                <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800/80 shadow-md flex flex-col lg:flex-row gap-4 items-center justify-between">
+                  <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto flex-grow max-w-2xl">
+                    <div className="relative w-full">
+                      <input 
+                        type="text" 
+                        placeholder={isLoadingGlobal ? "Updating live index database..." : `Search ${globalChannels.length.toLocaleString() || "..."} global channels...`}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all"
+                      />
+                      <i data-lucide="search" className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                    </div>
+
+                    {searchQuery.trim() === "" && uniqueCategories.length > 2 && (
+                      <div className="flex items-center gap-2 w-full sm:w-48 shrink-0">
+                        <select
+                          value={selectedCategoryFilter}
+                          onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+                          className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-3 text-sm text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 w-full appearance-none cursor-pointer"
+                        >
+                          {uniqueCategories.map(cat => (
+                            <option key={cat} value={cat}>{cat}</option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between w-full lg:w-auto gap-4 shrink-0">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-bold text-slate-400">
+                      <span className={`h-2 w-2 rounded-full ${isLoadingGlobal ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'}`}></span>
+                      <span>
+                        {isLoadingGlobal ? "Indexing DB..." : "DB Ready"}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="flex flex-col items-end hidden sm:flex">
+                        <span className="text-xs font-bold text-slate-300">Channels</span>
+                        <span className="text-[10px] text-brand-400">{filteredChannels.length} results</span>
+                      </div>
+                      <button 
+                        onClick={() => setShowFavoritesOnly(prev => !prev)}
+                        className={`text-sm flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+                          showFavoritesOnly 
+                            ? 'bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30 shadow-lg shadow-amber-500/10' 
+                            : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                        }`}
+                      >
+                        <i data-lucide="star" className={`w-4 h-4 ${showFavoritesOnly ? 'fill-current' : ''}`}></i>
+                        Favorites
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Grid List Container */}
+                {channelsToRender.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-64 text-center p-6 text-slate-500">
+                    <i data-lucide="tv-2" className="w-16 h-16 mb-4 opacity-20"></i>
+                    <p className="text-lg font-semibold text-slate-400">No channels found</p>
+                    <p className="text-sm mt-1">Try adjusting your search or category filter.</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4 md:gap-5 pb-4 animate-fadeIn">
+                    {channelsToRender.map((channel, index) => {
+                      const isFavorited = favorites.includes(channel.id);
+                      return (
+                        <button
+                          key={`${channel.id}-${index}`}
+                          onClick={() => handleSelectChannel(channel)}
+                          className="group flex flex-col p-3 rounded-2xl bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all text-left relative overflow-hidden"
+                        >
+                          <div 
+                            className="absolute top-4 right-4 z-20 cursor-pointer p-1.5 rounded-lg bg-slate-950/80 backdrop-blur-sm border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-900"
+                            onClick={(e) => toggleFavorite(channel.id, e)}
+                          >
+                            <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
+                          </div>
+
+                          <div className="w-full aspect-video bg-slate-950 rounded-xl mb-3 flex items-center justify-center p-2 relative overflow-hidden">
+                            <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">
+                              <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                            </div>
+                            <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
+                              <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                            </div>
+                          </div>
+                          
+                          <h4 className="text-sm font-bold text-slate-200 group-hover:text-white truncate w-full px-1">
+                            {channel.name}
+                          </h4>
+                          
+                          <div className="flex items-center gap-1.5 mt-2 px-1 text-[10px] uppercase font-bold tracking-wider text-slate-500">
+                             <span className="truncate max-w-[80px] bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-brand-400/80">
+                               {channel.category}
+                             </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Pure API Grid Carousels (Dynamically generated using pure country M3U feeds) */}
+                {searchQuery.trim() === "" && !showFavoritesOnly && selectedCategoryFilter === "All" && activeCategory === "curated" && (
+                  <div className="flex flex-col gap-8 mt-4 border-t border-slate-900 pt-8 pb-10">
+                    <ChannelCarousel 
+                      title="Bangladeshi Channels" 
+                      icon={<span className="text-xl">🇧🇩</span>} 
+                      channels={bdCarouselChannels} 
+                      onSelectChannel={handleSelectChannel} 
+                      favorites={favorites} 
+                      toggleFavorite={(id) => toggleFavorite(id)} 
+                    />
+                    
+                    <ChannelCarousel 
+                      title="All Sports Channels" 
+                      icon={<i data-lucide="trophy" className="w-5 h-5 text-brand-400"></i>} 
+                      channels={sportsCarouselChannels} 
+                      onSelectChannel={handleSelectChannel} 
+                      favorites={favorites} 
+                      toggleFavorite={(id) => toggleFavorite(id)} 
+                    />
+                  </div>
+                )}
+
+                {visibleLimit < filteredChannels.length && (
+                  <div className="py-6 text-center text-sm font-semibold text-slate-500">
+                     <i data-lucide="loader-2" className="w-5 h-5 inline animate-spin mr-2"></i> Loading more channels...
+                  </div>
+                )}
+              </div>
+            )}
+
+
+            {/* ===================================================================== */}
+            {/* VIEW 2: PLAYER                                                        */}
+            {/* ===================================================================== */}
+            {viewState === "player" && (
+              <div className="px-4 py-6 w-full animate-fadeIn min-h-full flex flex-col">
+                <div className="mx-auto flex flex-col gap-4 w-full transition-all duration-300 max-w-6xl">
+                  
+                  {/* Back Navigation Button */}
+                  <button 
+                    onClick={handleBackToHome}
+                    className="self-start flex items-center gap-2 text-slate-400 hover:text-white px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 hover:border-slate-700 transition-colors shadow-sm"
+                  >
+                    <i data-lucide="arrow-left" className="w-4 h-4"></i>
+                    <span className="text-sm font-bold">Back to Channels</span>
+                  </button>
+
+                  {/* Player Frame */}
+                  <div className="bg-slate-900 rounded-2xl overflow-hidden border border-slate-800/80 shadow-2xl flex flex-col relative group w-full">
+                    
+                    {/* Visual player video container */}
+                    <div className="aspect-video w-full bg-slate-950 relative flex items-center justify-center">
+                      
+                      {videoError ? (
+                        <div className="absolute inset-0 bg-slate-950 z-10 flex flex-col items-center justify-center text-center p-6 gap-4 border-b border-slate-800">
+                          <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
+                            <i data-lucide="alert-octagon" className="w-8 h-8"></i>
+                          </div>
+                          <div className="max-w-md">
+                            <h3 className="font-bold text-lg text-slate-200">Stream Connection Offline</h3>
+                            <p className="text-xs text-slate-400 mt-1">{videoError}</p>
+                            <p className="text-[11px] text-slate-500 mt-3 bg-slate-900 p-3 rounded-lg border border-slate-800/50 text-left leading-relaxed">
+                              This current server failed to handshake. Try selecting an alternate source in the **Alternative Sources** bar below, or check your VPN connectivity if the channel is regionally locked.
+                            </p>
+                          </div>
+
+                          <div className="flex flex-wrap gap-2 justify-center mt-2">
+                            <button 
+                              onClick={() => {
+                                const urlToCopy = activeSource ? activeSource.url : '';
+                                copyToClipboard(urlToCopy);
+                              }}
+                              className="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-xs text-white rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-brand-600/20 transition-colors"
+                            >
+                              <i data-lucide={isCopied ? "check" : "copy"} className="w-4 h-4 text-white"></i>
+                              {isCopied ? "Copied!" : "Copy Stream URL"}
+                            </button>
+                            <button 
+                              onClick={() => { setUseProxy(false); setVideoError(null); }} 
+                              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300 font-semibold transition-colors"
+                            >
+                              Retry Playback
+                            </button>
+                          </div>
+                        </div>
+                      ) : null}
+
+                      <video
+                        key={activeSource ? activeSource.url : "none"}
+                        ref={videoRef}
+                        className="w-full h-full object-contain absolute inset-0"
+                        controls
+                        autoPlay
+                        playsInline
+                        muted={isMuted}
+                      />
+                    </div>
+
+                    {/* ACTIVE SERVER / MULTI-SOURCE SWITCHER STRIP */}
+                    {currentChannelSources.length > 1 && (
+                      <div className="bg-slate-950 border-y border-slate-800/80 px-4 py-3 flex flex-col md:flex-row md:items-center gap-3">
+                        <span className="text-[10px] uppercase font-extrabold text-slate-400 tracking-wider flex items-center gap-1.5 px-1 shrink-0">
+                          <i data-lucide="server" className="w-3.5 h-3.5 text-brand-400"></i>
+                          Alternative Sources ({currentChannelSources.length}):
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {currentChannelSources.map((srv, index) => (
+                            <button
+                              key={srv.id}
+                              onClick={() => {
+                                isManualServerSelectionRef.current = true;
+                                setActiveServerIndex(index);
+                                setUseProxy(false);
+                                setVideoError(null);
+                              }}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                                activeServerIndex === index
+                                  ? 'bg-brand-600 text-white shadow-md shadow-brand-600/10'
+                                  : 'bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-slate-200'
+                              }`}
+                            >
+                              <i data-lucide="radio" className="w-3.5 h-3.5"></i>
+                              <span>{srv.name}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="bg-slate-900 px-4 py-5 flex flex-col md:flex-row md:items-center justify-between gap-5">
+                      <div className="flex items-start gap-4 flex-grow">
+                        <div className="w-14 h-14 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                          <ChannelLogo name={activeChannelWithFreshData ? activeChannelWithFreshData.name : ""} logoUrl={activeChannelWithFreshData ? activeChannelWithFreshData.logo : ""} />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h2 className="font-extrabold text-white text-xl">
+                              {activeChannelWithFreshData ? activeChannelWithFreshData.name : ""}
+                            </h2>
+                            {activeChannelWithFreshData && activeChannelWithFreshData.category && (
+                              <span className="bg-brand-900/30 border border-brand-500/30 text-brand-300 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wide">
+                                {activeChannelWithFreshData.category}
+                              </span>
+                            )}
+                            {activeChannelWithFreshData && activeChannelWithFreshData.country && (
+                              <span className="bg-slate-800 text-slate-300 text-[10px] px-2 py-0.5 rounded font-bold uppercase border border-slate-700">
+                                {activeChannelWithFreshData.country}
+                              </span>
+                            )}
+                            {useProxy && (
+                              <span className="bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase flex items-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                                Proxy Bypass
+                              </span>
+                            )}
+                          </div>
+                          
+                          <p className="hidden md:block text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
+                            {activeChannelWithFreshData && activeChannelWithFreshData.description ? activeChannelWithFreshData.description : "Public Webcast broadcast via IPTV playlist feed. Connections are completely peer-to-peer and un-metered."}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Action & Tools Button Area */}
+                      <div className="flex flex-wrap items-center gap-2.5 shrink-0 border-t border-slate-800 pt-4 md:border-0 md:pt-0 w-full md:w-auto">
+                        
+                        {/* Interactive Volume Control slider supporting 200% limit scale natively */}
+                        <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl h-11 flex-grow md:flex-grow-0">
+                          <button onClick={() => setIsMuted(!isMuted)} className="text-slate-400 hover:text-white transition-colors shrink-0 outline-none">
+                            <i data-lucide={isMuted || volumeLevel === 0 ? "volume-x" : volumeLevel < 100 ? "volume-1" : "volume-2"} className="w-4 h-4"></i>
+                          </button>
+                          <input
+                            type="range"
+                            min="0"
+                            max="200"
+                            value={isMuted ? 0 : volumeLevel}
+                            onChange={(e) => {
+                              setVolumeLevel(Number(e.target.value));
+                              if (isMuted && Number(e.target.value) > 0) setIsMuted(false);
+                            }}
+                            className="w-full md:w-24 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer outline-none accent-brand-500"
+                            title="Volume Control (Up to 200%)"
+                          />
+                          <span className="text-[10px] sm:text-xs font-semibold text-slate-300 w-8 text-right tabular-nums shrink-0">{isMuted ? 0 : volumeLevel}%</span>
+                        </div>
+
+                        <button 
+                          onClick={() => {
+                            const urlToCopy = activeSource ? activeSource.url : '';
+                            copyToClipboard(urlToCopy);
+                          }}
+                          className={`h-11 px-4 rounded-xl border flex items-center gap-2 text-sm font-semibold transition-all ${
+                            isCopied 
+                              ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-400' 
+                              : 'bg-slate-950 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800'
+                          }`}
+                          title="Copy raw stream URL to play on VLC Player"
+                        >
+                          <i data-lucide={isCopied ? "check" : "copy"} className="w-4 h-4"></i>
+                          <span className="hidden sm:inline">{isCopied ? "Copied Link" : "Copy Link"}</span>
+                        </button>
+
+                        <button 
+                          onClick={(e) => activeChannelWithFreshData && toggleFavorite(activeChannelWithFreshData.id, e)}
+                          className={`h-11 w-11 rounded-xl border flex items-center justify-center transition-all shrink-0 ${
+                            activeChannelWithFreshData && favorites.includes(activeChannelWithFreshData.id)
+                              ? 'bg-amber-500/15 border-amber-500/50 text-amber-400'
+                              : 'bg-slate-950 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800'
+                          }`}
+                          title="Toggle Favorite"
+                        >
+                          <i data-lucide="star" className={`w-5 h-5 ${activeChannelWithFreshData && favorites.includes(activeChannelWithFreshData.id) ? 'fill-current' : ''}`}></i>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            )}
+            
+          </main>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
