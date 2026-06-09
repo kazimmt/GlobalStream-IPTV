@@ -1266,26 +1266,48 @@
         }
       };
 
-      const triggerFullscreen = () => {
+      const triggerFullscreen = async () => {
         const container = playerContainerRef.current;
         if (!container) return;
 
         if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-          if (container.requestFullscreen) {
-            container.requestFullscreen();
-          } else if (container.webkitRequestFullscreen) {
-            container.webkitRequestFullscreen();
-          } else if (container.msRequestFullscreen) {
-            container.msRequestFullscreen();
-          }
+          try {
+            if (container.requestFullscreen) {
+              await container.requestFullscreen();
+            } else if (container.webkitRequestFullscreen) {
+              await container.webkitRequestFullscreen();
+            } else if (container.msRequestFullscreen) {
+              await container.msRequestFullscreen();
+            }
+            
+            // Try to force Landscape mode on Mobile
+            if (window.screen && window.screen.orientation && window.screen.orientation.lock) {
+              window.screen.orientation.lock('landscape').catch(e => console.warn("Orientation lock failed:", e));
+            } else if (window.screen && window.screen.lockOrientation) {
+              window.screen.lockOrientation('landscape');
+            }
+          } catch (err) {
+            console.warn("Fullscreen error:", err);
+         }
         } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-          } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-          }
+          try {
+            if (document.exitFullscreen) {
+              await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              await document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+              await document.msExitFullscreen();
+            }
+            
+            // Unlock Orientation
+            if (window.screen && window.screen.orientation && window.screen.orientation.unlock) {
+              window.screen.orientation.unlock();
+            } else if (window.screen && window.screen.unlockOrientation) {
+              window.screen.unlockOrientation();
+            }
+          } catch (err) {
+            console.warn("Exit fullscreen error:", err);
+         }
         }
       };
 
@@ -1762,7 +1784,6 @@
                         key={activeSource ? activeSource.url : "none"}
                         ref={videoRef}
                         className="w-full h-full object-contain absolute inset-0 cursor-pointer"
-                        onClick={togglePlayPause}
                         autoPlay
                         playsInline
                         muted={isMuted}
@@ -1774,6 +1795,7 @@
                           hlsRef={hlsRef}
                           isPlaying={isPlaying}
                           togglePlayPause={togglePlayPause}
+						  setIsPlaying={setIsPlaying}
                           triggerFullscreen={triggerFullscreen}
                           isMuted={isMuted}
                           setIsMuted={setIsMuted}
