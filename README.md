@@ -78,7 +78,7 @@ git init
 git add index.html
 git commit -m "feat: deploy standalone globalstream app"
 git branch -M main
-git remote add origin [https://github.com/tuhin0408/GlobalStream-IPTV.git](https://github.com/tuhin0408/GlobalStream-IPTV.git)
+git remote add origin [https://github.com/kazimmt/GlobalStream-IPTV.git](https://github.com/kazimmt/GlobalStream-IPTV.git)
 git push -u origin main
 ```
 Go to your repository Settings -> Pages -> Set source branch to main -> Save.
