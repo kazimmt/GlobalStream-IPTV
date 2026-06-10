@@ -84,4 +84,4 @@ git push -u origin main
 Go to your repository Settings -> Pages -> Set source branch to main -> Save.
 
 ## ⚖️ Disclaimer
-This application is a generic media player client designed to aggregate publicly accessible playlist links. It does not host, broadcast, or store any streaming media content locally. All streams are retrieved peer-to-peer directly from the endpoints provided within public external `.m3u` repositories. Please ensure viewing complies with your local intellectual property regulations.
+This application is a generic media player client designed to aggregate publicly accessible playlist links. It does not host, broadcast, or store any streaming media content locally. All streams are retrieved peer-to-peer directly from the endpoints provided within public external `.m3u` repositories. Please ensure viewing complies with your local intellectual property regulations. If any links in these playlists infringe on your rights as a copyright holder, they may be removed by opening an [issue](https://github.com/kazimmt/GlobalStream-IPTV/issues/new).
