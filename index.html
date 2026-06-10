@@ -110,7 +110,7 @@
         description: "Live broadcast of T Sports HD from Bangladesh.",
         servers: [
           { name: "Server 1", url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8", type: "hls" },
-          { name: "Server 2", url: "https://tvsen7.aynaott.com/tsports-hd/index.m3u8", type: "hls" }
+          { name: "Server 2", url: "https://tvsen6.aynaott.com/tsports-hd/index.m3u8", type: "hls" }
         ]
       },
 	  {
@@ -638,17 +638,36 @@
       const audioCtxRef = useRef(null);
       const gainNodeRef = useRef(null);
 
+      // Bangladeshi Carousel channels: Sorted by popularity, and prioritizing Sports channels first
       const bdCarouselChannels = useMemo(() => {
-        return bdApiChannels;
+        return [...bdApiChannels].sort((a, b) => {
+          const aIsSport = (a.category && a.category.toLowerCase().includes('sport')) || a.name.toLowerCase().includes('sport') || a.name.toLowerCase().includes('khela');
+          const bIsSport = (b.category && b.category.toLowerCase().includes('sport')) || b.name.toLowerCase().includes('sport') || b.name.toLowerCase().includes('khela');
+          
+          if (aIsSport && !bIsSport) return -1;
+          if (!aIsSport && bIsSport) return 1;
+          
+          // Popularity sort descending: (server count proxy + custom weight modifier for curated/preset flags)
+          const scoreA = (a.servers || []).length + (a.id.startsWith('bd-') || a.id.startsWith('curated-') ? 100 : 0);
+          const scoreB = (b.servers || []).length + (b.id.startsWith('bd-') || b.id.startsWith('curated-') ? 100 : 0);
+          return scoreB - scoreA;
+        });
       }, [bdApiChannels]);
 
+      // All Sports Carousel channels: Sorted by popularity (alt server count)
       const sportsCarouselChannels = useMemo(() => {
-        return globalChannels.filter(ch => 
-          ch.category && 
-          ch.category.toLowerCase().includes('sport') &&
-          !ch.isCustomSource && 
-          !ch.id.startsWith('bd-')
-        );
+        return globalChannels
+          .filter(ch => 
+            ch.category && 
+            ch.category.toLowerCase().includes('sport') &&
+            !ch.isCustomSource && 
+            !ch.id.startsWith('bd-')
+          )
+          .sort((a, b) => {
+            const scoreA = (a.servers || []).length + (a.id.startsWith('curated-') ? 100 : 0);
+            const scoreB = (b.servers || []).length + (b.id.startsWith('curated-') ? 100 : 0);
+            return scoreB - scoreA;
+          });
       }, [globalChannels]);
 
       // Computed aggregation of all channels to cleanly resolve favorites mapping across multiple sources
@@ -1060,6 +1079,7 @@
             
             setDynamicCountries(sortedCountries);
 
+            // Fetch dynamic categories
             const activeCategorySet = new Set(finalCompiled.map(ch => ch.category));
             const knownCategories = new Set(categoriesRes.map(c => c.name));
 
@@ -1081,8 +1101,24 @@
               }
             });
 
-            sortedCategories.sort((a, b) => a.name.localeCompare(b.name));
-            setDynamicCategories(sortedCategories);
+            // Calculate popularity frequency to show only top 10 categories
+            const categoryCounts = {};
+            finalCompiled.forEach(ch => {
+              if (ch.category) {
+                categoryCounts[ch.category] = (categoryCounts[ch.category] || 0) + 1;
+              }
+            });
+
+            // Sort categories descending by channel count
+            sortedCategories.sort((a, b) => {
+              const countA = categoryCounts[a.name] || 0;
+              const countB = categoryCounts[b.name] || 0;
+              return countB - countA;
+            });
+
+            // Slice out only the top 10 categories/genres
+            const top10Categories = sortedCategories.slice(0, 10);
+            setDynamicCategories(top10Categories);
 
             triggerToast(`Successfully synced local APIs with ${finalCompiled.length.toLocaleString()} world channels.`);
           } catch (err) {
@@ -1577,14 +1613,15 @@
                   <h1 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-400 bg-clip-text text-transparent flex items-center gap-2">
                     GlobalStream <span className="text-[10px] uppercase font-bold tracking-widest bg-brand-600/30 text-brand-400 px-2 py-0.5 rounded border border-brand-500/20">IPTV</span>
                   </h1>
-                  <p className="text-[11px] text-slate-400 hidden sm:block">Stream live television networks directly on your browser</p>
                 </div>
               </div>
 
               {/* Header Hamburger Dropdown Menu for Desktop - Hidden on Mobile */}
               <div className="relative menu-container hidden md:block">
                 <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  onClick={() => {
+                    setIsMenuOpen(!isMenuOpen);
+                  }}
                   className="h-10 w-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-all focus:outline-none border border-slate-750"
                   aria-label="Toggle Menu"
                 >
@@ -1742,19 +1779,6 @@
                         <i data-lucide="search" className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
                       </div>
 
-                      {searchQuery.trim() === "" && uniqueCategories.length > 2 && (
-                        <div className="flex items-center gap-2 w-full sm:w-48 shrink-0">
-                          <select
-                            value={selectedCategoryFilter}
-                            onChange={(e) => setSelectedCategoryFilter(e.target.value)}
-                            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-3 text-sm text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 w-full appearance-none cursor-pointer"
-                          >
-                            {uniqueCategories.map(cat => (
-                              <option key={cat} value={cat}>{cat}</option>
-                            ))}
-                          </select>
-                        </div>
-                      )}
                     </div>
 
                     <div className="flex items-center justify-between w-full lg:w-auto gap-4 shrink-0">
@@ -1767,7 +1791,7 @@
 
                       <div className="flex items-center gap-4">
                         <div className="flex flex-col items-end hidden sm:flex">
-                          <span className="text-xs font-bold text-slate-300">Channels</span>
+                          <span className="text-xs font-bold text-slate-300">Featured Channels</span>
                           <span className="text-[10px] text-brand-400">{filteredChannels.length} results</span>
                         </div>
                         <button 
@@ -2580,7 +2604,7 @@
               className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "search" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}
             >
               <i data-lucide="search" className="w-5 h-5"></i>
-              <span>Search Channel</span>
+              <span>Search</span>
             </button>
             
             <button 
@@ -2588,7 +2612,7 @@
               className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "favorites" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}
             >
               <i data-lucide="star" className={`w-5 h-5 ${activeMobileTab === "favorites" && viewState !== "player" ? "fill-brand-400/10" : ""}`}></i>
-              <span>Favorites Channel</span>
+              <span>Favorites</span>
             </button>
             
             <button 
