@@ -110,7 +110,7 @@
         description: "Live broadcast of T Sports HD from Bangladesh.",
         servers: [
           { name: "Server 1", url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8", type: "hls" },
-          { name: "Server 2", url: "https://tvsen7.aynaott.com/tsports-hd/index.m3u8", type: "hls" }
+          { name: "Server 2", url: "https://tvsen6.aynaott.com/tsports-hd/index.m3u8", type: "hls" }
         ]
       },
 	  {
@@ -732,33 +732,56 @@
             const parseM3U = (m3uText, sourceName) => {
               const lines = m3uText.split(/\r?\n/);
               const parsedChannels = [];
+              const channelMapByTvgId = {};
               let currentCh = null;
 
               for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (line.startsWith('#EXTINF:')) {
                   currentCh = {};
+                  const tvgIdMatch = line.match(/tvg-id="([^"]+)"/);
                   const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
                   const tvgLogoMatch = line.match(/tvg-logo="([^"]+)"/);
                   const groupTitleMatch = line.match(/group-title="([^"]+)"/);
                   const nameMatch = line.split(',');
                   const fallbackName = nameMatch.length > 1 ? nameMatch[nameMatch.length - 1].trim() : "Unknown Channel";
 
+                  currentCh.tvgId = (tvgIdMatch && tvgIdMatch[1]) ? tvgIdMatch[1] : null;
                   currentCh.name = (tvgNameMatch && tvgNameMatch[1]) ? tvgNameMatch[1] : fallbackName;
                   currentCh.logo = (tvgLogoMatch && tvgLogoMatch[1]) ? tvgLogoMatch[1] : "";
                   currentCh.category = (groupTitleMatch && groupTitleMatch[1]) ? groupTitleMatch[1] : "Sports";
                 } else if (line && !line.startsWith('#') && currentCh) {
-                  currentCh.url = line;
-                  currentCh.id = `custom-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
-                  currentCh.type = "hls";
-                  currentCh.country = "Global";
-                  currentCh.countryCode = "BD";
-                  currentCh.countryFlag = "🇧🇩";
-                  currentCh.description = `Streamed from ${sourceName} Playlist. If it does not play here, Copy stream link and try NS Player`;
-                  currentCh.isCustomSource = true;
-                  currentCh.sourceName = sourceName;
-                  currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: `Backup Server (${sourceName})`, url: line, type: "hls" }];
-                  parsedChannels.push(currentCh);
+                  const url = line;
+                  const tvgId = currentCh.tvgId;
+
+                  if (tvgId && channelMapByTvgId[tvgId]) {
+                    const existingCh = channelMapByTvgId[tvgId];
+                    const serverIdx = existingCh.servers.length;
+                    const urlExists = existingCh.servers.some(s => s.url === url);
+                    if (!urlExists) {
+                      existingCh.servers.push({
+                        id: `${existingCh.id}-srv-${serverIdx}`,
+                        name: `Backup Server ${serverIdx + 1} (${sourceName})`,
+                        url: url,
+                        type: "hls"
+                      });
+                    }
+                  } else {
+                    currentCh.url = url;
+                    currentCh.id = `custom-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
+                    currentCh.type = "hls";
+                    currentCh.country = "Global";
+                    currentCh.countryCode = "BD";
+                    currentCh.countryFlag = "🇧🇩";
+                    currentCh.description = `Streamed from ${sourceName} Playlist. If it does not play here, Copy stream link and try NS Player`;
+                    currentCh.isCustomSource = true;
+                    currentCh.sourceName = sourceName;
+                    currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: `Backup Server (${sourceName})`, url: url, type: "hls" }];
+                    parsedChannels.push(currentCh);
+                    if (tvgId) {
+                      channelMapByTvgId[tvgId] = currentCh;
+                    }
+                  }
                   currentCh = null;
                 }
               }
@@ -768,31 +791,54 @@
             const parseBdM3u = (m3uText) => {
               const lines = m3uText.split(/\r?\n/);
               const parsedChannels = [];
+              const channelMapByTvgId = {};
               let currentCh = null;
 
               for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (line.startsWith('#EXTINF:')) {
                   currentCh = {};
+                  const tvgIdMatch = line.match(/tvg-id="([^"]+)"/);
                   const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
                   const tvgLogoMatch = line.match(/tvg-logo="([^"]+)"/);
                   const groupTitleMatch = line.match(/group-title="([^"]+)"/);
                   const nameMatch = line.split(',');
                   const fallbackName = nameMatch.length > 1 ? nameMatch[nameMatch.length - 1].trim() : "Unknown Channel";
 
+                  currentCh.tvgId = (tvgIdMatch && tvgIdMatch[1]) ? tvgIdMatch[1] : null;
                   currentCh.name = (tvgNameMatch && tvgNameMatch[1]) ? tvgNameMatch[1] : fallbackName;
                   currentCh.logo = (tvgLogoMatch && tvgLogoMatch[1]) ? tvgLogoMatch[1] : "";
                   currentCh.category = (groupTitleMatch && groupTitleMatch[1]) ? groupTitleMatch[1] : "General";
                 } else if (line && !line.startsWith('#') && currentCh) {
-                  currentCh.url = line;
-                  currentCh.id = `bd-api-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
-                  currentCh.type = "hls";
-                  currentCh.country = "Bangladesh";
-                  currentCh.countryCode = "BD";
-                  currentCh.countryFlag = "🇧🇩";
-                  currentCh.description = `Streamed via official iptv-org country index.`;
-                  currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: "Primary Stream", url: line, type: "hls" }];
-                  parsedChannels.push(currentCh);
+                  const url = line;
+                  const tvgId = currentCh.tvgId;
+
+                  if (tvgId && channelMapByTvgId[tvgId]) {
+                    const existingCh = channelMapByTvgId[tvgId];
+                    const serverIdx = existingCh.servers.length;
+                    const urlExists = existingCh.servers.some(s => s.url === url);
+                    if (!urlExists) {
+                      existingCh.servers.push({
+                        id: `${existingCh.id}-srv-${serverIdx}`,
+                        name: `Server ${serverIdx + 1}`,
+                        url: url,
+                        type: "hls"
+                      });
+                    }
+                  } else {
+                    currentCh.url = url;
+                    currentCh.id = `bd-api-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
+                    currentCh.type = "hls";
+                    currentCh.country = "Bangladesh";
+                    currentCh.countryCode = "BD";
+                    currentCh.countryFlag = "🇧🇩";
+                    currentCh.description = `Streamed via official iptv-org country index.`;
+                    currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: "Primary Stream", url: url, type: "hls" }];
+                    parsedChannels.push(currentCh);
+                    if (tvgId) {
+                      channelMapByTvgId[tvgId] = currentCh;
+                    }
+                  }
                   currentCh = null;
                 }
               }
@@ -860,33 +906,6 @@
             const allCustomChannels = customM3UResults.flat();
             const standaloneCustomChannels = [];
 
-            allCustomChannels.forEach(customCh => {
-              const normName = normalizeName(customCh.name);
-              if (bdPresetsMap[normName]) {
-                const preset = bdPresetsMap[normName];
-                const urlExists = preset.servers.some(s => s.url === customCh.url);
-                if (!urlExists) {
-                  // Push to make custom servers secondary/backup streams
-                  preset.servers.push({
-                    id: customCh.servers[0].id,
-                    name: customCh.servers[0].name,
-                    url: customCh.url,
-                    type: "hls"
-                  });
-                  // Keep primary preset.url intact so that custom doesn't override it immediately
-                  if (!preset.logo && customCh.logo) preset.logo = customCh.logo;
-                }
-              } else {
-                const existingCustom = standaloneCustomChannels.find(c => normalizeName(c.name) === normName);
-                if (existingCustom) {
-                  const urlExists = existingCustom.servers.some(s => s.url === customCh.url);
-                  if (!urlExists) existingCustom.servers.push(customCh.servers[0]);
-                } else {
-                  standaloneCustomChannels.push(customCh);
-                }
-              }
-            });
-
             const compiled = [];
 
             channelsRes.forEach(ch => {
@@ -938,6 +957,62 @@
                   type: "hls"
                 }))
               });
+            });
+
+            allCustomChannels.forEach(customCh => {
+              const normName = normalizeName(customCh.name);
+              
+              let matchedChannel = null;
+              
+              if (customCh.tvgId) {
+                for (const preset of bdPresetsCopy) {
+                  if (preset.id === customCh.tvgId || preset.tvgId === customCh.tvgId) {
+                    matchedChannel = preset;
+                    break;
+                  }
+                }
+                if (!matchedChannel) {
+                  matchedChannel = compiled.find(c => c.id === customCh.tvgId || c.tvgId === customCh.tvgId);
+                }
+                if (!matchedChannel) {
+                  matchedChannel = standaloneCustomChannels.find(c => c.id === customCh.tvgId || c.tvgId === customCh.tvgId);
+                }
+              }
+
+              if (matchedChannel) {
+                customCh.servers.forEach(srv => {
+                  const urlExists = matchedChannel.servers.some(s => s.url === srv.url);
+                  if (!urlExists) {
+                    matchedChannel.servers.push({
+                      id: srv.id,
+                      name: srv.name,
+                      url: srv.url,
+                      type: "hls"
+                    });
+                  }
+                });
+                if (!matchedChannel.logo && customCh.logo) matchedChannel.logo = customCh.logo;
+              } else if (bdPresetsMap[normName]) {
+                const preset = bdPresetsMap[normName];
+                const urlExists = preset.servers.some(s => s.url === customCh.url);
+                if (!urlExists) {
+                  preset.servers.push({
+                    id: customCh.servers[0].id,
+                    name: customCh.servers[0].name,
+                    url: customCh.url,
+                    type: "hls"
+                  });
+                  if (!preset.logo && customCh.logo) preset.logo = customCh.logo;
+                }
+              } else {
+                const existingCustom = standaloneCustomChannels.find(c => normalizeName(c.name) === normName);
+                if (existingCustom) {
+                  const urlExists = existingCustom.servers.some(s => s.url === customCh.url);
+                  if (!urlExists) existingCustom.servers.push(customCh.servers[0]);
+                } else {
+                  standaloneCustomChannels.push(customCh);
+                }
+              }
             });
 
             const deduplicateByUrl = (channelList) => {
