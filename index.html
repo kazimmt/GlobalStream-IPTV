@@ -104,7 +104,7 @@
         name: "T Sports HD",
         category: "Sports",
         country: "Bangladesh",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/1280px-T_Sports_logo.svg.png",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/4/4c/T_Sports_logo.svg",
         url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
         type: "hls",
         description: "Live broadcast of T Sports HD from Bangladesh.",
@@ -380,8 +380,8 @@
                     <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
                   </div>
 
-                  <div className="w-full aspect-video bg-slate-950 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
-                    <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">
+                  <div className="w-full aspect-video bg-slate-700 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
+                    <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0.2,0.2)]">
                       <ChannelLogo name={channel.name} logoUrl={channel.logo} />
                     </div>
                     <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
@@ -940,15 +940,26 @@
               });
             });
 
-            const finalCompiled = [...compiled, ...bdPresetsCopy, ...standaloneCustomChannels];
+            const deduplicateByUrl = (channelList) => {
+              const seen = new Set();
+              return channelList.filter(ch => {
+                if (!ch.url) return false;
+                const url = ch.url.trim();
+                if (seen.has(url)) return false;
+                seen.add(url);
+                return true;
+              });
+            };
+
+            const finalCompiled = deduplicateByUrl([...compiled, ...bdPresetsCopy, ...standaloneCustomChannels]);
             setGlobalChannels(finalCompiled);
             
             // Set dynamic bd.m3u API channels for the grid carousel
-            const parsedBdApi = parseBdM3u(bdM3uText);
+            const parsedBdApi = deduplicateByUrl(parseBdM3u(bdM3uText));
             setBdApiChannels(parsedBdApi);
             
             const dynamicCurated = allCustomChannels.filter(ch => ch.sourceName === "Tapmad BD" || ch.sourceName === "FIFA Plus");
-            const updatedCurated = [...dynamicCurated, ...CURATED_CHANNELS];
+            const updatedCurated = deduplicateByUrl([...dynamicCurated, ...CURATED_CHANNELS]);
             setCuratedChannels(updatedCurated);
             
             setChannels(prev => {
@@ -1700,8 +1711,8 @@
                             <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
                           </div>
 
-                          <div className="w-full aspect-video bg-slate-950 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
-                            <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">
+                          <div className="w-full aspect-video bg-slate-700 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
+                            <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0.2,0.2)]">
                               <ChannelLogo name={channel.name} logoUrl={channel.logo} />
                             </div>
                             <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
@@ -1876,7 +1887,7 @@
 
                     <div className="bg-slate-900 px-4 py-5 flex flex-col md:flex-row md:items-center justify-between gap-5">
                       <div className="flex items-start gap-4 flex-grow">
-                        <div className="w-14 h-14 rounded-xl bg-slate-950 border border-slate-800/80 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                        <div className="w-14 h-14 rounded-xl bg-slate-700 border border-slate-800/80 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
                           <ChannelLogo name={activeChannelWithFreshData ? activeChannelWithFreshData.name : ""} logoUrl={activeChannelWithFreshData ? activeChannelWithFreshData.logo : ""} />
                         </div>
                         <div>
@@ -2049,8 +2060,8 @@
                                 <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
                               </div>
 
-                              <div className="w-full aspect-video bg-slate-950 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
-                                <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]">
+                              <div className="w-full aspect-video bg-slate-700 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
+                                <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0.2,0.2)]">
                                   <ChannelLogo name={channel.name} logoUrl={channel.logo} />
                                 </div>
                                 <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
