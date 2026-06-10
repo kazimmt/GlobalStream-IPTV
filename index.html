@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="Stay updated with the latest sports news, live match scores, expert analysis, and exclusive updates from the world of football, cricket, and more on Khela.pro.bd. Your ultimate destination for comprehensive sports coverage.">
   <meta name="keywords" content="FIFA World Cup 2026, ফিফা বিশ্বকাপ ২০২৬, 2026 World Cup, FIFA 2026 schedule, বিশ্বকাপ ফুটবল ২০২৬, host countries 2026, World Cup matches, football tournament 2026, Argentina football, Brazil football, Lionel Messi 2026, Cristiano Ronaldo, World Cup venues, USA Mexico Canada 2026, football world cup news, live football update">
   <title>GlobalStream - Live World TV & IPTV Player</title>
@@ -335,7 +335,7 @@
                   className="text-[10px] sm:text-xs font-bold text-brand-400 hover:text-white bg-brand-500/10 hover:bg-brand-500/80 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg transition-colors mr-1 flex items-center gap-1"
                 >
                   See All
-                  <i data-lucide="arrow-right" className="w-3 h-3"></i>
+                  <i data-lucide="arrow-right" className="w-3.5 h-3.5"></i>
                 </button>
               )}
               <button 
@@ -347,7 +347,7 @@
               </button>
               <button 
                 onClick={() => scroll('right')}
-                className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors"
                 title="Scroll Right"
               >
                 <i data-lucide="chevron-right" className="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
@@ -572,6 +572,7 @@
 
     function App() {
       const [viewState, setViewState] = useState("home"); // "home" or "player"
+      const [activeMobileTab, setActiveMobileTab] = useState("home"); // "home", "search", "favorites", "settings"
 
       const [activeCategory, setActiveCategory] = useState("curated");
       const [curatedChannels, setCuratedChannels] = useState(CURATED_CHANNELS);
@@ -617,6 +618,7 @@
       const [volumeLevel, setVolumeLevel] = useState(100); // 0 to 200 volume scale
       const [isCategoryOpen, setIsCategoryOpen] = useState(false);
       const [isCountryOpen, setIsCountryOpen] = useState(false);
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
       const [isCopied, setIsCopied] = useState(false);
       const [toastMessage, setToastMessage] = useState(null);
       const [useProxy, setUseProxy] = useState(false);
@@ -637,12 +639,10 @@
       const gainNodeRef = useRef(null);
 
       const bdCarouselChannels = useMemo(() => {
-        // Return only the exact API country playlist fetched directly from iptv-org/iptv/countries/bd.m3u
         return bdApiChannels;
       }, [bdApiChannels]);
 
       const sportsCarouselChannels = useMemo(() => {
-        // Exclude all presets and M3U sideloaded configurations to maintain iptv-org only logic
         return globalChannels.filter(ch => 
           ch.category && 
           ch.category.toLowerCase().includes('sport') &&
@@ -650,6 +650,15 @@
           !ch.id.startsWith('bd-')
         );
       }, [globalChannels]);
+
+      // Computed aggregation of all channels to cleanly resolve favorites mapping across multiple sources
+      const allUniqueChannels = useMemo(() => {
+        const map = new Map();
+        curatedChannels.forEach(ch => map.set(ch.id, ch));
+        bdApiChannels.forEach(ch => map.set(ch.id, ch));
+        globalChannels.forEach(ch => map.set(ch.id, ch));
+        return Array.from(map.values());
+      }, [curatedChannels, bdApiChannels, globalChannels]);
 
       const triggerToast = (msg) => {
         setToastMessage(msg);
@@ -685,7 +694,6 @@
         setCurrentChannel(channel);
         setViewState("player");
         
-        // Push State for Android Back Button & Hardware Swipe Controls
         window.history.pushState({ view: "player", channelId: channel.id }, "");
       };
 
@@ -924,7 +932,6 @@
 
               if (bdPresetsMap[normName] && (isBD || bdPresetsMap[normName].isCustomSource)) {
                 const matchedPreset = bdPresetsMap[normName];
-                // Prepend official iptv-org streams to make them primary servers
                 const newStreams = channelStreams.filter(stream => !matchedPreset.servers.some(srv => srv.url === stream.url));
                 if (newStreams.length > 0) {
                   const mappedNewStreams = newStreams.map((stream, sIdx) => ({
@@ -934,7 +941,6 @@
                     type: "hls"
                   }));
                   matchedPreset.servers = [...mappedNewStreams, ...matchedPreset.servers];
-                  // Set primary url to the first and highest quality iptv-org stream
                   matchedPreset.url = mappedNewStreams[0].url;
                 }
                 return; 
@@ -1029,7 +1035,6 @@
             const finalCompiled = deduplicateByUrl([...compiled, ...bdPresetsCopy, ...standaloneCustomChannels]);
             setGlobalChannels(finalCompiled);
             
-            // Set dynamic bd.m3u API channels for the grid carousel
             const parsedBdApi = deduplicateByUrl(parseBdM3u(bdM3uText));
             setBdApiChannels(parsedBdApi);
             
@@ -1111,9 +1116,10 @@
 
       useEffect(() => {
         const handleClickOutside = (e) => {
-          if (!e.target.closest('.dropdown-container')) {
+          if (!e.target.closest('.dropdown-container') && !e.target.closest('.menu-container')) {
             setIsCategoryOpen(false);
             setIsCountryOpen(false);
+            setIsMenuOpen(false);
           }
         };
         document.addEventListener('mousedown', handleClickOutside);
@@ -1131,6 +1137,7 @@
       }, [
         isCategoryOpen, 
         isCountryOpen, 
+        isMenuOpen,
         channels, 
         favorites, 
         isCopied, 
@@ -1153,7 +1160,8 @@
         isNsPlayerModalOpen,
         copiedLinkId,
         seeAllData,
-        seeAllSearchQuery
+        seeAllSearchQuery,
+        activeMobileTab
       ]);
 
       const toggleFavorite = (channelId, e) => {
@@ -1379,7 +1387,6 @@
               await container.msRequestFullscreen();
             }
             
-            // Try to force Landscape mode on Mobile
             if (window.screen && window.screen.orientation && window.screen.orientation.lock) {
               window.screen.orientation.lock('landscape').catch(e => console.warn("Orientation lock failed:", e));
             } else if (window.screen && window.screen.lockOrientation) {
@@ -1398,7 +1405,6 @@
               await document.msExitFullscreen();
             }
             
-            // Unlock Orientation
             if (window.screen && window.screen.orientation && window.screen.orientation.unlock) {
               window.screen.orientation.unlock();
             } else if (window.screen && window.screen.unlockOrientation) {
@@ -1433,7 +1439,7 @@
         setSelectedCountryCode("");
         setCuratedSelected(false);
         setSearchQuery(""); 
-        setSelectedCategoryFilter("All"); 
+        setSelectedCategoryFilter(catName); 
 
         const filtered = globalChannels.filter(ch => ch.category.toLowerCase() === catName.toLowerCase());
         if (filtered.length > 0) {
@@ -1526,7 +1532,6 @@
         return result;
       }, [channels, globalChannels, searchQuery, selectedCategoryFilter, favorites, showFavoritesOnly]);
 
-      // Embedded category filtration for "See All" modal popup
       const filteredSeeAllChannels = useMemo(() => {
         if (!seeAllData) return [];
         if (!seeAllSearchQuery.trim()) return seeAllData.channels;
@@ -1561,7 +1566,7 @@
 
           {/* Header Controls */}
           <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3.5 shadow-sm shrink-0">
-            <div className="max-w-[1700px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="max-w-[1700px] mx-auto flex items-center justify-between gap-4">
               
               {/* Brand Logo */}
               <div className="flex items-center gap-3 cursor-pointer" onClick={loadCurated}>
@@ -1576,115 +1581,139 @@
                 </div>
               </div>
 
-              {/* Header Navigation Options */}
-              <div className={`flex-wrap items-center justify-center md:justify-end gap-2.5 w-full md:w-auto ${viewState === 'player' ? 'hidden md:flex' : 'flex'}`}>
-                <button 
-                  onClick={loadCurated}
-                  className={`px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all ${
-                    activeCategory === 'curated' && viewState === 'home'
-                      ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' 
-                      : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
-                  }`}
+              {/* Header Hamburger Dropdown Menu for Desktop - Hidden on Mobile */}
+              <div className="relative menu-container hidden md:block">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="h-10 w-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-all focus:outline-none border border-slate-750"
+                  aria-label="Toggle Menu"
                 >
-                  <i data-lucide="sparkles" className="w-3.5 h-3.5"></i>
-                  Featured
+                  <i data-lucide={isMenuOpen ? "x" : "menu"} className="w-5 h-5"></i>
                 </button>
 
-                {/* Categories Dropdown */}
-                <div className="relative dropdown-container">
-                  <button 
-                    onClick={() => {
-                      setIsCategoryOpen(!isCategoryOpen);
-                      setIsCountryOpen(false);
-                    }}
-                    className="px-4 py-2.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-2 transition-all"
-                  >
-                    <i data-lucide="grid" className="w-3.5 h-3.5"></i>
-                    Categories
-                    <i data-lucide="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''}`}></i>
-                  </button>
-                  {isCategoryOpen && (
-                    <>
-                      <div className="fixed inset-0 z-[90] md:hidden bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCategoryOpen(false)}></div>
-                      <div className="fixed md:absolute top-[76px] md:top-full left-4 right-4 md:left-auto md:right-0 mt-2 w-auto md:w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
-                        <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">
-                          Select Category
-                        </div>
-                        <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
-                          {dynamicCategories.map(cat => (
-                            <button
-                              key={cat.id}
-                              onClick={() => {
-                                loadIPTVCategory(cat.id, cat.name);
-                                setIsCategoryOpen(false);
-                              }}
-                              className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center gap-3 transition-all ${
-                                activeCategory === cat.id ? 'text-brand-400 bg-brand-950/20 font-bold' : 'text-slate-300'
-                              }`}
-                            >
-                              <i data-lucide={cat.icon} className="w-4 h-4 text-slate-400"></i>
-                              <span>{cat.name}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
+                {isMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl z-50 p-3 flex flex-col gap-2.5 animate-fadeIn">
+                    <button 
+                      onClick={() => {
+                        loadCurated();
+                        setIsMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all ${
+                        activeCategory === 'curated' && viewState === 'home'
+                          ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' 
+                          : 'bg-slate-850 hover:bg-slate-800 text-slate-300'
+                      }`}
+                    >
+                      <i data-lucide="sparkles" className="w-3.5 h-3.5"></i>
+                      Featured
+                    </button>
 
-                {/* Country Explorer Dropdown */}
-                <div className="relative dropdown-container">
-                  <button 
-                    onClick={() => {
-                      setIsCountryOpen(!isCountryOpen);
-                      setIsCategoryOpen(false);
-                    }}
-                    className="px-4 py-2.5 rounded-lg text-xs font-semibold bg-brand-600 hover:bg-brand-500 text-white flex items-center gap-2 transition-all shadow-lg shadow-brand-600/25"
-                  >
-                    <i data-lucide="globe" className="w-3.5 h-3.5"></i>
-                    Browse Country
-                    <i data-lucide="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCountryOpen ? 'rotate-180' : ''}`}></i>
-                  </button>
-                  {isCountryOpen && (
-                    <>
-                      <div className="fixed inset-0 z-[90] md:hidden bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCountryOpen(false)}></div>
-                      <div className="fixed md:absolute top-[76px] md:top-full left-4 right-4 md:left-auto md:right-0 mt-2 w-auto md:w-72 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
-                        <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">
-                          Select Country TV
-                        </div>
-                        <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
-                          {dynamicCountries.map(ct => (
-                            <button
-                              key={ct.code}
-                              onClick={() => {
-                                loadIPTVCountry(ct.code, ct.name);
-                                setIsCountryOpen(false);
-                              }}
-                              className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center justify-between transition-all ${
-                                selectedCountryCode === ct.code ? 'text-brand-400 bg-brand-950/25 font-bold' : 'text-slate-300'
-                              }`}
-                            >
-                              <span className="truncate pr-2">{ct.name}</span>
-                              <span className="text-[10px] uppercase font-mono text-slate-500 bg-slate-950 px-2 py-0.5 rounded border border-slate-850 shrink-0">
-                                {ct.code}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
+                    {/* Categories Dropdown */}
+                    <div className="relative dropdown-container w-full">
+                      <button 
+                        onClick={() => {
+                          setIsCategoryOpen(!isCategoryOpen);
+                          setIsCountryOpen(false);
+                        }}
+                        className="w-full px-4 py-2.5 rounded-lg text-xs font-semibold bg-slate-850 hover:bg-slate-800 text-slate-300 flex items-center justify-between transition-all"
+                      >
+                        <span className="flex items-center gap-2">
+                          <i data-lucide="grid" className="w-3.5 h-3.5"></i>
+                          Categories
+                        </span>
+                        <i data-lucide="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''}`}></i>
+                      </button>
+                      {isCategoryOpen && (
+                        <>
+                          <div className="fixed inset-0 z-[90] bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCategoryOpen(false)}></div>
+                          <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
+                            <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">
+                              Select Category
+                            </div>
+                            <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
+                              {dynamicCategories.map(cat => (
+                                <button
+                                  key={cat.id}
+                                  onClick={() => {
+                                    loadIPTVCategory(cat.id, cat.name);
+                                    setIsCategoryOpen(false);
+                                    setIsMenuOpen(false);
+                                  }}
+                                  className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center gap-3 transition-all ${
+                                    activeCategory === cat.id ? 'text-brand-400 bg-brand-950/20 font-bold' : 'text-slate-300'
+                                  }`}
+                                >
+                                  <i data-lucide={cat.icon} className="w-4 h-4 text-slate-400"></i>
+                                  <span>{cat.name}</span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
 
-                {/* NS Player Servers Button */}
-                <button 
-                  onClick={() => setIsNsPlayerModalOpen(true)}
-                  className="px-4 py-2.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-2 transition-all shadow-lg shadow-emerald-600/25"
-                >
-                  <i data-lucide="play-square" className="w-3.5 h-3.5"></i>
-                  NS Player Servers
-                </button>
+                    {/* Country Explorer Dropdown */}
+                    <div className="relative dropdown-container w-full">
+                      <button 
+                        onClick={() => {
+                          setIsCountryOpen(!isCountryOpen);
+                          setIsCategoryOpen(false);
+                        }}
+                        className="w-full px-4 py-2.5 rounded-lg text-xs font-semibold bg-brand-600 hover:bg-brand-500 text-white flex items-center justify-between transition-all shadow-lg shadow-brand-600/25"
+                      >
+                        <span className="flex items-center gap-2">
+                          <i data-lucide="globe" className="w-3.5 h-3.5"></i>
+                          Browse Country
+                        </span>
+                        <i data-lucide="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCountryOpen ? 'rotate-180' : ''}`}></i>
+                      </button>
+                      {isCountryOpen && (
+                        <>
+                          <div className="fixed inset-0 z-[90] bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCountryOpen(false)}></div>
+                          <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
+                            <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">
+                              Select Country TV
+                            </div>
+                            <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
+                              {dynamicCountries.map(ct => (
+                                <button
+                                  key={ct.code}
+                                  onClick={() => {
+                                    loadIPTVCountry(ct.code, ct.name);
+                                    setIsCountryOpen(false);
+                                    setIsMenuOpen(false);
+                                  }}
+                                  className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center justify-between transition-all ${
+                                    selectedCountryCode === ct.code ? 'text-brand-400 bg-brand-950/25 font-bold' : 'text-slate-300'
+                                  }`}
+                                >
+                                  <span className="truncate pr-2">{ct.name}</span>
+                                  <span className="text-[10px] uppercase font-mono text-slate-500 bg-slate-950 px-2 py-0.5 rounded border border-slate-850 shrink-0">
+                                    {ct.code}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <button 
+                      onClick={() => {
+                        setIsNsPlayerModalOpen(true);
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-2 transition-all shadow-lg shadow-emerald-600/25 justify-center"
+                    >
+                      <i data-lucide="play-square" className="w-3.5 h-3.5"></i>
+                      NS Player Servers
+                    </button>
+                  </div>
+                )}
               </div>
+
             </div>
           </header>
 
@@ -1695,151 +1724,433 @@
             {/* VIEW 1: HOME (CHANNEL GRID & CAROUSELS)                               */}
             {/* ===================================================================== */}
             {viewState === "home" && (
-              <div className="max-w-[1700px] mx-auto px-4 py-6 flex flex-col gap-6 animate-fadeIn">
+              <div className="max-w-[1700px] mx-auto px-4 py-6 flex flex-col gap-6 animate-fadeIn pb-24 md:pb-6">
                 
-                {/* Search & Filters Bar */}
-                <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800/80 shadow-md flex flex-col lg:flex-row gap-4 items-center justify-between">
-                  <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto flex-grow max-w-2xl">
-                    <div className="relative w-full">
-                      <input 
-                        type="text" 
-                        placeholder={isLoadingGlobal ? "Updating live index database..." : `Search ${globalChannels.length.toLocaleString() || "..."} global channels...`}
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all"
-                      />
-                      <i data-lucide="search" className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                {/* --- DESKTOP VIEW LAYOUT --- */}
+                <div className="hidden md:flex flex-col gap-6">
+                  {/* Search & Filters Bar */}
+                  <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800/80 shadow-md flex flex-col lg:flex-row gap-4 items-center justify-between">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto flex-grow max-w-2xl">
+                      <div className="relative w-full">
+                        <input 
+                          type="text" 
+                          placeholder={isLoadingGlobal ? "Updating live index database..." : `Search ${globalChannels.length.toLocaleString() || "..."} global channels...`}
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all"
+                        />
+                        <i data-lucide="search" className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                      </div>
+
+                      {searchQuery.trim() === "" && uniqueCategories.length > 2 && (
+                        <div className="flex items-center gap-2 w-full sm:w-48 shrink-0">
+                          <select
+                            value={selectedCategoryFilter}
+                            onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+                            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-3 text-sm text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 w-full appearance-none cursor-pointer"
+                          >
+                            {uniqueCategories.map(cat => (
+                              <option key={cat} value={cat}>{cat}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
                     </div>
 
-                    {searchQuery.trim() === "" && uniqueCategories.length > 2 && (
-                      <div className="flex items-center gap-2 w-full sm:w-48 shrink-0">
-                        <select
-                          value={selectedCategoryFilter}
-                          onChange={(e) => setSelectedCategoryFilter(e.target.value)}
-                          className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-3 text-sm text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 w-full appearance-none cursor-pointer"
+                    <div className="flex items-center justify-between w-full lg:w-auto gap-4 shrink-0">
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-bold text-slate-400">
+                        <span className={`h-2 w-2 rounded-full ${isLoadingGlobal ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'}`}></span>
+                        <span>
+                          {isLoadingGlobal ? "Indexing DB..." : "DB Ready"}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <div className="flex flex-col items-end hidden sm:flex">
+                          <span className="text-xs font-bold text-slate-300">Channels</span>
+                          <span className="text-[10px] text-brand-400">{filteredChannels.length} results</span>
+                        </div>
+                        <button 
+                          onClick={() => setShowFavoritesOnly(prev => !prev)}
+                          className={`text-sm flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+                            showFavoritesOnly 
+                              ? 'bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30 shadow-lg shadow-amber-500/10' 
+                              : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                          }`}
                         >
-                          {uniqueCategories.map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
-                          ))}
-                        </select>
+                          <i data-lucide="star" className={`w-4 h-4 ${showFavoritesOnly ? 'fill-current' : ''}`}></i>
+                          Favorites
+                        </button>
                       </div>
-                    )}
-                  </div>
-
-                  <div className="flex items-center justify-between w-full lg:w-auto gap-4 shrink-0">
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-bold text-slate-400">
-                      <span className={`h-2 w-2 rounded-full ${isLoadingGlobal ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'}`}></span>
-                      <span>
-                        {isLoadingGlobal ? "Indexing DB..." : "DB Ready"}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-4">
-                      <div className="flex flex-col items-end hidden sm:flex">
-                        <span className="text-xs font-bold text-slate-300">Channels</span>
-                        <span className="text-[10px] text-brand-400">{filteredChannels.length} results</span>
-                      </div>
-                      <button 
-                        onClick={() => setShowFavoritesOnly(prev => !prev)}
-                        className={`text-sm flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
-                          showFavoritesOnly 
-                            ? 'bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30 shadow-lg shadow-amber-500/10' 
-                            : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
-                        }`}
-                      >
-                        <i data-lucide="star" className={`w-4 h-4 ${showFavoritesOnly ? 'fill-current' : ''}`}></i>
-                        Favorites
-                      </button>
                     </div>
                   </div>
+
+                  {/* Featured Channel Title */}
+                  {searchQuery.trim() === "" && !showFavoritesOnly && selectedCategoryFilter === "All" && activeCategory === "curated" && (
+                    <div className="flex items-center gap-2 mt-2 mb-1">
+                      <i data-lucide="sparkles" className="w-5 h-5 text-brand-400"></i>
+                      <h2 className="text-xl font-bold text-white">Featured</h2>
+                    </div>
+                  )}
+
+                  {/* Grid List Container */}
+                  {channelsToRender.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-64 text-center p-6 text-slate-500">
+                      <i data-lucide="tv-2" className="w-16 h-16 mb-4 opacity-20"></i>
+                      <p className="text-lg font-semibold text-slate-400">No channels found</p>
+                      <p className="text-sm mt-1">Try adjusting your search or category filter.</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-3 md:gap-4 pb-4 animate-fadeIn">
+                      {channelsToRender.map((channel, index) => {
+                        const isFavorited = favorites.includes(channel.id);
+                        return (
+                          <button
+                            key={`${channel.id}-${index}`}
+                            onClick={() => handleSelectChannel(channel)}
+                            className="group flex flex-col p-2 sm:p-2.5 rounded-2xl bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all text-left relative overflow-hidden"
+                          >
+                            <div 
+                              className="absolute top-2.5 right-2.5 z-20 cursor-pointer p-1 sm:p-1.5 rounded-lg bg-slate-950/80 backdrop-blur-sm border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-900"
+                              onClick={(e) => toggleFavorite(channel.id, e)}
+                            >
+                              <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
+                            </div>
+
+                            <div className="w-full aspect-video bg-slate-700 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
+                              <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0.2,0.2)]">
+                                <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                              </div>
+                              <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
+                                <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                              </div>
+                            </div>
+                            
+                            <h4 className="text-[11px] sm:text-xs font-bold text-slate-200 group-hover:text-white truncate w-full px-1">
+                              {channel.name}
+                            </h4>
+                            
+                            <div className="flex items-center gap-1.5 mt-1.5 px-1 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-slate-500">
+                               <span className="truncate max-w-[100px] bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-brand-400/80">
+                                 {channel.category}
+                               </span>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Pure API Grid Carousels */}
+                  {searchQuery.trim() === "" && !showFavoritesOnly && selectedCategoryFilter === "All" && activeCategory === "curated" && (
+                    <div className="flex flex-col gap-8 mt-4 border-t border-slate-900 pt-8 pb-10">
+                      <ChannelCarousel 
+                        title="Bangladeshi Channels" 
+                        icon={<span className="text-xl">🇧🇩</span>} 
+                        channels={bdCarouselChannels} 
+                        onSelectChannel={handleSelectChannel} 
+                        favorites={favorites} 
+                        toggleFavorite={(id) => toggleFavorite(id)} 
+                        onSeeAll={(data) => {
+                          setSeeAllSearchQuery("");
+                          setSeeAllData(data);
+                        }}
+                      />
+                      
+                      <ChannelCarousel 
+                        title="All Sports Channels" 
+                        icon={<i data-lucide="trophy" className="w-5 h-5 text-brand-400"></i>} 
+                        channels={sportsCarouselChannels} 
+                        onSelectChannel={handleSelectChannel} 
+                        favorites={favorites} 
+                        toggleFavorite={(id) => toggleFavorite(id)} 
+                        onSeeAll={(data) => {
+                          setSeeAllSearchQuery("");
+                          setSeeAllData(data);
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
 
-                {/* Featured Channel Title */}
-                {searchQuery.trim() === "" && !showFavoritesOnly && selectedCategoryFilter === "All" && activeCategory === "curated" && (
-                  <div className="flex items-center gap-2 mt-2 mb-1">
-                    <i data-lucide="sparkles" className="w-5 h-5 text-brand-400"></i>
-                    <h2 className="text-xl font-bold text-white">Featured</h2>
-                  </div>
-                )}
+                {/* --- MOBILE VIEW LAYOUT --- */}
+                <div className="flex md:hidden flex-col gap-4">
+                  {}
+                  {activeMobileTab === "home" && (
+                    <div className="flex flex-col gap-6 animate-fadeIn">
+                      <div className="flex items-center gap-2 mt-2">
+                        <i data-lucide="sparkles" className="w-4 h-4 text-brand-400"></i>
+                        <h2 className="text-sm font-bold text-white">Featured Channels</h2>
+                      </div>
+					  
+					  <div className="grid grid-cols-3 gap-2.5">
+                        {curatedChannels.slice(0, 15).map((channel, index) => {
+                          const isFavorited = favorites.includes(channel.id);
+                          return (
+                            <button
+                              key={`mob-curated-${channel.id}-${index}`}
+                              onClick={() => handleSelectChannel(channel)}
+                              className="group flex flex-col p-2 rounded-xl bg-slate-900 border border-slate-800/80 text-left relative overflow-hidden"
+                            >
+                              <div className="w-full aspect-video bg-slate-700 rounded-lg mb-1.5 flex items-center justify-center p-1 relative overflow-hidden">
+                                <div className="w-full h-full relative z-10">
+                                  <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                                </div>
+                              </div>
+                              <h4 className="text-[10px] font-bold text-slate-200 truncate w-full px-0.5">
+                                {channel.name}
+                              </h4>
+                            </button>
+                          );
+                        })}
+                      </div>
+					  
+                      <ChannelCarousel 
+                        title="Bangladeshi Channels" 
+                        icon={<span className="text-lg">🇧🇩</span>} 
+                        channels={bdCarouselChannels} 
+                        onSelectChannel={handleSelectChannel} 
+                        favorites={favorites} 
+                        toggleFavorite={(id) => toggleFavorite(id)} 
+                        onSeeAll={(data) => {
+                          setSeeAllSearchQuery("");
+                          setSeeAllData(data);
+                        }}
+                      />
+                      
+                      <ChannelCarousel 
+                        title="All Sports Channels" 
+                        icon={<i data-lucide="trophy" className="w-4 h-4 text-brand-400"></i>} 
+                        channels={sportsCarouselChannels} 
+                        onSelectChannel={handleSelectChannel} 
+                        favorites={favorites} 
+                        toggleFavorite={(id) => toggleFavorite(id)} 
+                        onSeeAll={(data) => {
+                          setSeeAllSearchQuery("");
+                          setSeeAllData(data);
+                        }}
+                      />
 
-                {/* Grid List Container - Adjusted grid column metrics and spacings to make card grids slightly smaller */}
-                {channelsToRender.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-64 text-center p-6 text-slate-500">
-                    <i data-lucide="tv-2" className="w-16 h-16 mb-4 opacity-20"></i>
-                    <p className="text-lg font-semibold text-slate-400">No channels found</p>
-                    <p className="text-sm mt-1">Try adjusting your search or category filter.</p>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-3 md:gap-4 pb-4 animate-fadeIn">
-                    {channelsToRender.map((channel, index) => {
-                      const isFavorited = favorites.includes(channel.id);
-                      return (
-                        <button
-                          key={`${channel.id}-${index}`}
-                          onClick={() => handleSelectChannel(channel)}
-                          className="group flex flex-col p-2 sm:p-2.5 rounded-2xl bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all text-left relative overflow-hidden"
-                        >
-                          <div 
-                            className="absolute top-2.5 right-2.5 z-20 cursor-pointer p-1 sm:p-1.5 rounded-lg bg-slate-950/80 backdrop-blur-sm border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-900"
-                            onClick={(e) => toggleFavorite(channel.id, e)}
-                          >
-                            <i data-lucide="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`}></i>
+                    </div>
+                  )}
+
+                  {activeMobileTab === "search" && (
+                    <div className="flex flex-col gap-4 animate-fadeIn">
+                      {/* Search box header tab */}
+                      <div className="relative w-full">
+                        <input 
+                          type="text" 
+                          placeholder="Search channels, categories, countries..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                        />
+                        <i data-lucide="search" className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                      </div>
+
+                      {/* Display Results Grid or Categories List */}
+                      {(searchQuery.trim() !== "" || selectedCountryCode !== "" || selectedCategoryFilter !== "All") ? (
+                        <div className="flex flex-col gap-3">
+                          <div className="flex items-center justify-between bg-slate-900 p-2.5 rounded-xl border border-slate-800/80">
+                            <span className="text-xs font-semibold text-slate-300">
+                              {searchQuery.trim() !== "" ? "Search Results" : selectedCountryCode !== "" ? `Country: ${selectedCountryCode}` : `Category: ${selectedCategoryFilter}`}
+                            </span>
+                            <button 
+                              onClick={() => {
+                                setSearchQuery("");
+                                setSelectedCountryCode("");
+                                setSelectedCategoryFilter("All");
+                                loadCurated();
+                              }}
+                              className="text-[10px] font-bold text-brand-400 bg-brand-500/10 px-2 py-1 rounded-lg"
+                            >
+                              Clear Filter
+                            </button>
                           </div>
 
-                          <div className="w-full aspect-video bg-slate-700 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
-                            <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0.2,0.2)]">
-                              <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                          <div className="grid grid-cols-3 gap-2.5">
+                            {filteredChannels.slice(0, visibleLimit).map((channel, index) => (
+                              <button
+                                key={`mob-search-res-${channel.id}-${index}`}
+                                onClick={() => handleSelectChannel(channel)}
+                                className="group flex flex-col p-2 rounded-xl bg-slate-900 border border-slate-800/80 text-left relative overflow-hidden"
+                              >
+                                <div className="w-full aspect-video bg-slate-700 rounded-lg mb-1.5 flex items-center justify-center p-1 relative overflow-hidden">
+                                  <div className="w-full h-full relative z-10">
+                                    <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                                  </div>
+                                </div>
+                                <h4 className="text-[10px] font-bold text-slate-200 truncate w-full px-0.5">
+                                  {channel.name}
+                                </h4>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-5">
+                          {/* Browse by Category Grid */}
+                          <div className="flex flex-col gap-2">
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                              <i data-lucide="grid" className="w-3.5 h-3.5 text-brand-400"></i>
+                              Categories
+                            </h3>
+                            <div className="grid grid-cols-2 gap-2">
+                              {dynamicCategories.map(cat => (
+                                <button
+                                  key={`mob-cat-${cat.id}`}
+                                  onClick={() => {
+                                    setSelectedCategoryFilter(cat.name);
+                                    loadIPTVCategory(cat.id, cat.name);
+                                  }}
+                                  className="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center gap-2.5 hover:bg-slate-800/60 transition-colors text-left"
+                                >
+                                  <i data-lucide={cat.icon} className="w-4 h-4 text-brand-400"></i>
+                                  <span className="text-xs font-bold text-slate-300 truncate">{cat.name}</span>
+                                </button>
+                              ))}
                             </div>
-                            <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
-                              <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                          </div>
+
+                          {/* Browse by Country Grid */}
+                          <div className="flex flex-col gap-2">
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                              <i data-lucide="globe" className="w-3.5 h-3.5 text-brand-400"></i>
+                              Countries
+                            </h3>
+                            <div className="grid grid-cols-2 gap-2">
+                              {dynamicCountries.map(ct => (
+                                <button
+                                  key={`mob-ct-${ct.code}`}
+                                  onClick={() => {
+                                    setSelectedCountryCode(ct.code.toUpperCase());
+                                    loadIPTVCountry(ct.code, ct.name);
+                                  }}
+                                  className="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center justify-between hover:bg-slate-800/60 transition-colors text-left"
+                                >
+                                  <span className="text-xs font-bold text-slate-300 truncate">{ct.name}</span>
+                                  <span className="text-[9px] uppercase font-mono text-slate-500 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-850 shrink-0">
+                                    {ct.code}
+                                  </span>
+                                </button>
+                              ))}
                             </div>
                           </div>
-                          
-                          <h4 className="text-[11px] sm:text-xs font-bold text-slate-200 group-hover:text-white truncate w-full px-1">
-                            {channel.name}
-                          </h4>
-                          
-                          <div className="flex items-center gap-1.5 mt-1.5 px-1 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-slate-500">
-                             <span className="truncate max-w-[100px] bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-brand-400/80">
-                               {channel.category}
-                             </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
+                        </div>
+                      )}
+                    </div>
+                  )}
 
-                {/* Pure API Grid Carousels (Dynamically generated using pure country M3U feeds) */}
-                {searchQuery.trim() === "" && !showFavoritesOnly && selectedCategoryFilter === "All" && activeCategory === "curated" && (
-                  <div className="flex flex-col gap-8 mt-4 border-t border-slate-900 pt-8 pb-10">
-                    <ChannelCarousel 
-                      title="Bangladeshi Channels" 
-                      icon={<span className="text-xl">🇧🇩</span>} 
-                      channels={bdCarouselChannels} 
-                      onSelectChannel={handleSelectChannel} 
-                      favorites={favorites} 
-                      toggleFavorite={(id) => toggleFavorite(id)} 
-                      onSeeAll={(data) => {
-                        setSeeAllSearchQuery("");
-                        setSeeAllData(data);
-                      }}
-                    />
-                    
-                    <ChannelCarousel 
-                      title="All Sports Channels" 
-                      icon={<i data-lucide="trophy" className="w-5 h-5 text-brand-400"></i>} 
-                      channels={sportsCarouselChannels} 
-                      onSelectChannel={handleSelectChannel} 
-                      favorites={favorites} 
-                      toggleFavorite={(id) => toggleFavorite(id)} 
-                      onSeeAll={(data) => {
-                        setSeeAllSearchQuery("");
-                        setSeeAllData(data);
-                      }}
-                    />
-                  </div>
-                )}
+                  {activeMobileTab === "favorites" && (
+                    <div className="flex flex-col gap-4 animate-fadeIn">
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-sm font-bold text-white flex items-center gap-2">
+                          <i data-lucide="star" className="w-4 h-4 text-amber-400 fill-amber-400"></i>
+                          My Favorite Channels
+                        </h2>
+                      </div>
+
+                      {favorites.length === 0 ? (
+                        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 text-center flex flex-col items-center gap-2.5">
+                          <i data-lucide="star" className="w-10 h-10 text-slate-600"></i>
+                          <span className="text-xs font-bold text-slate-400">No Favorites Added Yet</span>
+                          <p className="text-[10px] text-slate-500 leading-relaxed max-w-xs">
+                            Browse channels on the home feed or search tabs and tap the star icon to save them here for quick access.
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-3 gap-2.5">
+                          {allUniqueChannels.filter(ch => favorites.includes(ch.id)).map((channel, index) => (
+                            <button
+                              key={`mob-fav-${channel.id}-${index}`}
+                              onClick={() => handleSelectChannel(channel)}
+                              className="group flex flex-col p-2 rounded-xl bg-slate-900 border border-slate-800/80 text-left relative overflow-hidden"
+                            >
+                              <div className="w-full aspect-video bg-slate-700 rounded-lg mb-1.5 flex items-center justify-center p-1 relative overflow-hidden">
+                                <div className="w-full h-full relative z-10">
+                                  <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+                                </div>
+                              </div>
+                              <h4 className="text-[10px] font-bold text-slate-200 truncate w-full px-0.5">
+                                {channel.name}
+                              </h4>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {activeMobileTab === "settings" && (
+                    <div className="flex flex-col gap-5 animate-fadeIn">
+                      {/* App Info Card */}
+                      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+                        <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-1.5 border-b border-slate-800 pb-2">
+                          <i data-lucide="info" className="w-4 h-4 text-brand-400"></i>
+                          About GlobalStream
+                        </h3>
+                        <div className="flex items-center gap-3">
+                          <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-lg">
+                            <i data-lucide="tv" className="w-6 h-6"></i>
+                          </div>
+                          <div>
+                            <h4 className="text-xs font-bold text-white">GlobalStream IPTV</h4>
+                            <span className="text-[10px] text-brand-400 font-bold">by: Kazi MMT</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* NS Player Settings Card */}
+                      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+                        <h3 className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 border-b border-slate-800 pb-2">
+                          <i data-lucide="monitor-play" className="w-4 h-4"></i>
+                          How to use with NS Player:
+                        </h3>
+                        
+                        <div className="bg-emerald-950/20 border border-emerald-500/10 rounded-xl p-3 text-[10px] text-slate-300 leading-relaxed">
+                          <li>Download and install <strong>NS Player</strong> from the Google Play Store.</li>
+                          <li>Open the app and look for the option to <strong>Playlist</strong>.</li>
+                          <li>Copy one of the live server links provided below.</li>
+                          <li>Paste the copied URL into NS Player and hit save. Enjoy the stream!</li>
+                        </div>
+
+                        <div className="flex flex-col gap-2.5">
+                          {[
+                            { id: 'Fifa+', name: 'FIFA+', url: 'https://cutt.ly/fifaplus' },
+                            { id: 'tapmad', name: 'Tapmad BD Live', url: 'https://cutt.ly/tapmadbd' },
+                            { id: 'sonyliv', name: 'SonyLiV Live', url: 'https://cutt.ly/SonyLiV' },
+                            { id: 'toffee', name: 'Toffee', url: 'https://raw.githubusercontent.com/BINOD-XD/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_NS_Player.m3u' },
+                            { id: 'akashgo', name: 'Akash Go', url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/akash_live.m3u' },
+                            { id: 'aynaott', name: 'Ayna OTT', url: 'https://raw.githubusercontent.com/srhady/AynaOTT/refs/heads/main/aynaott.m3u' },
+                            { id: 'axsports', name: 'AX Sports Live', url: 'https://raw.githubusercontent.com/srhady/axsports/refs/heads/main/playlist.m3u' },
+                            { id: 'bingstream', name: 'Bing Stream', url: 'https://raw.githubusercontent.com/srhady/bingstream/refs/heads/main/playlist.m3u' }
+                          ].map(link => (
+                            <div key={`mob-settings-${link.id}`} className="bg-slate-950 border border-slate-800/60 rounded-xl p-2.5 flex items-center justify-between gap-2">
+                              <div className="flex flex-col truncate">
+                                <span className="text-[10px] font-bold text-slate-300">{link.name}</span>
+                                <span className="text-[9px] text-slate-500 truncate font-mono">{link.url}</span>
+                              </div>
+                              <button
+                                onClick={() => {
+                                  copyToClipboard(link.url);
+                                  setCopiedLinkId(link.id);
+                                  setTimeout(() => setCopiedLinkId(null), 2500);
+                                }}
+                                className={`p-1.5 rounded-lg border shrink-0 transition-colors ${
+                                  copiedLinkId === link.id 
+                                    ? 'bg-emerald-500/15 border-emerald-500/45 text-emerald-400' 
+                                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+                                }`}
+                              >
+                                <i data-lucide={copiedLinkId === link.id ? "check" : "copy"} className="w-3.5 h-3.5"></i>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 {visibleLimit < filteredChannels.length && (
                   <div className="py-6 text-center text-sm font-semibold text-slate-500">
@@ -1854,7 +2165,7 @@
             {/* VIEW 2: PLAYER                                                        */}
             {/* ===================================================================== */}
             {viewState === "player" && (
-              <div className="px-4 py-6 w-full animate-fadeIn min-h-full flex flex-col">
+              <div className="px-4 py-6 w-full animate-fadeIn min-h-full flex flex-col pb-24 md:pb-6">
                 <div className="mx-auto flex flex-col gap-4 w-full transition-all duration-300 max-w-6xl">
                   
                   {/* Back Navigation Button */}
@@ -2056,7 +2367,7 @@
             {/* VIEW 3: SEE ALL CHANNELS MODAL POPUP                                  */}
             {/* ===================================================================== */}
             {seeAllData && (
-              <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fadeIn">
+              <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fadeIn pb-24 md:pb-4">
                 <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-6xl w-full h-[85vh] overflow-hidden flex flex-col relative animate-[fadeIn_0.2s_ease-out]">
                   
                   {/* Modal Header */}
@@ -2167,7 +2478,7 @@
             {/* VIEW 4: NS PLAYER SERVERS MODAL                                       */}
             {/* ===================================================================== */}
             {isNsPlayerModalOpen && (
-              <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fadeIn">
+              <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fadeIn pb-24 md:pb-4">
                 <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-xl w-full overflow-hidden flex flex-col relative animate-[fadeIn_0.2s_ease-out]">
                   
                   {/* Modal Header */}
@@ -2250,6 +2561,45 @@
             )}
             
           </main>
+
+          {/* ===================================================================== */}
+          {/* BOTTOM TAB BAR NAVIGATION FOR MOBILE                                  */}
+          {/* ===================================================================== */}
+          {}
+          <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800/80 flex justify-around py-3 md:hidden">
+            <button 
+              onClick={() => { setActiveMobileTab("home"); setViewState("home"); }} 
+              className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "home" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}
+            >
+              <i data-lucide="home" className="w-5 h-5"></i>
+              <span>Home</span>
+            </button>
+            
+            <button 
+              onClick={() => { setActiveMobileTab("search"); setViewState("home"); }} 
+              className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "search" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}
+            >
+              <i data-lucide="search" className="w-5 h-5"></i>
+              <span>Search Channel</span>
+            </button>
+            
+            <button 
+              onClick={() => { setActiveMobileTab("favorites"); setViewState("home"); }} 
+              className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "favorites" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}
+            >
+              <i data-lucide="star" className={`w-5 h-5 ${activeMobileTab === "favorites" && viewState !== "player" ? "fill-brand-400/10" : ""}`}></i>
+              <span>Favorites Channel</span>
+            </button>
+            
+            <button 
+              onClick={() => { setActiveMobileTab("settings"); setViewState("home"); }} 
+              className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "settings" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}
+            >
+              <i data-lucide="settings" className="w-5 h-5"></i>
+              <span>Settings</span>
+            </button>
+          </div>
+
         </div>
       );
     }
