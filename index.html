@@ -316,6 +316,7 @@
         <img
           src={logoUrl}
           alt=""
+          loading="lazy"
           className="w-full h-full object-contain p-1"
           onError={() => setIsError(true)}
         />
@@ -489,7 +490,14 @@
       }, []);
 
       useEffect(() => {
+        let isTouchDevice = false;
+
+        const handleTouch = () => {
+          isTouchDevice = true;
+        };
+
         const handleMouseMove = () => {
+          if (isTouchDevice) return; // Prevent emulated mousemove on touch devices
           setShowControls(true);
           if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
           controlsTimeoutRef.current = setTimeout(() => {
@@ -498,20 +506,44 @@
         };
         
         const handleMouseLeave = () => {
+          if (isTouchDevice) return;
           if (isPlaying) setShowControls(false);
         };
 
+        const handleVideoClick = () => {
+          setShowControls(prev => {
+            const nextState = !prev;
+            if (nextState && isPlaying) {
+              if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+              controlsTimeoutRef.current = setTimeout(() => {
+                setShowControls(false);
+              }, 3000);
+            }
+            return nextState;
+          });
+        };
+
         const container = videoRef.current?.parentElement;
+        const video = videoRef.current;
+        
         if (container) {
+          container.addEventListener('touchstart', handleTouch, { passive: true });
           container.addEventListener('mousemove', handleMouseMove);
           container.addEventListener('mouseleave', handleMouseLeave);
-          container.addEventListener('touchstart', handleMouseMove);
         }
+        
+        if (video) {
+          video.addEventListener('click', handleVideoClick);
+        }
+        
         return () => {
           if (container) {
+            container.removeEventListener('touchstart', handleTouch);
             container.removeEventListener('mousemove', handleMouseMove);
             container.removeEventListener('mouseleave', handleMouseLeave);
-            container.removeEventListener('touchstart', handleMouseMove);
+          }
+          if (video) {
+            video.removeEventListener('click', handleVideoClick);
           }
           if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
         };
@@ -679,7 +711,7 @@
       const [copiedLinkId, setCopiedLinkId] = useState(null);
       
       const isManualServerSelectionRef = useRef(false);
-      const [visibleLimit, setVisibleLimit] = useState(100);
+      const [visibleLimit, setVisibleLimit] = useState(48);
 
       const playerContainerRef = useRef(null);
       const videoRef = useRef(null);
@@ -1216,36 +1248,22 @@
 
       useEffect(() => {
         if (typeof lucide !== 'undefined') {
-          lucide.createIcons();
+          // Use setTimeout to ensure React DOM has finished painting, preventing blocking main thread
+          setTimeout(() => lucide.createIcons(), 10);
         }
       }, [
-        isCategoryOpen, 
-        isCountryOpen, 
-        isMenuOpen,
-        channels, 
-        favorites, 
-        isCopied, 
-        videoError, 
-        isLoadingList, 
-        showFavoritesOnly, 
-        toastMessage, 
-        isLoadingGlobal,
-        globalChannels,
-        activeServerIndex,
-        currentChannelSources,
-        visibleLimit,
-        dynamicCountries,
-        dynamicCategories,
-        curatedChannels,
-        useProxy,
         viewState,
-        volumeLevel,
-        isMuted,
+        activeMobileTab,
+        isCategoryOpen,
+        isCountryOpen,
+        isMenuOpen,
         isNsPlayerModalOpen,
-        copiedLinkId,
         seeAllData,
-        seeAllSearchQuery,
-        activeMobileTab
+        visibleLimit,
+        favorites.length,
+        activeServerIndex,
+        toastMessage,
+        isCopied
       ]);
 
       const toggleFavorite = (channelId, e) => {
@@ -1565,7 +1583,7 @@
       };
 
       useEffect(() => {
-        setVisibleLimit(100);
+        setVisibleLimit(48);
       }, [searchQuery, selectedCategoryFilter, activeCategory, selectedCountryCode, showFavoritesOnly]);
 
       const uniqueCategories = useMemo(() => {
@@ -1630,7 +1648,7 @@
         const { scrollTop, scrollHeight, clientHeight } = e.target;
         if (scrollHeight - scrollTop <= clientHeight + 300) {
             if (visibleLimit < filteredChannels.length) {
-                setVisibleLimit(prev => prev + 100);
+                setVisibleLimit(prev => prev + 48);
             }
         }
       };
