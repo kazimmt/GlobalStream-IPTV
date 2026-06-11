@@ -1057,37 +1057,38 @@
             );
 
             // Group all TSports channels into one curated channel item
-            const tsportsChannels = allCustomChannels.filter(ch => ch.sourceName === "TSports");
-            if (tsportsChannels.length > 0) {
-              const combinedServers = [];
-              tsportsChannels.forEach(ch => {
-                ch.servers.forEach((srv, idx) => {
-                  // Prevent duplicate URLs inside the combined server list
-                  if (!combinedServers.some(s => s.url === srv.url)) {
-                    combinedServers.push({
-                      id: `tsports-srv-${ch.id}-${idx}`,
-                      name: ch.name || `Server ${combinedServers.length + 1}`, // Names the server after the channel it came from
-                      url: srv.url,
-                      type: "hls"
-                    });
-                  }
-                });
-              });
+			const tsportsChannels = allCustomChannels.filter(ch => ch.sourceName === "TSports");
+			if (tsportsChannels.length > 0) {
+			  const combinedServers = [];
+			  tsportsChannels.forEach(ch => {
+				ch.servers.forEach((srv, idx) => {
+				  // Prevent duplicate URLs inside the combined server list
+				  if (!combinedServers.some(s => s.url === srv.url)) {
+					combinedServers.push({
+					  id: `tsports-srv-${ch.id}-${idx}`,
+					  name: ch.name || `Server ${combinedServers.length + 1}`, 
+					  url: srv.url,
+					  type: "hls"
+					});
+				  }
+				});
+			  });
 
-              if (combinedServers.length > 0) {
-                dynamicCurated.push({
-                  id: "curated-tsports-network",
-                  name: "T-Sports Network",
-                  category: "Sports",
-                  country: "Bangladesh",
-                  logo: tsportsChannels.find(c => c.logo)?.logo || "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/960px-T_Sports_logo.svg.png",
-                  url: combinedServers[0].url,
-                  type: "hls",
-                  description: "Live broadcast of all channels from the TSports playlist. Some servers may not work.",
-                  servers: combinedServers
-                });
-              }
-            }
+			  if (combinedServers.length > 0) {
+				dynamicCurated.push({
+				  id: "curated-tsports-network",
+				  name: "T Sports Servers",
+				  category: "Sports",
+				  country: "Bangladesh",
+				  // FIX: Hardcode a reliable Imgur image mirror for T Sports directly here instead of using the fallback logo
+				  logo: "https://i.imgur.com/7E0Hjmh.png",
+				  url: combinedServers[0].url,
+				  type: "hls",
+				  description: "Live broadcast of all channels from the TSports playlist. Some servers may not work.",
+				  servers: combinedServers
+				});
+			  }
+			}
 
             const updatedCurated = deduplicateByUrl([...dynamicCurated, ...CURATED_CHANNELS]);
             setCuratedChannels(updatedCurated);
