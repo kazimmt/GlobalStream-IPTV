@@ -752,6 +752,7 @@
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_all_player.m3u', name: 'Toffee' },
 			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/roar-zone-playlist.m3u', name: 'RoarZone' },
+			  { url: 'https://raw.githubusercontent.com/abusaeeidx/CrestSport-IPTV-Collection/refs/heads/main/bd.m3u', name: 'bd-New' },
               { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
             ];
 
@@ -1061,6 +1062,40 @@
               ch.sourceName === "FIFA Plus" || 
               (ch.sourceName === "RoarZone" && roarzoneSpecificNames.includes(ch.name))
             );
+
+		// Group all TSports channels into one curated channel item
+			const tsportsChannels = allCustomChannels.filter(ch => ch.sourceName === "bd-New");
+			if (tsportsChannels.length > 0) {
+			  const combinedServers = [];
+			  tsportsChannels.forEach(ch => {
+				ch.servers.forEach((srv, idx) => {
+				  // Prevent duplicate URLs inside the combined server list
+				  if (!combinedServers.some(s => s.url === srv.url)) {
+					combinedServers.push({
+					  id: `tsports-srv-${ch.id}-${idx}`,
+					  name: ch.name || `Server ${combinedServers.length + 1}`, 
+					  url: srv.url,
+					  type: "hls"
+					});
+				  }
+				});
+			  });
+
+			  if (combinedServers.length > 0) {
+				dynamicCurated.push({
+				  id: "curated-tsports-network",
+				  name: "T Sports Servers",
+				  category: "Sports",
+				  country: "Bangladesh",
+				  // FIX: Hardcode a reliable Imgur image mirror for T Sports directly here instead of using the fallback logo
+				  logo: "https://i.imgur.com/7E0Hjmh.png",
+				  url: combinedServers[0].url,
+				  type: "hls",
+				  description: "Live broadcast of all channels from the TSports playlist. Some servers may not work.",
+				  servers: combinedServers
+				});
+			  }
+			}
 
             const updatedCurated = deduplicateByUrl([...dynamicCurated, ...CURATED_CHANNELS]);
             setCuratedChannels(updatedCurated);
