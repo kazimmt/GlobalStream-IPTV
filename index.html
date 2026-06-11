@@ -316,7 +316,6 @@
         <img
           src={logoUrl}
           alt=""
-          loading="lazy"
           className="w-full h-full object-contain p-1"
           onError={() => setIsError(true)}
         />
@@ -489,46 +488,34 @@
         };
       }, []);
 
-      // Automatically hide controls after 5 seconds of inactivity when playing
       useEffect(() => {
-        if (showControls && isPlaying) {
+        const handleMouseMove = () => {
+          setShowControls(true);
           if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
           controlsTimeoutRef.current = setTimeout(() => {
-            setShowControls(false);
-          }, 5000);
-        }
-        return () => {
-          if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+            if (isPlaying) setShowControls(false);
+          }, 3000);
         };
-      }, [showControls, isPlaying]);
-
-      // Handle pointer interactions and tap toggles properly
-      useEffect(() => {
-        const showControlsTemporarily = () => {
-          setShowControls(true);
-        };
-
-        const toggleControlsOnTap = (e) => {
-          // If clicking an interactive button or slider, don't toggle visibility
-          if (e.target.closest('.pointer-events-auto')) return;
-          setShowControls(prev => !prev);
+        
+        const handleMouseLeave = () => {
+          if (isPlaying) setShowControls(false);
         };
 
         const container = videoRef.current?.parentElement;
         if (container) {
-          container.addEventListener('mousemove', showControlsTemporarily);
-          container.addEventListener('touchstart', showControlsTemporarily, { passive: true });
-          container.addEventListener('click', toggleControlsOnTap);
+          container.addEventListener('mousemove', handleMouseMove);
+          container.addEventListener('mouseleave', handleMouseLeave);
+          container.addEventListener('touchstart', handleMouseMove);
         }
-
         return () => {
           if (container) {
-            container.removeEventListener('mousemove', showControlsTemporarily);
-            container.removeEventListener('touchstart', showControlsTemporarily);
-            container.removeEventListener('click', toggleControlsOnTap);
+            container.removeEventListener('mousemove', handleMouseMove);
+            container.removeEventListener('mouseleave', handleMouseLeave);
+            container.removeEventListener('touchstart', handleMouseMove);
           }
+          if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
         };
-      }, [videoRef]);
+      }, [isPlaying, videoRef]);
 
       const formatTime = (time) => {
         if (isNaN(time) || !isFinite(time)) return "00:00";
@@ -677,7 +664,7 @@
       const [isLoadingList, setIsLoadingList] = useState(false);
       const [isPlaying, setIsPlaying] = useState(true);
       const [isMuted, setIsMuted] = useState(false);
-      const [volumeLevel, setVolumeLevel] = useState(100); // 0 to 100 volume scale
+      const [volumeLevel, setVolumeLevel] = useState(100); // 0 to 200 volume scale
       const [isCategoryOpen, setIsCategoryOpen] = useState(false);
       const [isCountryOpen, setIsCountryOpen] = useState(false);
       const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -692,11 +679,13 @@
       const [copiedLinkId, setCopiedLinkId] = useState(null);
       
       const isManualServerSelectionRef = useRef(false);
-      const [visibleLimit, setVisibleLimit] = useState(48);
+      const [visibleLimit, setVisibleLimit] = useState(100);
 
       const playerContainerRef = useRef(null);
       const videoRef = useRef(null);
       const hlsRef = useRef(null);
+      const audioCtxRef = useRef(null);
+      const gainNodeRef = useRef(null);
 
       // Bangladeshi Carousel channels: Sorted by popularity, and prioritizing Sports channels first
       const bdCarouselChannels = useMemo(() => {
@@ -1227,22 +1216,36 @@
 
       useEffect(() => {
         if (typeof lucide !== 'undefined') {
-          // Use setTimeout to ensure React DOM has finished painting, preventing blocking main thread
-          setTimeout(() => lucide.createIcons(), 10);
+          lucide.createIcons();
         }
       }, [
-        viewState,
-        activeMobileTab,
-        isCategoryOpen,
-        isCountryOpen,
+        isCategoryOpen, 
+        isCountryOpen, 
         isMenuOpen,
-        isNsPlayerModalOpen,
-        seeAllData,
-        visibleLimit,
-        favorites.length,
+        channels, 
+        favorites, 
+        isCopied, 
+        videoError, 
+        isLoadingList, 
+        showFavoritesOnly, 
+        toastMessage, 
+        isLoadingGlobal,
+        globalChannels,
         activeServerIndex,
-        toastMessage,
-        isCopied
+        currentChannelSources,
+        visibleLimit,
+        dynamicCountries,
+        dynamicCategories,
+        curatedChannels,
+        useProxy,
+        viewState,
+        volumeLevel,
+        isMuted,
+        isNsPlayerModalOpen,
+        copiedLinkId,
+        seeAllData,
+        seeAllSearchQuery,
+        activeMobileTab
       ]);
 
       const toggleFavorite = (channelId, e) => {
@@ -1280,12 +1283,45 @@
         return () => window.removeEventListener('keydown', handleKeyDown);
       }, [currentChannel, viewState, isPlaying, isMuted]);
 
-      // Direct compatible video volume setup to bypass standard iframe CORS audio blocks
       useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
+
+        if (gainNodeRef.current) {
+          gainNodeRef.current.gain.value = isMuted ? 0 : volumeLevel / 100;
+        } 
         video.volume = Math.min((isMuted ? 0 : volumeLevel) / 100, 1.0);
+        
       }, [volumeLevel, isMuted, viewState]);
+
+      useEffect(() => {
+        const video = videoRef.current;
+        if (!video || viewState !== "player") return;
+
+        const handlePlaying = () => {
+          if (!audioCtxRef.current && window.AudioContext) {
+            try {
+              if (hlsRef.current) {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const source = ctx.createMediaElementSource(video);
+                const gain = ctx.createGain();
+                source.connect(gain);
+                gain.connect(ctx.destination);
+                
+                audioCtxRef.current = ctx;
+                gainNodeRef.current = gain;
+                
+                gain.gain.value = isMuted ? 0 : volumeLevel / 100;
+              }
+            } catch (e) {
+              console.warn("AudioContext init blocked, relying on standard bounds", e);
+            }
+          }
+        };
+
+        video.addEventListener('playing', handlePlaying);
+        return () => video.removeEventListener('playing', handlePlaying);
+      }, [viewState]);
 
       useEffect(() => {
         if (viewState !== "player" || !activeSource) return;
@@ -1529,7 +1565,7 @@
       };
 
       useEffect(() => {
-        setVisibleLimit(48);
+        setVisibleLimit(100);
       }, [searchQuery, selectedCategoryFilter, activeCategory, selectedCountryCode, showFavoritesOnly]);
 
       const uniqueCategories = useMemo(() => {
@@ -1594,7 +1630,7 @@
         const { scrollTop, scrollHeight, clientHeight } = e.target;
         if (scrollHeight - scrollTop <= clientHeight + 300) {
             if (visibleLimit < filteredChannels.length) {
-                setVisibleLimit(prev => prev + 48);
+                setVisibleLimit(prev => prev + 100);
             }
         }
       };
@@ -2344,22 +2380,22 @@
                       {/* Action & Tools Button Area */}
                       <div className="flex flex-wrap items-center gap-2.5 shrink-0 border-t border-slate-800 pt-4 md:border-0 md:pt-0 w-full md:w-auto">
                         
-                        {/* Interactive Volume Control slider supporting 100% native volume limit scale */}
+                        {/* Interactive Volume Control slider supporting 200% limit scale natively */}
                         <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl h-11 flex-grow md:flex-grow-0">
                           <button onClick={() => setIsMuted(!isMuted)} className="text-slate-400 hover:text-white transition-colors shrink-0 outline-none">
-                            <i data-lucide={isMuted || volumeLevel === 0 ? "volume-x" : volumeLevel < 50 ? "volume-1" : "volume-2"} className="w-4 h-4"></i>
+                            <i data-lucide={isMuted || volumeLevel === 0 ? "volume-x" : volumeLevel < 100 ? "volume-1" : "volume-2"} className="w-4 h-4"></i>
                           </button>
                           <input
                             type="range"
                             min="0"
-                            max="100"
+                            max="200"
                             value={isMuted ? 0 : volumeLevel}
                             onChange={(e) => {
                               setVolumeLevel(Number(e.target.value));
                               if (isMuted && Number(e.target.value) > 0) setIsMuted(false);
                             }}
                             className="w-full md:w-24 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer outline-none accent-brand-500"
-                            title="Volume Control"
+                            title="Volume Control (Up to 200%)"
                           />
                           <span className="text-[10px] sm:text-xs font-semibold text-slate-300 w-8 text-right tabular-nums shrink-0">{isMuted ? 0 : volumeLevel}%</span>
                         </div>
