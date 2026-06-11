@@ -100,20 +100,6 @@
 
     const CURATED_CHANNELS = [
 	  {
-        id: "curated-t-sports",
-        name: "T Sports HD",
-        category: "Sports",
-        country: "Bangladesh",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/960px-T_Sports_logo.svg.png",
-        url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
-        type: "hls",
-        description: "Live broadcast of T Sports HD from Bangladesh.",
-        servers: [
-          { name: "Server 1", url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8", type: "hls" },
-          { name: "Server 2", url: "https://tvsen7.aynaott.com/tsports-hd/index.m3u8", type: "hls" }
-        ]
-      },
-	  {
         id: "curated-toffee-sports",
         name: "Toffee Sports",
         category: "Sports",
@@ -131,35 +117,6 @@
 		  { name: "Sony Sports 2", url: "https://sm-monirul.top/toffee/play/sony_sports_5_hd.m3u8", type: "hls" },
 		  { name: "Ten Cricket", url: "https://sm-monirul.top/toffee/play/ten_cricket.m3u8", type: "hls" },
 		  { name: "Euro Sports", url: "https://sm-monirul.top/toffee/play/euro_sports_hd.m3u8", type: "hls" }
-        ]
-      },
-	  {
-        id: "curated-somoy-news-tv",
-        name: "Somoy News TV",
-        category: "News / Sports",
-        country: "Bangladesh",
-        logo: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c4/SOMOY_TV_Logo.svg/960px-SOMOY_TV_Logo.svg.png",
-        url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8",
-        type: "hls",
-        description: "Live broadcast of Somoy News TV from Bangladesh.",
-        servers: [
-          { name: "Server 1", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1702/output/index.m3u8", type: "hls" },
-          { name: "Server 2", url: "https://tvsen6.aynaott.com/somoytv/index.m3u8", type: "hls" },
-		  { name: "Server 3", url: "https://bozztv.com/rongo/rongo-somoy/index.m3u8", type: "hls" }
-        ]
-      },
-	  {
-        id: "curated-btv",
-        name: "Bangladesh Telivision",
-        category: "News / Sports",
-        country: "Bangladesh",
-        logo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/02/Bangladesh_Television_Logo.svg/960px-Bangladesh_Television_Logo.svg.png",
-        url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
-        type: "hls",
-        description: "Live broadcast of BTV from Bangladesh.",
-        servers: [
-          { name: "Server 1", url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8", type: "hls" },
-          { name: "Server 2", url: "https://tvsen6.aynaott.com/btvhd/index.m3u8", type: "hls" }
         ]
       },
 	  {
@@ -247,36 +204,10 @@
         type: "hls",
         description: "Official FIFA+ Live stream broadcasting documentary series, iconic World Cup historical matches, and live youth international tournaments."
       },
-      {
-        id: "curated-aljazeera-eng",
-        name: "Al Jazeera English",
-        category: "News",
-        country: "Qatar / Global",
-        logo: "https://upload.wikimedia.org/wikipedia/de/thumb/7/71/Aljazeera.svg/960px-Aljazeera.svg.png",
-        url: "https://dash4.antik.sk/live/test_aljazeera_eng/playlist.m3u8",
-        type: "hls",
-        description: "Global news channel broadcast 24 hours a day in English.",
-        servers: [
-          { name: "Server 1", url: "https://dash4.antik.sk/live/test_aljazeera_eng/playlist.m3u8", type: "hls" },
-          { name: "Server 2", url: "https://live-am.aljazeera.net/algeur/index.m3u8", type: "hls" }
-        ]
-      }
     ];
 
     const BANGLADESH_CHANNELS_PRESET = [
-            {
-        id: "bd-t-sports-hd",
-        name: "T Sports HD",
-        category: "Sports",
-        country: "Bangladesh",
-        countryCode: "BD",
-        countryFlag: "🇧🇩",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/960px-T_Sports_logo.svg.png",
-        url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8",
-        type: "hls",
-        description: "Live broadcast of T Sports HD from Bangladesh.",
-        servers: [{ id: "bd-t-sports-hd-srv-0", name: "Backup Server (Ayna OTT)", url: "https://tvsen7.aynaott.com/tsportsfhd/index.m3u8", type: "hls" }]
-      }
+            
     ];
 
     function ChannelLogo({ name, logoUrl }) {
@@ -812,9 +743,9 @@
           try {
             const CUSTOM_M3U_URLS = [
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
-			  { url: 'https://khela.pro.bd/playlist/custom_playlist.m3u', name: 'AynaOTT' },
+			  { url: 'https://raw.githubusercontent.com/abusaeeidx/T-Sports-Playlist-Auto-Update/refs/heads/main/combine_playlist.m3u', name: 'TSports' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_all_player.m3u', name: 'Toffee' },
-			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/RoarZone-Auto-Update-playlist/refs/heads/main/RoarZone.m3u', name: 'RoarZone' },
+			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/roar-zone-playlist.m3u', name: 'RoarZone' },
               { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
             ];
 
@@ -1116,7 +1047,48 @@
             const parsedBdApi = deduplicateByUrl(parseBdM3u(bdM3uText));
             setBdApiChannels(parsedBdApi);
             
-            const dynamicCurated = allCustomChannels.filter(ch => ch.sourceName === "Tapmad BD" || ch.sourceName === "FIFA Plus");
+			// --- Seleted Channels from RoarZone ---
+            const roarzoneSpecificNames = ["T SPORTS HD", "SOMOY TV", "BTV"]; 
+            
+            let dynamicCurated = allCustomChannels.filter(ch => 
+              ch.sourceName === "Tapmad BD" || 
+              ch.sourceName === "FIFA Plus" || 
+              (ch.sourceName === "RoarZone" && roarzoneSpecificNames.includes(ch.name))
+            );
+
+            // Group all TSports channels into one curated channel item
+            const tsportsChannels = allCustomChannels.filter(ch => ch.sourceName === "TSports");
+            if (tsportsChannels.length > 0) {
+              const combinedServers = [];
+              tsportsChannels.forEach(ch => {
+                ch.servers.forEach((srv, idx) => {
+                  // Prevent duplicate URLs inside the combined server list
+                  if (!combinedServers.some(s => s.url === srv.url)) {
+                    combinedServers.push({
+                      id: `tsports-srv-${ch.id}-${idx}`,
+                      name: ch.name || `Server ${combinedServers.length + 1}`, // Names the server after the channel it came from
+                      url: srv.url,
+                      type: "hls"
+                    });
+                  }
+                });
+              });
+
+              if (combinedServers.length > 0) {
+                dynamicCurated.push({
+                  id: "curated-tsports-network",
+                  name: "T-Sports Network",
+                  category: "Sports",
+                  country: "Bangladesh",
+                  logo: tsportsChannels.find(c => c.logo)?.logo || "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/T_Sports_logo.svg/960px-T_Sports_logo.svg.png",
+                  url: combinedServers[0].url,
+                  type: "hls",
+                  description: "Live broadcast of all channels from the TSports playlist. Some servers may not work.",
+                  servers: combinedServers
+                });
+              }
+            }
+
             const updatedCurated = deduplicateByUrl([...dynamicCurated, ...CURATED_CHANNELS]);
             setCuratedChannels(updatedCurated);
             
@@ -2203,15 +2175,6 @@
             {viewState === "player" && (
               <div className="px-4 py-6 w-full animate-fadeIn min-h-full flex flex-col pb-24 md:pb-6">
                 <div className="mx-auto flex flex-col gap-4 w-full transition-all duration-300 max-w-6xl">
-                  
-                  {/* Back Navigation Button */}
-                  <button 
-                    onClick={handleBackToHome}
-                    className="self-start flex items-center gap-2 text-slate-400 hover:text-white px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 hover:border-slate-700 transition-colors shadow-sm"
-                  >
-                    <i data-lucide="arrow-left" className="w-4 h-4"></i>
-                    <span className="text-sm font-bold">Back to Channels</span>
-                  </button>
 
                   {/* Player Frame */}
                   <div className="bg-slate-900 rounded-2xl overflow-hidden border border-slate-800/80 shadow-2xl flex flex-col relative group w-full">
