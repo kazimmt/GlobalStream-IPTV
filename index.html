@@ -100,6 +100,16 @@
 
     const CURATED_CHANNELS = [
 	  {
+        id: "curated-t-sports",
+        name: "T Sports",
+        category: "Sports",
+        country: "Bangladesh",
+        logo: "https://i.imgur.com/7E0Hjmh.png",
+        url: "https://sm-monirul.top/ultra_restream/live/t_sports5.m3u8",
+        type: "hls",
+        description: "Official live television stream for T Sports."
+      },
+	  {
         id: "curated-toffee-sports",
         name: "Toffee Sports",
         category: "Sports",
@@ -109,9 +119,6 @@
         type: "hls",
         description: "Live broadcast of Sports Channels from Toffee.",
         servers: [
-          { name: "World Cup 2026", url: "https://sm-monirul.top/toffee/play/bdvsnz26.m3u8", type: "hls" },
-		  { name: "Toffee Sports", url: "https://sm-monirul.top/toffee/play/sports_highlights.m3u8", type: "hls" },
-          { name: "Somoy TV", url: "https://sm-monirul.top/toffee/play/somoy_tv.m3u8", type: "hls" },
 		  { name: "Sony Sports 1", url: "https://sm-monirul.top/toffee/play/sony_sports_1_hd.m3u8", type: "hls" },
 		  { name: "Sony Sports 2", url: "https://sm-monirul.top/toffee/play/sony_sports_2_hd.m3u8", type: "hls" },
 		  { name: "Sony Sports 2", url: "https://sm-monirul.top/toffee/play/sony_sports_5_hd.m3u8", type: "hls" },
@@ -608,7 +615,7 @@
       const [isLoadingList, setIsLoadingList] = useState(false);
       const [isPlaying, setIsPlaying] = useState(true);
       const [isMuted, setIsMuted] = useState(false);
-      const [volumeLevel, setVolumeLevel] = useState(100); // 0 to 100 volume scale
+      const [volumeLevel, setVolumeLevel] = useState(100); // 0 to 200 volume scale
       const [isCategoryOpen, setIsCategoryOpen] = useState(false);
       const [isCountryOpen, setIsCountryOpen] = useState(false);
       const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -743,7 +750,6 @@
           try {
             const CUSTOM_M3U_URLS = [
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
-			  { url: 'https://raw.githubusercontent.com/abusaeeidx/T-Sports-Playlist-Auto-Update/refs/heads/main/combine_playlist.m3u', name: 'TSports' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_all_player.m3u', name: 'Toffee' },
 			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/roar-zone-playlist.m3u', name: 'RoarZone' },
               { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
@@ -1055,40 +1061,6 @@
               ch.sourceName === "FIFA Plus" || 
               (ch.sourceName === "RoarZone" && roarzoneSpecificNames.includes(ch.name))
             );
-
-            // Group all TSports channels into one curated channel item
-			const tsportsChannels = allCustomChannels.filter(ch => ch.sourceName === "TSports");
-			if (tsportsChannels.length > 0) {
-			  const combinedServers = [];
-			  tsportsChannels.forEach(ch => {
-				ch.servers.forEach((srv, idx) => {
-				  // Prevent duplicate URLs inside the combined server list
-				  if (!combinedServers.some(s => s.url === srv.url)) {
-					combinedServers.push({
-					  id: `tsports-srv-${ch.id}-${idx}`,
-					  name: ch.name || `Server ${combinedServers.length + 1}`, 
-					  url: srv.url,
-					  type: "hls"
-					});
-				  }
-				});
-			  });
-
-			  if (combinedServers.length > 0) {
-				dynamicCurated.push({
-				  id: "curated-tsports-network",
-				  name: "T Sports Servers",
-				  category: "Sports",
-				  country: "Bangladesh",
-				  // FIX: Hardcode a reliable Imgur image mirror for T Sports directly here instead of using the fallback logo
-				  logo: "https://i.imgur.com/7E0Hjmh.png",
-				  url: combinedServers[0].url,
-				  type: "hls",
-				  description: "Live broadcast of all channels from the TSports playlist. Some servers may not work.",
-				  servers: combinedServers
-				});
-			  }
-			}
 
             const updatedCurated = deduplicateByUrl([...dynamicCurated, ...CURATED_CHANNELS]);
             setCuratedChannels(updatedCurated);
