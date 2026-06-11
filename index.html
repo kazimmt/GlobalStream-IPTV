@@ -803,6 +803,7 @@
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
 			  { url: 'https://khela.pro.bd/playlist/custom_playlist.m3u', name: 'AynaOTT' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_all_player.m3u', name: 'Toffee' },
+			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/RoarZone-Auto-Update-playlist/refs/heads/main/RoarZone.m3u', name: 'RoarZone' },
               { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
             ];
 
@@ -847,10 +848,7 @@
                     currentCh.url = url;
                     currentCh.id = `custom-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
                     currentCh.type = "hls";
-                    currentCh.country = "Global";
-                    currentCh.countryCode = "BD";
-                    currentCh.countryFlag = "🇧🇩";
-                    currentCh.description = `Streamed from ${sourceName} Playlist. If it does not play here, Copy stream link and try NS Player`;
+                    currentCh.description = `Streamed from ${sourceName} Playlist.`;
                     currentCh.isCustomSource = true;
                     currentCh.sourceName = sourceName;
                     currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: `Backup Server (${sourceName})`, url: url, type: "hls" }];
