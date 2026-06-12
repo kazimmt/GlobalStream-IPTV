@@ -320,6 +320,16 @@
       "https://aponn.vercel.app/iptv.m3u"
     ];
 
+    // Added Proxy utility to bypass HTTPS Mixed Content & CORS blocks automatically
+    function getSecureUrl(url) {
+      if (!url) return url;
+      // If we are hosted on HTTPS but requesting an HTTP link, proxy it so the browser allows it.
+      if (url.startsWith('http://') && window.location.protocol === 'https:') {
+        return 'https://corsproxy.io/?' + encodeURIComponent(url);
+      }
+      return url;
+    }
+
     let shakaPlayer = null;
     let mpegtsPlayer = null; 
     let rawChannels = [];
@@ -545,7 +555,8 @@
       for (const url of urls) {
         logToDiagnostic(`Fetching playlist: ${url}`);
         try {
-          const response = await fetch(url);
+          // Route M3U fetches through the secure proxy if needed
+          const response = await fetch(getSecureUrl(url));
           if (!response.ok) {
             logToDiagnostic(`Server returned HTTP status ${response.status} for ${url}`, 'warn');
             continue;
@@ -738,12 +749,15 @@
 
       document.getElementById('bufferingStatusText').innerText = "Loading Raw Stream Data...";
 
+      // Proxy the stream URL to bypass HTTPS restrictions if needed
+      const secureStreamUrl = getSecureUrl(streamUrl);
+
       if (mpegts.getFeatureList().mseLivePlayback) {
         try {
           mpegtsPlayer = mpegts.createPlayer({
             type: 'mse', 
             isLive: true,
-            url: streamUrl,
+            url: secureStreamUrl,
             cors: true
           });
 
@@ -796,6 +810,8 @@
         return;
       }
       
+      const secureUrl = getSecureUrl(activeUrl);
+
       const cleanHTML = `
         <html>
         <head>
@@ -810,7 +826,7 @@
             <p class="text-xs text-zinc-500 mt-2">Bypasses secure browser limitations and sandbox boundaries cleanly.</p>
           </div>
           <script>
-            const url = "${activeUrl}";
+            const url = "${secureUrl}";
             const vid = document.getElementById('pVid');
             const mp = mpegts.createPlayer({ type: 'mse', isLive: true, url: url, cors: true });
             mp.attachMediaElement(vid);
