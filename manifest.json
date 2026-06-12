@@ -2,7 +2,7 @@
   "name": "GlobalStream IPTV Player",
   "short_name": "GlobalStream",
   "description": "Stream live world television and curated event playlists.",
-  "start_url": "./index.html",
+  "start_url": "./fifa.html",
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#4c1d95",
