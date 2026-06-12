@@ -100,6 +100,16 @@
 
     const CURATED_CHANNELS = [
 	  {
+        id: "curated-fs-1",
+        name: "FS1",
+        category: "Sports",
+        country: "USA",
+        logo: "https://i.imgur.com/O9BapV9.png",
+        url: "https://601.thelistener.pk/fs1.m3u8",
+        type: "hls",
+        description: "Official live television stream for FS1."
+      },
+	  {
         id: "curated-t-sports",
         name: "T Sports",
         category: "Sports",
@@ -109,19 +119,11 @@
         type: "hls",
         description: "Live broadcast of Sports Channels from Toffee.",
         servers: [
-		  { name: "Server 1", url: "http://103.151.61.12/T-Sports.kutta/video.m3u8", type: "hls" },
-		  { name: "Server 2", url: "https://sm-monirul.top/ultra_restream/live/t_sports5.m3u8", type: "hls" }
+		  { name: "Server 1", url: "http://198.195.239.50:8095/T-spo_rts-hoichoi24/video.m3u8", type: "hls" },
+		  { name: "Server 2", url: "http://103.151.61.12/T-Sports.kutta/video.m3u8", type: "hls" },
+		  { name: "Server 3", url: "https://sm-monirul.top/ultra_restream/live/t_sports5.m3u8", type: "hls" },
+		  { name: "Server 4", url: "https://storage.googleapis.com/hynvessrworov1/mux_video_ts1/index-1.m3u8", type: "hls" }
         ]
-      },
-	  {
-        id: "curated-cazé-tv",
-        name: "CazéTV",
-        category: "Sports",
-        country: "Brazil",
-        logo: "https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Caz%C3%A9TV_logo.svg/960px-Caz%C3%A9TV_logo.svg.png",
-        url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8",
-        type: "hls",
-        description: "Official live television stream for CazeTV."
       },
 	  {
         id: "curated-toffee-sports",
@@ -755,8 +757,9 @@
             const CUSTOM_M3U_URLS = [
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_all_player.m3u', name: 'Toffee' },
-			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/roar-zone-playlist.m3u', name: 'RoarZone' },
-			  { url: 'https://raw.githubusercontent.com/abusaeeidx/CrestSport-IPTV-Collection/refs/heads/main/bd.m3u', name: 'bd-New' },
+			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/RoarZone.m3u', name: 'RoarZone' },
+			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/playlist_s.m3u', name: 'fifawc' },
+			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/World_Cup.m3u', name: 'wc-special' },
               { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
             ];
 
@@ -1059,24 +1062,26 @@
             setBdApiChannels(parsedBdApi);
             
 			// --- Seleted Channels from RoarZone ---
-            const roarzoneSpecificNames = ["T SPORTS HD", "SOMOY TV", "BTV"]; 
+            const roarzoneSpecificNames = ["T Sports Hd", "Somoy Tv", "Btv"]; 
             
             let dynamicCurated = allCustomChannels.filter(ch => 
               ch.sourceName === "Tapmad BD" || 
               ch.sourceName === "FIFA Plus" || 
-              (ch.sourceName === "RoarZone" && roarzoneSpecificNames.includes(ch.name))
+              (ch.sourceName === "RoarZone" && roarzoneSpecificNames.includes(ch.name)) || 
+              (ch.sourceName === "fifawc" && ch.category && ch.category.toLowerCase().includes("FIFA World Cup"))
             );
 
-		// Group all TSports channels into one curated channel item
-			const tsportsChannels = allCustomChannels.filter(ch => ch.sourceName === "bd-New");
-			if (tsportsChannels.length > 0) {
+
+
+		// Group all WC Servers channels into one curated channel item
+			const wcserversChannels = allCustomChannels.filter(ch => ch.sourceName === "wc-special");
+			if (wcserversChannels.length > 0) {
 			  const combinedServers = [];
-			  tsportsChannels.forEach(ch => {
+			  wcserversChannels.forEach(ch => {
 				ch.servers.forEach((srv, idx) => {
-				  // Prevent duplicate URLs inside the combined server list
 				  if (!combinedServers.some(s => s.url === srv.url)) {
 					combinedServers.push({
-					  id: `tsports-srv-${ch.id}-${idx}`,
+					  id: `wcservers-srv-${ch.id}-${idx}`,
 					  name: ch.name || `Server ${combinedServers.length + 1}`, 
 					  url: srv.url,
 					  type: "hls"
@@ -1087,15 +1092,14 @@
 
 			  if (combinedServers.length > 0) {
 				dynamicCurated.push({
-				  id: "curated-tsports-network",
-				  name: "T Sports Servers",
+				  id: "curated-worldcup-worldcup",
+				  name: "World Cup Special",
 				  category: "Sports",
-				  country: "Bangladesh",
-				  // FIX: Hardcode a reliable Imgur image mirror for T Sports directly here instead of using the fallback logo
-				  logo: "https://i.imgur.com/7E0Hjmh.png",
+				  country: "Global",
+				  logo: "https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/960px-2026_FIFA_World_Cup_emblem.svg.png",
 				  url: combinedServers[0].url,
 				  type: "hls",
-				  description: "Live broadcast of all channels from the TSports playlist. Some servers may not work.",
+				  description: "Live broadcast of popular wc streamers. Some servers may not work.",
 				  servers: combinedServers
 				});
 			  }
