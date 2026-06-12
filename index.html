@@ -696,13 +696,13 @@
           setIsLoadingGlobal(true);
           try {
             const CUSTOM_M3U_URLS = [
+              { url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/unite8_sports.m3u', name: 'unite8' },
+			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/World_Cup.m3u', name: 'wc-special' },
+			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/roar-zone-playlist.m3u', name: 'RoarZone' },
+			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/RoarZone-Auto-Update-playlist/refs/heads/main/RoarZone.m3u', name: 'RoarZone2' },
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_all_player.m3u', name: 'Toffee' },
-			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/roar-zone-playlist.m3u', name: 'RoarZone' },
-			  { url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/unite8_sports.m3u', name: 'unite8' },
-			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/RoarZone-Auto-Update-playlist/refs/heads/main/RoarZone.m3u', name: 'RoarZone2' },
 			  { url: 'https://aponn.vercel.app/iptv.m3u', name: 'fifawc' },
-			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/World_Cup.m3u', name: 'wc-special' },
               { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
             ];
 
@@ -1004,21 +1004,21 @@
             const parsedBdApi = deduplicateByUrl(parseBdM3u(bdM3uText));
             setBdApiChannels(parsedBdApi);
             
+			// --- Seleted Channels from wcspecial ---
+            const wcspecialSpecificNames = ["TVRI INDO", "CAZE TV BR", "TELEMUNDO HD"]; 
+			
 			// --- Seleted Channels from RoarZone ---
             const roarzoneSpecificNames = ["T SPORTS HD", "SOMOY TV", "BTV"];
 			
 			// --- Seleted Channels from RoarZone2 ---
             const roarzone2SpecificNames = ["T Sports Hd", "T Sports", "Somoy Tv", "Btv"]; 
-			
-			// --- Seleted Channels from wcspecial ---
-            const wcspecialSpecificNames = ["TVRI INDO", "CAZE TV BR", "TELEMUNDO HD"]; 
             
             let dynamicCurated = allCustomChannels.filter(ch => 
               ch.sourceName === "Tapmad BD" || 
 			  ch.sourceName === "unite8" || 
+			  (ch.sourceName === "wc-special" && wcspecialSpecificNames.includes(ch.name)) || 
               (ch.sourceName === "RoarZone" && roarzoneSpecificNames.includes(ch.name)) || 
-			  (ch.sourceName === "RoarZone2" && roarzone2SpecificNames.includes(ch.name)) || 
-			  (ch.sourceName === "wc-special" && wcspecialSpecificNames.includes(ch.name)) 
+			  (ch.sourceName === "RoarZone2" && roarzone2SpecificNames.includes(ch.name))
             );
 
             const updatedCurated = deduplicateByUrl([...dynamicCurated, ...CURATED_CHANNELS]);
