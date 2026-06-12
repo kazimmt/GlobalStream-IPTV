@@ -699,6 +699,7 @@
               { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_all_player.m3u', name: 'Toffee' },
 			  { url: 'https://raw.githubusercontent.com/abusaeeidx/BDxTV/refs/heads/main/roar-zone-playlist.m3u', name: 'RoarZone' },
+			  { url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/unite8_sports.m3u', name: 'unite8' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/RoarZone-Auto-Update-playlist/refs/heads/main/RoarZone.m3u', name: 'RoarZone2' },
 			  { url: 'https://aponn.vercel.app/iptv.m3u', name: 'fifawc' },
 			  { url: 'https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/World_Cup.m3u', name: 'wc-special' },
@@ -1014,7 +1015,7 @@
             
             let dynamicCurated = allCustomChannels.filter(ch => 
               ch.sourceName === "Tapmad BD" || 
-              ch.sourceName === "FIFA Plus" || 
+			  ch.sourceName === "unite8" || 
               (ch.sourceName === "RoarZone" && roarzoneSpecificNames.includes(ch.name)) || 
 			  (ch.sourceName === "RoarZone2" && roarzone2SpecificNames.includes(ch.name)) || 
 			  (ch.sourceName === "wc-special" && wcspecialSpecificNames.includes(ch.name)) 
