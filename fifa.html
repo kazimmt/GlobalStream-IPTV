@@ -283,42 +283,13 @@
 
   </main>
 
-  <!-- CUSTOM ALERT SYSTEM FOR CORS & NOTIFICATION WINDOWS -->
-  <div id="alertBox" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 transition-opacity duration-300 pointer-events-none opacity-0">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative transform scale-95 transition-transform duration-300" id="alertContent">
-      <div class="flex items-center gap-3 text-rose-500 mb-3">
-        <div class="p-2 bg-rose-500/10 rounded-xl border border-rose-500/20">
-          <i data-lucide="alert-triangle" class="w-6 h-6"></i>
-        </div>
-        <h3 class="font-black text-lg" id="alertTitle">Network / Blocked Stream</h3>
-      </div>
-      <p class="text-slate-300 text-xs leading-relaxed" id="alertMessage">An unexpected network failure happened.</p>
-      
-      <div class="mt-4 p-3 bg-slate-950 border border-slate-800 rounded-xl text-[11px] text-slate-400 space-y-2">
-        <p class="font-bold text-slate-300">How to resolve:</p>
-        <p>1. <span class="text-rose-400 font-bold">HTTPS Mixed Content Block</span>: If this application is hosted over HTTPS, your browser blocks unencrypted <code class="bg-slate-900 px-1 rounded text-rose-300">http://</code> stream sources automatically.</p>
-        <p>2. <span class="text-rose-400 font-bold">CORS Block</span>: The stream provider is missing CORS headers. Installing a browser extension like "Allow CORS" can bypass this.</p>
-        <p>3. <span class="text-emerald-400 font-bold">Best Alternative</span>: Play the stream externally in standalone video players like VLC or PotPlayer.</p>
-      </div>
-
-      <div class="mt-5 flex gap-2 justify-end">
-        <button id="vlcFallbackBtn" onclick="openInVlc()" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white text-xs font-bold rounded-lg transition hover:from-orange-600 hover:to-amber-700 flex items-center gap-1.5">
-          <i data-lucide="play-circle" class="w-3.5 h-3.5"></i> Play in VLC / External Player
-        </button>
-        <button onclick="closeAlert()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-lg transition">
-          Dismiss
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- PLAYER CORE SCRIPTS -->
   <script>
     // Playlists Locations (Loaded automatically)
     const PLAYLIST_URLS = [
       "http://kazimmt.ami.bd/playlist/custom_playlist.m3u",
       "https://raw.githubusercontent.com/ahan443/FAST-IPTV/refs/heads/main/FIFA.m3u",
-	  "https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/World_Cup.m3u",
+      "https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/World_Cup.m3u",
       "https://aponn.vercel.app/iptv.m3u"
     ];
 
@@ -769,7 +740,7 @@
             logToDiagnostic(`mpegts.js Stream Issue: [${type}] Detail: ${detail}. If blocked, check HTTPS Mixed Content.`, 'error');
             document.getElementById('playerBuffering').classList.add('opacity-0');
             
-            // Auto catch fetch and mixed content loader exceptions and present solutions in a clean dialog
+            // Auto catch fetch and mixed content loader exceptions and log them
             const currentName = document.getElementById('activeChannelName').innerText;
             showAlert(
               'Stream Loading Blocked', 
@@ -854,26 +825,13 @@
       }
     }
 
-    // Custom alerts dialog
+    // Custom alerts logger (Modal has been removed)
     function showAlert(title, text) {
-      document.getElementById('alertTitle').innerText = title;
-      document.getElementById('alertMessage').innerText = text;
-      
-      const alertBox = document.getElementById('alertBox');
-      const alertContent = document.getElementById('alertContent');
-      
-      alertBox.classList.remove('pointer-events-none', 'opacity-0');
-      alertContent.classList.remove('scale-95');
-      alertContent.classList.add('scale-100');
+      logToDiagnostic(`Alert Triggered: ${title} - ${text}`, 'warn');
     }
 
     function closeAlert() {
-      const alertBox = document.getElementById('alertBox');
-      const alertContent = document.getElementById('alertContent');
-      
-      alertBox.classList.add('pointer-events-none', 'opacity-0');
-      alertContent.classList.add('scale-95');
-      alertContent.classList.remove('scale-100');
+      // No-op (Alert dialog structure has been cleanly removed)
     }
 
     // Copying text to the clipboard safely
