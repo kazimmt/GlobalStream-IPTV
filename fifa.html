@@ -227,6 +227,17 @@
             </div>
           </div>
         </div>
+
+        <!-- Technical address output -->
+        <div class="pt-3 border-t border-slate-800/60 text-xs space-y-3">
+          <div>
+            <label class="text-slate-500 font-semibold block mb-1">Stream Source Address</label>
+            <div class="flex items-center gap-2">
+              <input type="text" id="activeStreamUrl" readonly class="w-full bg-slate-950/70 border border-slate-800 rounded px-2.5 py-1.5 font-mono text-[11px] text-slate-300 focus:outline-none" value="None">
+              <button onclick="copyToClipboard('activeStreamUrl')" class="p-1.5 bg-slate-800 hover:bg-slate-700 rounded text-slate-300 shrink-0" title="Copy stream link"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -628,7 +639,6 @@
       return parsedChannels;
     }
 
-    // Checks that a channel is strictly a raw TS stream
     function isSupportedFormat(url) {
       if (!url) return false;
       const lower = url.toLowerCase();
@@ -726,7 +736,7 @@
         await shakaPlayer.unload();
       }
 
-      document.getElementById('bufferingStatusText').innerText = "Demuxing Raw Stream container...";
+      document.getElementById('bufferingStatusText').innerText = "Loading Raw Stream Data...";
 
       if (mpegts.getFeatureList().mseLivePlayback) {
         try {
