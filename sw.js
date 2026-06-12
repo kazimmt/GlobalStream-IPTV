@@ -1,9 +1,9 @@
 /* Simple Basic Service Worker (sw.js) */
 
-const CACHE_NAME = 'globalstream-v1';
+const CACHE_NAME = 'globalstream-fifa';
 const ASSETS_TO_CACHE = [
   '/',
-  './index.html',
+  './fifa.html',
   './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://cdn.jsdelivr.net/npm/hls.js@latest',
