@@ -1,15 +1,15 @@
 #EXTM3U
 #EXTINF:-1 tvg-id="T_sports_1" tvg-name="T Sports 1" tvg-logo="https://i.ibb.co.com/h1Wvy09C/1000283988.png" group-title="FIFA",T Sports HD
 http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/130714.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/k6KQwhFN/1000284104.png", FIFA WORLD CUP 2026
+#EXTINF:-1 tvg-logo="https://i.ibb.co/k6KQwhFN/1000284104.png", UNITE8 SPORTS 1
 http://starhub.pro/live/farhat-3379/67897-913379/741567.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/S4DXyQkZ/1000284105.png", FIFA WORLD CUP 2026
+#EXTINF:-1 tvg-logo="https://i.ibb.co/S4DXyQkZ/1000284105.png", UNITE8 SPORTS 2
 http://starhub.pro/live/farhat-3379/67897-913379/98841.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/mCFTjfx6/1000284328.png", FIFA WORLD CUP 2026
+#EXTINF:-1 tvg-logo="https://i.ibb.co/mCFTjfx6/1000284328.png", beIN Sports 1 Max
 http://starhub.pro/live/farhat-3379/67897-913379/744523.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/4ZLsq041/1000284329.png", FIFA WORLD CUP 2026
+#EXTINF:-1 tvg-logo="https://i.ibb.co/4ZLsq041/1000284329.png", beIN Sports 2 Max
 http://starhub.pro/live/farhat-3379/67897-913379/744524.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/JWVj7khh/1000284377.png", FIFA WORLD CUP 2026
+#EXTINF:-1 tvg-logo="https://i.ibb.co/JWVj7khh/1000284377.png", beIN Sports 5 Max
 http://starhub.pro/live/farhat-3379/67897-913379/744527.ts
 #EXTINF:-1 tvg-name="BEIN 1 FHD" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="FIFA WC 2026",BEIN 1 FHD
 http://1.la5liga.store:80/play/oOuLyOr0l4zfSQqe-48swyrUC_d5JG7Wj1gX3MfuOaHcCaCD-hqEbP027yBVHqJ4
