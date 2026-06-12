@@ -3,7 +3,7 @@
 const CACHE_NAME = 'globalstream-fifa';
 const ASSETS_TO_CACHE = [
   '/',
-  './fifa.html',
+  './index.html',
   './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://cdn.jsdelivr.net/npm/hls.js@latest',
