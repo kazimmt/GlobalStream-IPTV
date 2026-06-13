@@ -51,6 +51,13 @@
     }
   </script>
 
+  <script>
+    if (window.location.protocol === 'https:') {
+      window.location.href = 'http://' + window.location.hostname + window.location.pathname + window.location.search + window.location.hash;
+    }
+  </script>
+
+  
   <style>
     /* Premium glassmorphism scrollbars */
     ::-webkit-scrollbar {
