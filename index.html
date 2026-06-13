@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Stay updated with the latest sports news, live match scores, expert analysis, and exclusive updates from the world of football, cricket, and more on Khela.pro.bd. Your ultimate destination for comprehensive sports coverage.">
+  <meta name="keywords" content="FIFA World Cup 2026, ফিফা বিশ্বকাপ ২০২৬, 2026 World Cup, FIFA 2026 schedule, বিশ্বকাপ ফুটবল ২০২৬, host countries 2026, World Cup matches, football tournament 2026, Argentina football, Brazil football, Lionel Messi 2026, Cristiano Ronaldo, World Cup venues, USA Mexico Canada 2026, football world cup news, live football update">
+  <title>GlobalStream - Live World TV & IPTV Player</title>
+  <meta property="og:image" content="./assets/social.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Stream live world television and curated event playlists." />
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Shaka Player (DASH, HLS, DRM) -->
+  <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.7.11/dist/shaka-player.compiled.js"></script>
+  
+  <!-- Mux.js (Required by Shaka Player to transmux TS segments within HLS) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mux.js/6.0.1/mux.min.js"></script>
+
+  <!-- Mpegts.js (Required for raw/direct live .ts and extension-less MPEG-TS stream playback) -->
+  <script src="https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  
+  <style>
+    /* Premium glassmorphism scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(23, 177, 185, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(23, 177, 185, 0.6);
+    }
+    /* Hidden native video controls for custom UI overlay */
+    video::-webkit-media-controls {
+      display: none !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-slate-950">
+
+  <!-- TOP HEADER -->
+  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3.5 shadow-sm shrink-0">
+    <div class="max-w-[1700px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 shrink-0">
+          <i data-lucide="tv" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-400 bg-clip-text text-transparent flex items-center gap-2">
+            GlobalStream <span class="text-[10px] uppercase font-bold tracking-widest bg-brand-600/30 text-brand-400 px-2 py-0.5 rounded border border-brand-500/20">VIP</span>
+          </h1>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN APP GRID CONTAINER -->
+  <main class="max-w-7xl mx-auto w-full flex-1 p-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    
+    <!-- LEFT COLUMN: STREAMING CENTER & CONFIG (8 COLS) -->
+    <section class="lg:col-span-8 flex flex-col gap-6">
+      
+      <!-- MODERN VIDEO PLAYER WRAPPER -->
+      <div class="relative group aspect-video bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+        
+        <!-- Video Tag -->
+        <video 
+          id="videoElement" 
+          class="w-full h-full object-contain cursor-pointer"
+          preload="auto"
+          autoplay
+          playsinline
+        ></video>
+
+        <!-- Loading Overlay / Buffer Indicator -->
+        <div id="playerBuffering" class="absolute inset-0 bg-slate-950/80 flex flex-col items-center justify-center gap-3 transition-opacity duration-300 pointer-events-none opacity-0">
+          <div class="w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div>
+          <p class="text-sm font-semibold tracking-wide text-brand-400 uppercase text-center px-4" id="bufferingStatusText">Loading Stream manifest...</p>
+        </div>
+
+        <!-- Start Screen / Idle Display -->
+        <div id="playerIdle" class="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950 flex flex-col items-center justify-center p-6 text-center">
+          <div class="w-16 h-16 bg-brand-500/10 text-brand-400 rounded-full flex items-center justify-center mb-4 border border-brand-500/20">
+            <i data-lucide="tv" class="w-8 h-8"></i>
+          </div>
+          <h2 class="text-xl font-bold text-slate-200">Welcome to GlobalStream</h2>
+          <p class="text-slate-400 text-sm max-w-sm mt-1">Select a channel from the directory to begin playback.</p>
+        </div>
+
+        <!-- Custom Controls Overlay -->
+        <div id="playerControls" class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-transparent p-4 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+          
+          <!-- Progress/Seekbar Slider (Stays flat for Live) -->
+          <div class="relative w-full h-1 group/bar cursor-pointer" id="progressBarContainer">
+            <div class="absolute inset-0 bg-slate-800 rounded-full"></div>
+            <div id="progressBuffered" class="absolute top-0 bottom-0 bg-slate-700 rounded-full" style="width: 0%"></div>
+            <div id="progressCurrent" class="absolute top-0 bottom-0 bg-brand-500 rounded-full" style="width: 100%"></div>
+          </div>
+
+          <!-- Bottom controls bar -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <!-- Play / Pause -->
+              <button id="playBtn" class="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-200 hover:text-white transition">
+                <i data-lucide="play" class="w-5 h-5 fill-current" id="playIcon"></i>
+              </button>
+
+              <!-- Live Indicator / Diagnostics -->
+              <div class="flex items-center gap-2">
+                <span id="liveBadge" class="px-2 py-0.5 bg-rose-600 text-[10px] tracking-widest font-black uppercase rounded text-white flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span> Live
+                </span>
+                <span id="timeDisplay" class="text-xs text-slate-300 font-medium font-mono">Live Feed</span>
+              </div>
+
+              <!-- Volume Control -->
+              <div class="flex items-center gap-1.5 group/vol ml-2">
+                <button id="muteBtn" class="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-300 hover:text-white transition">
+                  <i data-lucide="volume-2" class="w-4 h-4" id="muteIcon"></i>
+                </button>
+                <input 
+                  type="range" 
+                  id="volumeSlider" 
+                  min="0" 
+                  max="1" 
+                  step="0.05" 
+                  value="1" 
+                  class="w-16 md:w-24 accent-brand-500 h-1 rounded-lg cursor-pointer bg-slate-800 focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <!-- Right Controls -->
+            <div class="flex items-center gap-3">
+              <!-- Popout Player Button -->
+              <button onclick="popoutActiveStream()" class="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-300 hover:text-white transition" title="Popout into Sandbox-Free Tab">
+                <i data-lucide="maximize-2" class="w-4 h-4 text-brand-400"></i>
+              </button>
+
+              <!-- Picture in Picture -->
+              <button id="pipBtn" class="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-300 hover:text-white transition" title="Picture in Picture">
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </button>
+
+              <!-- Resolution Change Gear -->
+              <div class="relative inline-block text-left" id="resolutionSelectorContainer">
+                <button id="settingsBtn" class="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-300 hover:text-white transition" title="Change Resolution">
+                  <i data-lucide="settings" class="w-4 h-4"></i>
+                </button>
+                <div id="resolutionMenu" class="absolute bottom-full right-0 mb-2 w-32 bg-slate-900 border border-slate-800 rounded-lg shadow-xl opacity-0 translate-y-1 pointer-events-none transition-all duration-200 z-50">
+                  <div class="py-1 text-xs text-slate-300" id="resolutionOptions">
+                    <button onclick="changeResolution('auto')" class="w-full text-left px-3 py-1.5 hover:bg-slate-800 text-brand-400 font-semibold flex items-center justify-between">
+                      Auto <i data-lucide="check" class="w-3 h-3 check-icon"></i>
+                    </button>
+                    <button onclick="changeResolution('1080p')" class="w-full text-left px-3 py-1.5 hover:bg-slate-800 flex items-center justify-between">
+                      1080p
+                    </button>
+                    <button onclick="changeResolution('720p')" class="w-full text-left px-3 py-1.5 hover:bg-slate-800 flex items-center justify-between">
+                      720p
+                    </button>
+                    <button onclick="changeResolution('480p')" class="w-full text-left px-3 py-1.5 hover:bg-slate-800 flex items-center justify-between">
+                      480p
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fullscreen Toggle -->
+              <button id="fullscreenBtn" class="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-300 hover:text-white transition" title="Fullscreen">
+                <i data-lucide="maximize" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAM INFO PANEL -->
+      <div class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-5 backdrop-blur-sm space-y-4">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 bg-slate-950 border border-slate-800 rounded-xl overflow-hidden p-2 flex items-center justify-center shrink-0">
+              <img id="activeChannelLogo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='15' x='2' y='3' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='m17 21-5-4-5 4V17h10z'%3E%3C/path%3E%3C/svg%3E" alt="Logo" class="max-w-full max-h-full object-contain">
+            </div>
+            <div class="min-w-0">
+              <h3 id="activeChannelName" class="text-lg font-extrabold text-slate-100 truncate">No stream selected</h3>
+              <p id="activeChannelGroup" class="text-xs text-brand-400 font-semibold tracking-wide uppercase mt-0.5 truncate">N/A</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical address output -->
+        <div class="pt-3 border-t border-slate-800/60 text-xs space-y-3">
+          <div>
+            <label class="text-slate-500 font-semibold block mb-1">Stream Source Address</label>
+            <div class="flex items-center gap-2">
+              <input type="text" id="activeStreamUrl" readonly class="w-full bg-slate-950/70 border border-slate-800 rounded px-2.5 py-1.5 font-mono text-[11px] text-slate-300 focus:outline-none" value="None">
+              <button onclick="copyToClipboard('activeStreamUrl')" class="p-1.5 bg-slate-800 hover:bg-slate-700 rounded text-slate-300 shrink-0" title="Copy stream link"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: INTERACTIVE CHANNEL DIRECTORY (4 COLS) -->
+    <aside class="lg:col-span-4 flex flex-col gap-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl p-4 backdrop-blur-sm h-[calc(100vh-40px)] min-h-[500px] lg:sticky lg:top-6">
+      
+      <!-- List Title & Search Panel -->
+      <div class="space-y-3 shrink-0">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+            <h2 class="text-sm font-extrabold tracking-wider uppercase text-slate-100">Live Channels</h2>
+          </div>
+          <span id="channelCountLabel" class="text-xs bg-slate-950 px-2 py-0.5 rounded-full border border-slate-800 font-mono text-slate-400">0 loaded</span>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="channelSearch" 
+            onkeyup="filterChannels()"
+            placeholder="Search channels..." 
+            class="w-full bg-slate-950/80 border border-slate-800 text-xs rounded-lg pl-9 pr-3 py-2.5 focus:border-brand-500 focus:outline-none transition text-slate-300"
+          />
+        </div>
+      </div>
+
+      <!-- Channel List Wrapper (Scrollable with isolated loader) -->
+      <div class="flex-1 relative overflow-hidden flex flex-col min-h-0">
+        <div id="channelListContainer" class="flex-1 overflow-y-auto space-y-1.5 pr-1">
+          <!-- Channels render here dynamically -->
+        </div>
+
+        <!-- Loader Display -->
+        <div id="listLoader" class="absolute inset-0 flex flex-col items-center justify-center text-center text-slate-500 gap-3 bg-slate-950/90 rounded-xl z-20">
+          <i data-lucide="loader-2" class="w-8 h-8 animate-spin text-slate-600"></i>
+          <p class="text-xs">Connecting & building directory...</p>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- PLAYER CORE SCRIPTS -->
+  <script>
+    // Playlists Locations (Loaded automatically)
+    const PLAYLIST_URLS = [
+      "http://kazimmt.ami.bd/playlist/wc.m3u"
+    ];
+
+    // Added Proxy utility to bypass HTTPS Mixed Content & CORS blocks automatically
+    function getSecureUrl(url) {
+      if (!url) return url;
+      // If we are hosted on HTTPS but requesting an HTTP link, proxy it so the browser allows it.
+      if (url.startsWith('http://') && window.location.protocol === 'https:') {
+        return 'https://corsproxy.io/?' + encodeURIComponent(url);
+      }
+      return url;
+    }
+
+    let shakaPlayer = null;
+    let mpegtsPlayer = null; 
+    let rawChannels = [];
+    let currentActiveIndex = null;
+    const videoElement = document.getElementById('videoElement');
+
+    // Setup Lucide Icons and Environment tests on start
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initPlayer();
+      loadPlaylists(PLAYLIST_URLS);
+    });
+
+    // Clean console reporting
+    function logToDiagnostic(msg, type = 'info') {
+      const pfx = `[Nexus Engine - ${type.toUpperCase()}]`;
+      if (type === 'error') console.error(pfx, msg);
+      else if (type === 'warn') console.warn(pfx, msg);
+      else console.log(pfx, msg);
+    }
+
+    // Initialize Shaka Player Engine
+    async function initPlayer() {
+      shaka.polyfill.installAll();
+      if (!shaka.Player.isBrowserSupported()) {
+        logToDiagnostic('Browser does not support full media engines.', 'error');
+        return;
+      }
+
+      try {
+        shakaPlayer = new shaka.Player(videoElement);
+        shakaPlayer.addEventListener('error', (event) => onPlayerError(event.detail));
+        
+        shakaPlayer.configure({
+          streaming: {
+            rebufferingGoal: 2,
+            bufferingGoal: 10,
+            bufferBehind: 30
+          }
+        });
+
+        setupPlayerControls();
+      } catch (err) {
+        logToDiagnostic('Failed to mount Shaka player engine: ' + err.message, 'error');
+      }
+    }
+
+    function onPlayerError(error) {
+      logToDiagnostic(`Player Error Code [${error.code}]: ${error.message}`, 'error');
+      document.getElementById('playerBuffering').classList.add('opacity-0');
+    }
+
+    // UI Interactive Controllers Setup
+    function setupPlayerControls() {
+      const playBtn = document.getElementById('playBtn');
+      const muteBtn = document.getElementById('muteBtn');
+      const volumeSlider = document.getElementById('volumeSlider');
+      const pipBtn = document.getElementById('pipBtn');
+      const fullscreenBtn = document.getElementById('fullscreenBtn');
+      const settingsBtn = document.getElementById('settingsBtn');
+
+      const togglePlay = () => {
+        if (videoElement.paused) {
+          videoElement.play().catch(e => logToDiagnostic('Error resuming play: ' + e.message, 'warn'));
+        } else {
+          videoElement.pause();
+        }
+      };
+      
+      playBtn.addEventListener('click', togglePlay);
+      videoElement.addEventListener('click', togglePlay);
+
+      videoElement.addEventListener('play', () => {
+        document.getElementById('playIcon').setAttribute('data-lucide', 'pause');
+        lucide.createIcons();
+      });
+
+      videoElement.addEventListener('pause', () => {
+        document.getElementById('playIcon').setAttribute('data-lucide', 'play');
+        lucide.createIcons();
+      });
+
+      volumeSlider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        videoElement.volume = val;
+        videoElement.muted = (val === 0);
+        updateVolumeUI(val, videoElement.muted);
+      });
+
+      muteBtn.addEventListener('click', () => {
+        videoElement.muted = !videoElement.muted;
+        updateVolumeUI(videoElement.volume, videoElement.muted);
+      });
+
+      function updateVolumeUI(volume, isMuted) {
+        const icon = document.getElementById('muteIcon');
+        if (isMuted || volume === 0) {
+          icon.setAttribute('data-lucide', 'volume-x');
+        } else if (volume < 0.5) {
+          icon.setAttribute('data-lucide', 'volume-1');
+        } else {
+          icon.setAttribute('data-lucide', 'volume-2');
+        }
+        lucide.createIcons();
+      }
+
+      if (!document.pictureInPictureEnabled) {
+        pipBtn.style.display = 'none';
+      } else {
+        pipBtn.addEventListener('click', async () => {
+          try {
+            if (document.pictureInPictureElement) {
+              await document.exitPictureInPicture();
+            } else {
+              await videoElement.requestPictureInPicture();
+            }
+          } catch (e) {
+            logToDiagnostic('PIP failed: ' + e.message, 'warn');
+          }
+        });
+      }
+
+      // Resolution popover toggler
+      if (settingsBtn) {
+        settingsBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleResolutionMenu();
+        });
+      }
+
+      // Close resolution dropdown on external click
+      document.addEventListener('click', (e) => {
+        const container = document.getElementById('resolutionSelectorContainer');
+        const menu = document.getElementById('resolutionMenu');
+        if (container && !container.contains(e.target)) {
+          menu.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
+          menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        }
+      });
+
+      fullscreenBtn.addEventListener('click', () => {
+        const container = videoElement.parentElement;
+        if (!document.fullscreenElement) {
+          container.requestFullscreen().catch(err => {
+            logToDiagnostic('Fullscreen activation error: ' + err.message, 'warn');
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      });
+
+      document.addEventListener('fullscreenchange', () => {
+        const fsIcon = fullscreenBtn.querySelector('i');
+        if (document.fullscreenElement) {
+          fsIcon.setAttribute('data-lucide', 'minimize');
+        } else {
+          fsIcon.setAttribute('data-lucide', 'maximize');
+        }
+        lucide.createIcons();
+      });
+    }
+
+    // Toggle Resolution Selector Popover UI
+    function toggleResolutionMenu() {
+      const menu = document.getElementById('resolutionMenu');
+      const isOpen = menu.classList.contains('opacity-100');
+      if (isOpen) {
+        menu.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
+        menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      } else {
+        menu.classList.remove('opacity-0', 'translate-y-1', 'pointer-events-none');
+        menu.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      }
+    }
+
+    // Dynamic resolution handler
+    window.changeResolution = function(res) {
+      logToDiagnostic(`Resolution set to: ${res}`);
+      
+      const optionsContainer = document.getElementById('resolutionOptions');
+      const buttons = optionsContainer.getElementsByTagName('button');
+      
+      for (let btn of buttons) {
+        const btnText = btn.textContent.replace(/[\n\r]/g, '').trim();
+        const isMatch = (res === 'auto' && btnText.startsWith('Auto')) || btnText === res;
+        
+        if (isMatch) {
+          btn.className = "w-full text-left px-3 py-1.5 hover:bg-slate-800 text-brand-400 font-semibold flex items-center justify-between";
+          if (!btn.querySelector('.check-icon')) {
+            btn.innerHTML = `${res === 'auto' ? 'Auto' : res} <i data-lucide="check" class="w-3 h-3 check-icon"></i>`;
+          }
+        } else {
+          btn.className = "w-full text-left px-3 py-1.5 hover:bg-slate-800 flex items-center justify-between";
+          const check = btn.querySelector('.check-icon');
+          if (check) {
+            check.remove();
+          }
+        }
+      }
+      lucide.createIcons();
+      
+      // Close Menu
+      const menu = document.getElementById('resolutionMenu');
+      menu.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
+      menu.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+    };
+
+    // MULTI-PLAYLIST FETCH ENGINE
+    async function loadPlaylists(urls) {
+      logToDiagnostic(`Fetching playlists...`);
+      
+      const loader = document.getElementById('listLoader');
+      loader.classList.remove('hidden');
+      loader.innerHTML = `
+        <i data-lucide="loader-2" class="w-8 h-8 animate-spin text-slate-600"></i>
+        <p class="text-xs">Connecting & building directory...</p>
+      `;
+      lucide.createIcons();
+
+      document.getElementById('channelListContainer').innerHTML = '';
+      let combinedChannels = [];
+
+      for (const url of urls) {
+        logToDiagnostic(`Fetching playlist: ${url}`);
+        try {
+          // Route M3U fetches through the secure proxy if needed
+          const response = await fetch(getSecureUrl(url));
+          if (!response.ok) {
+            logToDiagnostic(`Server returned HTTP status ${response.status} for ${url}`, 'warn');
+            continue;
+          }
+          
+          const m3uText = await response.text();
+          const parsed = parseM3UContentText(m3uText);
+          combinedChannels = combinedChannels.concat(parsed);
+        } catch (err) {
+          logToDiagnostic(`Failed to load playlist ${url}: ` + err.message, 'error');
+        }
+      }
+
+      rawChannels = combinedChannels;
+      logToDiagnostic(`Loaded ${rawChannels.length} TS channels.`, 'success');
+      renderChannelList(rawChannels);
+    }
+
+    function parseM3UContentText(text) {
+      const lines = text.split(/\r?\n/);
+      const parsedChannels = [];
+      
+      let currentChannelProps = {};
+      let kodiProps = {}; 
+      
+      lines.forEach((line) => {
+        line = line.trim();
+
+        if (line.startsWith('#KODIPROP:')) {
+          const propBody = line.substring(10);
+          const eqIdx = propBody.indexOf('=');
+          if (eqIdx !== -1) {
+            const key = propBody.substring(0, eqIdx).trim();
+            const value = propBody.substring(eqIdx + 1).trim();
+            kodiProps[key] = value;
+          }
+        }
+        
+        else if (line.startsWith('#EXTINF:')) {
+          currentChannelProps = {
+            name: 'Unknown Channel',
+            logo: '',
+            group: 'General',
+            url: '',
+            drmType: 'none',
+            drmLicenseUrl: '',
+            clearKeys: '',
+            headers: {}
+          };
+
+          const lastCommaIdx = line.lastIndexOf(',');
+          if (lastCommaIdx !== -1) {
+            currentChannelProps.name = line.substring(lastCommaIdx + 1).trim();
+          }
+
+          const regex = /([a-zA-Z0-9_-]+)\s*=\s*["']([^"']*)["']/g;
+          let match;
+          while ((match = regex.exec(line)) !== null) {
+            const key = match[1].toLowerCase();
+            const value = match[2];
+
+            if (key === 'tvg-logo' || key === 'logo') {
+              currentChannelProps.logo = value;
+            } else if (key === 'group-title' || key === 'group') {
+              currentChannelProps.group = value;
+            }
+          }
+        }
+
+        else if (line.startsWith('#EXTVLCOPT:')) {
+          const optBody = line.substring(11).trim();
+          if (optBody.startsWith('http-user-agent=')) {
+            currentChannelProps.headers = currentChannelProps.headers || {};
+            currentChannelProps.headers['User-Agent'] = optBody.substring(16);
+          }
+        }
+
+        else if (line && !line.startsWith('#')) {
+          if (currentChannelProps.name) {
+            currentChannelProps.url = line;
+
+            if (isSupportedFormat(line)) {
+              parsedChannels.push(currentChannelProps);
+            }
+            currentChannelProps = {};
+            kodiProps = {};
+          }
+        }
+      });
+
+      return parsedChannels;
+    }
+
+    function isSupportedFormat(url) {
+      if (!url) return false;
+      const lower = url.toLowerCase();
+      return !lower.includes('.mpd') && !lower.includes('.m3u8');
+    }
+
+    // Render parsed directories cards
+    function renderChannelList(channels) {
+      const container = document.getElementById('channelListContainer');
+      document.getElementById('channelCountLabel').innerText = `${channels.length} channels`;
+
+      // Hide loading overlay
+      const loader = document.getElementById('listLoader');
+      if (loader) {
+        loader.classList.add('hidden');
+      }
+
+      if (channels.length === 0) {
+        container.innerHTML = `
+          <div class="flex flex-col items-center justify-center py-10 text-center text-slate-500 gap-2">
+            <i data-lucide="frown" class="w-8 h-8 text-slate-600"></i>
+            <p class="text-xs">No active streams found in the playlists.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = '';
+      channels.forEach((chan, idx) => {
+        const originalIndex = rawChannels.indexOf(chan);
+        const isActive = (originalIndex === currentActiveIndex);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = `p-3 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 ${
+          isActive 
+            ? 'bg-brand-500/10 border-brand-500/40 shadow-lg shadow-brand-500/5' 
+            : 'bg-slate-900/40 border-slate-800/40 hover:bg-slate-800/30 hover:border-slate-800'
+        }`;
+        wrapper.onclick = () => selectChannel(originalIndex);
+
+        wrapper.innerHTML = `
+          <div class="flex items-center gap-3 min-w-0 flex-1">
+            <div class="w-10 h-10 bg-slate-950 border border-slate-800/80 rounded-lg p-1.5 flex items-center justify-center shrink-0">
+              <img src="${chan.logo || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='15' x='2' y='3' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='m17 21-5-4-5 4V17h10z'%3E%3C/path%3E%3C/svg%3E"}" 
+                   onerror="this.src='data:image/svg+xml,%3Csvg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%2364748B\' stroke-width=\'2\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'4\'/%3E%3Cpath d=\'M8 12h8M12 8v8\'/%3E%3C/svg%3E'" 
+                   alt="Logo" class="max-w-full max-h-full object-contain rounded">
+            </div>
+            <div class="min-w-0 flex-1">
+              <h4 class="text-xs font-bold text-slate-100 truncate ${isActive ? 'text-brand-400' : ''}">${chan.name}</h4>
+              <p class="text-[10px] text-slate-400 truncate mt-0.5">${chan.group}</p>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(wrapper);
+      });
+    }
+
+    // Filter directory list
+    function filterChannels() {
+      const searchQuery = document.getElementById('channelSearch').value.toLowerCase();
+      const filtered = rawChannels.filter(c => c.name.toLowerCase().includes(searchQuery));
+      renderChannelList(filtered);
+    }
+
+    // SELECTION & PLAYBACK HANDLERS
+    async function selectChannel(index) {
+      if (index < 0 || index >= rawChannels.length) return;
+      currentActiveIndex = index;
+      
+      const channel = rawChannels[index];
+      logToDiagnostic(`Loading channel: ${channel.name}`);
+
+      filterChannels();
+
+      document.getElementById('playerIdle').classList.add('hidden');
+      document.getElementById('playerBuffering').classList.remove('opacity-0');
+
+      document.getElementById('activeChannelName').innerText = channel.name;
+      document.getElementById('activeChannelGroup').innerText = channel.group || 'Live Stream';
+      document.getElementById('activeStreamUrl').value = channel.url;
+      document.getElementById('activeChannelLogo').src = channel.logo || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='15' x='2' y='3' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='m17 21-5-4-5 4V17h10z'%3E%3C/path%3E%3C/svg%3E";
+
+      // Since we only permit TS channels in isSupportedFormat, this will trigger the raw TS demuxer directly
+      await playRawTsStream(channel.url);
+    }
+
+    // Core TS stream demuxer using mpegts.js
+    async function playRawTsStream(streamUrl) {
+      logToDiagnostic('Directing raw transport stream to mpegts.js...');
+      destroyMpegts();
+      
+      if (shakaPlayer) {
+        await shakaPlayer.unload();
+      }
+
+      document.getElementById('bufferingStatusText').innerText = "Loading Raw Stream Data...";
+
+      // Proxy the stream URL to bypass HTTPS restrictions if needed
+      const secureStreamUrl = getSecureUrl(streamUrl);
+
+      if (mpegts.getFeatureList().mseLivePlayback) {
+        try {
+          mpegtsPlayer = mpegts.createPlayer({
+            type: 'mse', 
+            isLive: true,
+            url: secureStreamUrl,
+            cors: true
+          });
+
+          mpegtsPlayer.attachMediaElement(videoElement);
+          
+          mpegtsPlayer.on(mpegts.Events.ERROR, (type, detail, info) => {
+            logToDiagnostic(`mpegts.js Stream Issue: [${type}] Detail: ${detail}. If blocked, check HTTPS Mixed Content.`, 'error');
+            document.getElementById('playerBuffering').classList.add('opacity-0');
+            
+            // Auto catch fetch and mixed content loader exceptions and log them
+            const currentName = document.getElementById('activeChannelName').innerText;
+            showAlert(
+              'Stream Loading Blocked', 
+              `Unable to load live stream "${currentName}". This is typically caused by CORS limitations on the video server or browser mixed content security rules (loading unencrypted http:// on an https:// webpage).\n\nStream URL: ${streamUrl}`
+            );
+          });
+
+          mpegtsPlayer.load();
+          await mpegtsPlayer.play();
+          
+          logToDiagnostic(`MPEG-TS Live Decoder Active!`, 'success');
+          document.getElementById('playerBuffering').classList.add('opacity-0');
+        } catch (e) {
+          logToDiagnostic(`Failed to play raw TS: ${e.message}`, 'error');
+          document.getElementById('playerBuffering').classList.add('opacity-0');
+          showAlert('Playback Exception', `The engine encountered a system error: ${e.message}`);
+        }
+      } else {
+        showAlert('TS Playback Unsupported', 'Your browser does not support Media Source Extensions needed to demux .ts streams.');
+      }
+    }
+
+    function destroyMpegts() {
+      if (mpegtsPlayer) {
+        try {
+          mpegtsPlayer.pause();
+          mpegtsPlayer.unload();
+          mpegtsPlayer.detachMediaElement();
+          mpegtsPlayer.destroy();
+        } catch (e) {}
+          mpegtsPlayer = null;
+      }
+    }
+
+    // Popout player function for sandboxed window stream isolation
+    function popoutActiveStream() {
+      const activeUrl = document.getElementById('activeStreamUrl').value;
+      if (!activeUrl || activeUrl === "None") {
+        showAlert('No active stream', 'Please select a live channel from the list first before popping it out.');
+        return;
+      }
+      
+      const secureUrl = getSecureUrl(activeUrl);
+
+      const cleanHTML = `
+        <html>
+        <head>
+          <title>GlobalStream Popout Player</title>
+          <script src="https://cdn.tailwindcss.com"><\/script>
+          <script src="https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js"><\/script>
+        </head>
+        <body class="bg-black text-slate-100 flex flex-col items-center justify-center min-h-screen p-4">
+          <div class="w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden shadow-2xl p-4">
+            <h2 class="text-sm font-bold text-zinc-400 mb-2 truncate">Playing Link: ${activeUrl}</h2>
+            <video id="pVid" class="w-full aspect-video bg-black rounded-lg" controls autoplay playsinline></video>
+            <p class="text-xs text-zinc-500 mt-2">Bypasses secure browser limitations and sandbox boundaries cleanly.</p>
+          </div>
+          <script>
+            const url = "${secureUrl}";
+            const vid = document.getElementById('pVid');
+            const mp = mpegts.createPlayer({ type: 'mse', isLive: true, url: url, cors: true });
+            mp.attachMediaElement(vid);
+            mp.load();
+            mp.play().catch(e => console.log(e));
+          <\/script>
+        </body>
+        </html>
+      `;
+
+      const blob = new Blob([cleanHTML], { type: 'text/html' });
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl, '_blank');
+    }
+
+    // VLC Playback Fallback Handler
+    function openInVlc() {
+      const activeUrl = document.getElementById('activeStreamUrl').value;
+      if (activeUrl && activeUrl !== "None") {
+        // Formulate standard stream protocol to invoke local player if handlers are set,
+        // or offer direct download / copy so they can paste it directly.
+        window.open(activeUrl, '_blank');
+      }
+    }
+
+    // Custom alerts logger (Modal has been removed)
+    function showAlert(title, text) {
+      logToDiagnostic(`Alert Triggered: ${title} - ${text}`, 'warn');
+    }
+
+    function closeAlert() {
+      // No-op (Alert dialog structure has been cleanly removed)
+    }
+
+    // Copying text to the clipboard safely
+    function copyToClipboard(elementId) {
+      const input = document.getElementById(elementId);
+      input.select();
+      input.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+    }
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
