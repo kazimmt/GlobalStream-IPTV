@@ -1,48 +1,46 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="T_sports" tvg-name="T Sports" tvg-logo="https://i.ibb.co.com/h1Wvy09C/1000283988.png" group-title="FIFA",T Sports HD 1
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/h1Wvy09C/1000283988.png",T Sports ᴴᴰ
 http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/130714.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co.com/h1Wvy09C/1000283988.png", T Sports HD 2
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/h1Wvy09C/1000283988.png", T Sports ᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/130714.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/k6KQwhFN/1000284104.png", UNITE8 SPORTS 1
+#EXTINF:-1 tvg-logo="https://i.ibb.co/k6KQwhFN/1000284104.png", UNITE8 SPORTS 1 ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/741567.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/S4DXyQkZ/1000284105.png", UNITE8 SPORTS 2
+#EXTINF:-1 tvg-logo="https://i.ibb.co/S4DXyQkZ/1000284105.png", UNITE8 SPORTS 2 ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/98841.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/mCFTjfx6/1000284328.png", beIN Sports 1 Max
+#EXTINF:-1 tvg-logo="https://i.ibb.co/mCFTjfx6/1000284328.png", beIN Sports 1 Max ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/744523.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/4ZLsq041/1000284329.png", beIN Sports 2 Max
+#EXTINF:-1 tvg-logo="https://i.ibb.co/4ZLsq041/1000284329.png", beIN Sports 2 Max ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/744524.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/JWVj7khh/1000284377.png", beIN Sports 5 Max
+#EXTINF:-1 tvg-logo="https://i.ibb.co/JWVj7khh/1000284377.png", beIN Sports 5 Max ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/744527.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co.com/nMBnLS9h/1000284536.png", FUSSBALL.TV1
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/nMBnLS9h/1000284536.png", FUSSBALL.TV1 ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co.com/TD6fkDPj/1000284537.png", FUSSBALL.TV2
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/TD6fkDPj/1000284537.png", FUSSBALL.TV2 ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/742611.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co.com/nMBnLS9h/1000284536.png", FUSSBALL.TV1 4K
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/nMBnLS9h/1000284536.png", FUSSBALL.TV1 ⁴ᵏ
 http://starhub.pro/live/farhat-3379/67897-913379/745269.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/C32Rhtff/1000284518.png", NOW TV 4K
+#EXTINF:-1 tvg-logo="https://i.ibb.co/C32Rhtff/1000284518.png", NOW TV ⁴ᵏ
 http://starhub.pro/live/farhat-3379/67897-913379/745270.ts
-#EXTINF:-1 tvg-name="BEIN 1 FHD" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="FIFA WC 2026",BEIN 1 FHD
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png",BEIN 1 ᶠᴴᴰ
 http://1.la5liga.store:80/play/oOuLyOr0l4zfSQqe-48swyrUC_d5JG7Wj1gX3MfuOaHcCaCD-hqEbP027yBVHqJ4
-#EXTINF:-1 tvg-name="BEIN 4 MAX FHD" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="FIFA WC 2026",BEIN 4 MAX FHD
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png",BEIN 4 MAX ᶠᴴᴰ
 http://1.la5liga.store:80/play/oOuLyOr0l4zfSQqe-48swyrUC_d5JG7Wj1gX3MfuOaE4OM3tuyzL533bO9nJYOIc
-#EXTINF:-1 tvg-name="BEIN 1 FHD" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="FIFA WC 2026",BEIN 1 FHD
-http://1.la5liga.store:80/play/oOuLyOr0l4zfSQqe-48swyrUC_d5JG7Wj1gX3MfuOaHcCaCD-hqEbP027yBVHqJ4
 
-#EXTINF:-1 tvg-name="FOOTBALL | SKY SPORTS ᴴᴰ" tvg-id="skysportsfootball.uk" tvg-logo="https://i.ibb.co/HTJV8tQS/Sky-Sports.png" group-title="SM All TV",FOOTBALL | SKY SPORTS ᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/HTJV8tQS/Sky-Sports.png", SKY SPORTS ᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/100481.ts
-#EXTINF:-1 tvg-name="FOOTBALL | SKY SPORTS ⁴ᵏ" tvg-id="skysportsfootball.uk" tvg-logo="https://i.ibb.co/p4knk5y/images-4.png" group-title="SM All TV",FOOTBALL | SKY SPORTS ⁴ᵏ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/HTJV8tQS/Sky-Sports.png", SKY SPORTS ᶠᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/100482.ts
-#EXTINF:-1 tvg-name="FOOTBALL | SKY SPORTS PREMIER 'ᴴᴰ" tvg-id="skysportspremiereleague.uk" tvg-logo="https://i.ibb.co/hJz9zYr5/Sky-Sports-Premier.png" group-title="SM All TV",FOOTBALL | SKY SPORTS PREMIER 'ᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/hJz9zYr5/Sky-Sports-Premier.png", SKY SPORTS PREMIER ᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/100489.ts
-#EXTINF:-1 tvg-name="FOOTBALL | SKY SPORTS PREMIER ⁴ᵏ" tvg-id="skysportspremiereleague.uk" tvg-logo="https://i.ibb.co/p4knk5y/images-4.png" group-title="SM All TV",FOOTBALL | SKY SPORTS PREMIER ⁴ᵏ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/hJz9zYr5/Sky-Sports-Premier.png", SKY SPORTS PREMIER ᶠᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/125642.ts
-#EXTINF:-1 tvg-name="FOOTBALL | TNT SPORTS ᴴᴰ" tvg-id="tnt.us" tvg-logo="https://i.ibb.co/XkK5vQ98/TNT-Sports.png" group-title="SM All TV",FOOTBALL | TNT SPORTS ᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/XkK5vQ98/TNT-Sports.png" , TNT SPORTS ᶠᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/230392.ts
-#EXTINF:-1 tvg-name="FOOTBALL | TNT PREMIUM ᴴᴰ" tvg-id="TNTSportsUltimate.uk" tvg-logo="https://i.ibb.co/8nmhSD21/TNT-Premium.png" group-title="SM All TV",FOOTBALL | TNT PREMIUM ᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/8nmhSD21/TNT-Premium.png", TNT PREMIUM ᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/292234.ts
-#EXTINF:-1 tvg-name="FOOTBALL | BEIN SPORTS 1 ENGLISH ᴴᴰ" tvg-id="beinsports1en.qa" tvg-logo="https://i.ibb.co/RpV3GLys/Bein-Sports-1-English.png" group-title="SM All TV",FOOTBALL | BEIN SPORTS 1 ENGLISH ᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/RpV3GLys/Bein-Sports-1-English.png", BEIN SPORTS 1 ENGLISH ᶠᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/100492.ts
-#EXTINF:-1 tvg-name="FOOTBALL | BEIN SPORTS 1 ENGLISH ⁴ᵏ" tvg-id="beinsports1en.qa" tvg-logo="https://i.ibb.co/p4knk5y/images-4.png" group-title="SM All TV",FOOTBALL | BEIN SPORTS 1 ENGLISH ⁴ᵏ
+#EXTINF:-1 tvg-logo="https://i.ibb.co/RpV3GLys/Bein-Sports-1-English.png", BEIN SPORTS 1 ENGLISH ᴴᴰ
 http://khanmalik.io:8080/live/Khemprakash/skyplay2421/249894.ts
-#EXTINF:-1 tvg-chno="1433" tvg-name="Zee Bangla Sonar (FIFA BANGLA COMMENTARY)" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="World_Cup",Zee Bangla Sonar (FIFA BANGLA COMMENTARY)
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png", Zee Bangla Sonar (BANGLA)⁵⁷⁶ᴾ
 http://str2.v3v3v.xyz:2082/live/rokhsi25_951396/POm6KqnW/277428.ts
