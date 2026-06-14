@@ -10,7 +10,6 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Stream live world television and curated event playlists." />
-  <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
@@ -838,19 +837,6 @@
       input.select();
       input.setSelectionRange(0, 99999);
       document.execCommand('copy');
-    }
-  </script>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(registration => {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-          }, err => {
-            console.log('ServiceWorker registration failed: ', err);
-          });
-      });
     }
   </script>
 </body>
