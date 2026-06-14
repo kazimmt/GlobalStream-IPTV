@@ -1,4 +1,16 @@
 #EXTM3U
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/zcmZoUy.png",FUSSBALL.TV2ᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/742611.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/wxwxBTU.png",FUSSBALL.TV1⁴ᵏ
+http://starhub.pro/live/farhat-3379/67897-913379/745269.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sLjlYNz.png",FUSSBALL.TV2⁴ᵏ
+http://vca.easy747.com:80/live/donad220/8U01MGV/1438206.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sLjlYNz.png",FUSSBALL.TV2⁴ᵏ
+https://2connect.xyz/live/5DD5FAA5705C/0F1A36AC576D476/1438206.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW TV⁴ᵏ
+http://starhub.pro/live/farhat-3379/67897-913379/745270.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/130714.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
@@ -15,18 +27,6 @@ http://starhub.pro/live/farhat-3379/67897-913379/744523.ts
 http://starhub.pro/live/farhat-3379/67897-913379/744524.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/a6l76hW.png",beIN Sports 5 Maxᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/744527.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
-http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/zcmZoUy.png",FUSSBALL.TV2ᶠᴴᴰ
-http://starhub.pro/live/farhat-3379/67897-913379/742611.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/wxwxBTU.png",FUSSBALL.TV1⁴ᵏ
-http://starhub.pro/live/farhat-3379/67897-913379/745269.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/sLjlYNz.png",FUSSBALL.TV2⁴ᵏ
-http://vca.easy747.com:80/live/donad220/8U01MGV/1438206.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/sLjlYNz.png",FUSSBALL.TV2⁴ᵏ
-https://2connect.xyz/live/5DD5FAA5705C/0F1A36AC576D476/1438206.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW TV⁴ᵏ
-http://starhub.pro/live/farhat-3379/67897-913379/745270.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/L6ceg5Z.png",BEIN 1ᶠᴴᴰ
 http://1.la5liga.store:80/play/oOuLyOr0l4zfSQqe-48swyrUC_d5JG7Wj1gX3MfuOaHcCaCD-hqEbP027yBVHqJ4
 #EXTINF:-1 tvg-logo="https://i.imgur.com/L6ceg5Z.png",BEIN 1ᶠᴴᴰ
