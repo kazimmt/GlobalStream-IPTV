@@ -295,16 +295,14 @@
     ];
 
     // Added Proxy utility to bypass HTTPS Mixed Content & CORS blocks automatically
-// URL that throws a CORS error
-const apiUrl = "https://api.example.com/data";
-
-// Prefix the URL with corsproxy.io
-const response = await fetch(
-  "https://corsproxy.io/?url=" + encodeURIComponent(apiUrl)
-);
-
-// HTTP request succeeds ✅
-const data = await response.json();
+    function getSecureUrl(url) {
+      if (!url) return url;
+      // If we are hosted on HTTPS but requesting an HTTP link, proxy it so the browser allows it.
+      if (url.startsWith('http://') && window.location.protocol === 'https:') {
+        return 'https://corsproxy.io/?' + encodeURIComponent(url);
+      }
+      return url;
+    }
 
     let shakaPlayer = null;
     let mpegtsPlayer = null; 
