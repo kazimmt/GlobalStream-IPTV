@@ -1,4 +1,15 @@
 #EXTM3U
+
+#=================================
+
+🖥️ Developed by: Kazi MMT
+🔗 Telegram: https://t.me/KaziMMT
+🕒 Last Updated: 2026-06-16 21:56:00 (BD Time)
+📺 Channels Count: 34
+🔒 Usage: Personal / Educational
+
+#=================================
+
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
@@ -37,12 +48,14 @@ http://1.la5liga.store:80/play/oOuLyOr0l4zfSQqe-48swyrUC_d5JG7Wj1gX3MfuOaHcCaCD-
 http://starhub.pro/live/farhat-3379/67897-913379/98841.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/52500.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᶠᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/18452.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/130714.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/130714.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
+http://luckonline.eu/live/y49sz6KMQs/6115263489/1142.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://luckonline.eu/live/y49sz6KMQs/6115263489/1142.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/P54rWCP.png",UNITE8 SPORTS 1ᶠᴴᴰ
@@ -113,3 +126,10 @@ https://otte.live.fly.ww.aiv-cdn.net/iad-nitro/live/dash/enc/ap5wz1ofsp/out/v1/7
 
 #EXTINF:-1 tvg-logo="https://i.imgur.com/orHEu6F.png",Zee Bangla Sonar (BANGLA)ˢᵈ
 http://str2.v3v3v.xyz:2082/live/rokhsi25_951396/POm6KqnW/277428.ts
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
+https://edge2.roarzone.net:8447/roarzone/edge1/1/index.m3u8?token=596b59a47156723120620a13ce202b8ce8b924a5-0e111c99c13de299be4efab0c5f5cd23-1781283307-1781272507
+#EXTINF:-1 tvg-logo="https://tvassets.roarzone.net/images/somoy-fifa.png",Somoy TVᴴᴰ
+https://edge2.roarzone.net:8447/roarzone/edge1/2/index.m3u8?token=0dafd665b60e889c5259c9479183bb90fb023546-e789f634b4546a8623f58123a1209b5f-1781283307-1781272507
+#EXTINF:-1 tvg-logo="https://tvassets.roarzone.net/images/btv-fifa.png",BTVᴴᴰ
+https://edge2.roarzone.net:8447/roarzone/edge1/3/index.m3u8?token=863f03e9d643930127b4fc72b5275b751a01dade-0ac4e2977b446e1433d4938778a20f50-1781283307-1781272507
