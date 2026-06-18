@@ -1,47 +1,4 @@
 #EXTM3U
-#EXT-X-VERSION:3
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" MaharBawdi.mm " tvg-logo="https://static-content-glb.solocoo.tv/epg/live/myanmar/channelicons/Maharbawdi_m.png" group-title="Myanmar Tv" ,MAHARBAWDI
-https://pplive.comquas.com:5443/LiveApp/streams/rHEBIW7pjQLU1677679374164.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" DVBTV.mm " tvg-logo="https://upload.wikimedia.org/wikipedia/en/5/59/Democratic_Voice_of_Burma.png" group-title="Myanmar Tv" ,DVB
-https://live-stream.dvb.no/hls/stream_higher/index.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" VOAnews.com " tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/VOA_logo.svg/330px-VOA_logo.svg.png" group-title="Myanmar Tv" ,VOA
-https://voa-video-hls-ns.akamaized.net/pangeavideo/2025/03/e/eb/eb812b56-3898-4d0b-8e09-01ef70829123_master.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" MRTV4.mm " tvg-logo="https://static-content-glb.solocoo.tv/epg/live/myanmar/channelicons/MRTV-4%20HD_m.png" group-title="Myanmar Tv" ,MRTV-4
-https://pplive.comquas.com:5443/LiveApp/streams/9AUG8Y4aKVmk1762750828463.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" Channel7.mm " tvg-logo="https://static-content-glb.solocoo.tv/epg/live/myanmar/channelicons/Channel7%20HD_m.png" group-title="Myanmar Tv" ,CHANNEL7
-https://pplive.comquas.com:5443/LiveApp/streams/CLcBFN71NkF61709008601656.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" MaharTV.mm " tvg-logo="https://upload.wikimedia.org/wikipedia/commons/2/21/Mahar_TV_logo.npg.png" group-title="Myanmar Tv" ,Mahar
-https://tv.mahar.live/mahar/website.stream/playlist.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" MaharEsports.mm " tvg-logo="https://i.postimg.cc/wM9PRGRb/mahar-logo.png" group-title="Myanmar Tv" ,Mahar ESport
-https://tv.mahar.live/mahar/fd7f0e4ec56046e91c32ba18110a0540.sdp/playlist.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" FortuneTV.mm " tvg-logo="https://i.postimg.cc/qqHvMTwF/1743317027293.png" group-title="Myanmar Tv" ,Fortune
-https://fortune-proxy.channelbur21.workers.dev/
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" ChannelK.mm " tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Channelk.png/330px-Channelk.png" group-title="Myanmar Tv" ,ChannelK
-http://103.215.194.93:8282/hls/fortunetv/live/vmix_1080.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" MNTV.mm " tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Myanmar_National_TV_Logo.jpg/330px-Myanmar_National_TV_Logo.jpg" group-title="Myanmar Tv" ,MNTV
-https://l1-xl1.myanmarnet.com/relay/mntv/ch1/stream.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" MEntertainmentChannel.mm " tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFvLgqJiFy4b0IbqqBeyj-j903OjgUC7PnVg&s" group-title="Myanmar Tv" , ME
-https://5a13fe32ef748.streamlock.net/mmplay/mrtv-entertainment/chunklist_w1909816536.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" TVM.mm " tvg-logo="https://i.postimg.cc/L5ynPGm8/tvm.png" group-title="Myanmar Tv" ,TVM
-http://203.81.84.130/hls/mwd_serie/index.m3u8
-#EXTINF:-1 group-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/1200px-Flag_of_Myanmar.svg.png" tvg-id=" GoldenLand.mm " tvg-logo="https://i.postimg.cc/TPXYKTnq/golden-land.png" group-title="Myanmar Tv" ,Golden Land
-http://203.81.84.130/hls/mwd_document/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.ibb.co/h1Wvy09C/1000283988.png", FIFA WORLD CUP 2026 HD
-http://198.195.239.50:8095/tsports/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.ibb.co/h1Wvy09C/1000283988.png", FIFA WORLD CUP 2026 HD
-http://starhub.pro/live/farhat-3379/67897-913379/130714.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/Q7mpW5pf/1000284104.png", FIFA WORLD CUP 2026 FHD
-https://aponn.vercel.app/us1.m3u8
-#EXTINF:-1 tvg-logo="https://i.ibb.co/gZCRC7ds/1000284105.png", FIFA WORLD CUP 2026 FHD
-https://aponn.vercel.app/us2.m3u8
-#EXTINF:-1 tvg-logo="https://i.ibb.co/nMBnLS9h/1000284536.png", FIFA WORLD CUP 2026 FHD
-http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/TD6fkDPj/1000284537.png", FIFA WORLD CUP 2026 FHD
-http://starhub.pro/live/farhat-3379/67897-913379/742611.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/nMBnLS9h/1000284536.png", FIFA WORLD CUP 2026 UHD
-http://starhub.pro/live/farhat-3379/67897-913379/745269.ts
-#EXTINF:-1 tvg-logo="https://i.ibb.co/C32Rhtff/1000284518.png", FIFA WORLD CUP 2026 UHD
-http://starhub.pro/live/farhat-3379/67897-913379/745270.ts
 #=================================
 🖥️ Developed by: Kazi MMT
 🔗 Telegram: https://t.me/KaziMMT
@@ -71,13 +28,19 @@ https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8
 #KODIPROP:inputstream.adaptive.manifest_type=hls
 https://picocloud.thebosstv.com/main2/robi_fifa_main_abr/playlist.m3u8|referer=https://iscreen.com.bd/
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
 http://vca.easy747.com:80/live/donad220/8U01MGV/1438202.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
 https://2connect.xyz/live/5DD5FAA5705C/0F1A36AC576D476/1438202.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/zcmZoUy.png",FUSSBALL.TV2ᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/742611.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/zcmZoUy.png",FUSSBALL.TV2ᶠᴴᴰ
 http://vca.easy747.com:80/live/donad220/8U01MGV/1438203.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/zcmZoUy.png",FUSSBALL.TV2ᶠᴴᴰ
 https://2connect.xyz/live/5DD5FAA5705C/0F1A36AC576D476/1438203.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/wxwxBTU.png",FUSSBALL.TV1⁴ᵏ
+http://starhub.pro/live/farhat-3379/67897-913379/745269.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/wxwxBTU.png",FUSSBALL.TV1⁴ᵏ
 http://vca.easy747.com:80/live/donad220/8U01MGV/1438205.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/wxwxBTU.png",FUSSBALL.TV1⁴ᵏ
@@ -86,6 +49,8 @@ https://2connect.xyz/live/5DD5FAA5705C/0F1A36AC576D476/1438205.ts
 http://vca.easy747.com:80/live/donad220/8U01MGV/1438206.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/sLjlYNz.png",FUSSBALL.TV2⁴ᵏ
 https://2connect.xyz/live/5DD5FAA5705C/0F1A36AC576D476/1438206.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW TV⁴ᵏ
+http://starhub.pro/live/farhat-3379/67897-913379/745270.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW TV⁴ᵏ
 http://vca.easy747.com/live/donad220/8U01MGV/1301200.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW TV⁴ᵏ
@@ -102,6 +67,8 @@ http://starhub.pro/live/farhat-3379/67897-913379/52500.ts
 http://113.21.231.219:789/Tsports/index.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/18452.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/130714.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://rgkkw.live:80/live/1Aoen7elp5/IgMJ60tmAa/130714.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
@@ -225,6 +192,12 @@ https://a121aivottepl-a.akamaihd.net/gru-nitro/live/clients/dash/enc/a6bxtdgxts/
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=4bbcff3289d457b4dd5dbdd21221de9a:c4906b9a9f8dda3c0725bddb8c497733
 https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/m7duvnk2bu/out/v1/d1ad69118b5647309b1eb7213affdb3d/cenc.mpd
+#EXTINF:-1 tvg-logo="https://i.ibb.co/h1Wvy09C/1000283988.png", FIFA WORLD CUP 2026 HD
+http://198.195.239.50:8095/tsports/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.ibb.co/Q7mpW5pf/1000284104.png", FIFA WORLD CUP 2026 FHD
+https://aponn.vercel.app/us1.m3u8
+#EXTINF:-1 tvg-logo="https://i.ibb.co/gZCRC7ds/1000284105.png", FIFA WORLD CUP 2026 FHD
+https://aponn.vercel.app/us2.m3u8
 #=================================
 🖥️ Developed by: Monirul Islam
 🔗 Telegram: https://t.me/monirul_Islam_SM
