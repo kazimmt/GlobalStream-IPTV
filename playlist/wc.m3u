@@ -11,23 +11,16 @@
 #=================================
 
 #EXTINF:-1  tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEEᶠᴴᴰ
-https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/0/master_2000.m3u8
+https://kazimmt.ami.bd/playlist/TF/TF-1.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEEᶠᴴᴰ
-https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-4/0/master_2000.m3u8
+https://kazimmt.ami.bd/playlist/TF/TF-2.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEEᶠᴴᴰ
-https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-2/0/master_3000.m3u8
+https://kazimmt.ami.bd/playlist/TF/TF-3.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEEᶠᴴᴰ
-https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-3/0/master_2000.m3u8
+https://kazimmt.ami.bd/playlist/TF/TF-4.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEEᶠᴴᴰ
-https://cdn-tt.pages.dev/ch5.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEEᶠᴴᴰ
-https://cdn-tt.pages.dev/ch1.m3u8|cookie=Edge-Cache-Cookie="Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9ibGRjbXByb2QtY2RuLnRvZmZlZWxpdmUuY29t:Expires=1781611166:KeyName=prod_linear:Signature=pbpxM96PtoZiMKNlc6im8bRQIKPCW-2QGqxQfe1WY447rP0eJm1ADSa13BXmXstJwMMAAUjJ5CtJsoaahvUuAg"
-#EXTINF:-1 tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEEᶠᴴᴰ
-https://cdn-tt.pages.dev/ch2.m3u8|cookie=Edge-Cache-Cookie="Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9ibGRjbXByb2QtY2RuLnRvZmZlZWxpdmUuY29t:Expires=1781611166:KeyName=prod_linear:Signature=pbpxM96PtoZiMKNlc6im8bRQIKPCW-2QGqxQfe1WY447rP0eJm1ADSa13BXmXstJwMMAAUjJ5CtJsoaahvUuAg"
-#EXTINF:-1 tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEE 3ᶠᴴᴰ
-https://cdn-tt.pages.dev/ch3.m3u8|cookie=Edge-Cache-Cookie="Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9ibGRjbXByb2QtY2RuLnRvZmZlZWxpdmUuY29t:Expires=1781611166:KeyName=prod_linear:Signature=pbpxM96PtoZiMKNlc6im8bRQIKPCW-2QGqxQfe1WY447rP0eJm1ADSa13BXmXstJwMMAAUjJ5CtJsoaahvUuAg"
-#EXTINF:-1 tvg-logo="https://i.imgur.com/xO1AEbX.png", TOFFEE 4ᶠᴴᴰ
-https://cdn-tt.pages.dev/ch4.m3u8|cookie=Edge-Cache-Cookie="Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9ibGRjbXByb2QtY2RuLnRvZmZlZWxpdmUuY29t:Expires=1781611166:KeyName=prod_linear:Signature=pbpxM96PtoZiMKNlc6im8bRQIKPCW-2QGqxQfe1WY447rP0eJm1ADSa13BXmXstJwMMAAUjJ5CtJsoaahvUuAg"
+https://kazimmt.ami.bd/playlist/TF/TF-5.m3u8
+
 #EXTINF:-1 tvg-logo="https://i.imgur.com/m4RUXVr.png",TAPMADᶠᴴᴰ
 https://premierleagpl23.akamaized.net/hls/live/2107108/tapmad-P2s6L_FiN@L-UrU/master.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/m4RUXVr.png",TAPMAD 2 HD
