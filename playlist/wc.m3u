@@ -63,6 +63,18 @@ http://luckonline.eu/live/y49sz6KMQs/6115263489/1142.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/P54rWCP.png",UNITE8 SPORTS 1ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/741567.ts
 
+#EXTINF:-1 tvg-logo="https://i.imgur.com/P54rWCP.png",UNITE8 SPORTS 1ᶠᴴᴰ
+#EXT-X-VERSION:3
+#EXT-X-INDEPENDENT-SEGMENTS
+#EXT-X-STREAM-INF:BANDWIDTH=3000000
+http://opplex.to:80/live/Abdurrehman890/482910/444332.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/apGlVc6.png",UNITE8 SPORTS 2ᶠᴴᴰ
+#EXT-X-VERSION:3
+#EXT-X-INDEPENDENT-SEGMENTS
+#EXT-X-STREAM-INF:BANDWIDTH=3000000
+http://opplex.to:80/live/Abdurrehman890/482910/444333.m3u8
+
 #EXTINF:-1 tvg-logo="https://i.imgur.com/TuiOPeH.png",TELEMUNDOᶠᴴᴰ
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
