@@ -33,9 +33,8 @@ jobs:
         import os
 
         urls = [
-            "https://modsmz.github.io/ch/sports.m3u",
-            "https://aponn.vercel.app/iptv.m3u",
             "https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/wc.m3u",
+            "https://aponn.vercel.app/iptv.m3u",
             "https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/refs/heads/main/World_Cup.m3u",
             "https://raw.githubusercontent.com/Ajayone8x/sportzx-playlist/refs/heads/main/Sportzx.m3u8"
         ]
