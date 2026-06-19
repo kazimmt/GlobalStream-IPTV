@@ -189,17 +189,14 @@ https://a121aivottepl-a.akamaihd.net/gru-nitro/live/clients/dash/enc/a6bxtdgxts/
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=4bbcff3289d457b4dd5dbdd21221de9a:c4906b9a9f8dda3c0725bddb8c497733
 https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/m7duvnk2bu/out/v1/d1ad69118b5647309b1eb7213affdb3d/cenc.mpd
-#EXTINF:-1 tvg-logo="https://i.ibb.co/h1Wvy09C/1000283988.png", FIFA WORLD CUP 2026 HD
-http://198.195.239.50:8095/tsports/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.ibb.co/Q7mpW5pf/1000284104.png", FIFA WORLD CUP 2026 FHD
-https://aponn.vercel.app/us1.m3u8
-#EXTINF:-1 tvg-logo="https://i.ibb.co/gZCRC7ds/1000284105.png", FIFA WORLD CUP 2026 FHD
-https://aponn.vercel.app/us2.m3u8
 #=================================
 🖥️ Developed by: Monirul Islam
 🔗 Telegram: https://t.me/monirul_Islam_SM
 🕒 Last Updated: 2026-06-10 17:38:24 (BD Time)
 📺 Channels Count: 20+
+#=================================
+#EXTINF:-1 tvg-id="t sports" tvg-name="T-Sports" tvg-logo="https://sm-live-tv-channel-logo.pages.dev/image/T_Sports.png" group-title="world cup",T Sports
+http://198.195.239.50:8095/tsports/index.m3u8
 #EXTINF:-1 tvg-name="Football World Cup 2026 link hindi" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="Football World Cup 2026",Football World Cup
 http://114.130.57.224:8080/Somoy-TV-3Mb/tracks-v1a1/mono.m3u8?token=SkQuhAXZxgBan1
 #EXTINF:-1 tvg-name="Football World Cup 2026 link hindi" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="Football World Cup 2026",Football World Cup
