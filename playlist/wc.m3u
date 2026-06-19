@@ -19,6 +19,8 @@ https://kazimmt.ami.bd/playlist/TF/TF-3.m3u8
 https://kazimmt.ami.bd/playlist/TF/TF-4.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-5ᶠᴴᴰ
 https://kazimmt.ami.bd/playlist/TF/TF-5.m3u8
+#EXTINF:-1  tvg-logo="https://i.imgur.com/UspLV8i.png", BD V AUS 🇧🇩ᶠᴴᴰ
+https://kazimmt.ami.bd/playlist/TF/bdaus.m3u8
 
 #EXTINF:-1 tvg-logo="https://i.imgur.com/m4RUXVr.png",TAPMADᶠᴴᴰ
 https://premierleagpl23.akamaized.net/hls/live/2107108/tapmad-P2s6L_FiN@L-UrU/master.m3u8
