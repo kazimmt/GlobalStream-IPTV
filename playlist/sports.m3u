@@ -1,4 +1,10 @@
 #EXTM3U
+#=================================
+🖥️ Developed by: Kazi MMT
+🔗 Telegram: https://t.me/KaziMMT
+🕒 Last Updated: 2026-06-18 23:24:00 (BD Time)
+🔒 Usage: Personal / Educational
+#=================================
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-1ᶠᴴᴰ
 https://kazimmt.ami.bd/playlist/TF/TF-1.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-2ᶠᴴᴰ
@@ -9,15 +15,12 @@ https://kazimmt.ami.bd/playlist/TF/TF-3.m3u8
 https://kazimmt.ami.bd/playlist/TF/TF-4.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-5ᶠᴴᴰ
 https://kazimmt.ami.bd/playlist/TF/TF-5.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/m4RUXVr.png",TAPMADᶠᴴᴰ
-https://premierleagpl23.akamaized.net/hls/live/2107108/tapmad-P2s6L_FiN@L-UrU/master.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/m4RUXVr.png",TAPMAD 2 HD
+#EXTINF:-1  tvg-logo="https://i.imgur.com/UspLV8i.png", BD V AUS 🇧🇩ᶠᴴᴰ
+https://kazimmt.ami.bd/playlist/TF/bdaus.m3u8
 https://premierleagpl23.akamaized.net/hls/live/2107108/vertical-backup312/master.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/g46kUC4.png",SOMOY TVᴴᴰ
 https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/FCH3l8A.png",I SCREENᴴᴰ
-#KODIPROP:inputstream.adaptive.manifest_type=hls
-https://picocloud.thebosstv.com/main2/robi_fifa_main_abr/playlist.m3u8|referer=https://iscreen.com.bd/
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
@@ -78,6 +81,12 @@ http://starhub.pro/live/farhat-3379/67897-913379/741567.ts
 http://opplex.to:80/live/Abdurrehman890/482910/444333.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/apGlVc6.png",UNITE8 SPORTS 2ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/98841.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/M5UsROs.png",FOXᴴᴰ
+https://1nyaler.streamhostingcdn.top/stream/26/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/rslTSh9.png",GO3 Sportsᶠᴴᴰ
+http://ytoxw6un.ottclub.xyz/iptv/KCUHA6DGYYVA8ZZFUPQV3KZH/6408/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/n92UWKH.png",PTV Sportsᶠᴴᴰ
+http://stalker.hakunamata.workers.dev/play/1099/index.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/orHEu6F.png",Zee Bangla Sonar (BANGLA)ˢᵈ
 http://str2.v3v3v.xyz:2082/live/rokhsi25_951396/POm6KqnW/277428.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/TuiOPeH.png",TELEMUNDOᶠᴴᴰ
@@ -128,34 +137,12 @@ https://origin-m6web.live.6cloud.fr/out/v1/6play/6play-m6/cmaf_cenc00/dash-short
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=7b37e4614fcee2ec2ff6e5900c2f798f:f349a9c28c55c20b9a2c50af99d1fc76
 https://otte-tim.live.pv-cdn.net/pdx-nitro/live/clients/dash/enc/aezp9y6l15/out/v1/69a2a7041395406b970598f61680e7cf/cenc.mpd
-#EXTINF:-1 tvg-logo="https://i.imgur.com/M5UsROs.png",FOXᶠᴴᴰ
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=f6564ec2aee819046328a0e153be574d:ff46a8a1031eb27ef22576a077c98ab7
-https://otte-tim.live.pv-cdn.net/pdx-nitro/live/clients/dash/enc/ajfoeddkbz/out/v1/b78800b9b2304879b15843f455836829/cenc.mpd
-#EXTINF:-1 tvg-logo="https://i.imgur.com/XiFZia7.png",FOX Oneᴴᴰ
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=c620c93c60c04999eb9ddc28ecfb70a8:e76a709c251313190e76cb3c3d3a5824
-https://otte.live.fly.ww.aiv-cdn.net/iad-nitro/live/dash/enc/ap5wz1ofsp/out/v1/7fa6feef143747beaa186ebb6dfb2532/cenc.mpd
-#EXTINF:-1  tvg-logo="https://go-live.info/wp-content/uploads/2024/09/logowhitenew.webp" ,GO Live
+#EXTINF:-1  tvg-logo="https://i.imgur.com/uDz3H80.png" ,GO Live
 https://d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist.m3u8
-#EXTINF:-1  tvg-logo="https://go-live.info/wp-content/uploads/2024/09/logowhitenew.webp" ,GO Live
+#EXTINF:-1  tvg-logo="https://i.imgur.com/uDz3H80.png" ,GO Live
 https://streamtv.panthomashreky6.workers.dev/https/d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist_b4096000_slENG.m3u8
-#EXTINF:-1 tvg-logo="https://static.wikia.nocookie.net/logopedia/images/d/dd/Screenshot_2026-06-10_002618.png" ,Unite8 Sports 2 HD
+#EXTINF:-1 tvg-logo="https://i.imgur.com/apGlVc6.png" ,Unite8 Sports 2 HD
 http://212.102.34.8:9080/AndFlixHD/video.m3u8
-#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/TSN1.svg/960px-TSN1.svg.png",TSN 1
-http://stalker.hakunamata.workers.dev/play/258/index.m3u8
-#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/TSN2_New_Logo.svg/960px-TSN2_New_Logo.svg.png",TSN 2
-http://stalker.hakunamata.workers.dev/play/259/index.m3u8
-#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/TSN3.svg/960px-TSN3.svg.png",TSN 3
-http://stalker.hakunamata.workers.dev/play/260/index.m3u8
-#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/TSN4.svg/960px-TSN4.svg.png",TSN 4
-http://stalker.hakunamata.workers.dev/play/261/index.m3u8
-#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/TSN5.svg/960px-TSN5.svg.png",TSN 5
-http://stalker.hakunamata.workers.dev/play/262/index.m3u8
 #EXTINF:-1  tvg-logo="https://dizplai.com/wp-content/uploads/2025/10/DAZN_Logo_Chalk.svg-800x800.png", Dazn Direct
 https://1nyaler.streamhostingcdn.top/stream/94/index.m3u8
 #EXTINF:-1 tvg-logo="https://dizplai.com/wp-content/uploads/2025/10/DAZN_Logo_Chalk.svg-800x800.png" , DAZN HDR
@@ -171,18 +158,18 @@ https://tglmp02.akamaized.net/out/v1/1063ebb215c14312ba9d4e415ac706d2/manifest.m
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=d816287e21496989eae1312925a423c5:00da00f13180e7e6cd5ce87d1c974e8d
 https://dai.google.com/linear/dash/pa/event/antwa0EiQm2PoHtx4rBtVw/stream/0c8b0b72-7a38-4852-ab2e-3fd88cbe71cc:GRQ/manifest.mpd
-#EXTINF:-1 tvg-logo="https://i.postimg.cc/0NYVSnkr/Gemini-Generated-Image-ykkw2cykkw2cykkw.png", CAZE TV - AQ
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=9752ef72590ef441ffa3731e0486fbc0:db63ec7b9f11348b7cc6808a54c99457
-https://a121aivottepl-a.akamaihd.net/gru-nitro/live/clients/dash/enc/a6bxtdgxts/out/v1/691e8c4b528d4e45b893a9e2e516211b/cenc.mpd
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/0NYVSnkr/Gemini-Generated-Image-ykkw2cykkw2cykkw.png", SPORTV BR - AQ
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=4bbcff3289d457b4dd5dbdd21221de9a:c4906b9a9f8dda3c0725bddb8c497733
 https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/m7duvnk2bu/out/v1/d1ad69118b5647309b1eb7213affdb3d/cenc.mpd
+#=================================
+🖥️ Developed by: Monirul Islam
+🔗 Telegram: https://t.me/monirul_Islam_SM
+🕒 Last Updated: 2026-06-10 17:38:24 (BD Time)
+📺 Channels Count: 20+
+#=================================
 #EXTINF:-1 tvg-id="t sports" tvg-name="T-Sports" tvg-logo="https://sm-live-tv-channel-logo.pages.dev/image/T_Sports.png" group-title="world cup",T Sports
 http://198.195.239.50:8095/tsports/index.m3u8
 #EXTINF:-1 tvg-name="Football World Cup 2026 link hindi" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="Football World Cup 2026",Football World Cup
@@ -197,6 +184,12 @@ http://46.101.169.21/ch299/index.m3u8
 https://d1g8wgjurz8via.cloudfront.net/bpk-tv/ColorsHD/default/ColorsHD.m3u8
 #EXTINF:-1 tvg-name="Toffee" group-title="Live TV",Toffee
 https://toffee-seg.smartdev.workers.dev/manifest?url=https%3A%2F%2Fprod-cdn01-live.toffeelive.com%2Flive%2FFIFA-2026-3%2F0%2Fmaster_2000.m3u8&cookie=Expires%3D1781743302~_GO%3DGenerated~URLPrefix%3DaHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature%3DAduQTZ-IBJK3awEVSUXpj_uwlxEE0LuF5wxPzQDy_iFSBN_m9GiueLyajyncXRt99CvWsh_jcBWsp2svsdHAYujNwAUK
+#EXTINF:-1 tvg-logo="https://static.wikia.nocookie.net/logopedia/images/2/29/TSN3_HD.svg",TSN 3
+http://stalker.hakunamata.workers.dev/play/260/index.m3u8
+#EXTINF:-1 tvg-logo="https://static.wikia.nocookie.net/logopedia/images/7/70/TSN4_HD.svg",TSN 4
+http://stalker.hakunamata.workers.dev/play/261/index.m3u8
+#EXTINF:-1 tvg-logo="https://static.wikia.nocookie.net/logopedia/images/2/2e/TSN5_HD.svg",TSN 5
+http://stalker.hakunamata.workers.dev/play/262/index.m3u8
 #EXTINF:-1  tvg-logo="https://static.wikia.nocookie.net/logopedia/images/2/27/BeinSports1.svg", BeIN Sports 1 Direct
 https://1nyaler.streamhostingcdn.top/stream/23/index.m3u8
 #EXTINF:-1 tvg-logo="https://static.wikia.nocookie.net/logopedia/images/8/84/BEMAX1.png",BeIN Sports Max 1
