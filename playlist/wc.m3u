@@ -22,17 +22,10 @@ https://kazimmt.ami.bd/playlist/TF/TF-5.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/UspLV8i.png", BD V AUS 🇧🇩ᶠᴴᴰ
 https://kazimmt.ami.bd/playlist/TF/bdaus.m3u8
 
-#EXTINF:-1 tvg-logo="https://i.imgur.com/m4RUXVr.png",TAPMADᶠᴴᴰ
-https://premierleagpl23.akamaized.net/hls/live/2107108/tapmad-P2s6L_FiN@L-UrU/master.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/m4RUXVr.png",TAPMAD 2 HD
 https://premierleagpl23.akamaized.net/hls/live/2107108/vertical-backup312/master.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/g46kUC4.png",SOMOY TVᴴᴰ
 https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/FCH3l8A.png",I SCREENᴴᴰ
-#KODIPROP:inputstream.adaptive.manifest_type=hls
-https://picocloud.thebosstv.com/main2/robi_fifa_main_abr/playlist.m3u8|referer=https://iscreen.com.bd/
-
-
 
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Sz2PpOr.png",FUSSBALL.TV1ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/742610.ts
@@ -100,6 +93,15 @@ http://opplex.to:80/live/Abdurrehman890/482910/444333.m3u8
 
 #EXTINF:-1 tvg-logo="https://i.imgur.com/apGlVc6.png",UNITE8 SPORTS 2ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/98841.ts
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/M5UsROs.png",FOXᴴᴰ
+https://1nyaler.streamhostingcdn.top/stream/26/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/rslTSh9.png",GO3 Sportsᶠᴴᴰ
+http://ytoxw6un.ottclub.xyz/iptv/KCUHA6DGYYVA8ZZFUPQV3KZH/6408/index.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/n92UWKH.png",PTV Sportsᶠᴴᴰ
+http://stalker.hakunamata.workers.dev/play/1099/index.m3u8
 
 #EXTINF:-1 tvg-logo="https://i.imgur.com/orHEu6F.png",Zee Bangla Sonar (BANGLA)ˢᵈ
 http://str2.v3v3v.xyz:2082/live/rokhsi25_951396/POm6KqnW/277428.ts
