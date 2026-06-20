@@ -1,87 +1,73 @@
-# 📺 GlobalStream IPTV
+# 📺 Khela Stream
 
-An ultra-lightweight, single-file live web television and IPTV client. **GlobalStream IPTV** seamlessly bridges the massive `iptv-org` registry with high-priority, auto-updating custom `.m3u` event playlists, ensuring primary sports streams and regional networks are always live, accessible, and prioritized.
+![Khela Stream Banner](https://img.shields.io/badge/Status-Live-success?style=for-the-badge) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-![UI](https://img.shields.io/badge/UI-Tailwind_CSS_3.0-06b6d4?style=for-the-badge&logo=tailwind-css)
-![Engine](https://img.shields.io/badge/Engine-React_18_--_HLS.js-61dafb?style=for-the-badge&logo=react)
-![Deployment](https://img.shields.io/badge/Deployment-Single_File_/_Serverless-emerald?style=for-the-badge&logo=github-pages)
+**Khela Stream** is a modern, responsive, and lightweight web application designed for live streaming sports and events. It utilizes `hls.js` to play `.m3u8` HTTP Live Streaming feeds directly in the browser and features a dynamic channel matrix that parses both hardcoded and external `.m3u` playlists.
+
+---
+
+## ✨ Features
+
+- **Modern Dark UI:** A sleek, dark-themed dashboard inspired by premium streaming platforms, utilizing Google Material Symbols and the Inter font.
+- **HLS Video Player:** Integrated `hls.js` engine for smooth, adaptive playback of `.m3u8` video streams.
+- **Dynamic M3U Parsing:** Automatically fetches and parses external `.m3u` playlists (e.g., Tapmad BD) and appends them to the channel matrix.
+- **CORS Proxy Integration:** Bypasses browser CORS restrictions using a custom Cloudflare Worker proxy, ensuring maximum compatibility with third-party streaming links.
+- **Smart Fallback System:** Built-in error handling that displays a user-friendly fallback screen if a stream cluster fails to load.
+- **Responsive Design:** Fully responsive grid layout that adapts flawlessly to desktop, tablet, and mobile screens.
+- **Anti-Debugging:** Integrates `disable-devtool` to deter casual source-code inspection and stream ripping.
+
+
+
+---
+
+## 🚀 Live Demo
 
 <h2 align="center">
-    <a href="https://khela.pro.bd/"><b>Live Demo</b></a><br>
   🔗 <a href="https://khela.pro.bd/"><b>https://khela.pro.bd/</b></a>
 
 </h2>
 
 ---
 
-## ⚡ Key Features
+## 🛠️ Technologies Used
 
-*   **Dynamic Event Curation:** Live sports matches or pop-up events from specialized feeds (**Tapmad BD** and **FIFA Plus**) are automatically scraped and injected directly at the top of your homepage dashboard the moment they go live. 
-*   **Dual-Engine Stream Aggregator:** Concurrently parses the entire global `iptv-org` registry (over 30,000 international streams) alongside hyper-focused, automated GitHub `.m3u` repositories.
-*   **Intelligent Server Failover & Prioritization:** If a channel exists in both the public directory and your custom lists, the application automatically stacks your custom sources as `Server 1 (Primary)` and relegates secondary sources to fallback positions.
-*   **Sleek Modern UX:** Crafted with a premium dark-mode dashboard using Tailwind CSS, featuring smooth transitions, adaptive channel grids, custom vector fallback logos, and responsive performance across mobile and desktop.
-*   **Advanced Media Controls:** Equipped with standard/theater view modes, native fullscreen options, real-time buffer management via HLS.js, and a one-click **"Copy Link for VLC"** clipboard tool.
-*   **Persistent User Library:** Mark favorite channels to curate a personalized dashboard page that saves instantly to browser `LocalStorage`.
+- **Frontend:** HTML5, Vanilla CSS, Vanilla JavaScript
+- **Video Engine:** [hls.js (v1.4.12)](https://github.com/video-dev/hls.js/)
+- **Icons & Typography:** Google Material Symbols Outlined, Google Fonts (Inter)
+- **Security:** [disable-devtool](https://github.com/theajack/disable-devtool)
 
 ---
 
-## 🛠️ Built With
+## ⚙️ How It Works
 
-| Technology | Purpose | Implementation Method |
-| :--- | :--- | :--- |
-| **React 18** | UI State, Memoized filtering, and DOM rendering | Production CDN |
-| **Tailwind CSS** | Premium Dark-Theme Layout and Grid Systems | Standalone script injection |
-| **HLS.js** | Low-latency adaptive m3u8 streaming & buffer handling | JavaScript delivery network |
-| **Lucide Icons** | Dynamic category and navigation iconography | Scalable Vector Graphics vector pack |
+1. **Initialization:** On load, the app automatically bootstraps the default hardcoded channel.
+2. **Dynamic Fetching:** The script fetches an external `.m3u` playlist from GitHub, parses the `#EXTINF` metadata (channel names and logo URLs), and injects new channel cards into the UI.
+3. **Playback & Proxy:** When a channel is clicked, the URL is routed through a Cloudflare Worker proxy to prevent cross-origin blocks. `hls.js` then mounts the stream to the `<video>` element.
 
 ---
 
-## 🔌 Integrated Playlists
+## 💻 Running Locally
 
-The application aggregates, normalizes, and prioritizes links from the following active distributions:
+Since this is a client-side application, running it is incredibly simple. No build tools are required!
 
-*   **Toffee Auto-Update Feeds** (`toffee_NS_Player.m3u` & `toffee_playlist.m3u`)
-*   **Tapmad BD Sports** (`tapmad_bd.m3u`) — *Injected straight to your live curation deck*
-*   **FIFA Plus Live Events** (`fifa_live.m3u`) — *Injected straight to your live curation deck*
-*   **AX Sports & CricHD Event Arrays** (`playlist.m3u`)
-*   **Ayna OTT & BongoBD Regional Networks**
-*   **IPTV-Org International Registry** (Global countries, logos, and categories APIs)
-
----
-
-## ⌨️ Desktop Keyboard Shortcuts
-
-Enhance your channel-surfing experience with native playback hotkeys:
-
-> 💡 *Make sure your cursor is not focused inside the search filter box when using hotkeys.*
-
-*   <kbd>Spacebar</kbd> — Play / Pause current stream
-*   <kbd>T</kbd> — Toggle Theater Mode (expands player canvas)
-*   <kbd>F</kbd> — Enter Fullscreen video mode
-*   <kbd>M</kbd> — Quick Mute / Unmute audio toggle
-
----
-
-## 🚀 Deployment & Installation
-
-Because the entire application is compiled into a **single production-ready file**, deployment takes less than 60 seconds.
-
-### Quick Local Start
-1. Clone this repository or copy the `index.html` file.
-2. Double-click `index.html` to open it instantly in any modern web browser.
-
-### Web Deployment (GitHub Pages, Vercel, or Netlify)
-Simply drop the `index.html` into the root directory of your static hosting platform:
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/kazimmt/GlobalStream-IPTV.git](https://github.com/kazimmt/GlobalStream-IPTV.git)
+   ```
+2. **Navigate to the directory:**
 ```bash
-# Example git deployment sequence
-git init
-git add index.html
-git commit -m "feat: deploy standalone globalstream app"
-git branch -M main
-git remote add origin [https://github.com/kazimmt/GlobalStream-IPTV.git](https://github.com/kazimmt/GlobalStream-IPTV.git)
-git push -u origin main
+cd khela-stream
 ```
-Go to your repository Settings -> Pages -> Set source branch to main -> Save.
+3. **Open** index.html:
+Simply double-click the `index.html` file to open it in your browser, or use an extension like Live Server in VS Code.
 
-## ⚖️ Disclaimer
-This application is a generic media player client designed to aggregate publicly accessible playlist links. It does not host, broadcast, or store any streaming media content locally. All streams are retrieved peer-to-peer directly from the endpoints provided within public external `.m3u` repositories. Please ensure viewing complies with your local intellectual property regulations. If any links in these playlists infringe on your rights as a copyright holder, they may be removed by opening an [issue](https://github.com/kazimmt/GlobalStream-IPTV/issues/new).
+## 🔧 Customization
+**Adding/Changing the External M3U Playlist**
+To change the source of the dynamic channels, locate the `fetch()` call near the bottom of the script in the HTML file:
+```JavaScript
+fetch('[https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u](https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u)')
+```
+Replace the URL with any valid direct link to an `.m3u` file.
+
+## ⚠️ Disclaimer
+This project is built for educational purposes and acts strictly as a front-end video player. **Khela Stream** does not host, upload, or control any of the video feeds or streams. All streams are pulled from third-party URLs and public `.m3u` playlists provided by the community.
