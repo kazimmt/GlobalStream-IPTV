@@ -1,547 +1,1593 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-<meta name="description" content="Stay updated with the latest sports news, live match scores, expert analysis, and exclusive updates from the world of football, cricket, and more on Khela.pro.bd. Your ultimate destination for comprehensive sports coverage.">
-<meta name="keywords" content="FIFA World Cup 2026, ফিফা বিশ্বকাপ ২০২৬, 2026 World Cup, FIFA 2026 schedule, বিশ্বকাপ ফুটবল ২০২৬, host countries 2026, World Cup matches, football tournament 2026, Argentina football, Brazil football, Lionel Messi 2026, Cristiano Ronaldo, World Cup venues, USA Mexico Canada 2026, football world cup news, live football update">
-<title>Khela Stream - Live FIFA WorldCup</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<meta property="og:image" content="./assets/social.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Stream live world television and curated event playlists." />
-<link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
-<link rel="icon" type="image/png" href="./assets/favicon.png">
-<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
-<!-- Google Material Symbols Outlined -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { 
-  background: #0f172a;
-  min-height:100vh; 
-  font-family:'Inter', system-ui, -apple-system, sans-serif; 
-  color:#f8fafc;
-  overflow-x: hidden;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Stay updated with the latest sports news, live match scores, expert analysis, and exclusive updates from the world of football, cricket, and more on Khela.pro.bd. Your ultimate destination for comprehensive sports coverage.">
+  <meta name="keywords" content="FIFA World Cup 2026, ফিফা বিশ্বকাপ ২০২৬, 2026 World Cup, FIFA 2026 schedule, বিশ্বকাপ ফুটবল ২০২৬, host countries 2026, World Cup matches, football tournament 2026, Argentina football, Brazil football, Lionel Messi 2026, Cristiano Ronaldo, World Cup venues, USA Mexico Canada 2026, football world cup news, live football update">
+  <title>GlobalStream - Live World TV & IPTV Player</title>
+  <meta property="og:image" content="./assets/social.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Stream live world television and curated event playlists." />
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              900: '#4c1d95',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js"></script>
+  
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .pulse-glow { animation: pulse-glow 2s infinite ease-in-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fadeIn { animation: fadeIn 0.15s ease-out forwards; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Material Icons specific adjustments */
-.material-symbols-outlined {
-  vertical-align: middle;
-  font-size: 20px;
-}
-.material-symbols-outlined.spin {
-  animation: spin 1s linear infinite;
-}
-@keyframes spin { 100% { transform: rotate(360deg); } }
-
-/* Base Layout Structure */
-.app-container {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-/* Header & Search Bar (Fixed Layout) */
-.top-bar {
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 16px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 98;
-}
-
-.brand-logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #a855f7, #3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.brand-logo .material-symbols-outlined {
-  color: #a855f7; /* Provide fallback color since text-fill transparent affects icons sometimes */
-  font-size: 28px;
-  -webkit-text-fill-color: initial;
-}
-
-.search-box {
-  position: relative;
-  width: 380px;
-  margin: 0 20px;
-}
-.search-box input {
-  width: 100%;
-  padding: 11px 16px 11px 42px;
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 0.9rem;
-  outline: none;
-  transition: all 0.3s ease;
-}
-.search-box input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-.search-box .material-symbols-outlined {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #64748b;
-}
-
-.live-badge-glow {
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  animation: pulseGlow 2s infinite;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
-  white-space: nowrap;
-}
-.live-badge-glow .material-symbols-outlined {
-  font-size: 14px;
-}
-@keyframes pulseGlow {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.96); opacity: 0.85; }
-}
-
-.main-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.dashboard-grid {
-  padding: 32px 40px;
-  display: grid;
-  grid-template-columns: 66% 34%;
-  gap: 32px;
-  max-width: 1600px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* Left Content Block: Video Station */
-.theater-block {
-  display: flex;
-  flex-direction: column;
-}
-.premium-card {
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-.card-header-panel {
-  background: #161e2e;
-  padding: 16px 24px;
-  font-size: 1rem;
-  font-weight: 700;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-.stream-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.stream-title .material-symbols-outlined { color: #a855f7; }
-.media-container {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-  position: relative;
-}
-video { width: 100%; height: 100%; display: block; }
-
-/* Secure Fallback Layer */
-.ns-fallback {
-  position: absolute;
-  inset: 0;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(15, 23, 42, 0.98);
-  text-align: center;
-  padding: 40px;
-  z-index: 10;
-}
-.ns-fallback.show { display: flex; }
-.ns-fallback p {
-  color: #f1f5f9;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.6;
-  max-width: 80%;
-}
-.ns-fallback .material-symbols-outlined {
-  font-size: 3rem;
-  color: #f43f5e;
-  margin-bottom: 16px;
-}
-
-/* Streaming Broadcast Details Box */
-.stream-details-box {
-  margin-top: 20px;
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 20px;
-  border-radius: 16px;
-}
-.stream-details-box h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
-.meta-status-line { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #a855f7; font-weight: 600; }
-
-/* Right Content Block: Network Channels Deck */
-.channels-hub {
-  background: rgba(30, 41, 59, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 24px;
-  height: fit-content;
-}
-.hub-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.hub-title .material-symbols-outlined { color: #3b82f6; }
-
-/* GRID LAYOUT FOR CHANNELS */
-.channels-list-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 16px;
-  max-height: 520px;
-  overflow-y: auto;
-  padding-right: 8px;
-  padding-bottom: 10px;
-}
-.channels-list-container::-webkit-scrollbar { width: 6px; }
-.channels-list-container::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 10px; }
-
-/* Grid Channel Card Element */
-.channel-card {
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  border-radius: 14px;
-  padding: 20px 12px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 12px;
-}
-.channel-card:hover {
-  background: rgba(30, 41, 59, 0.9);
-  border-color: rgba(168, 85, 247, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
-}
-.channel-card.active {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(59, 130, 246, 0.12));
-  border-color: #a855f7;
-}
-
-/* Updated avatar class to support img element with object-fit */
-.channel-icon-avatar {
-  width: 80px;
-  height: 45px;
-  border-radius: 8px;
-  object-fit: contain;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.channel-name-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: #fff;
-}
-.channel-card.active .channel-name-title { color: #a855f7; }
-.channel-badge-status {
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #94a3b8;
-  letter-spacing: 0.5px;
-}
-.channel-card.active .channel-badge-status {
-  background: rgba(168, 85, 247, 0.2);
-  color: #a855f7;
-}
-
-/* Responsive Adaptability Breakpoints */
-@media (max-width: 992px) {
-  .dashboard-grid {
-    grid-template-columns: 100%;
-    padding: 20px 16px;
-    gap: 24px;
-  }
-  .top-bar { padding: 16px 20px; flex-wrap: wrap; gap: 16px; justify-content: center; }
-  .search-box { width: 100%; order: 3; margin: 0; }
-  .brand-logo { order: 1; }
-  .live-badge-glow { order: 2; }
-}
-@media (max-width: 480px) {
-  .channels-list-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-</style>
+    .material-symbols-outlined {
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga';
+    }
+    .material-symbols-outlined.w-3\.5 { font-size: 14px !important; }
+    .material-symbols-outlined.w-4 { font-size: 16px !important; }
+    .material-symbols-outlined.w-5 { font-size: 20px !important; }
+    .material-symbols-outlined.w-6 { font-size: 24px !important; }
+    .material-symbols-outlined.w-10 { font-size: 40px !important; }
+  </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
 
-<div class="app-container">
+  <div id="root" class="flex flex-col min-h-screen"></div>
 
-  <main class="main-wrapper">
-    
-    <header class="top-bar">
-      <div class="brand-logo">
-        <span class="material-symbols-outlined">play_circle</span> Khela<span>Stream</span>
-      </div>
-    </header>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
 
-    <div class="dashboard-grid">
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo, useDeferredValue } = React;
+
+    const Icon = React.memo(({ name, className, ...props }) => {
+      const iconMap = {
+        'tv': 'tv',
+        'menu': 'menu',
+        'x': 'close',
+        'star': 'star',
+        'trophy': 'emoji_events',
+        'globe': 'public',
+        'grid': 'grid_view',
+        'server': 'dns',
+        'info': 'info',
+        'radio': 'radio',
+        'volume-x': 'volume_off',
+        'volume-1': 'volume_down',
+        'volume-2': 'volume_up',
+        'copy': 'content_copy',
+        'check': 'check',
+        'alert-octagon': 'warning',
+        'loader-2': 'autorenew',
+        'chevron-left': 'chevron_left',
+        'chevron-right': 'chevron_right',
+        'chevron-down': 'expand_more',
+        'arrow-right': 'arrow_forward',
+        'monitor-play': 'ondemand_video',
+        'play-square': 'smart_display',
+        'home': 'home',
+        'settings': 'settings',
+        'newspaper': 'newspaper',
+        'music': 'music_note',
+        'film': 'movie',
+        'smile': 'sentiment_satisfied',
+        'car': 'directions_car',
+        'briefcase': 'work',
+        'laugh': 'sentiment_very_satisfied',
+        'graduation-cap': 'school',
+        'heart': 'favorite',
+        'compass': 'explore',
+        'cloud-sun': 'cloud_queue',
+        'sparkles': 'auto_awesome',
+        'clapperboard': 'movie_creation',
+        'book-open': 'menu_book',
+        'search': 'search'
+      };
+
+      const materialName = iconMap[name] || name.replace(/-/g, '_');
       
-      <div class="theater-block">
-        <div class="premium-card">
-          <div class="card-header-panel">
-            <span class="stream-title">
-              <span class="material-symbols-outlined">satellite_alt</span> Featured Premium Engine Feed
-            </span>
-            <span style="font-size: 0.8rem; color: #64748b; font-weight: 600;">GATEWAY: ADAPTIVE MULTICAST</span>
+      const isFilled = className && (
+        className.includes('fill-amber-400') || 
+        className.includes('fill-current') || 
+        className.includes('fill-brand-400')
+      );
+
+      const style = {
+        fontSize: 'inherit',
+        width: '1.2em',
+        height: '1.2em',
+        fontVariationSettings: isFilled ? "'FILL' 1, 'wght' 400" : "'FILL' 0, 'wght' 400"
+      };
+
+      return (
+        <span 
+          className={`material-symbols-outlined select-none flex items-center justify-center shrink-0 ${className || ''}`}
+          style={style}
+          {...props}
+        >
+          {materialName}
+        </span>
+      );
+    });
+
+    const CURATED_CHANNELS = [];
+    const BANGLADESH_CHANNELS_PRESET = [];
+
+    const isSecure = (url) => url && url.toLowerCase().startsWith('https://');
+
+    const ChannelLogo = React.memo(({ name, logoUrl }) => {
+      const [isError, setIsError] = useState(!logoUrl);
+      useEffect(() => { setIsError(!logoUrl); }, [logoUrl]);
+
+      if (isError) {
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        const hue = Math.abs(hash % 360);
+        const bgStyle = { background: `linear-gradient(135deg, hsl(${hue}, 70%, 40%) 0%, hsl(${(hue + 60) % 360}, 80%, 28%) 100%)` };
+        const initials = name.replace(/[^a-zA-Z0-9 ]/g, "").split(" ").filter(Boolean).map(w => w[0]).slice(0, 2).join("").toUpperCase() || name.substring(0, 2).toUpperCase();
+
+        return (
+          <div style={bgStyle} className="w-full h-full flex items-center justify-center text-white font-extrabold text-[11px] tracking-wider shadow-inner select-none uppercase">
+            {initials}
           </div>
-          <div class="media-container">
-            <!-- Added autoplay and muted. Browsers require 'muted' to autoplay video -->
-            <video id="player" controls playsinline autoplay muted controlsList="nodownload" oncontextmenu="return false;"></video>
-            <div class="ns-fallback" id="nsFallback">
-              <span class="material-symbols-outlined">error</span>
-              <p>This channel is experiencing loading issues. Please click the channel button again to reconnect, or select an alternative channel.</p>
+        );
+      }
+      return <img src={logoUrl} alt="" loading="lazy" className="w-full h-full object-contain p-1" onError={() => setIsError(true)} />;
+    });
+
+    const getCategoryIcon = (catId) => {
+      const mapping = { sports: "trophy", news: "newspaper", music: "music", movies: "film", kids: "smile", science: "globe", entertainment: "tv", documentary: "book-open", auto: "car", business: "briefcase", comedy: "laugh", education: "graduation-cap", religious: "heart", travel: "compass", weather: "cloud-sun", lifestyle: "sparkles", series: "clapperboard" };
+      return mapping[catId] || "tv";
+    };
+
+    const ChannelCard = React.memo(({ channel, isFavorited, onToggleFavorite, onSelect, className = "" }) => (
+      <div
+        onClick={() => onSelect(channel)}
+        className={`group flex flex-col p-2 sm:p-2.5 rounded-2xl bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all text-left relative overflow-hidden cursor-pointer ${className}`}
+      >
+        <div 
+          className="absolute top-2.5 right-2.5 z-20 cursor-pointer p-1 sm:p-1.5 rounded-lg bg-slate-950/80 backdrop-blur-sm border border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-slate-900"
+          onClick={(e) => { e.stopPropagation(); onToggleFavorite(channel.id, e); }}
+        >
+          <Icon name="star" className={`w-3.5 h-3.5 ${isFavorited ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`} />
+        </div>
+        <div className="w-full aspect-video bg-slate-700 rounded-xl mb-2.5 flex items-center justify-center p-2 relative overflow-hidden">
+          <div className="w-full h-full relative z-10 drop-shadow-[0_0_8px_rgba(0,0,0.2,0.2)]">
+            <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+          </div>
+          <div className="absolute inset-0 opacity-20 blur-xl scale-150 pointer-events-none">
+            <ChannelLogo name={channel.name} logoUrl={channel.logo} />
+          </div>
+        </div>
+        <h4 className="text-[11px] sm:text-xs font-bold text-slate-200 group-hover:text-white truncate w-full px-1">{channel.name}</h4>
+        <div className="flex items-center gap-1.5 mt-1.5 px-1 text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-slate-500">
+          <span className="truncate max-w-[100px] bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-brand-400/80">{channel.category}</span>
+        </div>
+      </div>
+    ));
+
+    function ChannelCarousel({ title, icon, channels, onSelectChannel, favorites, toggleFavorite, onSeeAll }) {
+      const containerRef = useRef(null);
+      const scroll = (direction) => {
+        if (containerRef.current) {
+          const scrollAmount = direction === 'left' ? -400 : 400;
+          containerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      };
+
+      if (!channels || channels.length === 0) return null;
+
+      return (
+        <div className="flex flex-col gap-3 mt-4 relative">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-bold text-white flex items-center gap-2">
+                {icon} {title}
+              </span>
+              <span className="text-xs bg-slate-850 text-slate-400 px-2.5 py-0.5 rounded-full font-semibold">{channels.length}</span>
+            </div>
+            
+            <div className="flex items-center gap-1.5">
+              {onSeeAll && (
+                <button onClick={() => onSeeAll({ title, channels })} className="text-[10px] sm:text-xs font-bold text-brand-400 hover:text-white bg-brand-500/10 hover:bg-brand-500/80 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg transition-colors mr-1 flex items-center gap-1">
+                  See All <Icon name="arrow-right" className="w-3.5 h-3.5" />
+                </button>
+              )}
+              <button onClick={() => scroll('left')} className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                <Icon name="chevron-left" className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </button>
+              <button onClick={() => scroll('right')} className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                <Icon name="chevron-right" className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </button>
+            </div>
+          </div>
+
+          <div ref={containerRef} className="flex overflow-x-auto gap-3 sm:gap-4 pb-4 scroll-smooth snap-x snap-mandatory no-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {channels.map((channel, index) => (
+              <ChannelCard 
+                key={`${channel.id}-carousel-${index}`} 
+                channel={channel} 
+                isFavorited={favorites.includes(channel.id)} 
+                onToggleFavorite={toggleFavorite} 
+                onSelect={onSelectChannel} 
+                className="w-[130px] sm:w-[160px] shrink-0 snap-start" 
+              />
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    function PlayerOverlay({ videoRef, hlsRef, isPlaying, togglePlayPause, triggerFullscreen, isMuted, setIsMuted }) {
+      const [currentTime, setCurrentTime] = useState(0);
+      const [duration, setDuration] = useState(0);
+      const [showControls, setShowControls] = useState(true);
+      const [isFullscreen, setIsFullscreen] = useState(false);
+      const controlsTimeoutRef = useRef(null);
+
+      useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        const updateTime = () => setCurrentTime(video.currentTime);
+        const updateDuration = () => setDuration(video.duration);
+        video.addEventListener('timeupdate', updateTime);
+        video.addEventListener('durationchange', updateDuration);
+        return () => { video.removeEventListener('timeupdate', updateTime); video.removeEventListener('durationchange', updateDuration); };
+      }, [videoRef]);
+
+      useEffect(() => {
+        const handleFullscreenChange = () => setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        return () => { document.removeEventListener('fullscreenchange', handleFullscreenChange); document.removeEventListener('webkitfullscreenchange', handleFullscreenChange); };
+      }, []);
+
+      useEffect(() => {
+        if (showControls && isPlaying) {
+          if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+          controlsTimeoutRef.current = setTimeout(() => setShowControls(false), 5000);
+        }
+        return () => { if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current); };
+      }, [showControls, isPlaying]);
+
+      useEffect(() => {
+        const showControlsTemporarily = () => setShowControls(true);
+        const toggleControlsOnTap = (e) => { if (e.target.closest('.pointer-events-auto')) return; setShowControls(prev => !prev); };
+        const container = videoRef.current?.parentElement;
+        if (container) {
+          container.addEventListener('mousemove', showControlsTemporarily);
+          container.addEventListener('touchstart', showControlsTemporarily, { passive: true });
+          container.addEventListener('click', toggleControlsOnTap);
+        }
+        return () => {
+          if (container) { container.removeEventListener('mousemove', showControlsTemporarily); container.removeEventListener('touchstart', showControlsTemporarily); container.removeEventListener('click', toggleControlsOnTap); }
+        };
+      }, [videoRef]);
+
+      const formatTime = (time) => {
+        if (isNaN(time) || !isFinite(time)) return "00:00";
+        const h = Math.floor(time / 3600);
+        const m = Math.floor((time % 3600) / 60);
+        const s = Math.floor(time % 60);
+        if (h > 0) return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      const handleSeek = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        if (videoRef.current && duration && isFinite(duration)) videoRef.current.currentTime = pos * duration;
+      };
+
+      const handleGoToLive = () => {
+        if (hlsRef.current && hlsRef.current.liveSyncPosition) videoRef.current.currentTime = hlsRef.current.liveSyncPosition;
+        else if (videoRef.current && isFinite(videoRef.current.duration)) videoRef.current.currentTime = videoRef.current.duration;
+      };
+
+      const isLive = !isFinite(duration) || duration === 0 || (videoRef.current && duration - currentTime < 15);
+
+      return (
+        <div className={`absolute inset-0 z-20 pointer-events-none flex flex-col justify-end transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-90"></div>
+          <div className="relative p-4 md:p-6 w-full flex flex-col gap-3 pointer-events-auto">
+            <div className="group/scrubber w-full h-1.5 md:h-2 bg-slate-700/50 rounded-full cursor-pointer relative overflow-visible flex items-center transition-all hover:h-2 md:hover:h-3" onClick={handleSeek}>
+              <div className="h-full bg-brand-500 rounded-full relative shadow-[0_0_10px_rgba(139,92,246,0.6)]" style={{ width: `${duration > 0 && isFinite(duration) ? (currentTime / duration) * 100 : 100}%` }}>
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 md:w-4 md:h-4 bg-white rounded-full scale-0 group-hover/scrubber:scale-100 transition-transform shadow-lg"></div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-white mt-1">
+              <div className="flex items-center gap-4 md:gap-6">
+                <button onClick={togglePlayPause} className="hover:text-brand-400 hover:scale-110 transition-all focus:outline-none drop-shadow-md">
+                  {isPlaying ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  )}
+                </button>
+                <button onClick={() => setIsMuted(!isMuted)} className="hover:text-brand-400 hover:scale-110 transition-all focus:outline-none drop-shadow-md">
+                  {isMuted ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" x2="15" y1="9" y2="15"/><line x1="15" x2="23" y1="9" y2="15"/></svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                  )}
+                </button>
+                <div className="text-[11px] md:text-sm font-medium tabular-nums text-slate-200 drop-shadow-md flex gap-1 items-center">
+                  <span className="text-white">{formatTime(currentTime)}</span>
+                  {isFinite(duration) && duration > 0 ? ( <><span className="text-slate-500 font-normal">/</span> <span>{formatTime(duration)}</span></> ) : null}
+                </div>
+              </div>
+              <div className="flex items-center gap-3 md:gap-5">
+                <button onClick={handleGoToLive} className={`flex items-center gap-1.5 md:gap-2 text-[10px] md:text-xs font-bold px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg border transition-all shadow-sm ${isLive ? 'bg-red-600/20 text-red-500 border-red-600/30' : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border-slate-700 backdrop-blur-sm'}`}>
+                  <span className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${isLive ? 'bg-red-500 animate-pulse' : 'bg-slate-400'}`} /> {isLive ? 'LIVE' : 'GO TO LIVE'}
+                </button>
+                <button onClick={triggerFullscreen} className="hover:text-brand-400 hover:scale-110 transition-all focus:outline-none drop-shadow-md">
+                  {isFullscreen ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="stream-details-box">
-          <h2>World Cup Event Live Broadcast</h2>
-          <div class="meta-status-line" id="statusMsg">
-            <span class="material-symbols-outlined spin">sync</span> Initializing digital pipeline matrix...
-          </div>
-        </div>
-      </div>
+      );
+    }
 
-      <div class="channels-hub">
-        <div class="hub-title"><span class="material-symbols-outlined">format_list_bulleted</span> CHANNELS MATRIX</div>
-        <div class="channels-list-container" id="channelsList">
-          
-          <!-- Replaced div gradients with image tags using placehold.co API -->
-          <div class="channel-card active" data-url="https://kazimmt.ami.bd/playlist/TF/TF-1.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 1 Icon">
-            <div class="channel-name-title">TOFFEE 1</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
-          
-          <div class="channel-card" data-url="https://kazimmt.ami.bd/playlist/TF/TF-2.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 2 Icon">
-            <div class="channel-name-title">TOFFEE 2</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
-          
-          <div class="channel-card" data-url="https://kazimmt.ami.bd/playlist/TF/TF-3.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 3 Icon">
-            <div class="channel-name-title">TOFFEE 3</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
-          
-          <div class="channel-card" data-url="https://kazimmt.ami.bd/playlist/TF/TF-4.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 4 Icon">
-            <div class="channel-name-title">TOFFEE 4</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
-          
-          <div class="channel-card" data-url="https://kazimmt.ami.bd/playlist/TF/TF-5.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 5 Icon">
-            <div class="channel-name-title">TOFFEE 5</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
-          
-          <div class="channel-card" data-url="https://kazimmt.ami.bd/playlist/TF/bdaus.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/UspLV8i.png" alt="BD VS AUS Icon">
-            <div class="channel-name-title">BD VS AUS</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
-          
-        </div>
-      </div>
-
-    </div>
-
-  </main>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/disable-devtool@latest/disable-devtool.min.js"></script>
-<script>
-try {
-  if (typeof DisableDevtool !== 'undefined') {
-    DisableDevtool();
-  }
-} catch (error) {
-  console.warn('Devtool block could not be initialized:', error);
-}
-
-var PROXY = 'https://billowing-dawn-ee85.opkawsar156.workers.dev/?url=';
-var hls=null, video=document.getElementById('player'), msg=document.getElementById('statusMsg');
-var fallback=document.getElementById('nsFallback');
-var currentUrl='';
-
-function showFallback(url){
-  currentUrl=url;
-  fallback.classList.add('show');
-  msg.innerHTML='<span class="material-symbols-outlined" style="color:#ef4444;">warning</span> Stream cluster pipeline execution failed.';
-}
-
-function hideFallback(){
-  fallback.classList.remove('show');
-}
-
-function play(rawUrl, btn, isDirect){
-  document.querySelectorAll('.channel-card').forEach(function(b){ b.classList.remove('active'); });
-  if(btn) btn.classList.add('active');
-  currentUrl=rawUrl;
-  
-  var url = isDirect ? rawUrl : (PROXY + encodeURIComponent(rawUrl));
-  
-  msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Mounting broadcast proxy data streams...';
-  hideFallback();
-
-  if(hls){ hls.destroy(); hls=null; }
-
-  if(Hls.isSupported()){
-    hls=new Hls({
-      manifestLoadingMaxRetry:2,
-      levelLoadingMaxRetry:2,
-      fragLoadingMaxRetry:2
-    });
-    hls.loadSource(url);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function(){
-      msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
-      video.play().catch(function(){ 
-        msg.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Buffer Ready. Tap player to start.'; 
-      });
-    });
-    hls.on(Hls.Events.ERROR,function(e,d){
-      if(d.fatal){
-        console.log('HLS fatal network exceptions:', d.type, d.details);
-        showFallback(rawUrl);
-      }
-    });
-  } else if(video.canPlayType('application/vnd.apple.mpegurl')){
-    video.src=url;
-    video.play();
-    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
-    video.onerror=function(){ showFallback(rawUrl); };
-  } else {
-    showFallback(rawUrl);
-  }
-}
-
-// Initial default deployment node bootstrap
-// Fetch the default card and play its assigned URL
-window.addEventListener('DOMContentLoaded', () => {
-  const defaultCard = document.querySelector('.channel-card.active');
-  if(defaultCard && defaultCard.dataset.url) {
-    play(defaultCard.dataset.url, defaultCard);
-  }
-
-  // Fetch external M3U and append channels
-  fetch('https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u')
-    .then(response => response.text())
-    .then(data => {
-      const lines = data.split('\n');
-      const container = document.getElementById('channelsList');
-      let currentChannel = {};
+    function App() {
+      const [viewState, setViewState] = useState("home"); 
+      const [activeMobileTab, setActiveMobileTab] = useState("home"); 
+      const [activeCategory, setActiveCategory] = useState("curated");
+      const [curatedChannels, setCuratedChannels] = useState(CURATED_CHANNELS);
+      const [channels, setChannels] = useState(CURATED_CHANNELS);
+      const [curatedSelected, setCuratedSelected] = useState(true);
       
-      for (let i = 0; i < lines.length; i++) {
-        let line = lines[i].trim();
-        
-        // Parse metadata line
-        if (line.startsWith('#EXTINF:')) {
-          // Extract logo URL
-          const logoMatch = line.match(/tvg-logo=["']?([^"']+)["']?/);
-          currentChannel.logo = logoMatch ? logoMatch[1] : 'https://i.imgur.com/53aSeDH.png';
-          
-          // Extract channel name (comes after the comma)
-          const nameMatch = line.split(',').pop();
-          currentChannel.name = nameMatch ? nameMatch.trim() : 'Unknown Channel';
-        } 
-        // Parse URL line (not a comment, not empty)
-        else if (line !== '' && !line.startsWith('#')) {
-          currentChannel.url = line;
-          
-          // Create new channel card
-          const card = document.createElement('div');
-          card.className = 'channel-card';
-          card.dataset.url = currentChannel.url;
-          card.onclick = function() { play(this.dataset.url, this); };
-          
-          card.innerHTML = `
-            <img class="channel-icon-avatar" src="${currentChannel.logo}" alt="${currentChannel.name} Icon" onerror="this.src='https://i.imgur.com/53aSeDH.png'">
-            <div class="channel-name-title">${currentChannel.name}</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          `;
-          
-          // Append to the end of the container
-          container.appendChild(card);
-          
-          // Reset for the next channel
-          currentChannel = {};
-        }
-      }
-    })
-    .catch(error => {
-      console.error('Failed to load external M3U playlist:', error);
-    });
-});
-</script>
+      const [globalChannels, setGlobalChannels] = useState([]);
+      const [bdApiChannels, setBdApiChannels] = useState([]); 
+      const [isLoadingGlobal, setIsLoadingGlobal] = useState(false);
+      
+      const [dynamicCountries, setDynamicCountries] = useState([]);
+      const [dynamicCategories, setDynamicCategories] = useState([]);
 
-<script>
+      const [selectedCountryCode, setSelectedCountryCode] = useState("");
+      const [searchQuery, setSearchQuery] = useState("");
+      const deferredSearchQuery = useDeferredValue(searchQuery); 
+      const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
+      
+      const [favorites, setFavorites] = useState(() => {
+        try { const saved = localStorage.getItem("globalstream_favs"); return saved ? JSON.parse(saved) : []; } catch (e) { return []; }
+      });
+      
+      const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
+      const [currentChannel, setCurrentChannel] = useState(() => {
+        try { const saved = localStorage.getItem("globalstream_last_channel"); return saved ? JSON.parse(saved) : null; } catch (e) { return null; }
+      });
+
+      const [activeServerIndex, setActiveServerIndex] = useState(0);
+      const [videoError, setVideoError] = useState(null);
+      const [isPlaying, setIsPlaying] = useState(true);
+      const [isMuted, setIsMuted] = useState(false);
+      const [volumeLevel, setVolumeLevel] = useState(100); 
+      const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+      const [isCountryOpen, setIsCountryOpen] = useState(false);
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+      const [isCopied, setIsCopied] = useState(false);
+      const [toastMessage, setToastMessage] = useState(null);
+
+      const [isNsPlayerModalOpen, setIsNsPlayerModalOpen] = useState(false);
+      const [seeAllData, setSeeAllData] = useState(null); 
+      const [seeAllSearchQuery, setSeeAllSearchQuery] = useState(""); 
+      const [copiedLinkId, setCopiedLinkId] = useState(null);
+      
+      const isManualServerSelectionRef = useRef(false);
+      const [visibleLimit, setVisibleLimit] = useState(48);
+
+      const playerContainerRef = useRef(null);
+      const videoRef = useRef(null);
+      const hlsRef = useRef(null);
+      const mpegtsPlayerRef = useRef(null);
+
+      const bdCarouselChannels = useMemo(() => {
+        return [...bdApiChannels].sort((a, b) => {
+          const aIsSport = (a.category && a.category.toLowerCase().includes('sport')) || a.name.toLowerCase().includes('sport') || a.name.toLowerCase().includes('khela');
+          const bIsSport = (b.category && b.category.toLowerCase().includes('sport')) || b.name.toLowerCase().includes('sport') || b.name.toLowerCase().includes('khela');
+          if (aIsSport && !bIsSport) return -1;
+          if (!aIsSport && bIsSport) return 1;
+          const scoreA = (a.servers || []).length + (a.id.startsWith('bd-') || a.id.startsWith('curated-') ? 100 : 0);
+          const scoreB = (b.servers || []).length + (b.id.startsWith('bd-') || b.id.startsWith('curated-') ? 100 : 0);
+          return scoreB - scoreA;
+        });
+      }, [bdApiChannels]);
+
+      const sportsCarouselChannels = useMemo(() => {
+        return globalChannels.filter(ch => ch.category && ch.category.toLowerCase().includes('sport') && !ch.isCustomSource && !ch.id.startsWith('bd-'))
+          .sort((a, b) => {
+            const scoreA = (a.servers || []).length + (a.id.startsWith('curated-') ? 100 : 0);
+            const scoreB = (b.servers || []).length + (b.id.startsWith('curated-') ? 100 : 0);
+            return scoreB - scoreA;
+          });
+      }, [globalChannels]);
+
+      const allUniqueChannels = useMemo(() => {
+        const map = new Map();
+        curatedChannels.forEach(ch => map.set(ch.id, ch));
+        bdApiChannels.forEach(ch => map.set(ch.id, ch));
+        globalChannels.forEach(ch => map.set(ch.id, ch));
+        return Array.from(map.values());
+      }, [curatedChannels, bdApiChannels, globalChannels]);
+
+      const triggerToast = (msg) => { setToastMessage(msg); setTimeout(() => setToastMessage(null), 4000); };
+
+      useEffect(() => {
+        if (!window.history.state) window.history.replaceState({ view: "home" }, "");
+        const handlePopState = (event) => {
+          if (event.state && event.state.view === "player") {
+            const channelId = event.state.channelId;
+            const found = globalChannels.find(c => c.id === channelId) || curatedChannels.find(c => c.id === channelId);
+            if (found) setCurrentChannel(found);
+            setViewState("player");
+          } else setViewState("home");
+        };
+        window.addEventListener("popstate", handlePopState);
+        return () => window.removeEventListener("popstate", handlePopState);
+      }, [globalChannels, curatedChannels]);
+
+      const handleSelectChannel = (channel) => {
+        setActiveServerIndex(0); isManualServerSelectionRef.current = false;
+        setCurrentChannel(channel); setViewState("player");
+        window.history.pushState({ view: "player", channelId: channel.id }, "");
+      };
+
+      const handleBackToHome = () => {
+        setViewState("home");
+        if (window.history.state && window.history.state.view === "player") window.history.back();
+      };
+
+      const activeChannelWithFreshData = useMemo(() => {
+        if (!currentChannel) return null;
+        return globalChannels.find(c => c.id === currentChannel.id) || curatedChannels.find(c => c.id === currentChannel.id) || currentChannel;
+      }, [currentChannel, globalChannels, curatedChannels]);
+
+      const currentChannelSources = useMemo(() => {
+        const channel = activeChannelWithFreshData;
+        if (!channel) return [];
+        const sources = channel.servers || [{ id: "primary", name: "Backup Server 2", url: channel.url }];
+        const seenUrls = new Set();
+        return sources.filter(srv => { if (seenUrls.has(srv.url)) return false; seenUrls.add(srv.url); return true; });
+      }, [activeChannelWithFreshData]);
+
+      const activeSource = useMemo(() => currentChannelSources[activeServerIndex] || currentChannelSources[0], [currentChannelSources, activeServerIndex]);
+
+      const testStreamReachability = async (url) => {
+        if (!url) return false;
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5s budget
+          // Fetch GET with no-cors to capture basic server TCP & SSL handshakes cleanly
+          await fetch(url, { method: 'GET', mode: 'no-cors', signal: controller.signal });
+          clearTimeout(timeoutId);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      };
+
+      useEffect(() => {
+        const fetchGlobalDatabase = async () => {
+          setIsLoadingGlobal(true);
+          try {
+            const CUSTOM_M3U_URLS = [
+              { url: 'https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u', name: 'Tapmad BD' },
+			  { url: 'https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/wc1.m3u', name: 'WC IPTV' },
+              { url: 'https://raw.githubusercontent.com/srhady/fifaplus/refs/heads/main/fifa_live.m3u', name: 'FIFA Plus' }
+            ];
+
+            const parseM3U = (m3uText, sourceName) => {
+              const lines = m3uText.split(/\r?\n/);
+              const parsedChannels = [];
+              const channelMapByTvgId = {};
+              let currentCh = null;
+
+              for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line.startsWith('#EXTINF:')) {
+                  currentCh = {};
+                  const tvgIdMatch = line.match(/tvg-id="([^"]+)"/);
+                  const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
+                  const tvgLogoMatch = line.match(/tvg-logo="([^"]+)"/);
+                  const groupTitleMatch = line.match(/group-title="([^"]+)"/);
+                  const nameMatch = line.split(',');
+                  currentCh.tvgId = (tvgIdMatch && tvgIdMatch[1]) ? tvgIdMatch[1] : null;
+                  currentCh.name = (tvgNameMatch && tvgNameMatch[1]) ? tvgNameMatch[1] : (nameMatch.length > 1 ? nameMatch[nameMatch.length - 1].trim() : "Unknown Channel");
+                  currentCh.logo = (tvgLogoMatch && tvgLogoMatch[1]) ? tvgLogoMatch[1] : "";
+                  currentCh.category = (groupTitleMatch && groupTitleMatch[1]) ? groupTitleMatch[1] : "Sports";
+                } else if (line && !line.startsWith('#') && currentCh) {
+                  const url = line.trim();
+                  // Skip strictly non-HTTPS channels completely
+                  if (isSecure(url)) {
+                    if (currentCh.tvgId && channelMapByTvgId[currentCh.tvgId]) {
+                      const existingCh = channelMapByTvgId[currentCh.tvgId];
+                      if (!existingCh.servers.some(s => s.url === url)) existingCh.servers.push({ id: `${existingCh.id}-srv-${existingCh.servers.length}`, name: `Backup Server ${existingCh.servers.length + 1} (${sourceName})`, url: url, type: "hls" });
+                    } else {
+                      currentCh.url = url;
+                      currentCh.id = `custom-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
+                      currentCh.type = "hls";
+                      currentCh.description = `Streamed from ${sourceName} Playlist.`;
+                      currentCh.isCustomSource = true;
+                      currentCh.sourceName = sourceName;
+                      currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: `Backup Server (${sourceName})`, url: url, type: "hls" }];
+                      parsedChannels.push(currentCh);
+                      if (currentCh.tvgId) channelMapByTvgId[currentCh.tvgId] = currentCh;
+                    }
+                  }
+                  currentCh = null;
+                }
+              }
+              return parsedChannels;
+            };
+
+            const parseBdM3u = (m3uText) => {
+              const lines = m3uText.split(/\r?\n/);
+              const parsedChannels = [];
+              const channelMapByTvgId = {};
+              let currentCh = null;
+              for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line.startsWith('#EXTINF:')) {
+                  currentCh = {};
+                  const tvgIdMatch = line.match(/tvg-id="([^"]+)"/);
+                  const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
+                  const tvgLogoMatch = line.match(/tvg-logo="([^"]+)"/);
+                  const groupTitleMatch = line.match(/group-title="([^"]+)"/);
+                  const nameMatch = line.split(',');
+                  currentCh.tvgId = (tvgIdMatch && tvgIdMatch[1]) ? tvgIdMatch[1] : null;
+                  currentCh.name = (tvgNameMatch && tvgNameMatch[1]) ? tvgNameMatch[1] : (nameMatch.length > 1 ? nameMatch[nameMatch.length - 1].trim() : "Unknown Channel");
+                  currentCh.logo = (tvgLogoMatch && tvgLogoMatch[1]) ? tvgLogoMatch[1] : "";
+                  currentCh.category = (groupTitleMatch && groupTitleMatch[1]) ? groupTitleMatch[1] : "General";
+                } else if (line && !line.startsWith('#') && currentCh) {
+                  const url = line.trim();
+                  // Skip strictly non-HTTPS channels completely
+                  if (isSecure(url)) {
+                    if (currentCh.tvgId && channelMapByTvgId[currentCh.tvgId]) {
+                      const existingCh = channelMapByTvgId[currentCh.tvgId];
+                      if (!existingCh.servers.some(s => s.url === url)) existingCh.servers.push({ id: `${existingCh.id}-srv-${existingCh.servers.length}`, name: `Server ${existingCh.servers.length + 1}`, url: url, type: "hls" });
+                    } else {
+                      currentCh.url = url;
+                      currentCh.id = `bd-api-${currentCh.name.toLowerCase().replace(/[^a-z0-9]/g, '')}-${Math.random().toString(36).substr(2, 5)}`;
+                      currentCh.type = "hls"; currentCh.country = "Bangladesh"; currentCh.countryCode = "BD"; currentCh.countryFlag = "🇧🇩";
+                      currentCh.description = `Streamed via official iptv-org country index.`;
+                      currentCh.servers = [{ id: `${currentCh.id}-srv-0`, name: "Primary Stream", url: url, type: "hls" }];
+                      parsedChannels.push(currentCh);
+                      if (currentCh.tvgId) channelMapByTvgId[currentCh.tvgId] = currentCh;
+                    }
+                  }
+                  currentCh = null;
+                }
+              }
+              return parsedChannels;
+            };
+
+            const customM3UPromises = CUSTOM_M3U_URLS.map(source => fetch(source.url).then(res => res.text()).then(text => parseM3U(text, source.name)).catch(err => []));
+
+            const [channelsRes, streamsRes, countriesRes, categoriesRes, logosRes, bdM3uText, ...customM3UResults] = await Promise.all([
+              fetch('https://iptv-org.github.io/api/channels.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/streams.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/countries.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/categories.json').then(r => r.json()),
+              fetch('https://iptv-org.github.io/api/logos.json').then(r => r.json()).catch(() => []),
+              fetch('https://iptv-org.github.io/iptv/countries/bd.m3u').then(r => r.text()).catch(() => ""),
+              ...customM3UPromises
+            ]);
+
+            const streamsMap = {};
+            streamsRes.forEach(stream => { if (stream.status !== 'blocked') { if (!streamsMap[stream.channel]) streamsMap[stream.channel] = []; streamsMap[stream.channel].push(stream); } });
+
+            const logosMap = {};
+            logosRes.forEach(logo => { if (logo.url && (logo.in_use || !logosMap[logo.channel])) logosMap[logo.channel] = logo.url; });
+
+            const countriesMap = {};
+            countriesRes.forEach(c => countriesMap[c.code.toUpperCase()] = c);
+
+            const categoriesMap = {};
+            categoriesRes.forEach(c => categoriesMap[c.id] = c.name);
+
+            const normalizeName = (name) => name.toLowerCase().replace(/\s+/g, '').replace(/hd/gi, '').replace(/tv/gi, '').replace(/bd/gi, '').replace(/[^a-z0-9]/g, '');
+
+            const bdPresetsCopy = BANGLADESH_CHANNELS_PRESET.map(ch => ({ ...ch, servers: [...(ch.servers || [{ id: `${ch.id}-srv-0`, name: "Server 1 (Primary)", url: ch.url, type: "hls" }])] }));
+            const bdPresetsMap = {};
+            bdPresetsCopy.forEach(p => bdPresetsMap[normalizeName(p.name)] = p);
+
+            const allCustomChannels = customM3UResults.flat();
+            const standaloneCustomChannels = [];
+            const compiled = [];
+
+            channelsRes.forEach(ch => {
+              const channelStreams = streamsMap[ch.id] || [];
+              const secureStreams = channelStreams.filter(stream => isSecure(stream.url));
+              if (secureStreams.length === 0) return;
+              
+              const countryInfo = countriesMap[ch.country.toUpperCase()];
+              let channelLogo = logosMap[ch.id] || ch.logo || "";
+              if (channelLogo && channelLogo.startsWith("http://")) channelLogo = channelLogo.replace("http://", "https://");
+              const isBD = ch.country && (ch.country.toUpperCase() === 'BD' || ch.country.toUpperCase() === 'BANGLADESH');
+              const normName = normalizeName(ch.name);
+
+              if (bdPresetsMap[normName] && (isBD || bdPresetsMap[normName].isCustomSource)) {
+                const matchedPreset = bdPresetsMap[normName];
+                const newStreams = secureStreams.filter(stream => !matchedPreset.servers.some(srv => srv.url === stream.url));
+                if (newStreams.length > 0) {
+                  const mappedNewStreams = newStreams.map((stream, sIdx) => ({ id: `${matchedPreset.id}-iptv-srv-${sIdx}`, name: stream.quality ? `Primary Server (${stream.quality.toUpperCase()})` : `Primary Server`, url: stream.url, type: "hls" }));
+                  matchedPreset.servers = [...mappedNewStreams, ...matchedPreset.servers.filter(s => isSecure(s.url))];
+                  matchedPreset.url = mappedNewStreams[0].url;
+                }
+                return; 
+              }
+
+              compiled.push({
+                id: ch.id, name: ch.name, logo: channelLogo, country: countryInfo ? countryInfo.name : ch.country, countryCode: ch.country.toUpperCase(), countryFlag: countryInfo ? countryInfo.flag : "🏳️",
+                category: ch.categories && ch.categories.length > 0 ? (categoriesMap[ch.categories[0]] || ch.categories[0]) : "General",
+                description: ch.network ? `Broadcasting live network. Part of the ${ch.network} network.` : `Official live television stream for ${ch.name}.`,
+                url: secureStreams[0].url,
+                servers: secureStreams.map((srv, idx) => ({ id: `${ch.id}-srv-${idx}`, name: srv.quality ? `Server ${idx + 1} (${srv.quality.toUpperCase()})` : `Server ${idx + 1}`, url: srv.url, type: "hls" }))
+              });
+            });
+
+            const compiledMapByTvgId = new Map();
+            const compiledMapByName = new Map();
+            compiled.forEach(c => {
+               if(c.tvgId) compiledMapByTvgId.set(c.tvgId, c);
+               compiledMapByTvgId.set(c.id, c);
+               compiledMapByName.set(normalizeName(c.name), c);
+            });
+            const standaloneCustomMapByTvgId = new Map();
+            const standaloneCustomMapByName = new Map();
+
+            allCustomChannels.forEach(customCh => {
+              const normName = normalizeName(customCh.name);
+              let matchedChannel = null;
+              
+              if (customCh.tvgId) {
+                matchedChannel = bdPresetsCopy.find(c => c.id === customCh.tvgId || c.tvgId === customCh.tvgId) || 
+                                 compiledMapByTvgId.get(customCh.tvgId) || 
+                                 standaloneCustomMapByTvgId.get(customCh.tvgId);
+              }
+
+              if (matchedChannel) {
+                customCh.servers.forEach(srv => {
+                  if (isSecure(srv.url) && !matchedChannel.servers.some(s => s.url === srv.url)) matchedChannel.servers.push({ id: srv.id, name: srv.name, url: srv.url, type: "hls" });
+                });
+                if (!matchedChannel.logo && customCh.logo) matchedChannel.logo = customCh.logo;
+              } else if (bdPresetsMap[normName]) {
+                const preset = bdPresetsMap[normName];
+                if (isSecure(customCh.url) && !preset.servers.some(s => s.url === customCh.url)) {
+                  preset.servers.push({ id: customCh.servers[0].id, name: customCh.servers[0].name, url: customCh.url, type: "hls" });
+                  if (!preset.logo && customCh.logo) preset.logo = customCh.logo;
+                }
+              } else {
+                const existingCustom = standaloneCustomMapByName.get(normName);
+                if (existingCustom) {
+                  if (isSecure(customCh.url) && !existingCustom.servers.some(s => s.url === customCh.url)) existingCustom.servers.push(customCh.servers[0]);
+                } else {
+                  if (isSecure(customCh.url)) {
+                    standaloneCustomChannels.push(customCh);
+                    if (customCh.tvgId) standaloneCustomMapByTvgId.set(customCh.tvgId, customCh);
+                    standaloneCustomMapByName.set(normName, customCh);
+                  }
+                }
+              }
+            });
+
+            const deduplicateByUrl = (channelList) => {
+              const seen = new Set();
+              return channelList.filter(ch => {
+                if (!ch.url) return false;
+                const url = ch.url.trim();
+                if (seen.has(url)) return false;
+                seen.add(url);
+                return true;
+              });
+            };
+
+            const finalCompiled = deduplicateByUrl([...compiled, ...bdPresetsCopy.filter(c => isSecure(c.url)), ...standaloneCustomChannels]);
+            setGlobalChannels(finalCompiled);
+            
+            const parsedBdApi = deduplicateByUrl(parseBdM3u(bdM3uText));
+            setBdApiChannels(parsedBdApi);
+            
+            // Filters only wc.m3u (m3u8 channels) and Tapmad playlist in the Featured channel list
+            let dynamicCurated = allCustomChannels.filter(ch => {
+              if (ch.sourceName === "Tapmad BD") {
+                return isSecure(ch.url);
+              }
+              if (ch.sourceName === "WC IPTV") {
+                return isSecure(ch.url) && ch.url.toLowerCase().includes('.m3u8');
+              }
+              return false;
+            });
+
+            const updatedCurated = deduplicateByUrl(dynamicCurated);
+            setCuratedChannels(updatedCurated);
+            setChannels(prev => (prev === CURATED_CHANNELS || prev.length === 0) ? updatedCurated : prev);
+            
+            setCurrentChannel(prev => {
+              if (!prev && updatedCurated.length > 0) return updatedCurated[0];
+              return prev;
+            });
+
+            // Asynchronously run reachability checks on curated channels and prioritize active ones to the top
+            setTimeout(async () => {
+              try {
+                const checkedChannels = await Promise.all(
+                  updatedCurated.map(async (ch) => {
+                    const isActive = await testStreamReachability(ch.url);
+                    return { ...ch, isActive };
+                  })
+                );
+
+                const sortedCurated = checkedChannels.sort((a, b) => {
+                  if (a.isActive && !b.isActive) return -1;
+                  if (!a.isActive && b.isActive) return 1;
+                  return 0; // Maintain original playlist order otherwise
+                });
+
+                setCuratedChannels(sortedCurated);
+                setChannels(prev => (prev === CURATED_CHANNELS || prev.length === 0 || JSON.stringify(prev) === JSON.stringify(updatedCurated)) ? sortedCurated : prev);
+                
+                const activeCount = sortedCurated.filter(c => c.isActive).length;
+                if (activeCount > 0) {
+                  triggerToast(`Prioritized ${activeCount} active curated channels to the top!`);
+                }
+              } catch (reachError) {
+                console.error("Reachability check failed", reachError);
+              }
+            }, 500);
+            
+            const activeCountryCodes = new Set(finalCompiled.map(ch => ch.countryCode));
+            const sortedCountries = countriesRes.filter(c => activeCountryCodes.has(c.code.toUpperCase())).map(c => ({ code: c.code.toLowerCase(), name: `${c.flag} ${c.name}` })).sort((a, b) => a.name.localeCompare(b.name));
+            setDynamicCountries(sortedCountries);
+
+            const activeCategorySet = new Set(finalCompiled.map(ch => ch.category));
+            const knownCategories = new Set(categoriesRes.map(c => c.name));
+            const sortedCategories = categoriesRes.filter(c => activeCategorySet.has(c.name)).map(c => ({ id: c.id, name: c.name, icon: getCategoryIcon(c.id) }));
+            activeCategorySet.forEach(cat => { if (!knownCategories.has(cat)) sortedCategories.push({ id: cat.toLowerCase().replace(/[^a-z0-9]/g, '-'), name: cat, icon: "tv" }); });
+
+            const categoryCounts = {};
+            finalCompiled.forEach(ch => { if (ch.category) categoryCounts[ch.category] = (categoryCounts[ch.category] || 0) + 1; });
+            sortedCategories.sort((a, b) => (categoryCounts[b.name] || 0) - (categoryCounts[a.name] || 0));
+            setDynamicCategories(sortedCategories.slice(0, 10));
+
+            triggerToast(`Successfully synced local APIs with ${finalCompiled.length.toLocaleString()} world channels.`);
+          } catch (err) {
+            console.error("Database initialization failed", err);
+            triggerToast("Failed to compile global IPTV database.");
+          } finally {
+            setIsLoadingGlobal(false);
+          }
+        };
+
+        fetchGlobalDatabase();
+      }, []);
+
+      useEffect(() => { try { localStorage.setItem("globalstream_favs", JSON.stringify(favorites)); } catch(e){} }, [favorites]);
+      useEffect(() => { if (currentChannel) { try { localStorage.setItem("globalstream_last_channel", JSON.stringify(currentChannel)); } catch(e){} } }, [currentChannel]);
+
+      useEffect(() => {
+        const handleClickOutside = (e) => {
+          if (!e.target.closest('.dropdown-container') && !e.target.closest('.menu-container')) { setIsCategoryOpen(false); setIsCountryOpen(false); setIsMenuOpen(false); }
+        };
+        document.addEventListener('mousedown', handleClickOutside); document.addEventListener('touchstart', handleClickOutside);
+        return () => { document.removeEventListener('mousedown', handleClickOutside); document.removeEventListener('touchstart', handleClickOutside); };
+      }, []);
+
+      const toggleFavorite = (channelId, e) => {
+        if (e) e.stopPropagation();
+        if (favorites.includes(channelId)) { setFavorites(prev => prev.filter(id => id !== channelId)); triggerToast("Removed from favorites"); }
+        else { setFavorites(prev => [...prev, channelId]); triggerToast("Added to favorites"); }
+      };
+
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (viewState !== "player") return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+          switch (e.key.toLowerCase()) {
+            case ' ': e.preventDefault(); togglePlayPause(); break;
+            case 'f': e.preventDefault(); triggerFullscreen(); break;
+            case 'm': e.preventDefault(); setIsMuted(prev => !prev); break;
+          }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [currentChannel, viewState, isPlaying, isMuted]);
+
+      useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        video.volume = Math.min((isMuted ? 0 : volumeLevel) / 100, 1.0);
+      }, [volumeLevel, isMuted, viewState]);
+
+      // Real-time Playhead Watchdog: Automatically skips gaps or stalls (replicates VLC resilience)
+      useEffect(() => {
+        const video = videoRef.current;
+        if (!video || viewState !== "player") return;
+
+        const watchdogInterval = setInterval(() => {
+          if (isPlaying && !video.paused) {
+            const buffered = video.buffered;
+            const currentTime = video.currentTime;
+
+            // Scan for micro-buffer gaps right in front of the active playhead position
+            for (let i = 0; i < buffered.length; i++) {
+              const start = buffered.start(i);
+              
+              if (currentTime < start && (start - currentTime) < 1.8) {
+                console.warn(`[Watchdog] Nudging playhead past unbuffered gap: ${currentTime.toFixed(2)} -> ${start.toFixed(2)}`);
+                video.currentTime = start + 0.1;
+                return;
+              }
+            }
+
+            // Fallback nudge if player is waiting for data but stuck in a stall state
+            if (video.readyState < 3) {
+              console.warn("[Watchdog] Stream stalled. Nudging playhead to skip packet misalignment.");
+              video.currentTime += 0.25;
+            }
+          }
+        }, 2000);
+
+        return () => clearInterval(watchdogInterval);
+      }, [isPlaying, activeSource, viewState]);
+
+      useEffect(() => {
+        if (viewState !== "player" || !activeSource) return;
+        setVideoError(null); setIsPlaying(true);
+        const video = videoRef.current;
+        if (!video) return;
+        destroyHls();
+        const resolvedUrl = activeSource.url;
+
+        // Stream Failure fallback pipeline trigger without CORS Proxies
+        const handleStreamFailure = () => {
+          if (isManualServerSelectionRef.current) {
+            setVideoError(`The selected server failed to connect. Please try another source manually.`); destroyHls(); return;
+          }
+          if (activeServerIndex < currentChannelSources.length - 1) {
+            setActiveServerIndex(prev => prev + 1);
+          } else {
+            setVideoError("This stream connection failed to connect. All alternative sources exhausted."); destroyHls();
+          }
+        };
+
+        const isTs = resolvedUrl.split('?')[0].toLowerCase().endsWith('.ts') || resolvedUrl.toLowerCase().includes('.ts?');
+        const isMp4 = resolvedUrl.split('?')[0].toLowerCase().endsWith('.mp4') || resolvedUrl.toLowerCase().includes('.mp4?');
+
+        if (isTs) {
+          if (typeof mpegts !== 'undefined' && mpegts.getFeatureList().mseLivePlayback) {
+            const mpegtsPlayer = mpegts.createPlayer({
+              type: 'mse',
+              isLive: true,
+              url: resolvedUrl
+            }, {
+              enableWorker: true,
+              lazyLoadMaxDuration: 3 * 60,
+              seekType: 'range'
+            });
+            mpegtsPlayerRef.current = mpegtsPlayer;
+            mpegtsPlayer.attachMediaElement(video);
+            mpegtsPlayer.load();
+            mpegtsPlayer.play().catch(err => setIsPlaying(false));
+            mpegtsPlayer.on(mpegts.Events.ERROR, (type, detail, info) => {
+              console.error("mpegts playback fallback error", type, detail, info);
+              handleStreamFailure();
+            });
+          } else {
+            video.src = resolvedUrl;
+            video.addEventListener('error', handleStreamFailure);
+            video.addEventListener('loadedmetadata', () => video.play().catch(err => setIsPlaying(false)));
+          }
+        } else if (isMp4) {
+          video.src = resolvedUrl;
+          video.addEventListener('error', handleStreamFailure);
+          video.addEventListener('loadedmetadata', () => video.play().catch(err => setIsPlaying(false)));
+        } else if (Hls.isSupported()) {
+          const hlsConfig = { 
+            enableWorker: true, 
+            lowLatencyMode: false, // Disabling low-latency accumulates a larger, safer buffer to withstand packet gaps
+            maxBufferLength: 30, 
+            maxMaxBufferLength: 60,
+            maxBufferHole: 2.0, // Highly relaxed gap skip tolerance (Crucial for Toffee BD)
+            nudgeOffset: 0.2,
+            nudgeMaxRetry: 25,
+            stretchShortVideoTrack: true, // Auto-aligns short video tracks with audio tracks to prevent black-screen stalls
+            maxAudioFramesDrift: 2.5,
+            forceKeyFrameOnDiscontinuity: true,
+            dtsgtsOffsetTolerance: 1.0, // Permits up to 1 second of timestamp drift without freezing the stream
+            xhrSetup: function (xhr) { xhr.withCredentials = false; } 
+          };
+
+          const hls = new Hls(hlsConfig); 
+          hlsRef.current = hls;
+          hls.loadSource(resolvedUrl); 
+          hls.attachMedia(video);
+          
+          hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(err => setIsPlaying(false)));
+          
+          let mediaErrorCount = 0;
+          hls.on(Hls.Events.ERROR, (event, data) => {
+            if (data.fatal) {
+              if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+                if (data.details === Hls.ErrorDetails.MANIFEST_LOAD_ERROR || data.details === Hls.ErrorDetails.MANIFEST_LOAD_TIMEOUT) {
+                  handleStreamFailure();
+                } else {
+                  hls.startLoad();
+                }
+              } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+                mediaErrorCount++;
+                if (mediaErrorCount <= 3) {
+                  hls.recoverMediaError();
+                } else {
+                  console.warn("Fatal media error recovery limit reached. Falling back...");
+                  handleStreamFailure();
+                }
+              } else {
+                handleStreamFailure();
+              }
+            }
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = resolvedUrl;
+          video.addEventListener('error', handleStreamFailure);
+          video.addEventListener('loadedmetadata', () => video.play().catch(err => setIsPlaying(false)));
+        } else {
+          setVideoError("Playback is not natively supported on this browser.");
+        }
+
+        return () => { destroyHls(); video.removeEventListener('error', handleStreamFailure); };
+      }, [activeSource, activeServerIndex, currentChannelSources, viewState]);
+
+      const destroyHls = () => { 
+        if (hlsRef.current) { hlsRef.current.destroy(); hlsRef.current = null; } 
+        if (mpegtsPlayerRef.current) {
+          try {
+            mpegtsPlayerRef.current.unload();
+            mpegtsPlayerRef.current.detachMediaElement();
+            mpegtsPlayerRef.current.destroy();
+          } catch(e){}
+          mpegtsPlayerRef.current = null;
+        }
+      };
+
+      const togglePlayPause = () => {
+        const video = videoRef.current;
+        if (!video) return;
+        if (isPlaying) { video.pause(); setIsPlaying(false); } else { video.play().catch(e => console.log(e)); setIsPlaying(true); }
+      };
+
+      const triggerFullscreen = async () => {
+        const container = playerContainerRef.current;
+        if (!container) return;
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          try {
+            if (container.requestFullscreen) await container.requestFullscreen();
+            else if (container.webkitRequestFullscreen) await container.webkitRequestFullscreen();
+            else if (container.msRequestFullscreen) await container.msRequestFullscreen();
+            if (window.screen && window.screen.orientation && window.screen.orientation.lock) window.screen.orientation.lock('landscape').catch(e => {});
+            else if (window.screen && window.screen.lockOrientation) window.screen.lockOrientation('landscape');
+          } catch (err) {}
+        } else {
+          try {
+            if (document.exitFullscreen) await document.exitFullscreen();
+            else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+            else if (document.msExitFullscreen) await document.msExitFullscreen();
+            if (window.screen && window.screen.orientation && window.screen.orientation.unlock) window.screen.orientation.unlock();
+            else if (window.screen && window.screen.unlockOrientation) window.screen.unlockOrientation();
+          } catch (err) {}
+        }
+      };
+
+      const copyToClipboard = (text) => {
+        const textArea = document.createElement("textarea"); textArea.value = text; document.body.appendChild(textArea); textArea.select();
+        try { document.execCommand('copy'); setIsCopied(true); triggerToast("Copied link to clipboard!"); setTimeout(() => setIsCopied(false), 2500); } catch (err) {}
+        document.body.removeChild(textArea);
+      };
+
+      const loadIPTVCategory = (catId, catName) => {
+        setActiveCategory("category"); setSelectedCountryCode(""); setCuratedSelected(false); setSearchQuery(""); setSelectedCategoryFilter(catName); 
+        const filtered = globalChannels.filter(ch => ch.category.toLowerCase() === catName.toLowerCase());
+        if (filtered.length > 0) { setChannels(filtered); triggerToast(`Loaded ${filtered.length} channels from ${catName}`); } else triggerToast("Syncing category feeds... please wait a moment.");
+        setViewState("home");
+      };
+
+      const loadIPTVCountry = (countryCode, countryName) => {
+        setActiveCategory("country"); setSelectedCountryCode(countryCode); setCuratedSelected(false); setSearchQuery(""); setSelectedCategoryFilter("All"); 
+        const filtered = globalChannels.filter(ch => ch.countryCode === countryCode.toUpperCase());
+        if (filtered.length > 0) { setChannels(filtered); triggerToast(`Loaded ${filtered.length} channels from ${countryName}`); } else triggerToast("Syncing country feeds... please wait a moment.");
+        setViewState("home");
+      };
+
+      const loadCurated = () => {
+        setActiveCategory("curated"); setSelectedCountryCode(""); setCuratedSelected(true); setChannels(curatedChannels); setVideoError(null); setSearchQuery(""); setSelectedCategoryFilter("All"); 
+        triggerToast("Featured Channel directory restored."); setViewState("home");
+      };
+
+      useEffect(() => { setVisibleLimit(48); }, [deferredSearchQuery, selectedCategoryFilter, activeCategory, selectedCountryCode, showFavoritesOnly]);
+
+      const filteredChannels = useMemo(() => {
+        let searchPool = channels;
+        if (deferredSearchQuery.trim() !== "") searchPool = globalChannels.length > 0 ? globalChannels : channels;
+        let result = searchPool;
+        if (deferredSearchQuery.trim() !== "") {
+          const query = deferredSearchQuery.toLowerCase();
+          result = searchPool.filter(ch => ch.name.toLowerCase().includes(query) || (ch.category && ch.category.toLowerCase().includes(query)) || (ch.country && ch.country.toLowerCase().includes(query)));
+          result.sort((a, b) => {
+            const aIsSport = a.category && a.category.toLowerCase().includes("sport"); const bIsSport = b.category && b.category.toLowerCase().includes("sport");
+            if (aIsSport && !bIsSport) return -1; if (!aIsSport && bIsSport) return 1;
+            const aStartsWith = a.name.toLowerCase().startsWith(query); const bStartsWith = b.name.toLowerCase().startsWith(query);
+            if (aStartsWith && !bStartsWith) return -1; if (!aStartsWith && bStartsWith) return 1;
+            return a.name.localeCompare(b.name);
+          });
+        } else {
+          result = searchPool.filter(ch => {
+            const matchesCat = selectedCategoryFilter === "All" || ch.category === selectedCategoryFilter;
+            const matchesFav = !showFavoritesOnly || favorites.includes(ch.id);
+            return matchesCat && matchesFav;
+          });
+        }
+        return result;
+      }, [channels, globalChannels, deferredSearchQuery, selectedCategoryFilter, favorites, showFavoritesOnly]);
+
+      const filteredSeeAllChannels = useMemo(() => {
+        if (!seeAllData) return [];
+        if (!seeAllSearchQuery.trim()) return seeAllData.channels;
+        const query = seeAllSearchQuery.toLowerCase();
+        return seeAllData.channels.filter(ch => ch.name.toLowerCase().includes(query) || (ch.category && ch.category.toLowerCase().includes(query)));
+      }, [seeAllData, seeAllSearchQuery]);
+
+      const handleScroll = (e) => {
+        const { scrollTop, scrollHeight, clientHeight } = e.target;
+        if (scrollHeight - scrollTop <= clientHeight + 300) {
+            if (visibleLimit < filteredChannels.length) setVisibleLimit(prev => prev + 48);
+        }
+      };
+
+      const channelsToRender = filteredChannels.slice(0, visibleLimit);
+
+      return (
+        <div className="flex-grow flex flex-col relative h-screen">
+          {toastMessage && (
+            <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[150] bg-slate-800 text-white px-4 py-2 rounded-full shadow-2xl border border-slate-700 animate-fadeIn text-xs font-semibold flex items-center gap-2 pointer-events-none">
+              <Icon name="info" className="w-4 h-4 text-brand-400" />
+              {toastMessage}
+            </div>
+          )}
+
+          <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3.5 shadow-sm shrink-0">
+            <div className="max-w-[1700px] mx-auto flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3 cursor-pointer" onClick={loadCurated}>
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+                  <Icon name="tv" className="w-6 h-6" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-400 bg-clip-text text-transparent flex items-center gap-2">
+                    GlobalStream <span className="text-[10px] uppercase font-bold tracking-widest bg-brand-600/30 text-brand-400 px-2 py-0.5 rounded border border-brand-500/20">IPTV</span>
+                  </h1>
+                </div>
+              </div>
+
+              <div className="relative menu-container hidden md:block">
+                <button onClick={() => !isLoadingGlobal && setIsMenuOpen(!isMenuOpen)} className="h-10 w-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-all focus:outline-none border border-slate-750" aria-label="Toggle Menu">
+                  <Icon name={isMenuOpen ? "x" : "menu"} className="w-5 h-5" />
+                </button>
+
+                {isMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl z-50 p-3 flex flex-col gap-2.5 animate-fadeIn">
+                    <button onClick={() => { loadCurated(); setIsMenuOpen(false); }} className={`w-full px-4 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all ${activeCategory === 'curated' && viewState === 'home' ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20' : 'bg-slate-850 hover:bg-slate-800 text-slate-300'}`}>
+                      <Icon name="sparkles" className="w-3.5 h-3.5" /> Featured
+                    </button>
+
+                    <div className="relative dropdown-container w-full">
+                      <button onClick={() => { setIsCategoryOpen(!isCategoryOpen); setIsCountryOpen(false); }} className="w-full px-4 py-2.5 rounded-lg text-xs font-semibold bg-slate-850 hover:bg-slate-800 text-slate-300 flex items-center justify-between transition-all">
+                        <span className="flex items-center gap-2"><Icon name="grid" className="w-3.5 h-3.5" /> Categories</span>
+                        <Icon name="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {isCategoryOpen && (
+                        <>
+                          <div className="fixed inset-0 z-[90] bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCategoryOpen(false)}></div>
+                          <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
+                            <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">Select Category</div>
+                            <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
+                              {dynamicCategories.map(cat => (
+                                <button key={cat.id} onClick={() => { loadIPTVCategory(cat.id, cat.name); setIsCategoryOpen(false); setIsMenuOpen(false); }} className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center gap-3 transition-all ${activeCategory === cat.id ? 'text-brand-400 bg-brand-950/20 font-bold' : 'text-slate-300'}`}>
+                                  <Icon name={cat.icon} className="w-4 h-4 text-slate-400" /> <span>{cat.name}</span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="relative dropdown-container w-full">
+                      <button onClick={() => { setIsCountryOpen(!isCountryOpen); setIsCategoryOpen(false); }} className="w-full px-4 py-2.5 rounded-lg text-xs font-semibold bg-brand-600 hover:bg-brand-500 text-white flex items-center justify-between transition-all shadow-lg shadow-brand-600/25">
+                        <span className="flex items-center gap-2"><Icon name="globe" className="w-3.5 h-3.5" /> Browse Country</span>
+                        <Icon name="chevron-down" className={`w-3.5 h-3.5 transition-transform duration-200 ${isCountryOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {isCountryOpen && (
+                        <>
+                          <div className="fixed inset-0 z-[90] bg-black/10 backdrop-blur-[1px]" onClick={() => setIsCountryOpen(false)}></div>
+                          <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-[100] flex flex-col overflow-hidden animate-fadeIn">
+                            <div className="px-4 py-2.5 text-[10px] uppercase tracking-wider font-extrabold text-slate-500 bg-slate-900 border-b border-slate-800/65 sticky top-0">Select Country TV</div>
+                            <div className="overflow-y-auto max-h-64 divide-y divide-slate-800/30">
+                              {dynamicCountries.map(ct => (
+                                <button key={ct.code} onClick={() => { loadIPTVCountry(ct.code, ct.name); setIsCountryOpen(false); setIsMenuOpen(false); }} className={`w-full text-left px-4 py-2.5 text-xs hover:bg-slate-800 active:bg-slate-800 flex items-center justify-between transition-all ${selectedCountryCode === ct.code ? 'text-brand-400 bg-brand-950/25 font-bold' : 'text-slate-300'}`}>
+                                  <span className="truncate pr-2">{ct.name}</span>
+                                  <span className="text-[10px] uppercase font-mono text-slate-500 bg-slate-950 px-2 py-0.5 rounded border border-slate-850 shrink-0">{ct.code}</span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <button onClick={() => { setIsNsPlayerModalOpen(true); setIsMenuOpen(false); }} className="w-full px-4 py-2.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-2 transition-all shadow-lg shadow-emerald-600/25 justify-center">
+                      <Icon name="play-square" className="w-3.5 h-3.5" /> NS Player Servers
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </header>
+
+          {}
+          <main className="flex-grow overflow-y-auto w-full bg-slate-950" onScroll={handleScroll}>
+            {viewState === "home" && (
+              <div className="max-w-[1700px] mx-auto px-4 py-6 flex flex-col gap-6 animate-fadeIn pb-24 md:pb-6">
+                
+                <div className="hidden md:flex flex-col gap-6">
+                  <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800/80 shadow-md flex flex-col lg:flex-row gap-4 items-center justify-between">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto flex-grow max-w-2xl">
+                      <div className="relative w-full">
+                        <input type="text" placeholder={isLoadingGlobal ? "Updating live index database..." : `Search ${globalChannels.length.toLocaleString() || "..."} global channels...`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all" />
+                        <Icon name="search" className="w-4 h-4 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2" />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between w-full lg:w-auto gap-4 shrink-0">
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] font-bold text-slate-400">
+                        <span className={`h-2 w-2 rounded-full ${isLoadingGlobal ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'}`}></span>
+                        <span>{isLoadingGlobal ? "Indexing DB..." : "DB Ready"}</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="flex flex-col items-end hidden sm:flex">
+                          <span className="text-xs font-bold text-slate-300">Featured Channels</span>
+                          <span className="text-[10px] text-brand-400">{filteredChannels.length} results</span>
+                        </div>
+                        <button onClick={() => setShowFavoritesOnly(prev => !prev)} className={`text-sm flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${showFavoritesOnly ? 'bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30 shadow-lg shadow-amber-500/10' : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'}`}>
+                          <Icon name="star" className={`w-4 h-4 ${showFavoritesOnly ? 'fill-current' : ''}`} /> Favorites
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {searchQuery.trim() === "" && !showFavoritesOnly && selectedCategoryFilter === "All" && activeCategory === "curated" && (
+                    <div className="flex items-center gap-2 mt-2 mb-1">
+                      <Icon name="sparkles" className="w-5 h-5 text-brand-400" /> <h2 className="text-xl font-bold text-white">Featured</h2>
+                    </div>
+                  )}
+
+                  {channelsToRender.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-64 text-center p-6 text-slate-500">
+                      <Icon name="tv-2" className="w-16 h-16 mb-4 opacity-20" />
+                      <p className="text-lg font-semibold text-slate-400">No channels found</p>
+                      <p className="text-sm mt-1">Try adjusting your search or category filter.</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-3 md:gap-4 pb-4 animate-fadeIn">
+                      {channelsToRender.map((channel, index) => (
+                         <ChannelCard key={`${channel.id}-${index}`} channel={channel} isFavorited={favorites.includes(channel.id)} onToggleFavorite={toggleFavorite} onSelect={handleSelectChannel} />
+                      ))}
+                    </div>
+                  )}
+
+                  {searchQuery.trim() === "" && !showFavoritesOnly && selectedCategoryFilter === "All" && activeCategory === "curated" && (
+                    <div className="flex flex-col gap-8 mt-4 border-t border-slate-900 pt-8 pb-10">
+                      <ChannelCarousel title="Bangladeshi Channels" icon={<span className="text-xl">🇧🇩</span>} channels={bdCarouselChannels} onSelectChannel={handleSelectChannel} favorites={favorites} toggleFavorite={(id) => toggleFavorite(id)} onSeeAll={(data) => { setSeeAllSearchQuery(""); setSeeAllData(data); }} />
+                      <ChannelCarousel title="All Sports Channels" icon={<Icon name="trophy" className="w-5 h-5 text-brand-400" />} channels={sportsCarouselChannels} onSelectChannel={handleSelectChannel} favorites={favorites} toggleFavorite={(id) => toggleFavorite(id)} onSeeAll={(data) => { setSeeAllSearchQuery(""); setSeeAllData(data); }} />
+                    </div>
+                  )}
+                </div>
+
+                {}
+                <div className="flex md:hidden flex-col gap-4">
+                  {activeMobileTab === "home" && (
+                    <div className="flex flex-col gap-4 animate-fadeIn">
+                      <div className="flex items-center gap-2 mt-2">
+                        <Icon name="sparkles" className="w-4 h-4 text-brand-400" /> <h2 className="text-sm font-bold text-white">Featured Channels</h2>
+                      </div>
+					  <div className="grid grid-cols-3 gap-2.5">
+                        {curatedChannels.slice(0, 15).map((channel, index) => (
+                           <button key={`mob-curated-${channel.id}-${index}`} onClick={() => handleSelectChannel(channel)} className="group flex flex-col p-2 rounded-xl bg-slate-900 border border-slate-800/80 text-left relative overflow-hidden font-bold">
+                             <div className="w-full aspect-video bg-slate-700 rounded-lg mb-1.5 flex items-center justify-center p-1 relative overflow-hidden">
+                               <div className="w-full h-full relative z-10"><ChannelLogo name={channel.name} logoUrl={channel.logo} /></div>
+                             </div>
+                             <h4 className="text-[10px] font-bold text-slate-200 truncate w-full px-0.5">{channel.name}</h4>
+                           </button>
+                        ))}
+                      </div>
+                      <ChannelCarousel title="Bangladeshi Channels" icon={<span className="text-lg">🇧🇩</span>} channels={bdCarouselChannels} onSelectChannel={handleSelectChannel} favorites={favorites} toggleFavorite={(id) => toggleFavorite(id)} onSeeAll={(data) => { setSeeAllSearchQuery(""); setSeeAllData(data); }} />
+                      <ChannelCarousel title="All Sports Channels" icon={<Icon name="trophy" className="w-4 h-4 text-brand-400" />} channels={sportsCarouselChannels} onSelectChannel={handleSelectChannel} favorites={favorites} toggleFavorite={(id) => toggleFavorite(id)} onSeeAll={(data) => { setSeeAllSearchQuery(""); setSeeAllData(data); }} />
+                    </div>
+                  )}
+
+                  {activeMobileTab === "search" && (
+                    <div className="flex flex-col gap-4 animate-fadeIn">
+                      <div className="relative w-full">
+                        <input type="text" placeholder="Search channels, categories, countries..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-900 border border-slate-800/80 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50" />
+                        <Icon name="search" className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                      </div>
+                      {(searchQuery.trim() !== "" || selectedCountryCode !== "" || selectedCategoryFilter !== "All") ? (
+                        <div className="flex flex-col gap-3">
+                          <div className="flex items-center justify-between bg-slate-900 p-2.5 rounded-xl border border-slate-800/80">
+                            <span className="text-xs font-semibold text-slate-300">{searchQuery.trim() !== "" ? "Search Results" : selectedCountryCode !== "" ? `Country: ${selectedCountryCode}` : `Category: ${selectedCategoryFilter}`}</span>
+                            <button onClick={() => { setSearchQuery(""); setSelectedCountryCode(""); setSelectedCategoryFilter("All"); loadCurated(); }} className="text-[10px] font-bold text-brand-400 bg-brand-500/10 px-2 py-1 rounded-lg font-bold">Clear Filter</button>
+                          </div>
+                          <div className="grid grid-cols-3 gap-2.5">
+                            {filteredChannels.slice(0, visibleLimit).map((channel, index) => (
+                               <button key={`mob-search-res-${channel.id}-${index}`} onClick={() => handleSelectChannel(channel)} className="group flex flex-col p-2 rounded-xl bg-slate-900 border border-slate-800/80 text-left relative overflow-hidden">
+                                 <div className="w-full aspect-video bg-slate-700 rounded-lg mb-1.5 flex items-center justify-center p-1 relative overflow-hidden">
+                                   <div className="w-full h-full relative z-10"><ChannelLogo name={channel.name} logoUrl={channel.logo} /></div>
+                                 </div>
+                                 <h4 className="text-[10px] font-bold text-slate-200 truncate w-full px-0.5">{channel.name}</h4>
+                               </button>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col gap-5">
+                          <div className="flex flex-col gap-2">
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"><Icon name="grid" className="w-3.5 h-3.5 text-brand-400" /> Categories</h3>
+                            <div className="grid grid-cols-2 gap-2">
+                              {dynamicCategories.map(cat => (
+                                <button key={`mob-cat-${cat.id}`} onClick={() => { setSelectedCategoryFilter(cat.name); loadIPTVCategory(cat.id, cat.name); }} className="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center gap-2.5 hover:bg-slate-800/60 transition-colors text-left">
+                                  <Icon name={cat.icon} className="w-4 h-4 text-brand-400" /> <span className="text-xs font-bold text-slate-300 truncate">{cat.name}</span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"><Icon name="globe" className="w-3.5 h-3.5 text-brand-400" /> Countries</h3>
+                            <div className="grid grid-cols-2 gap-2">
+                              {dynamicCountries.map(ct => (
+                                <button key={`mob-ct-${ct.code}`} onClick={() => { setSelectedCountryCode(ct.code.toUpperCase()); loadIPTVCountry(ct.code, ct.name); }} className="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center justify-between hover:bg-slate-800/60 transition-colors text-left">
+                                  <span className="text-xs font-bold text-slate-300 truncate">{ct.name}</span> <span className="text-[9px] uppercase font-mono text-slate-500 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-850 shrink-0">{ct.code}</span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {activeMobileTab === "favorites" && (
+                    <div className="flex flex-col gap-4 animate-fadeIn">
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-sm font-bold text-white flex items-center gap-2"><Icon name="star" className="w-4 h-4 text-amber-400 fill-amber-400" /> My Favorite Channels</h2>
+                      </div>
+                      {favorites.length === 0 ? (
+                        <div className="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-8 text-center flex flex-col items-center gap-2.5">
+                          <Icon name="star" className="w-10 h-10 text-slate-600" />
+                          <span className="text-xs font-bold text-slate-400">No Favorites Added Yet</span>
+                          <p className="text-[10px] text-slate-500 leading-relaxed max-w-xs">Browse channels on the home feed or search tabs and tap the star icon to save them here for quick access.</p>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-3 gap-2.5">
+                          {allUniqueChannels.filter(ch => favorites.includes(ch.id)).map((channel, index) => (
+                             <button key={`mob-fav-${channel.id}-${index}`} onClick={() => handleSelectChannel(channel)} className="group flex flex-col p-2 rounded-xl bg-slate-900 border border-slate-800/80 text-left relative overflow-hidden">
+                               <div className="w-full aspect-video bg-slate-700 rounded-lg mb-1.5 flex items-center justify-center p-1 relative overflow-hidden">
+                                 <div className="w-full h-full relative z-10"><ChannelLogo name={channel.name} logoUrl={channel.logo} /></div>
+                               </div>
+                               <h4 className="text-[10px] font-bold text-slate-200 truncate w-full px-0.5">{channel.name}</h4>
+                             </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {}
+                  {activeMobileTab === "settings" && (
+                    <div className="flex flex-col gap-5 animate-fadeIn">
+                      <div className="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 flex flex-col gap-3">
+                        <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-1.5 border-b border-slate-800 pb-2 font-bold">
+                          <Icon name="info" className="w-4 h-4 text-brand-400" /> About GlobalStream
+                        </h3>
+                        <div className="flex items-center gap-3">
+                          <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center text-white shadow-lg">
+                            <Icon name="tv" className="w-6 h-6" />
+                          </div>
+                          <div><h4 className="text-xs font-bold text-white">GlobalStream IPTV</h4><span className="text-[10px] text-brand-400 font-bold">by: Kazi MMT</span></div>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 flex flex-col gap-3">
+                        <h3 className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 border-b border-slate-800 pb-2 font-bold">
+                          <Icon name="monitor-play" className="w-4 h-4" /> How to use with NS Player:
+                        </h3>
+                        <div className="bg-emerald-950/20 border border-emerald-500/10 rounded-xl p-3 text-[10px] text-slate-300 leading-relaxed">
+                          <li>Download and install <strong>NS Player</strong> from the Google Play Store.</li>
+                          <li>Open the app and look for the option to <strong>Playlist</strong>.</li>
+                          <li>Copy one of the live server links provided below.</li>
+                          <li>Paste the copied URL into NS Player and hit save. Enjoy the stream!</li>
+                        </div>
+                        <div className="flex flex-col gap-2.5">
+                          {[ { id: 'Fifa+', name: 'FIFA+', url: 'https://cutt.ly/fifaplus' }, { id: 'tapmad', name: 'Tapmad BD Live', url: 'https://cutt.ly/tapmadbd' }, { id: 'sonyliv', name: 'SonyLiV Live', url: 'https://cutt.ly/SonyLiV' }, { id: 'toffee', name: 'Toffee', url: 'https://raw.githubusercontent.com/BINOD-XD/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_NS_Player.m3u' }, { id: 'akashgo', name: 'Akash Go', url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/akash_live.m3u' }, { id: 'aynaott', name: 'Ayna OTT', url: 'https://raw.githubusercontent.com/srhady/AynaOTT/refs/heads/main/aynaott.m3u' }, { id: 'axsports', name: 'AX Sports Live', url: 'https://raw.githubusercontent.com/srhady/axsports/refs/heads/main/playlist.m3u' }, { id: 'bingstream', name: 'Bing Stream', url: 'https://raw.githubusercontent.com/srhady/bingstream/refs/heads/main/playlist.m3u' } ].map(link => (
+                            <div key={`mob-settings-${link.id}`} className="bg-slate-950 border border-slate-800/60 rounded-xl p-2.5 flex items-center justify-between gap-2">
+                              <div className="flex flex-col truncate text-left">
+                                <span className="text-[10px] font-bold text-slate-300">{link.name}</span>
+                                <span className="text-[9px] text-slate-500 truncate font-mono">{link.url}</span>
+                              </div>
+                              <button onClick={() => { copyToClipboard(link.url); setCopiedLinkId(link.id); setTimeout(() => setCopiedLinkId(null), 2500); }} className={`p-1.5 rounded-lg border shrink-0 transition-colors ${copiedLinkId === link.id ? 'bg-emerald-500/15 border-emerald-500/45 text-emerald-400' : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'}`}>
+                                <Icon name={copiedLinkId === link.id ? "check" : "copy"} className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {visibleLimit < filteredChannels.length && (
+                  <div className="py-6 text-center text-sm font-semibold text-slate-500">
+                     <Icon name="loader-2" className="w-5 h-5 inline animate-spin mr-2" /> Loading more channels...
+                  </div>
+                )}
+              </div>
+            )}
+
+            {}
+            {viewState === "player" && (
+              <div className="px-4 py-6 w-full animate-fadeIn min-h-full flex flex-col pb-24 md:pb-6">
+                <div className="mx-auto flex flex-col gap-4 w-full transition-all duration-300 max-w-6xl">
+                  <div className="bg-slate-900 rounded-2xl overflow-hidden border border-slate-800/80 shadow-2xl flex flex-col relative group w-full">
+                    <div ref={playerContainerRef} className="aspect-video w-full bg-slate-950 relative flex items-center justify-center overflow-hidden">
+                      {videoError ? (
+                        <div className="absolute inset-0 bg-slate-950 z-[30] flex flex-col items-center justify-center text-center p-6 gap-4 border-b border-slate-800">
+                          <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
+                            <Icon name="alert-octagon" className="w-8 h-8" />
+                          </div>
+                          <div className="max-w-md">
+                            <h3 className="font-bold text-lg text-slate-200">Stream Connection Offline</h3>
+                            <p className="text-xs text-slate-400 mt-1">{videoError}</p>
+                            <p className="text-[11px] text-slate-500 mt-3 bg-slate-900 p-3 rounded-lg border border-slate-800/50 text-left leading-relaxed">The stream server failed to handshake. Please select an alternate source below or check your network connectivity.</p>
+                          </div>
+                          <div className="flex flex-wrap gap-2 justify-center mt-2">
+                            <button onClick={() => { copyToClipboard(activeSource ? activeSource.url : ''); }} className="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-xs text-white rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-brand-600/20 transition-colors">
+                              <Icon name={isCopied ? "check" : "copy"} className="w-4 h-4 text-white" /> {isCopied ? "Copied!" : "Copy Stream URL"}
+                            </button>
+                            <button onClick={() => { setVideoError(null); }} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs rounded-lg text-slate-300 font-semibold transition-colors">Retry Playback</button>
+                          </div>
+                        </div>
+                      ) : null}
+                      <video key={activeSource ? activeSource.url : "none"} ref={videoRef} className="w-full h-full object-contain absolute inset-0 cursor-pointer" autoPlay playsInline muted={isMuted} />
+                      {!videoError && (
+                        <PlayerOverlay videoRef={videoRef} hlsRef={hlsRef} isPlaying={isPlaying} togglePlayPause={togglePlayPause} setIsPlaying={setIsPlaying} triggerFullscreen={triggerFullscreen} isMuted={isMuted} setIsMuted={setIsMuted} />
+                      )}
+                    </div>
+
+                    {currentChannelSources.length > 1 && (
+                      <div className="bg-slate-950 border-y border-slate-800/80 px-4 py-3 flex flex-col md:flex-row md:items-center gap-3">
+                        <span className="text-[10px] uppercase font-extrabold text-slate-400 tracking-wider flex items-center gap-1.5 px-1 shrink-0">
+                          <Icon name="server" className="w-3.5 h-3.5 text-brand-400" /> Alternative Sources ({currentChannelSources.length}):
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {currentChannelSources.map((srv, index) => (
+                            <button key={srv.id} onClick={() => { isManualServerSelectionRef.current = true; setActiveServerIndex(index); setVideoError(null); }} className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${activeServerIndex === index ? 'bg-brand-600 text-white shadow-md shadow-brand-600/10' : 'bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-slate-200'}`}>
+                              <Icon name="radio" className="w-3.5 h-3.5" /> <span>{srv.name}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="bg-slate-900 px-4 py-5 flex flex-col md:flex-row md:items-center justify-between gap-5">
+                      <div className="flex items-start gap-4 flex-grow text-left">
+                        <div className="w-14 h-14 rounded-xl bg-slate-700 border border-slate-800/80 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                          <ChannelLogo name={activeChannelWithFreshData ? activeChannelWithFreshData.name : ""} logoUrl={activeChannelWithFreshData ? activeChannelWithFreshData.logo : ""} />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h2 className="font-extrabold text-white text-xl">{activeChannelWithFreshData ? activeChannelWithFreshData.name : ""}</h2>
+                            {activeChannelWithFreshData && activeChannelWithFreshData.category && <span className="bg-brand-900/30 border border-brand-500/30 text-brand-300 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wide">{activeChannelWithFreshData.category}</span>}
+                            {activeChannelWithFreshData && activeChannelWithFreshData.country && <span className="bg-slate-800 text-slate-300 text-[10px] px-2 py-0.5 rounded font-bold uppercase border border-slate-700">{activeChannelWithFreshData.country}</span>}
+                          </div>
+                          <p className="hidden md:block text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">{activeChannelWithFreshData && activeChannelWithFreshData.description ? activeChannelWithFreshData.description : "Public Webcast broadcast via IPTV playlist feed. Connections are completely peer-to-peer and un-metered."}</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2.5 shrink-0 border-t border-slate-800 pt-4 md:border-0 md:pt-0 w-full md:w-auto">
+                        <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl h-11 flex-grow md:flex-grow-0">
+                          <button onClick={() => setIsMuted(!isMuted)} className="text-slate-400 hover:text-white transition-colors shrink-0 outline-none">
+                            <Icon name={isMuted || volumeLevel === 0 ? "volume-x" : volumeLevel < 50 ? "volume-1" : "volume-2"} className="w-4 h-4" />
+                          </button>
+                          <input type="range" min="0" max="100" value={isMuted ? 0 : volumeLevel} onChange={(e) => { setVolumeLevel(Number(e.target.value)); if (isMuted && Number(e.target.value) > 0) setIsMuted(false); }} className="w-full md:w-24 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer outline-none accent-brand-500" title="Volume Control" />
+                          <span className="text-[10px] sm:text-xs font-semibold text-slate-300 w-8 text-right tabular-nums shrink-0">{isMuted ? 0 : volumeLevel}%</span>
+                        </div>
+                        <button onClick={() => { copyToClipboard(activeSource ? activeSource.url : ''); }} className={`h-11 px-4 rounded-xl border flex items-center gap-2 text-sm font-semibold transition-all ${isCopied ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-400' : 'bg-slate-950 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800'}`} title="Copy raw stream URL to play on VLC Player">
+                          <Icon name={isCopied ? "check" : "copy"} className="w-4 h-4" /> <span className="hidden sm:inline">{isCopied ? "Copied Link" : "Copy Link"}</span>
+                        </button>
+                        <button onClick={(e) => activeChannelWithFreshData && toggleFavorite(activeChannelWithFreshData.id, e)} className={`h-11 w-11 rounded-xl border flex items-center justify-center transition-all shrink-0 ${activeChannelWithFreshData && favorites.includes(activeChannelWithFreshData.id) ? 'bg-amber-500/15 border-amber-500/50 text-amber-400' : 'bg-slate-950 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800'}`} title="Toggle Favorite">
+                          <Icon name="star" className={`w-5 h-5 ${activeChannelWithFreshData && favorites.includes(activeChannelWithFreshData.id) ? 'fill-current' : ''}`} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {}
+            {seeAllData && (
+              <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fadeIn pb-24 md:pb-4">
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-6xl w-full h-[85vh] overflow-hidden flex flex-col relative animate-[fadeIn_0.2s_ease-out]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between px-5 py-4 border-b border-slate-800 bg-slate-900/50 shrink-0 gap-3">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-bold text-white">{seeAllData.title}</h3>
+                      <span className="text-xs bg-slate-800 text-slate-400 px-2.5 py-0.5 rounded-full font-semibold">{filteredSeeAllChannels.length} / {seeAllData.channels.length}</span>
+                    </div>
+                    <div className="flex items-center gap-2 flex-grow max-w-md sm:mx-4">
+                      <div className="relative w-full">
+                        <input type="text" placeholder={`Search within ${seeAllData.title}...`} value={seeAllSearchQuery} onChange={(e) => setSeeAllSearchQuery(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all" />
+                        <Icon name="search" className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                      </div>
+                      {seeAllSearchQuery && <button onClick={() => setSeeAllSearchQuery("")} className="text-xs font-bold text-slate-400 hover:text-white bg-slate-800 px-2 py-2 rounded-lg transition-colors shrink-0">Clear</button>}
+                    </div>
+                    <button onClick={() => { setSeeAllSearchQuery(""); setSeeAllData(null); }} className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg transition-colors self-end sm:self-auto">
+                      <Icon name="x" className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  <div className="p-5 overflow-y-auto flex-grow bg-slate-950">
+                    {filteredSeeAllChannels.length === 0 ? (
+                      <div className="flex flex-col items-center justify-center h-full text-center p-6 text-slate-500">
+                        <Icon name="search" className="w-12 h-12 mb-3 opacity-25" />
+                        <p className="text-sm font-semibold text-slate-400">No matching channels found</p>
+                        <p className="text-xs mt-1">Try typing a different name.</p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-3 md:gap-4 pb-4">
+                        {filteredSeeAllChannels.map((channel, index) => (
+                           <ChannelCard key={`seeall-${channel.id}-${index}`} channel={channel} isFavorited={favorites.includes(channel.id)} onToggleFavorite={(id, e) => { e.stopPropagation(); toggleFavorite(id, e); }} onSelect={(ch) => { setSeeAllSearchQuery(""); setSeeAllData(null); handleSelectChannel(ch); }} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {}
+            {isNsPlayerModalOpen && (
+              <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fadeIn pb-24 md:pb-4">
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl max-w-xl w-full overflow-hidden flex flex-col relative animate-[fadeIn_0.2s_ease-out]">
+                  <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800 bg-slate-900/50">
+                    <h3 className="text-lg font-bold text-white flex items-center gap-2"><Icon name="monitor-play" className="text-brand-400" /> NS Player Instructions</h3>
+                    <button onClick={() => setIsNsPlayerModalOpen(false)} className="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg transition-colors">
+                      <Icon name="x" className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <div className="p-5 flex flex-col gap-5 overflow-y-auto max-h-[75vh]">
+                    <div className="bg-emerald-950/20 border border-emerald-500/20 rounded-xl p-4 text-sm text-slate-300">
+                      <h4 className="font-bold text-emerald-400 mb-2 flex items-center gap-2"><Icon name="info" className="w-4 h-4" /> How to use with NS Player:</h4>
+                      <ol className="list-decimal list-inside space-y-1.5 marker:text-emerald-500/70 ml-1 text-left">
+                        <li>Download and install <strong>NS Player</strong> from the Google Play Store.</li>
+                        <li>Open the app and look for the option to <strong>Playlist</strong>.</li>
+                        <li>Copy one of the live server links provided below.</li>
+                        <li>Paste the copied URL into NS Player and hit save. Enjoy the stream!</li>
+                      </ol>
+                    </div>
+                    <div className="flex flex-col gap-3 mt-1">
+                      <h4 className="text-xs uppercase tracking-wider font-extrabold text-slate-500 mb-1 border-b border-slate-800/50 pb-2">Copiable Server URLs</h4>
+                      {[ { id: 'Fifa+', name: 'FIFA+', url: 'https://cutt.ly/fifaplus' }, { id: 'tapmad', name: 'Tapmad BD Live', url: 'https://cutt.ly/tapmadbd' }, { id: 'sonyliv', name: 'SonyLiV Live', url: 'https://cutt.ly/SonyLiV' }, { id: 'toffee', name: 'Toffee', url: 'https://raw.githubusercontent.com/BINOD-XD/Toffee-Auto-Update-Playlist/refs/heads/main/toffee_NS_Player.m3u' }, { id: 'akashgo', name: 'Akash Go', url: 'https://raw.githubusercontent.com/srhady/Hady/refs/heads/main/akash_live.m3u' }, { id: 'aynaott', name: 'Ayna OTT', url: 'https://raw.githubusercontent.com/srhady/AynaOTT/refs/heads/main/aynaott.m3u' }, { id: 'axsports', name: 'AX Sports Live', url: 'https://raw.githubusercontent.com/srhady/axsports/refs/heads/main/playlist.m3u' }, { id: 'bingstream', name: 'Bing Stream', url: 'https://raw.githubusercontent.com/srhady/bingstream/refs/heads/main/playlist.m3u' } ].map(link => (
+                        <div key={link.id} className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col gap-2 transition-colors hover:border-slate-700">
+                          <span className="text-xs font-bold text-slate-300 text-left">{link.name}</span>
+                          <div className="flex gap-2">
+                            <input type="text" readOnly value={link.url} className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-400 w-full focus:outline-none focus:border-brand-500/50" />
+                            <button onClick={() => { copyToClipboard(link.url); setCopiedLinkId(link.id); setTimeout(() => setCopiedLinkId(null), 2500); }} className={`px-3 py-2 rounded-lg flex items-center justify-center transition-all shrink-0 border ${copiedLinkId === link.id ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-400' : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-300'}`} title="Copy URL">
+                              <Icon name={copiedLinkId === link.id ? "check" : "copy"} className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+          </main>
+
+          {}
+          <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-t border-slate-800/80 flex justify-around py-3 md:hidden">
+            <button onClick={() => { setActiveMobileTab("home"); setViewState("home"); }} className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "home" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}>
+              <Icon name="home" className="w-5 h-5" /> <span>Home</span>
+            </button>
+            <button onClick={() => { setActiveMobileTab("search"); setViewState("home"); }} className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "search" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}>
+              <Icon name="search" className="w-5 h-5" /> <span>Search</span>
+            </button>
+            <button onClick={() => { setActiveMobileTab("favorites"); setViewState("home"); }} className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "favorites" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}>
+              <Icon name="star" className={`w-5 h-5 ${activeMobileTab === "favorites" && viewState !== "player" ? "fill-brand-400/10" : ""}`} /> <span>Favorites</span>
+            </button>
+            <button onClick={() => { setActiveMobileTab("settings"); setViewState("home"); }} className={`flex flex-col items-center gap-1.5 text-[10px] font-bold transition-all focus:outline-none ${activeMobileTab === "settings" && viewState !== "player" ? "text-brand-400" : "text-slate-400"}`}>
+              <Icon name="settings" className="w-5 h-5" /> <span>Settings</span>
+            </button>
+          </div>
+
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+  
+  <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
@@ -549,6 +1595,5 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
   </script>
-  
 </body>
 </html>
