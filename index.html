@@ -351,12 +351,21 @@ body {
   width: 140px;
   display: none;
   flex-direction: column;
-  overflow: hidden;
+  max-height: 180px;
+  overflow-y: auto;
+  overflow-x: hidden;
   z-index: 30;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 .quality-dropdown.show {
   display: flex;
+}
+.quality-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+.quality-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 10px;
 }
 .quality-option {
   padding: 10px 14px;
