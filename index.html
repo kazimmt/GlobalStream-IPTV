@@ -624,7 +624,7 @@ function playWithHLS(url, rawUrl, videoEl) {
     hls.loadSource(url);
     hls.attachMedia(videoEl);
 
-    // Build elegant custom overlay with Picture-in-Picture & Quality Gears
+    // Build elegant custom overlay with Picture-in-Picture
     var overlay = document.createElement('div');
     overlay.id = 'hlsControlsOverlay';
     overlay.className = 'hls-controls-overlay';
@@ -638,40 +638,28 @@ function playWithHLS(url, rawUrl, videoEl) {
       `;
     }
 
-    overlay.innerHTML = `
-      ${pipBtnHtml}
-      <div class="quality-wrapper" style="position: relative;">
-        <button id="qualityBtn" class="hls-overlay-btn" title="Quality Settings" style="display: none;">
-          <span class="material-symbols-outlined">settings</span>
-        </button>
-        <div id="qualityDropdown" class="quality-dropdown"></div>
-      </div>
-    `;
+    overlay.innerHTML = pipBtnHtml;
     container.appendChild(overlay);
 
     // Setup interactive sync for overlay visibility with player controls state
     var overlayTimeout;
-    var qualityDropdown = document.getElementById('qualityDropdown');
-    var qualityBtn = document.getElementById('qualityBtn');
 
     function showControls() {
       overlay.classList.add('visible');
       clearTimeout(overlayTimeout);
       
       var isPlaying = !videoEl.paused && !videoEl.ended;
-      var isDropdownOpen = qualityDropdown && qualityDropdown.classList.contains('show');
       
-      // Auto-hide after 3 seconds of inactivity, only if playing and quality selection is closed
-      if (isPlaying && !isDropdownOpen) {
+      // Auto-hide after 3 seconds of inactivity, only if playing
+      if (isPlaying) {
         overlayTimeout = setTimeout(hideControls, 3000);
       }
     }
 
     function hideControls() {
       var isPlaying = !videoEl.paused && !videoEl.ended;
-      var isDropdownOpen = qualityDropdown && qualityDropdown.classList.contains('show');
       
-      if (isPlaying && !isDropdownOpen) {
+      if (isPlaying) {
         overlay.classList.remove('visible');
       }
     }
@@ -705,87 +693,12 @@ function playWithHLS(url, rawUrl, videoEl) {
       };
     }
 
-    if (qualityBtn && qualityDropdown) {
-      qualityBtn.onclick = function(e) {
-        e.stopPropagation();
-        qualityDropdown.classList.toggle('show');
-        showControls(); // Keep controls active when dropdown toggled
-      };
-
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function closeDropdown(e) {
-        if (!qualityBtn.contains(e.target) && !qualityDropdown.contains(e.target)) {
-          qualityDropdown.classList.remove('show');
-          showControls(); // Recalculate hide timeout
-        }
-      });
-    }
-
     hls.on(Hls.Events.MANIFEST_PARSED,function(){
       msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
       videoEl.play().catch(function(){ 
         msg.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Buffer Ready. Tap player to start.'; 
       });
-
-      // Populate Qualities dynamically if there is multi-quality source available
-      var levels = hls.levels;
-      if (levels && levels.length > 1) {
-        qualityBtn.style.display = 'flex';
-        qualityDropdown.innerHTML = '';
-
-        // Auto selection
-        var autoOpt = document.createElement('button');
-        autoOpt.className = 'quality-option active';
-        autoOpt.innerText = 'Auto';
-        autoOpt.onclick = function() {
-          hls.currentLevel = -1;
-          setActiveQualityOption(autoOpt);
-        };
-        qualityDropdown.appendChild(autoOpt);
-
-        // Map levels with their original index to keep track of level associations after sorting
-        var indexedLevels = levels.map(function(level, index) {
-          return { level: level, index: index };
-        });
-
-        // Sort levels descending: maximum quality (highest resolution or bitrate) first
-        indexedLevels.sort(function(a, b) {
-          var heightA = a.level.height || 0;
-          var heightB = b.level.height || 0;
-          if (heightB !== heightA) {
-            return heightB - heightA;
-          }
-          return (b.level.bitrate || 0) - (a.level.bitrate || 0);
-        });
-
-        // Quality resolutions ordered max first
-        indexedLevels.forEach(function(item) {
-          var level = item.level;
-          var originalIndex = item.index;
-          var opt = document.createElement('button');
-          opt.className = 'quality-option';
-          var name = level.height ? level.height + 'p' : (Math.round(level.bitrate / 1000) + ' kbps');
-          opt.innerText = name;
-          opt.onclick = function() {
-            hls.currentLevel = originalIndex;
-            setActiveQualityOption(opt);
-          };
-          qualityDropdown.appendChild(opt);
-        });
-      } else {
-        qualityBtn.style.display = 'none';
-      }
     });
-
-    function setActiveQualityOption(selectedOpt) {
-      var opts = qualityDropdown.querySelectorAll('.quality-option');
-      opts.forEach(function(opt) {
-        opt.classList.remove('active');
-      });
-      selectedOpt.classList.add('active');
-      qualityDropdown.classList.remove('show');
-      showControls(); // Recalculate hide timeout after closing selection
-    }
 
     hls.on(Hls.Events.ERROR,function(e,d){
       if(d.fatal){
