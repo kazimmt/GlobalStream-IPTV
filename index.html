@@ -601,13 +601,15 @@ window.addEventListener('DOMContentLoaded', () => {
     play(defaultCard.dataset.url, defaultCard);
   }
 
-  // Fetch external M3U and append channels
+  // Fetch external M3U and prepends channels to the front of the grid
   fetch('https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u')
     .then(response => response.text())
     .then(data => {
       const lines = data.split('\n');
       const channelsContainer = document.getElementById('channelsList');
+      const staticFirstChild = channelsContainer.firstElementChild;
       let currentChannel = {};
+      let isFirstTapmad = true;
       
       for (let i = 0; i < lines.length; i++) {
         let line = lines[i].trim();
@@ -632,14 +634,24 @@ window.addEventListener('DOMContentLoaded', () => {
           card.dataset.url = currentChannel.url;
           card.onclick = function() { play(this.dataset.url, this); };
           
+          if (isFirstTapmad) {
+            // Remove previous active status (from static channels)
+            document.querySelectorAll('.channel-card').forEach(b => b.classList.remove('active'));
+            card.className = 'channel-card active';
+            
+            // Switch current active playback to the newly discovered first Tapmad stream
+            play(currentChannel.url, card);
+            isFirstTapmad = false;
+          }
+          
           card.innerHTML = `
             <img class="channel-icon-avatar" src="${currentChannel.logo}" alt="${currentChannel.name} Icon" onerror="this.src='https://i.imgur.com/53aSeDH.png'">
             <div class="channel-name-title">${currentChannel.name}</div>
             <div class="channel-badge-status">ULTRA HD</div>
           `;
           
-          // Append to the end of the container
-          channelsContainer.appendChild(card);
+          // Insert dynamically parsed channel BEFORE the static children
+          channelsContainer.insertBefore(card, staticFirstChild);
           
           // Reset for the next channel
           currentChannel = {};
