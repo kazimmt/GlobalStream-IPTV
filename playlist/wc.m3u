@@ -21,6 +21,10 @@ https://kazimmt.ami.bd/playlist/TF/TF-4.m3u8
 https://kazimmt.ami.bd/playlist/TF/TF-5.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/UspLV8i.png", BD V AUS 🇧🇩ᶠᴴᴰ
 https://kazimmt.ami.bd/playlist/TF/bdaus.m3u8
+#EXTINF:-1  tvg-logo="https://i.imgur.com/uDz3H80.png", GO LIVEᶠᴴᴰ
+https://kazimmt.ami.bd/playlist/TF/GL-1.m3u8
+#EXTINF:-1  tvg-logo="https://i.imgur.com/B059UW2.png", CCTV 5ᶠᴴᴰ
+https://kazimmt.ami.bd/playlist/TF/CTV.m3u8
 
 https://premierleagpl23.akamaized.net/hls/live/2107108/vertical-backup312/master.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/g46kUC4.png",SOMOY TVᴴᴰ
