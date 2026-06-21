@@ -178,19 +178,6 @@ body {
   position: relative;
 }
 
-/* Full aspect container styles for JW Player */
-#player {
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.jwplayer {
-  width: 100% !important;
-  height: 100% !important;
-}
-
 /* Secure Fallback Layer */
 .ns-fallback {
   position: absolute;
@@ -353,9 +340,8 @@ body {
       
       <div class="theater-block">
         <div class="premium-card">
-          <div class="media-container">
-            <!-- JW Player mount container -->
-            <div id="player"></div>
+          <!-- The container where standard video or JW Player container will be injected dynamically -->
+          <div class="media-container" id="mediaContainer">
             <div class="ns-fallback" id="nsFallback">
               <span class="material-symbols-outlined">error</span>
               <p>This channel is experiencing loading issues. Please click the channel button again to reconnect, or select an alternative channel.</p>
@@ -405,31 +391,30 @@ body {
             <div class="channel-name-title">TOFFEE 5</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
-		  
-		  <div class="channel-card" data-url="https://d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/uDz3H80.png" alt="GO Live Icon">
-            <div class="channel-name-title">GO LIVE 1</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
-          
-		  <div class="channel-card" data-url="https://streamtv.panthomashreky6.workers.dev/https/d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist_b4096000_slENG.m3u8" onclick="play(this.dataset.url, this)">
-            <img class="channel-icon-avatar" src="https://i.imgur.com/uDz3H80.png" alt="GO Live Icon">
-            <div class="channel-name-title">GO LIVE 2</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          </div>
 
           <div class="channel-card" data-url="https://live.wxinxi.com/live/25816724_sb2maw7iluj1ghr92sk5siud28tpimx0.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/B059UW2.png" alt="CCTV 5 Icon">
             <div class="channel-name-title">CCTV 5</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
-		  
-          <div class="channel-card" data-url="https://kazimmt.ami.bd/playlist/TF/bdaus.m3u8" onclick="play(this.dataset.url, this)">
+          
+          <div class="channel-card" data-url="https://kazimmt.ami.bd/playlist/TF/bdaus.m3u.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/UspLV8i.png" alt="BD VS AUS Icon">
             <div class="channel-name-title">BD VS AUS</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
 		  
+		  <div class="channel-card" data-url="https://streamtv.panthomashreky6.workers.dev/https/d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist_b4096000_slENG.m3u8" onclick="play(this.dataset.url, this)">
+            <img class="channel-icon-avatar" src="https://i.imgur.com/uDz3H80.png" alt="GO Live Icon">
+            <div class="channel-name-title">GO LIVE 1</div>
+            <div class="channel-badge-status">ULTRA HD</div>
+          </div>
+		  
+		  <div class="channel-card" data-url="https://d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist.m3u8" onclick="play(this.dataset.url, this)">
+            <img class="channel-icon-avatar" src="https://i.imgur.com/uDz3H80.png" alt="GO Live Icon">
+            <div class="channel-name-title">GO LIVE 2</div>
+            <div class="channel-badge-status">ULTRA HD</div>
+          </div>
           
         </div>
       </div>
@@ -439,7 +424,8 @@ body {
   </main>
 </div>
 
-<!-- JW Player Script Setup -->
+<!-- Both engines imported side-by-side -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"></script>
 <script src="https://khela.pro.bd/player.js"></script>
 <script>
 jwplayer.key="Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==";
@@ -455,8 +441,9 @@ try {
 }
 
 var PROXY = 'https://billowing-dawn-ee85.opkawsar156.workers.dev/?url=';
-var playerInstance=null, msg=document.getElementById('statusMsg');
+var hls=null, msg=document.getElementById('statusMsg');
 var fallback=document.getElementById('nsFallback');
+var container=document.getElementById('mediaContainer');
 var currentUrl='';
 
 function showFallback(url){
@@ -474,21 +461,105 @@ function play(rawUrl, btn, isDirect){
   if(btn) btn.classList.add('active');
   currentUrl=rawUrl;
   
-  // Auto-bypass proxy for cloudfront.net URLs to prevent CORS/proxy issues
-  var useProxy = true;
-  if (isDirect || rawUrl.includes("cloudfront.net")) {
-    useProxy = false;
-  }
+  // Detect if the target stream is a Go Live Cloudfront channel
+  var isGoLive = rawUrl.toLowerCase().includes("cloudfront.net") || rawUrl.toLowerCase().includes("rtbgo");
+  var useProxy = !isGoLive;
   
   var url = useProxy ? (PROXY + encodeURIComponent(rawUrl)) : rawUrl;
   
-  msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Mounting broadcast proxy data streams...';
+  msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Mounting broadcast data streams...';
   hideFallback();
 
-  if(!playerInstance){
-    playerInstance = jwplayer("player");
+  // 1. Destroy and cleanup hls.js player if active
+  if(hls){ 
+    try { hls.destroy(); } catch(e){} 
+    hls=null; 
   }
+  
+  // 2. Destroy and cleanup JW Player if active
+  try {
+    if (typeof jwplayer !== 'undefined') {
+      var activeJw = jwplayer("jwPlayerElement");
+      if (activeJw && typeof activeJw.remove === 'function') {
+        activeJw.remove();
+      }
+    }
+  } catch(e){}
 
+  // 3. Clear dynamically generated player elements inside the media container
+  var oldHlsPlayer = document.getElementById('hlsPlayer');
+  if (oldHlsPlayer) oldHlsPlayer.remove();
+  
+  var oldJwPlayer = document.getElementById('jwPlayerElement');
+  if (oldJwPlayer) oldJwPlayer.remove();
+
+  // 4. Mount the correct engine
+  if (isGoLive) {
+    // Inject dynamic JW player mount point
+    var jwDiv = document.createElement('div');
+    jwDiv.id = 'jwPlayerElement';
+    jwDiv.style.width = '100%';
+    jwDiv.style.height = '100%';
+    jwDiv.style.position = 'absolute';
+    jwDiv.style.top = '0';
+    jwDiv.style.left = '0';
+    container.insertBefore(jwDiv, fallback);
+
+    playWithJW(url, rawUrl);
+  } else {
+    // Inject dynamic native video element for Toffee / standard HLS
+    var videoEl = document.createElement('video');
+    videoEl.id = 'hlsPlayer';
+    videoEl.controls = true;
+    videoEl.playsInline = true;
+    videoEl.autoplay = true;
+    videoEl.muted = true;
+    videoEl.setAttribute('controlsList', 'nodownload');
+    videoEl.oncontextmenu = function() { return false; };
+    videoEl.style.width = '100%';
+    videoEl.style.height = '100%';
+    videoEl.style.display = 'block';
+    container.insertBefore(videoEl, fallback);
+
+    playWithHLS(url, rawUrl, videoEl);
+  }
+}
+
+// Play workflow using standard hls.js (original player pipeline)
+function playWithHLS(url, rawUrl, videoEl) {
+  if(Hls.isSupported()){
+    hls=new Hls({
+      manifestLoadingMaxRetry:2,
+      levelLoadingMaxRetry:2,
+      fragLoadingMaxRetry:2
+    });
+    hls.loadSource(url);
+    hls.attachMedia(videoEl);
+    hls.on(Hls.Events.MANIFEST_PARSED,function(){
+      msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
+      videoEl.play().catch(function(){ 
+        msg.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Buffer Ready. Tap player to start.'; 
+      });
+    });
+    hls.on(Hls.Events.ERROR,function(e,d){
+      if(d.fatal){
+        console.log('HLS fatal network exceptions:', d.type, d.details);
+        showFallback(rawUrl);
+      }
+    });
+  } else if(videoEl.canPlayType('application/vnd.apple.mpegurl')){
+    videoEl.src=url;
+    videoEl.play();
+    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
+    videoEl.onerror=function(){ showFallback(rawUrl); };
+  } else {
+    showFallback(rawUrl);
+  }
+}
+
+// Play workflow using JW Player (go live setup)
+function playWithJW(url, rawUrl) {
+  var playerInstance = jwplayer("jwPlayerElement");
   playerInstance.setup({
     playlist: [{
       file: url,
@@ -504,12 +575,12 @@ function play(rawUrl, btn, isDirect){
   });
 
   playerInstance.on("ready", function(){
-    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
+    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live (JW) · Pipeline Active';
     hideFallback();
   });
 
   playerInstance.on("play", function(){
-    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
+    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live (JW) · Pipeline Active';
     hideFallback();
   });
 
@@ -518,7 +589,7 @@ function play(rawUrl, btn, isDirect){
   });
 
   playerInstance.on("buffer", function(){
-    msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Buffering stream data...';
+    msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Buffering live stream...';
   });
 }
 
@@ -535,7 +606,7 @@ window.addEventListener('DOMContentLoaded', () => {
     .then(response => response.text())
     .then(data => {
       const lines = data.split('\n');
-      const container = document.getElementById('channelsList');
+      const channelsContainer = document.getElementById('channelsList');
       let currentChannel = {};
       
       for (let i = 0; i < lines.length; i++) {
@@ -568,7 +639,7 @@ window.addEventListener('DOMContentLoaded', () => {
           `;
           
           // Append to the end of the container
-          container.appendChild(card);
+          channelsContainer.appendChild(card);
           
           // Reset for the next channel
           currentChannel = {};
