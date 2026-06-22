@@ -174,6 +174,8 @@ https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/m7duvnk2bu/
 #=================================
 #EXTINF:-1 tvg-id="t sports" tvg-name="T-Sports" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="world cup",Football World Cup
 http://103.179.25.147:8181/FiFaaaaaah/index.m3u8
+#EXTINF:-1 tvg-logo="https://www.somoynews.tv/icon.png" , Somoy TV
+http://ubuntu.moonplex.net:8080/Somoy_TV/index.m3u8
 #EXTINF:-1 tvg-name="Football World Cup 2026 link hindi" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="Football World Cup 2026",Football World Cup
 http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/745195.ts
 #====== Toffee World Cup ============
@@ -189,7 +191,8 @@ https://sm-monirul.top/tof/live/toffee4/index.m3u8
 https://sm-monirul.top/tof/live/toffee5/index.m3u8
 #====== Bioscope World Cup ============
 #EXTINF:-1 tvg-logo="https://i.postimg.cc/X7qgs8BY/images-d47abaf70fb3ea50af7cdf455ccab5a6-goplay-bioscope-icon-transparent-app.png" ,Bioscope
-https://sm-monirul.top/ultra_restream/bioscope/index.m3u8
+#https://sm-monirul.top/ultra_restream/bioscope/index.m3u8
+https://bioscope.sm-monirulislam-exp.workers.dev/index.m3u8
 #======  World Cup ============
 #EXTINF:-1 tvg-id="t sports" tvg-name="T-Sports" tvg-logo="https://raw.githubusercontent.com/sm-monirulislam/SM-Live-TV/main/Script/world_cup.png" group-title="world cup",Football World Cup
 https://d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist_b4096000_slENG.m3u8
