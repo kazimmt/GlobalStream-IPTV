@@ -527,7 +527,12 @@ try {
   console.warn('Devtool block could not be initialized:', error);
 }
 
-
+var PROXY = 'https://billowing-dawn-ee85.opkawsar156.workers.dev/?url=';
+var hls=null, msg=document.getElementById('statusMsg');
+var fallback=document.getElementById('nsFallback');
+var container=document.getElementById('mediaContainer');
+var currentUrl='';
+	
 function showFallback(url){
   currentUrl=url;
   fallback.classList.add('show');
