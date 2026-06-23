@@ -9,18 +9,21 @@
 
 #=================================
 
+#====== Toffee World Cup ============
+
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-1ᶠᴴᴰ
-https://kazimmt.ami.bd/playlist/TF/TF-1.m3u8
+http://sm-monirul.top/tof/live/gervsivo/index.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-2ᶠᴴᴰ
-https://kazimmt.ami.bd/playlist/TF/TF-2.m3u8
+http://sm-monirul.top/tof/live/ecuvscur/index.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-3ᶠᴴᴰ
-https://kazimmt.ami.bd/playlist/TF/TF-3.m3u8
+http://sm-monirul.top/tof/live/tunvsjap/index.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-4ᶠᴴᴰ
-https://kazimmt.ami.bd/playlist/TF/TF-4.m3u8
+https://sm-monirul.top/tof/live/toffee4/index.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-5ᶠᴴᴰ
 https://kazimmt.ami.bd/playlist/TF/TF-5.m3u8
-#EXTINF:-1  tvg-logo="https://i.imgur.com/UspLV8i.png", BD V AUS 🇧🇩ᶠᴴᴰ
-https://kazimmt.ami.bd/playlist/TF/bdaus.m3u8
+
+#======  World Cup ============
+
 #EXTINF:-1  tvg-logo="https://i.imgur.com/uDz3H80.png", GO LIVEᶠᴴᴰ
 https://d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/B059UW2.png", CCTV 5ᶠᴴᴰ
