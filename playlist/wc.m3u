@@ -31,6 +31,18 @@ https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/pl
 
 #======  World Cup ============
 
+#EXTINF:-1  tvg-logo="https://i.imgur.com/M5UsROs.png", FOXᶠᴴᴰ
+https://inproviszon.st/fox-usa.m3u8
+
+#EXTINF:-1  tvg-logo="https://i.imgur.com/M5UsROs.png", FOX⁴ᵏ
+https://inproviszon.st/fox4k-usa.m3u8
+
+#EXTINF:-1  tvg-logo="https://i.imgur.com/TuiOPeH.png", TELEMUNDO⁴ᵏ
+https://inproviszon.st/peacock-1.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/iReXqbP.png",beIN Sports 2 Maxᶠᴴᴰ
+https://inproviszon.st/beinsportsmax2-sa.m3u8
+
 #EXTINF:-1  tvg-logo="https://i.imgur.com/B059UW2.png", CCTV 5ᶠᴴᴰ
 https://kazimmt.ami.bd/playlist/TF/CCT-1.m3u8
 
