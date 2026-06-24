@@ -25,6 +25,9 @@ https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/pl
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-5ᶠᴴᴰ
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 9; Redmi S2 Build/PKQ1.181203.001) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.7049.79 Mobile Safari/537.36
 https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-5.m3u8
+#EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png", TOFFEE-🇧🇩-6ᶠᴴᴰ
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 9; Redmi S2 Build/PKQ1.181203.001) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.7049.79 Mobile Safari/537.36
+https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-6.m3u8
 
 #======  World Cup ============
 
