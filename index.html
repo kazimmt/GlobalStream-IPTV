@@ -7,8 +7,6 @@
 <meta name="keywords" content="FIFA World Cup 2026, ফিফা বিশ্বকাপ ২০২৬, 2026 World Cup, FIFA 2026 schedule, বিশ্বকাপ ফুটবল ২০২৬, host countries 2026, World Cup matches, football tournament 2026, Argentina football, Brazil football, Lionel Messi 2026, Cristiano Ronaldo, World Cup venues, USA Mexico Canada 2026, football world cup news, live football update">
 <title>Khela - Live FIFA WorldCup</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<!-- Added FontAwesome for Schedule Icons -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <meta property="og:image" content="./assets/social.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -396,58 +394,27 @@ body {
   background: rgba(168, 85, 247, 0.15);
 }
 
-/* Schedule Card Integration Styles */
-.schedule-container {
-  max-width: 1600px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 40px 40px;
-}
-.schedule-card { margin-top: 10px; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; background: rgba(30, 41, 59, 0.6); overflow: hidden; backdrop-filter: blur(16px); }
-.schedule-top { padding: 20px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #161e2e; }
-.schedule-title strong { font-size: 1.25rem; color: #fff; display: flex; align-items: center; gap: 10px; font-weight: 800;}
-.schedule-title span { color: #94a3b8; font-size: 0.85rem; display: block; margin-top: 4px; }
-.mlbd-v2-badge { background: rgba(59, 130, 246, 0.15); color: #3b82f6; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; }
-.mlbd-schedule-tabs, .mlbd-stage-tabs { display: flex; gap: 8px; margin-top: 16px; overflow-x: auto; padding-bottom: 4px; }
-.mlbd-schedule-tabs::-webkit-scrollbar, .mlbd-stage-tabs::-webkit-scrollbar { display: none; }
-.mlbd-schedule-tab, .mlbd-stage-tab { background: rgba(255, 255, 255, 0.05); border: none; padding: 8px 16px; border-radius: 10px; color: #cbd5e1; cursor: pointer; font-size: 0.85rem; font-weight: 600; white-space: nowrap; transition: all 0.2s; }
-.mlbd-schedule-tab:hover, .mlbd-stage-tab:hover { background: rgba(255, 255, 255, 0.1); }
-.mlbd-schedule-tab.is-active, .mlbd-stage-tab.is-active { background: #3b82f6; color: #fff; }
-.match-list { display: grid; gap: 12px; padding: 24px; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
-.match-card { background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: transform 0.2s; position: relative; overflow: hidden;}
-.match-card:hover { transform: translateY(-2px); background: rgba(30, 41, 59, 0.9); border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3); }
-.match-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #3b82f6; transition: all 0.3s;}
-.match-card.live-row::before { background: #ef4444; }
-.match-card.is-hidden-by-filter { display: none !important; }
-.match-group { font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; background: rgba(255, 255, 255, 0.05); padding: 4px 8px; border-radius: 6px; display: inline-block; }
-.team-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
-.team-row .flag { width: 32px; height: 22px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-.team-name { color: #f8fafc; font-weight: 700; font-size: 1rem; }
-.match-side { text-align: right; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; justify-content: center;}
-.match-time { color: #94a3b8; font-size: 0.85rem; font-weight: 600; text-align: right; line-height: 1.4;}
-.match-status { background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; }
-.live-dot.green { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; display: inline-block; animation: pulseGlow 2s infinite; }
-.match-countdown { background: rgba(255, 255, 255, 0.05); color: #cbd5e1; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-align: center; }
-.match-countdown.is-finished { background: transparent; color: #64748b; padding: 0;}
-
 /* Responsive Adaptability Breakpoints */
 @media (max-width: 992px) {
-  .dashboard-grid { grid-template-columns: 100%; padding: 20px 16px; gap: 24px; }
-  .schedule-container { padding: 0 16px 24px; }
+  .dashboard-grid {
+    grid-template-columns: 100%;
+    padding: 20px 16px;
+    gap: 24px;
+  }
   .top-bar { padding: 16px 20px; flex-wrap: wrap; gap: 16px; justify-content: center; }
   .search-box { width: 100%; order: 3; margin: 0; }
   .brand-logo { order: 1; }
   .live-badge-glow { order: 2; }
 }
 @media (max-width: 768px) {
-  .stream-details-box { display: none !important; }
-  .match-list { grid-template-columns: 1fr; padding: 16px; }
-  .match-card { flex-direction: column; align-items: flex-start; }
-  .match-side { width: 100%; flex-direction: row; justify-content: space-between; align-items: center; margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px; }
-  .match-time { text-align: left; }
+  .stream-details-box {
+    display: none !important;
+  }
 }
 @media (max-width: 480px) {
-  .channels-list-container { grid-template-columns: repeat(2, 1fr); }
+  .channels-list-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
 </head>
@@ -523,12 +490,31 @@ body {
             <div class="channel-name-title">SOUTH AFRICA 🇿🇦 VS SOUTH KOREA 🇰🇷</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
+
+          <div class="channel-card" data-url="https://live.wxinxi.com/live/25816724_sb2maw7iluj1ghr92sk5siud28tpimx0.m3u8" onclick="play(this.dataset.url, this)">
+            <img class="channel-icon-avatar" src="https://i.imgur.com/B059UW2.png" alt="CCTV 5 Icon">
+            <div class="channel-name-title">CCTV 5</div>
+            <div class="channel-badge-status">ULTRA HD</div>
+          </div>
 		  
+		  <div class="channel-card" data-url="https://streamtv.panthomashreky6.workers.dev/https/d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist_b4096000_slENG.m3u8" onclick="play(this.dataset.url, this)">
+            <img class="channel-icon-avatar" src="https://i.imgur.com/uDz3H80.png" alt="GO Live Icon">
+            <div class="channel-name-title">GO LIVE 1</div>
+            <div class="channel-badge-status">ULTRA HD</div>
+          </div>
+		  
+		  <div class="channel-card" data-url="https://d1211whpimeups.cloudfront.net/smil:rtbgo/chunklist.m3u8" onclick="play(this.dataset.url, this)">
+            <img class="channel-icon-avatar" src="https://i.imgur.com/uDz3H80.png" alt="GO Live Icon">
+            <div class="channel-name-title">GO LIVE 2</div>
+            <div class="channel-badge-status">ULTRA HD</div>
+          </div>
+          
         </div>
       </div>
 
     </div>
 
+<<<<<<< HEAD
     <!-- Match Schedule Integration -->
     <div class="schedule-container">
       <section class="schedule-card">
@@ -1715,6 +1701,8 @@ body {
     </div>
     <!-- End Match Schedule -->
 
+=======
+>>>>>>> parent of 4750aa6 (add match schedule)
   </main>
 </div>
 
@@ -2034,123 +2022,6 @@ window.addEventListener('DOMContentLoaded', () => {
       console.error('Failed to load external M3U playlist:', error);
     });
 });
-
-// Automatic Match Schedule Update Logic
-function updateEachMatchCountdown(){
-    const now = Math.floor(Date.now() / 1000);
-    document.querySelectorAll('[data-match-countdown]').forEach(function(el){
-      const start = Number(el.getAttribute('data-start') || 0);
-      const end = Number(el.getAttribute('data-end') || 0);
-      const status = String(el.getAttribute('data-status') || '').toLowerCase();
-      el.classList.remove('is-soon','is-finished');
-      if(!start){ el.textContent = status === 'live' ? 'Live now' : 'Time TBA'; return; }
-      if(status === 'live' && end && now <= end){
-        let left = Math.max(0, end - now);
-        const m = Math.floor(left / 60);
-        const sec = left % 60;
-        el.textContent = 'Live • ' + m + 'm ' + String(sec).padStart(2,'0') + 's left';
-        return;
-      }
-      if(now < start){
-        let diff = start - now;
-        const d = Math.floor(diff / 86400); diff %= 86400;
-        const h = Math.floor(diff / 3600); diff %= 3600;
-        const m = Math.floor(diff / 60);
-        const sec = diff % 60;
-        if(d > 0) el.textContent = d + 'd ' + h + 'h ' + m + 'm ' + String(sec).padStart(2,'0') + 's';
-        else el.textContent = h + 'h ' + m + 'm ' + String(sec).padStart(2,'0') + 's';
-        if((start - now) <= 3600) el.classList.add('is-soon');
-        return;
-      }
-      if(end && now < end){
-        let left = end - now;
-        const m = Math.floor(left / 60);
-        const sec = left % 60;
-        el.textContent = 'Live • ' + m + 'm ' + String(sec).padStart(2,'0') + 's left';
-        return;
-      }
-      el.textContent = 'Finished';
-      el.classList.add('is-finished');
-    });
-
-    // Automatically update Match status UI based on timestamp logic
-    document.querySelectorAll('.match-card').forEach(function(card){
-        const st = parseInt(card.getAttribute("data-start-ts")||"0",10);
-        const en = parseInt(card.getAttribute("data-end-ts")||"0",10);
-        const s = card.getAttribute("data-match-status")||"";
-        
-        const live = s==="live" || (st&&en&&now>=st&&now<=en);
-        const finished = s==="finished" || (en&&now>en);
-
-        if(live) {
-            card.classList.add("live-row");
-            card.setAttribute("data-match-status", "live");
-            let statusBadge = card.querySelector('.match-status');
-            if(!statusBadge) {
-              const countdownDiv = card.querySelector('.match-countdown');
-              statusBadge = document.createElement('div');
-              statusBadge.className = 'match-status';
-              statusBadge.innerHTML = '<span class="live-dot green"></span> LIVE';
-              if(countdownDiv) countdownDiv.parentNode.insertBefore(statusBadge, countdownDiv);
-            }
-        } else if(finished) {
-            card.classList.remove("live-row");
-            card.setAttribute("data-match-status", "finished");
-            const statusBadge = card.querySelector('.match-status');
-            if(statusBadge) statusBadge.remove();
-        }
-    });
-}
-
-// Auto Match Schedule filtering (Tabs)
-function initScheduleTabs(){
-    let status = "all", stage = "all";
-    function apply(){
-        const now = Date.now()/1000;
-        const day = new Date(), startDay = new Date(day.getFullYear(),day.getMonth(),day.getDate()).getTime()/1000, endDay = startDay+86400;
-        
-        document.querySelectorAll(".match-card").forEach(function(card){
-            const st = parseInt(card.getAttribute("data-start-ts")||"0",10), en = parseInt(card.getAttribute("data-end-ts")||"0",10);
-            const s = card.getAttribute("data-match-status")||"", g = card.getAttribute("data-stage")||"group";
-            
-            const live = s==="live" || (st&&en&&now>=st&&now<=en);
-            const today = st>=startDay&&st<endDay;
-            const upcoming = s==="upcoming" || st>now;
-            const finished = s==="finished" || (en&&now>en);
-            
-            const okStatus = status==="all" || (status==="live"&&live) || (status==="today"&&today) || (status==="upcoming"&&upcoming) || (status==="finished"&&finished);
-            const okStage = stage==="all" || g===stage;
-            
-            card.classList.toggle("is-hidden-by-filter", !(okStatus&&okStage));
-        });
-    }
-    
-    document.querySelectorAll(".mlbd-schedule-tab").forEach(function(btn){
-        btn.addEventListener("click", function(){
-            document.querySelectorAll(".mlbd-schedule-tab").forEach(b=>b.classList.remove("is-active"));
-            btn.classList.add("is-active");
-            status = btn.getAttribute("data-filter") || "all";
-            apply();
-        });
-    });
-    
-    document.querySelectorAll(".mlbd-stage-tab").forEach(function(btn){
-        btn.addEventListener("click", function(){
-            document.querySelectorAll(".mlbd-stage-tab").forEach(b=>b.classList.remove("is-active"));
-            btn.classList.add("is-active");
-            stage = btn.getAttribute("data-stage") || "all";
-            apply();
-        });
-    });
-    
-    apply();
-}
-
-// Start schedule intervals
-updateEachMatchCountdown();
-setInterval(updateEachMatchCountdown, 1000);
-initScheduleTabs();
-
 </script>
 
 <script>
@@ -2160,7 +2031,7 @@ initScheduleTabs();
           .then(registration => console.log('ServiceWorker registration successful with scope: ', registration.scope), err => console.log('ServiceWorker registration failed: ', err));
       });
     }
-</script>
+  </script>
   
 </body>
 </html>
