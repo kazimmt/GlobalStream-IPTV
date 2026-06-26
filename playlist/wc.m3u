@@ -32,22 +32,30 @@ https://kazimmt.ami.bd/playlist/TF/TF-6.m3u
 #======  T Sports (BD) ============
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᶠᴴᴰ
 http://fastshare1.com/live/Hussein456124/5478243659/52500.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/52500.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://fastshare1.com/live/Hussein456124/5478243659/18452.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/18452.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://fastshare1.com/live/Hussein456124/5478243659/113069.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/113069.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
 http://fastshare1.com/live/Hussein456124/5478243659/130714.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",T Sportsᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/130714.ts
 
 #======  FOX ============
-#EXTINF:-1 tvg-logo="https://i.imgur.com/XiFZia7.png",FS1ᶠᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.imgur.com/hDmosMm.png",FS1ᶠᴴᴰ
 http://fastshare1.com/live/Hussein456124/5478243659/751354.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/XiFZia7.png",FS1ᶠᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.imgur.com/hDmosMm.png",FS1ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/751354.ts
 
-#EXTINF:-1 tvg-logo="https://i.imgur.com/XiFZia7.png",FS2ᶠᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.imgur.com/olHih83.png",FS2ᶠᴴᴰ
 http://fastshare1.com/live/Hussein456124/5478243659/751355.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/XiFZia7.png",FS2ᶠᴴᴰ
+#EXTINF:-1 tvg-logo="https://i.imgur.com/olHih83.png",FS2ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/751355.ts
 
 
@@ -155,6 +163,7 @@ https://da-50f11b292a028381000001120000000000000009.id.vx.tentcdn.eu/wp/at-live-
 #KODIPROP:inputstream.adaptive.license_key=1b98a0f2de7784c6e132942385a089f3:546eae09a8d81c498dfd08532dcd68a5
 https://svc45.main.sl.t-online.de/bpk-tv/KID01064_FUSSBALLTV2_uhd/DASH/index.mpd
 
+#======  NOW TV ============
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW TV⁴ᵏ
 http://fastshare1.com/live/Hussein456124/5478243659/745270.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW TV⁴ᵏ
@@ -169,6 +178,44 @@ http://starhub.pro/live/farhat-3379/67897-913379/741567.ts
 http://fastshare1.com/live/Hussein456124/5478243659/745202.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/P54rWCP.png",UNITE8 SPORTS 2ᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/745202.ts
+
+#======  Super Sports ============
+#EXTINF:-1 tvg-logo="https://i.imgur.com/rC5rdnX.png",SuperSports Extraᴴᴰ
+http://fastshare1.com/live/Hussein456124/5478243659/741566.ts
+http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/745195.ts
+
+#======  beIN ============
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN SPORTS MAX⁴ᵏ
+http://fastshare1.com/live/Hussein456124/5478243659/747283.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN SPORTS MAX⁴ᵏ
+http://starhub.pro/live/farhat-3379/67897-913379/747283.ts
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN Sports 2 Maxᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/744524.ts
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN Sports 6 Frenchᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/744527.ts
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN 4 MAXᶠᴴᴰ
+https://inproviszon.st/beinsportsmax4-sa.m3u8
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beiN SPORTS FR
+http://193.47.62.55/hls/XEKKKQ.m3u8?|Referer=http://www.fawanews.sc/&Origin=http://www.fawanews.sc/
+
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN Sports 2ᴴᴰ
+https://edgestreams.pro/hls/sqdahach1ax.m3u8?|Referer=https://streamscenter.online/&Origin=https://streamscenter.online
+
+#======  TSN ============
+#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",TSN1ᶠᴴᴰ
+http://fastshare1.com/live/Hussein456124/5478243659/748388.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",TSN1ᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/748388.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",TSN SPORTSᶠᴴᴰ
+http://starhub.pro/live/farhat-3379/67897-913379/748388.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",SportzX Live
+https://instreams.pro/EU/HDWC1/tracks-v1a1/mono.m3u8|referer=https://instream.click/&origin=https://instream.click
+#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",TSN SPORTSᴴᴰ
+https://chatgpt.hereisman.net/playlist/52458/load-playlist?|Referer=https://gooz.aapmains.net
 
 #======  TELEMUNDO ============
 #EXTINF:-1 tvg-logo="https://i.imgur.com/TuiOPeH.png",TELEMUNDO (SPANISH)ᶠᴴᴰ
@@ -211,42 +258,6 @@ https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=34475edab991ad5e92548aebd710410a:501b209cccd323ac00bf5ac15b406cb4
 https://otte-qw.live.pv-cdn.net/pdx-nitro/live/clients/dash/enc/3ynrpdanq2/out/v1/81fd4c26584044d2b1a1cc5b32fa9af0/cenc.mpd|user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
-
-#======  Super Sports ============
-#EXTINF:-1 tvg-logo="https://i.imgur.com/rC5rdnX.png",SuperSports Extraᴴᴰ
-http://fastshare1.com/live/Hussein456124/5478243659/741566.ts
-http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/745195.ts
-
-#======  beIN ============
-#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN SPORTS MAX⁴ᵏ
-http://fastshare1.com/live/Hussein456124/5478243659/747283.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN SPORTS MAX⁴ᵏ
-http://starhub.pro/live/farhat-3379/67897-913379/747283.ts
-
-#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN Sports 2 Maxᶠᴴᴰ
-http://starhub.pro/live/farhat-3379/67897-913379/744524.ts
-
-#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN Sports 6 Frenchᶠᴴᴰ
-http://starhub.pro/live/farhat-3379/67897-913379/744527.ts
-
-#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN 4 MAXᶠᴴᴰ
-https://inproviszon.st/beinsportsmax4-sa.m3u8
-
-#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beiN SPORTS FR
-http://193.47.62.55/hls/XEKKKQ.m3u8?|Referer=http://www.fawanews.sc/&Origin=http://www.fawanews.sc/
-
-#EXTINF:-1 tvg-logo="https://i.imgur.com/9QifSzE.png",beIN Sports 2ᴴᴰ
-https://edgestreams.pro/hls/sqdahach1ax.m3u8?|Referer=https://streamscenter.online/&Origin=https://streamscenter.online
-
-#======  TSN ============
-#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",TSN SPORTSᶠᴴᴰ
-http://fastshare1.com/live/Hussein456124/5478243659/748388.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",TSN SPORTSᶠᴴᴰ
-http://starhub.pro/live/farhat-3379/67897-913379/748388.ts
-#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",SportzX Live
-https://instreams.pro/EU/HDWC1/tracks-v1a1/mono.m3u8|referer=https://instream.click/&origin=https://instream.click
-#EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png",TSN SPORTSᴴᴰ
-https://chatgpt.hereisman.net/playlist/52458/load-playlist?|Referer=https://gooz.aapmains.net
 
 #EXTINF:-1 tvg-logo="https://i.imgur.com/N09UZWA.png", TSN SPORTSᶠᴴᴰ
 #KODIPROP:inputstream=inputstream.adaptive
