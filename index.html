@@ -46,14 +46,14 @@ body {
   flex-direction: column;
 }
 
-/* Header & Search Bar (Fixed Layout) */
+/* Header */
 .top-bar {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 16px 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
@@ -73,59 +73,9 @@ body {
   gap: 10px;
 }
 .brand-logo .material-symbols-outlined {
-  color: #a855f7; /* Provide fallback color since text-fill transparent affects icons sometimes */
+  color: #a855f7;
   font-size: 28px;
   -webkit-text-fill-color: initial;
-}
-
-.search-box {
-  position: relative;
-  width: 380px;
-  margin: 0 20px;
-}
-.search-box input {
-  width: 100%;
-  padding: 11px 16px 11px 42px;
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 0.9rem;
-  outline: none;
-  transition: all 0.3s ease;
-}
-.search-box input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-.search-box .material-symbols-outlined {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #64748b;
-}
-
-.live-badge-glow {
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 8px 16px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  animation: pulseGlow 2s infinite;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
-  white-space: nowrap;
-}
-.live-badge-glow .material-symbols-outlined {
-  font-size: 14px;
-}
-@keyframes pulseGlow {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.96); opacity: 0.85; }
 }
 
 .main-wrapper {
@@ -277,7 +227,6 @@ body {
   border-color: #a855f7;
 }
 
-/* Updated avatar class to support img element with object-fit */
 .channel-icon-avatar {
   width: 80px;
   height: 45px;
@@ -288,8 +237,9 @@ body {
 
 .channel-name-title {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: #fff;
+  line-height: 1.3;
 }
 .channel-card.active .channel-name-title { color: #a855f7; }
 .channel-badge-status {
@@ -345,54 +295,6 @@ body {
   border-color: rgba(168, 85, 247, 0.4);
   transform: translateY(-1px);
 }
-.quality-dropdown {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 8px);
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  width: 140px;
-  display: none;
-  flex-direction: column;
-  max-height: 180px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  z-index: 30;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-}
-.quality-dropdown.show {
-  display: flex;
-}
-.quality-dropdown::-webkit-scrollbar {
-  width: 4px;
-}
-.quality-dropdown::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
-  border-radius: 10px;
-}
-.quality-option {
-  padding: 10px 14px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #94a3b8;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: left;
-  background: transparent;
-  border: none;
-  width: 100%;
-}
-.quality-option:hover {
-  background: rgba(168, 85, 247, 0.1);
-  color: #fff;
-}
-.quality-option.active {
-  color: #a855f7;
-  background: rgba(168, 85, 247, 0.15);
-}
 
 /* Responsive Adaptability Breakpoints */
 @media (max-width: 992px) {
@@ -401,10 +303,7 @@ body {
     padding: 20px 16px;
     gap: 24px;
   }
-  .top-bar { padding: 16px 20px; flex-wrap: wrap; gap: 16px; justify-content: center; }
-  .search-box { width: 100%; order: 3; margin: 0; }
-  .brand-logo { order: 1; }
-  .live-badge-glow { order: 2; }
+  .top-bar { padding: 16px 20px; }
 }
 @media (max-width: 768px) {
   .stream-details-box {
@@ -446,7 +345,7 @@ body {
         <div class="stream-details-box">
           <h2>World Cup Event Live Broadcast</h2>
           <div class="meta-status-line" id="statusMsg">
-            <span class="material-symbols-outlined spin">sync</span> Initializing digital pipeline matrix...
+            <span class="material-symbols-outlined spin">sync</span> Initializing stream engine pipelines...
           </div>
         </div>
       </div>
@@ -455,37 +354,37 @@ body {
         <div class="hub-title"><span class="material-symbols-outlined">format_list_bulleted</span> CHANNELS MATRIX</div>
         <div class="channels-list-container" id="channelsList">
           
-          <div class="channel-card active" data-url="https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-1.m3u8" onclick="play(this.dataset.url, this)">
+          <div class="channel-card active" data-url="https://sm-monirul.top/tof/live/toffee6/index.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 1 Icon">
             <div class="channel-name-title">NORWAY 🇳🇴 VS FRANCE 🇫🇷</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
           
-          <div class="channel-card" data-url="https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-2.m3u8" onclick="play(this.dataset.url, this)">
+          <div class="channel-card" data-url="https://sm-monirul.top/tof/live/toffee3/index.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 2 Icon">
             <div class="channel-name-title">SENEGAL 🇸🇳 VS IRAQ 🇮🇶</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
           
-          <div class="channel-card" data-url="https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-3.m3u8" onclick="play(this.dataset.url, this)">
+          <div class="channel-card" data-url="https://sm-monirul.top/tof/live/toffee4/index.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 3 Icon">
             <div class="channel-name-title">URUGUAY 🇸🇦 VS SPAIN 🇪🇸</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
           
-          <div class="channel-card" data-url="https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-4.m3u8" onclick="play(this.dataset.url, this)">
+          <div class="channel-card" data-url="https://sm-monirul.top/tof/live/toffee5/index.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 4 Icon">
             <div class="channel-name-title">CABO VERDE 🇨🇻 VS SAUDI ARABIA 🇸🇦</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
           
-          <div class="channel-card" data-url="https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-5.m3u8" onclick="play(this.dataset.url, this)">
+          <div class="channel-card" data-url="https://sm-monirul.top/tof/live/toffee2/index.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 5 Icon">
             <div class="channel-name-title">NEW ZEALAND 🇳🇿 VS BELGIUM 🇧🇪</div>
             <div class="channel-badge-status">ULTRA HD</div>
           </div>
 
-          <div class="channel-card" data-url="https://raw.githubusercontent.com/tuhin0408/GlobalStream-IPTV/refs/heads/main/playlist/TF/TF-6.m3u8" onclick="play(this.dataset.url, this)">
+          <div class="channel-card" data-url="https://sm-monirul.top/tof/live/toffee1/index.m3u8" onclick="play(this.dataset.url, this)">
             <img class="channel-icon-avatar" src="https://i.imgur.com/53aSeDH.png" alt="TOFFEE 6 Icon">
             <div class="channel-name-title">EGYPT 🇪🇬 VS IRAN 🇮🇷</div>
             <div class="channel-badge-status">ULTRA HD</div>
@@ -515,12 +414,13 @@ try {
   console.warn('Devtool block could not be initialized:', error);
 }
 
-var PROXY = 'https://billowing-dawn-ee85.opkawsar156.workers.dev/?url=';
 var hls=null, msg=document.getElementById('statusMsg');
 var fallback=document.getElementById('nsFallback');
 var container=document.getElementById('mediaContainer');
 var currentUrl='';
-	
+var fallbackPlaylist = [];
+var currentFallbackIndex = 0;
+
 function showFallback(url){
   currentUrl=url;
   fallback.classList.add('show');
@@ -531,52 +431,45 @@ function hideFallback(){
   fallback.classList.remove('show');
 }
 
-function play(rawUrl, btn, isDirect){
-  document.querySelectorAll('.channel-card').forEach(function(b){ b.classList.remove('active'); });
-  if(btn) btn.classList.add('active');
-  currentUrl=rawUrl;
+// Gathers potential stream pathways for robust playbacks without CORS proxies
+function buildStreamPlaylist(primaryUrl, btn) {
+  var playlist = [primaryUrl];
   
-  // Detect if the target stream is a Go Live Cloudfront channel
-  var isGoLive = rawUrl.toLowerCase().includes("cloudfront.net") || rawUrl.toLowerCase().includes("rtbgo");
-  // Detect if the target stream is a TAPMAD channel
-  var isTapmad = rawUrl.toLowerCase().includes("tapmad") || (btn && btn.dataset.isTapmad === 'true');
-  
-  var useProxy = !isGoLive;
-  
-  var url = useProxy ? (PROXY + encodeURIComponent(rawUrl)) : rawUrl;
-  
-  msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Mounting broadcast data streams...';
-  hideFallback();
-
-  // 1. Destroy and cleanup hls.js player if active
-  if(hls){ 
-    try { hls.destroy(); } catch(e){} 
-    hls=null; 
+  // Look for predefined HTML backups
+  if (btn && btn.dataset.fallback) {
+    playlist.push(btn.dataset.fallback);
   }
   
-  // 2. Destroy and cleanup JW Player if active
-  try {
-    if (typeof jwplayer !== 'undefined') {
-      var activeJw = jwplayer("jwPlayerElement");
-      if (activeJw && typeof activeJw.remove === 'function') {
-        activeJw.remove();
-      }
-    }
-  } catch(e){}
+  return [...new Set(playlist)];
+}
 
-  // 3. Clear dynamically generated player elements inside the media container
-  var oldHlsPlayer = document.getElementById('hlsPlayer');
-  if (oldHlsPlayer) oldHlsPlayer.remove();
+function play(rawUrl, btn){
+  document.querySelectorAll('.channel-card').forEach(function(b){ b.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
   
-  var oldJwPlayer = document.getElementById('jwPlayerElement');
-  if (oldJwPlayer) oldJwPlayer.remove();
+  // Initialize stream route list
+  fallbackPlaylist = buildStreamPlaylist(rawUrl, btn);
+  currentFallbackIndex = 0;
+  
+  triggerStreamRoute();
+}
 
-  var oldControlsOverlay = document.getElementById('hlsControlsOverlay');
-  if (oldControlsOverlay) oldControlsOverlay.remove();
+function triggerStreamRoute() {
+  if (currentFallbackIndex >= fallbackPlaylist.length) {
+    showFallback(fallbackPlaylist[0]);
+    return;
+  }
+  
+  var activeUrl = fallbackPlaylist[currentFallbackIndex];
+  msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Connecting to network (Route ' + (currentFallbackIndex + 1) + '/' + fallbackPlaylist.length + ')...';
+  hideFallback();
 
-  // 4. Mount the correct engine
-  if (isGoLive || isTapmad) {
-    // Inject dynamic JW player mount point
+  // Cleanup past players completely
+  cleanupCurrentPlayers();
+
+  var isGoLive = activeUrl.toLowerCase().includes("cloudfront.net") || activeUrl.toLowerCase().includes("rtbgo");
+
+  if (isGoLive) {
     var jwDiv = document.createElement('div');
     jwDiv.id = 'jwPlayerElement';
     jwDiv.style.width = '100%';
@@ -586,9 +479,8 @@ function play(rawUrl, btn, isDirect){
     jwDiv.style.left = '0';
     container.insertBefore(jwDiv, fallback);
 
-    playWithJW(url, rawUrl);
+    playWithJW(activeUrl);
   } else {
-    // Inject dynamic native video element for Toffee / standard HLS
     var videoEl = document.createElement('video');
     videoEl.id = 'hlsPlayer';
     videoEl.controls = true;
@@ -602,22 +494,47 @@ function play(rawUrl, btn, isDirect){
     videoEl.style.display = 'block';
     container.insertBefore(videoEl, fallback);
 
-    playWithHLS(url, rawUrl, videoEl);
+    playWithHLS(activeUrl, videoEl);
   }
 }
 
-// Play workflow using standard hls.js (original player pipeline)
-function playWithHLS(url, rawUrl, videoEl) {
+function cleanupCurrentPlayers() {
+  if(hls){ 
+    try { hls.destroy(); } catch(e){} 
+    hls=null; 
+  }
+  
+  try {
+    if (typeof jwplayer !== 'undefined') {
+      var activeJw = jwplayer("jwPlayerElement");
+      if (activeJw && typeof activeJw.remove === 'function') {
+        activeJw.remove();
+      }
+    }
+  } catch(e){}
+
+  var oldHlsPlayer = document.getElementById('hlsPlayer');
+  if (oldHlsPlayer) oldHlsPlayer.remove();
+  
+  var oldJwPlayer = document.getElementById('jwPlayerElement');
+  if (oldJwPlayer) oldJwPlayer.remove();
+
+  var oldControlsOverlay = document.getElementById('hlsControlsOverlay');
+  if (oldControlsOverlay) oldControlsOverlay.remove();
+}
+
+function playWithHLS(url, videoEl) {
   if(Hls.isSupported()){
     hls=new Hls({
-      manifestLoadingMaxRetry:2,
-      levelLoadingMaxRetry:2,
-      fragLoadingMaxRetry:2
+      manifestLoadingMaxRetry: 3,
+      levelLoadingMaxRetry: 3,
+      fragLoadingMaxRetry: 3
     });
+    
     hls.loadSource(url);
     hls.attachMedia(videoEl);
 
-    // Build elegant custom overlay with Picture-in-Picture
+    // Build PIP support button inside clean overlay
     var overlay = document.createElement('div');
     overlay.id = 'hlsControlsOverlay';
     overlay.className = 'hls-controls-overlay';
@@ -634,54 +551,26 @@ function playWithHLS(url, rawUrl, videoEl) {
     overlay.innerHTML = pipBtnHtml;
     container.appendChild(overlay);
 
-    // Setup interactive sync for overlay visibility with player controls state
     var overlayTimeout;
-
     function showControls() {
       overlay.classList.add('visible');
       clearTimeout(overlayTimeout);
-      
-      var isPlaying = !videoEl.paused && !videoEl.ended;
-      
-      // Auto-hide after 3 seconds of inactivity, only if playing
-      if (isPlaying) {
-        overlayTimeout = setTimeout(hideControls, 3000);
+      if (!videoEl.paused && !videoEl.ended) {
+        overlayTimeout = setTimeout(() => overlay.classList.remove('visible'), 3000);
       }
     }
 
-    function hideControls() {
-      var isPlaying = !videoEl.paused && !videoEl.ended;
-      
-      if (isPlaying) {
-        overlay.classList.remove('visible');
-      }
-    }
-
-    // Attach interaction events to trigger control overlay visibility
     videoEl.addEventListener('mousemove', showControls);
-    videoEl.addEventListener('pointermove', showControls);
     videoEl.addEventListener('touchstart', showControls, {passive: true});
     overlay.addEventListener('mousemove', showControls);
-    overlay.addEventListener('pointermove', showControls);
-    overlay.addEventListener('touchstart', showControls, {passive: true});
     
-    videoEl.addEventListener('play', showControls);
-    videoEl.addEventListener('pause', showControls);
-    videoEl.addEventListener('seeking', showControls);
-
-    // Initially show controls
-    showControls();
-
-    // Bind Picture-in-Picture logic
     var pipBtn = document.getElementById('pipBtn');
     if (pipBtn) {
       pipBtn.onclick = function() {
         if (document.pictureInPictureElement) {
           document.exitPictureInPicture();
         } else {
-          videoEl.requestPictureInPicture().catch(function(e) {
-            console.error("Picture-in-Picture failed:", e);
-          });
+          videoEl.requestPictureInPicture().catch(e => console.error(e));
         }
       };
     }
@@ -689,28 +578,32 @@ function playWithHLS(url, rawUrl, videoEl) {
     hls.on(Hls.Events.MANIFEST_PARSED,function(){
       msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
       videoEl.play().catch(function(){ 
-        msg.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Buffer Ready. Tap player to start.'; 
+        msg.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Buffer Ready. Tap player to play.'; 
       });
     });
 
     hls.on(Hls.Events.ERROR,function(e,d){
       if(d.fatal){
-        console.log('HLS fatal network exceptions:', d.type, d.details);
-        showFallback(rawUrl);
+        console.warn('Fatal HLS exception occurred. Progressing fallback...', d);
+        currentFallbackIndex++;
+        triggerStreamRoute();
       }
     });
   } else if(videoEl.canPlayType('application/vnd.apple.mpegurl')){
     videoEl.src=url;
     videoEl.play();
-    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live · Pipeline Active';
-    videoEl.onerror=function(){ showFallback(rawUrl); };
+    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Native Player Live';
+    videoEl.onerror=function(){ 
+      currentFallbackIndex++;
+      triggerStreamRoute();
+    };
   } else {
-    showFallback(rawUrl);
+    currentFallbackIndex++;
+    triggerStreamRoute();
   }
 }
 
-// Play workflow using JW Player (go live setup)
-function playWithJW(url, rawUrl) {
+function playWithJW(url) {
   var playerInstance = jwplayer("jwPlayerElement");
   playerInstance.setup({
     playlist: [{
@@ -727,104 +620,90 @@ function playWithJW(url, rawUrl) {
   });
 
   playerInstance.on("ready", function(){
-    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live (JW) · Pipeline Active';
-    hideFallback();
-  });
-
-  playerInstance.on("play", function(){
-    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live (JW) · Pipeline Active';
+    msg.innerHTML='<span class="material-symbols-outlined" style="color:#10b981;">check_circle</span> Streaming Engine Live (JW Player)';
     hideFallback();
   });
 
   playerInstance.on("error", function(){
-    showFallback(rawUrl);
+    currentFallbackIndex++;
+    triggerStreamRoute();
   });
 
   playerInstance.on("buffer", function(){
-    msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Buffering live stream...';
+    msg.innerHTML='<span class="material-symbols-outlined spin">sync</span> Buffering live broadcast...';
   });
 }
 
-// Initial default deployment node bootstrap
-// Fetch the default card and play its assigned URL
+// Function to fetch and append external M3U channels
+async function fetchAndAppendExternalChannels() {
+  try {
+    const response = await fetch('https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u');
+    if (!response.ok) throw new Error('Failed to fetch M3U playlist');
+    const text = await response.text();
+    
+    const lines = text.split(/\r?\n/);
+    const channelsList = document.getElementById('channelsList');
+    
+    let currentChannel = {};
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      
+      if (line.startsWith('#EXTINF:')) {
+        // Parse Logo URL (if available)
+        const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+        currentChannel.logo = logoMatch ? logoMatch[1] : 'https://i.imgur.com/53aSeDH.png';
+        
+        // Parse Channel Name (comes after the last comma)
+        const nameParts = line.split(',');
+        currentChannel.name = nameParts.length > 1 ? nameParts[nameParts.length - 1].trim() : 'Unknown Channel';
+      } else if (line !== '' && !line.startsWith('#')) {
+        currentChannel.url = line;
+        
+        // Build the HTML element to match existing UI
+        if (currentChannel.name && currentChannel.url) {
+          const card = document.createElement('div');
+          card.className = 'channel-card';
+          card.dataset.url = currentChannel.url;
+          card.onclick = function() { play(this.dataset.url, this); };
+          
+          card.innerHTML = `
+            <img class="channel-icon-avatar" src="${currentChannel.logo}" alt="${currentChannel.name} Icon" onerror="this.src='https://i.imgur.com/53aSeDH.png'">
+            <div class="channel-name-title">${currentChannel.name.toUpperCase()}</div>
+            <div class="channel-badge-status">LIVE</div>
+          `;
+          
+          channelsList.appendChild(card);
+        }
+        
+        // Reset for the next entry
+        currentChannel = {};
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching dynamic channels:', error);
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const defaultCard = document.querySelector('.channel-card.active');
   if(defaultCard && defaultCard.dataset.url) {
     play(defaultCard.dataset.url, defaultCard);
   }
-
-  // Fetch external M3U and prepends channels to the front of the grid
-  fetch('https://raw.githubusercontent.com/srhady/tapmad-bd/refs/heads/main/tapmad_bd.m3u')
-    .then(response => response.text())
-    .then(data => {
-      const lines = data.split('\n');
-      const channelsContainer = document.getElementById('channelsList');
-      const staticFirstChild = channelsContainer.firstElementChild;
-      let currentChannel = {};
-      let isFirstTapmad = true;
-      
-      for (let i = 0; i < lines.length; i++) {
-        let line = lines[i].trim();
-        
-        // Parse metadata line
-        if (line.startsWith('#EXTINF:')) {
-          // Extract logo URL
-          const logoMatch = line.match(/tvg-logo=["']?([^"']+)["']?/);
-          currentChannel.logo = logoMatch ? logoMatch[1] : 'https://i.imgur.com/53aSeDH.png';
-          
-          // Extract channel name (comes after the comma)
-          const nameMatch = line.split(',').pop();
-          currentChannel.name = nameMatch ? nameMatch.trim() : 'Unknown Channel';
-        } 
-        // Parse URL line (not a comment, not empty)
-        else if (line !== '' && !line.startsWith('#')) {
-          currentChannel.url = line;
-          
-          // Create new channel card
-          const card = document.createElement('div');
-          card.className = 'channel-card';
-          card.dataset.url = currentChannel.url;
-          card.dataset.isTapmad = "true"; // Flag this channel explicitly as part of Tapmad playlist
-          card.onclick = function() { play(this.dataset.url, this); };
-          
-          if (isFirstTapmad) {
-            // Remove previous active status (from static channels)
-            document.querySelectorAll('.channel-card').forEach(b => b.classList.remove('active'));
-            card.className = 'channel-card active';
-            
-            // Switch current active playback to the newly discovered first Tapmad stream
-            play(currentChannel.url, card);
-            isFirstTapmad = false;
-          }
-          
-          card.innerHTML = `
-            <img class="channel-icon-avatar" src="${currentChannel.logo}" alt="${currentChannel.name} Icon" onerror="this.src='https://i.imgur.com/53aSeDH.png'">
-            <div class="channel-name-title">${currentChannel.name}</div>
-            <div class="channel-badge-status">ULTRA HD</div>
-          `;
-          
-          // Insert dynamically parsed channel BEFORE the static children
-          channelsContainer.insertBefore(card, staticFirstChild);
-          
-          // Reset for the next channel
-          currentChannel = {};
-        }
-      }
-    })
-    .catch(error => {
-      console.error('Failed to load external M3U playlist:', error);
-    });
+  
+  // Call the function to load external M3U channels
+  fetchAndAppendExternalChannels();
 });
 </script>
 
 <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(registration => console.log('ServiceWorker registration successful with scope: ', registration.scope), err => console.log('ServiceWorker registration failed: ', err));
-      });
-    }
-  </script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(registration => console.log('ServiceWorker registered:', registration.scope), err => console.log('ServiceWorker failed:', err));
+  });
+}
+</script>
   
 </body>
 </html>
