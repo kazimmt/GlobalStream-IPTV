@@ -1,136 +1,136 @@
 #EXTM3U
 #EXTINF:-1 tvg-id="" tvg-logo="https://go4.pw/EUROPE/UK/UK.png",##### ENGLISH #####
-#EXTINF:-1 tvg-id="" tvg-name="EN - NORWAY VS FRANCE 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",EN - NORWAY VS FRANCE 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - TSN 4
 http://vca.easy747.com/donad220/8U01MGV/364461
-#EXTINF:-1 tvg-id="" tvg-name="EN - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",EN - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - TSN 4
 http://vca.easy747.com/donad220/8U01MGV/364460
-#EXTINF:-1 tvg-id="" tvg-name="EN - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",EN - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - 
 http://vca.easy747.com/donad220/8U01MGV/364453
-#EXTINF:-1 tvg-id="" tvg-name="EN - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",EN - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - TSN 4
 http://vca.easy747.com/donad220/8U01MGV/364450
-#EXTINF:-1 tvg-id="" tvg-name="EN - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",EN - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - TSN 4
 http://vca.easy747.com/donad220/8U01MGV/364449
-#EXTINF:-1 tvg-id="" tvg-name="EN - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",EN - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - TSN 4
 http://vca.easy747.com/donad220/8U01MGV/364446
 
-#EXTINF:-1 tvg-id="" tvg-name="##### FRENCH #####" tvg-logo="https://go4.pw/FRANCE/frlog.png" group-title="VIP | WORLD CUP 2026 4K",##### FRENCH #####
+#EXTINF:-1 tvg-logo="https://go4.pw/FRANCE/frlog.png",##### FRENCH #####
 http://vca.easy747.com/donad220/8U01MGV/317156
-#EXTINF:-1 tvg-id="" tvg-name="FR - NORWAY VS FRANCE 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",FR - NORWAY VS FRANCE 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - M6
 http://vca.easy747.com/donad220/8U01MGV/364442
-#EXTINF:-1 tvg-id="" tvg-name="FR - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",FR - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 2
 http://vca.easy747.com/donad220/8U01MGV/364440
-#EXTINF:-1 tvg-id="" tvg-name="FR - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",FR - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 2
 http://vca.easy747.com/donad220/8U01MGV/364435
-#EXTINF:-1 tvg-id="" tvg-name="FR - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",FR - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 1
 http://vca.easy747.com/donad220/8U01MGV/364432
-#EXTINF:-1 tvg-id="" tvg-name="FR - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",FR - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 2
 http://vca.easy747.com/donad220/8U01MGV/363846
-#EXTINF:-1 tvg-id="" tvg-name="FR - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",FR - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 1
 http://vca.easy747.com/donad220/8U01MGV/363844
 
-#EXTINF:-1 tvg-id="" tvg-name="##### ARABIC #####" tvg-logo="https://go4.pw/ASIA/SAUDI/SAUDI.png" group-title="VIP | WORLD CUP 2026 4K",##### ARABIC #####
+#EXTINF:-1 tvg-logo="https://go4.pw/ASIA/SAUDI/SAUDI.png",##### ARABIC #####
 http://vca.easy747.com/donad220/8U01MGV/317155
-#EXTINF:-1 tvg-id="" tvg-name="AR - NORWAY VS FRANCE 20:00 CET " tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",AR - NORWAY VS FRANCE 20:00 CET 
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",AR - beIN Sports 2 Max
 http://vca.easy747.com/donad220/8U01MGV/363820
-#EXTINF:-1 tvg-id="" tvg-name="AR - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",AR - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",AR - beIN Sports 1 Max
 http://vca.easy747.com/donad220/8U01MGV/363785
-#EXTINF:-1 tvg-id="" tvg-name="AR - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",AR - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",AR - beIN Sports 3 Max
 http://vca.easy747.com/donad220/8U01MGV/363783
-#EXTINF:-1 tvg-id="" tvg-name="AR - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",AR - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",AR - beIN Sports 4 Max
 http://vca.easy747.com/donad220/8U01MGV/363782
-#EXTINF:-1 tvg-id="" tvg-name="AR - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",AR - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",AR - beIN Sports 1 Max
 http://vca.easy747.com/donad220/8U01MGV/363781
-#EXTINF:-1 tvg-id="" tvg-name="AR - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",AR - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",AR - beIN Sports 2 Max
 http://vca.easy747.com/donad220/8U01MGV/363772
 
-#EXTINF:-1 tvg-id="" tvg-name="##### GERMANY #####" tvg-logo="https://go4.pw/FLAGS/flag_germany.png" group-title="VIP | WORLD CUP 2026 4K",##### GERMANY #####
+#EXTINF:-1 tvg-logo="https://go4.pw/FLAGS/flag_germany.png",##### GERMANY #####
 http://vca.easy747.com/donad220/8U01MGV/317153
-#EXTINF:-1 tvg-id="" tvg-name="DE - NORWAY VS FRANCE 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",DE - NORWAY VS FRANCE 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",DE - FUSSBALL.TV 1
 http://vca.easy747.com/donad220/8U01MGV/362620
-#EXTINF:-1 tvg-id="" tvg-name="DE - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",DE - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",DE - FUSSBALL.TV 2
 http://vca.easy747.com/donad220/8U01MGV/362590
-#EXTINF:-1 tvg-id="" tvg-name="DE - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",DE - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",DE - FUSSBALL.TV 1
 http://vca.easy747.com/donad220/8U01MGV/362577
-#EXTINF:-1 tvg-id="" tvg-name="DE - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",DE - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",DE - FUSSBALL.TV 2
 http://vca.easy747.com/donad220/8U01MGV/362564
-#EXTINF:-1 tvg-id="" tvg-name="DE - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",DE - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",DE - FUSSBALL.TV 2
 http://vca.easy747.com/donad220/8U01MGV/362563
-#EXTINF:-1 tvg-id="" tvg-name="DE - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",DE - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",DE - FUSSBALL.TV 1
 http://vca.easy747.com/donad220/8U01MGV/362561
 
-#EXTINF:-1 tvg-id="" tvg-name="##### SPAIN #####" tvg-logo="https://go4.pw/EUROPE/SPAIN/SPAIN.png" group-title="VIP | WORLD CUP 2026 4K",##### SPAIN #####
+#EXTINF:-1 tvg-logo="https://go4.pw/EUROPE/SPAIN/SPAIN.png",##### SPAIN #####
 http://vca.easy747.com/donad220/8U01MGV/317154
-#EXTINF:-1 tvg-id="" tvg-name="SP - NORWAY VS FRANCE 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",SP - NORWAY VS FRANCE 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",SP - DAZN 1
 http://vca.easy747.com/donad220/8U01MGV/363761
-#EXTINF:-1 tvg-id="" tvg-name="SP - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",SP - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",SP - DAZN 3
 http://vca.easy747.com/donad220/8U01MGV/363758
-#EXTINF:-1 tvg-id="" tvg-name="SP - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",SP - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",SP - DAZN 2
 http://vca.easy747.com/donad220/8U01MGV/363756
-#EXTINF:-1 tvg-id="" tvg-name="SP - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",SP - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",SP - DAZN
 http://vca.easy747.com/donad220/8U01MGV/363755
-#EXTINF:-1 tvg-id="609e7e423e9173000706a681" tvg-name="SP - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",SP - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",SP - DAZN 2
 http://vca.easy747.com/donad220/8U01MGV/363735
-#EXTINF:-1 tvg-id="5f1acdaa8ba90f0007d5e760" tvg-name="SP - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",SP - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",SP - DAZN
 http://vca.easy747.com/donad220/8U01MGV/363680
 
-#EXTINF:-1 tvg-id="" tvg-name="##### ITALY #####" tvg-logo="https://go4.pw/MAGFLAGS/ITALY.png" group-title="VIP | WORLD CUP 2026 4K",##### ITALY #####
+#EXTINF:-1 tvg-logo="https://go4.pw/MAGFLAGS/ITALY.png",##### ITALY #####
 http://vca.easy747.com/donad220/8U01MGV/317152
-#EXTINF:-1 tvg-id="" tvg-name="IT - NORWAY VS FRANCE 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",IT - NORWAY VS FRANCE 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - Rai 1
 http://vca.easy747.com/donad220/8U01MGV/362541
-#EXTINF:-1 tvg-id="" tvg-name="IT - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",IT - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - DAZN
 http://vca.easy747.com/donad220/8U01MGV/362529
-#EXTINF:-1 tvg-id="" tvg-name="IT - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",IT - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - DAZN
 http://vca.easy747.com/donad220/8U01MGV/362527
-#EXTINF:-1 tvg-id="" tvg-name="IT - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",IT - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - DAZN
 http://vca.easy747.com/donad220/8U01MGV/362520
-#EXTINF:-1 tvg-id="" tvg-name="IT - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",IT - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - DAZN
 http://vca.easy747.com/donad220/8U01MGV/362519
-#EXTINF:-1 tvg-id="" tvg-name="IT - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",IT - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - DAZN
 http://vca.easy747.com/donad220/8U01MGV/362508
 
-#EXTINF:-1 tvg-id="" tvg-name="##### PORTUGAL #####" tvg-logo="https://go4.pw/MAGFLAGS/PORTUGAL.png" group-title="VIP | WORLD CUP 2026 4K",##### PORTUGAL #####
+#EXTINF:-1 tvg-logo="https://go4.pw/MAGFLAGS/PORTUGAL.png",##### PORTUGAL #####
 http://vca.easy747.com/donad220/8U01MGV/317151
-#EXTINF:-1 tvg-id="" tvg-name="PT - NORWAY VS FRANCE 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",PT - NORWAY VS FRANCE 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",PT - SPORT.TV 1
 http://vca.easy747.com/donad220/8U01MGV/325605
-#EXTINF:-1 tvg-id="" tvg-name="PT - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",PT - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",PT - SPORT.TV 5
 http://vca.easy747.com/donad220/8U01MGV/325604
-#EXTINF:-1 tvg-id="" tvg-name="PT - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",PT - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",PT - SPORT.TV 5
 http://vca.easy747.com/donad220/8U01MGV/325603
-#EXTINF:-1 tvg-id="" tvg-name="PT - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",PT - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",PT - SPORT.TV 1
 http://vca.easy747.com/donad220/8U01MGV/325602
-#EXTINF:-1 tvg-id="" tvg-name="PT - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",PT - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",PT - SPORT.TV 1
 http://vca.easy747.com/donad220/8U01MGV/325601
-#EXTINF:-1 tvg-id="" tvg-name="PT - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",PT - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",PT - SPORT.TV 5
 http://vca.easy747.com/donad220/8U01MGV/324012
 
-#EXTINF:-1 tvg-id="" tvg-name="##### ALBANIA #####" tvg-logo="https://go4.pw/MAGFLAGS/ALBANIA.png" group-title="VIP | WORLD CUP 2026 4K",##### ALBANIA #####
+#EXTINF:-1 tvg-logo="https://go4.pw/MAGFLAGS/ALBANIA.png",##### ALBANIA #####
 http://vca.easy747.com/donad220/8U01MGV/362550
-#EXTINF:-1 tvg-id="" tvg-name="ALB - NORWAY VS FRANCE 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",ALB - NORWAY VS FRANCE 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",ALB - SuperSports 2
 http://vca.easy747.com/donad220/8U01MGV/362498
-#EXTINF:-1 tvg-id="skyanimation.uk" tvg-name="ALB - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",ALB - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",ALB - SuperSports
 http://vca.easy747.com/donad220/8U01MGV/348196
-#EXTINF:-1 tvg-id="" tvg-name="ALB - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",ALB - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",ALB - SuperSports
 http://vca.easy747.com/donad220/8U01MGV/346031
-#EXTINF:-1 tvg-id="" tvg-name="ALB - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",ALB - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",ALB - SuperSports 2
 http://vca.easy747.com/donad220/8U01MGV/346030
-#EXTINF:-1 tvg-id="" tvg-name="ALB - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",ALB - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",ALB - SuperSports
 http://vca.easy747.com/donad220/8U01MGV/331961
-#EXTINF:-1 tvg-id="mgm.us" tvg-name="ALB - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",ALB - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",ALB - SuperSports 2
 http://vca.easy747.com/donad220/8U01MGV/329631
 
-#EXTINF:-1 tvg-id="" tvg-name="##### TURKEY #####" tvg-logo="https://go4.pw/ASIA/TURKEY/TURKEY.png" group-title="VIP | WORLD CUP 2026 4K",##### TURKEY #####
+#EXTINF:-1 tvg-logo="https://go4.pw/ASIA/TURKEY/TURKEY.png",##### TURKEY #####
 http://vca.easy747.com/donad220/8U01MGV/1388013
-#EXTINF:-1 tvg-id="" tvg-name="TR - NORWAY VS FRANCE 20:00 CET " tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",TR - NORWAY VS FRANCE 20:00 CET 
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",TR - TRT 1
 http://vca.easy747.com/donad220/8U01MGV/317166
-#EXTINF:-1 tvg-id="" tvg-name="TR - SENEGAL VS IRAQ 20:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",TR - SENEGAL VS IRAQ 20:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",TR - TRT Spor
 http://vca.easy747.com/donad220/8U01MGV/317165
-#EXTINF:-1 tvg-id="" tvg-name="TR - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",TR - CAPE VERDE ISLANDS VS SAUDI ARABIA 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",TR - TRT 1
 http://vca.easy747.com/donad220/8U01MGV/317164
-#EXTINF:-1 tvg-id="" tvg-name="TR - URUGUAY VS SPAIN 01:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",TR - URUGUAY VS SPAIN 01:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",TR - TRT Spor
 http://vca.easy747.com/donad220/8U01MGV/317163
-#EXTINF:-1 tvg-id="" tvg-name="TR - EGYPT VS IRAN 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",TR - EGYPT VS IRAN 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",TR - TRT Spor
 http://vca.easy747.com/donad220/8U01MGV/317162
-#EXTINF:-1 tvg-id="" tvg-name="TR - NEW ZEALAND VS BELGIUM 04:00 CET" tvg-logo="https://go4.pw/wc26.png" group-title="VIP | WORLD CUP 2026 4K",TR - NEW ZEALAND VS BELGIUM 04:00 CET
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",TR - TRT 1
 http://vca.easy747.com/donad220/8U01MGV/317159
 
 #EXTINF:-1 tvg-logo="https://go4.pw/EUROPE/UK/UK.png",##### ENGLISH #####
@@ -152,18 +152,18 @@ http://vca.easy747.com/donad220/8U01MGV/317142
 http://vca.easy747.com/donad220/8U01MGV/71938
 #EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - M6
 http://vca.easy747.com/donad220/8U01MGV/317140
-#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - 
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 2
 http://vca.easy747.com/donad220/8U01MGV/317139
-#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - 
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 2
 http://vca.easy747.com/donad220/8U01MGV/317138
-#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR -  
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 1
 http://vca.easy747.com/donad220/8U01MGV/317137
 #EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 2
 http://vca.easy747.com/donad220/8U01MGV/317136
-#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",FR - beIN Sports 1
 http://vca.easy747.com/donad220/8U01MGV/317135
 
-#EXTINF:-1 tvg-id="nickelodeon.ca" tvg-name="##### ARABIC #####" tvg-logo="https://go4.pw/ASIA/SAUDI/SAUDI.png" group-title="VIP | WORLD CUP 2026",##### ARABIC #####
+#EXTINF:-1 tvg-logo="https://go4.pw/ASIA/SAUDI/SAUDI.png",##### ARABIC #####
 http://vca.easy747.com/donad220/8U01MGV/30414
 #EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",AR - beIN Strong8K
 http://vca.easy747.com/donad220/8U01MGV/317133
@@ -212,7 +212,7 @@ http://vca.easy747.com/donad220/8U01MGV/273431
 http://vca.easy747.com/donad220/8U01MGV/747
 #EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - RAI 1
 http://vca.easy747.com/donad220/8U01MGV/273421
-#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - RAI
+#EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - DAZN
 http://vca.easy747.com/donad220/8U01MGV/273420
 #EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",IT - DAZN
 http://vca.easy747.com/donad220/8U01MGV/273419
