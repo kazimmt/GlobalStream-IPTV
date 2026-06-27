@@ -19,8 +19,6 @@ https://kazimmt.ami.bd/playlist/TF/TF-5.m3u
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 9; Redmi S2 Build/PKQ1.181203.001) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.7049.79 Mobile Safari/537.36
 https://kazimmt.ami.bd/playlist/TF/TF-6.m3u
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",🇧🇩 T Sportsᶠᴴᴰ
-http://vca.easy747.com/donad220/8U01MGV/1404538
-#EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",🇧🇩 T Sportsᶠᴴᴰ
 http://fastshare1.com/live/Hussein456124/5478243659/52500.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",🇧🇩 T Sportsᶠᴴᴰ
 http://starhub.pro/live/farhat-3379/67897-913379/52500.ts
@@ -48,20 +46,6 @@ http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/130714.ts
 http://starhub.pro/live/farhat-3379/67897-913379/130714.ts
 
 #======  NOW TV ============
-#EXTINF:-1 tvg-logo="https://go4.pw/UK/Now-HK-Now-Sports.png",HK NOW SPORTS 1
-http://vca.easy747.com/donad220/8U01MGV/438868
-#EXTINF:-1 tvg-logo="https://go4.pw/UK/Now-HK-Now-Sports.png",HK NOW SPORTS 3
-http://vca.easy747.com/donad220/8U01MGV/438870
-#EXTINF:-1 tvg-logo="https://go4.pw/UK/Now-HK-Now-Sports.png",HK NOW SPORTS 4
-http://vca.easy747.com/donad220/8U01MGV/438871
-#EXTINF:-1 tvg-logo="https://go4.pw/UK/Now-HK-Now-Sports.png",HK NOW SPORTS 2
-http://vca.easy747.com/donad220/8U01MGV/438869
-#EXTINF:-1 tvg-logo="https://go4.pw/UK/Now-HK-Now-Sports.png",HK NOW SPORTS 5
-http://vca.easy747.com/donad220/8U01MGV/438872
-#EXTINF:-1 tvg-logo="https://go4.pw/UK/Now-HK-Now-Sports.png",HK NOW SPORTS 6
-http://vca.easy747.com/donad220/8U01MGV/438873
-#EXTINF:-1 tvg-logo="https://go4.pw/UK/Now-HK-Now-Sports.png",HK NOW SPORTS 7
-http://vca.easy747.com/donad220/8U01MGV/438874
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW Sports 616⁴ᵏ
 http://fastshare1.com/live/Hussein456124/5478243659/745270.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW Sports 616⁴ᵏ
@@ -125,6 +109,7 @@ http://vca.easy747.com/donad220/8U01MGV/69086
 
 
 #EXTINF:-1 tvg-id="" tvg-logo="https://go4.pw/EUROPE/UK/UK.png",##### ENGLISH #####
+http://vca.easy747.com/donad220/8U01MGV/317157
 #EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - TSN 4
 http://vca.easy747.com/donad220/8U01MGV/364461
 #EXTINF:-1 tvg-logo="https://go4.pw/wc26.png",EN - TSN 4
