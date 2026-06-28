@@ -1,6 +1,6 @@
 #EXTM3U
 #======  BANGLADESH ============
-#EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png",🇧🇩 TOFFEE 1ᶠᴴᴰ
+#EXTINF:-1  tvg-logo="https://i.imgur.com/asii3he.png",🇧🇩 TOFFEE 1ᶠᴴᴰ
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 9; Redmi S2 Build/PKQ1.181203.001) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.7049.79 Mobile Safari/537.36
 https://kazimmt.ami.bd/playlist/TF/TF-1.m3u8
 #EXTINF:-1  tvg-logo="https://i.imgur.com/53aSeDH.png",🇧🇩 TOFFEE 2ᶠᴴᴰ
@@ -43,6 +43,22 @@ http://starhub.pro/live/farhat-3379/67897-913379/130714.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/W8uu5u1.png",🇧🇩 T Sportsᴴᴰ
 http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/130714.ts
 
+#====== Bioscope World Cup ============
+#EXTINF:-1 tvg-logo="https://i.imgur.com/w91OYEI.png",Bioscope 
+http://sm-monirul.top/fifa/bioscope/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/w91OYEI.png",Bioscope 
+http://sm-monirul.top/fifa/bioscope1/index.m3u8
+EXTINF:-1 tvg-logo="https://i.imgur.com/w91OYEI.png",Bioscope 
+https://d1kep4defqj6r1.cloudfront.net/out/v1/4e21d5a122c549289dd6feab259266e8/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/0oICE2u.png" ,i screen
+http://sm-monirul.top/ott/iscreen/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/0oICE2u.png",I SCREEN HD
+#EXTVLCOPT:http-referrer=https://iscreen.com.bd/
+https://tc-sg.rockstreamer.com/v1/019ed91616121ea540a8171c8e801f/019ed92ac80315fc600b1796d4ad8b/main.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/C0KQZLV.png",Binge+
+#EXTVLCOPT:http-referrer=https://iscreen.com.bd/
+https://m3u-tvb.pages.dev/ics.m3u8
+
 #======  NOW TV ============
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW Sports 616⁴ᵏ
 http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/745270.ts
@@ -50,6 +66,14 @@ http://rgkkw.live/live/1Aoen7elp5/IgMJ60tmAa/745270.ts
 http://starhub.pro/live/farhat-3379/67897-913379/745270.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/xarBMwe.png",NOW Sports 616⁴ᵏ
 http://fastshare1.com/live/Hussein456124/5478243659/745270.ts
+
+#======  IRIB ============
+#EXTINF:-1 tvg-logo="https://i.imgur.com/5lB7eKE.png",IRIB⁴ᵏ
+https://live-aburayhan1107.telewebion.ir/ek/faratar/live/2160p/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/5lB7eKE.png",IRIBᶠᴴᴰ
+https://live-aburayhan1107.telewebion.ir/ek/faratar/live/108050p/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/5lB7eKE.png",IRIBᴴᴰ
+https://live-aburayhan1107.telewebion.ir/ek/faratar/live/720p/index.m3u8
 
 #======  Unite8 Sports ============
 #EXTINF:-1 tvg-logo="https://i.imgur.com/P54rWCP.png",UNITE8 SPORTS 1ᶠᴴᴰ
